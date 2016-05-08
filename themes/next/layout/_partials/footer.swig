@@ -8,6 +8,8 @@
   <span class="author" itemprop="copyrightHolder">{{ config.author }}</span>
 </div>
 
+有<span id="busuanzi_value_site_pv"></span>次拜访 &nbsp&nbsp&nbsp
+欢迎NO.<span id="busuanzi_value_site_uv"></span>号小伙伴
 <div class="powered-by">
   {{ __('footer.powered', '<a class="theme-link" href="http://hexo.io">Hexo</a>') }}
 </div>
@@ -18,3 +20,5 @@
     NexT.{{ theme.scheme }}
   </a>
 </div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
