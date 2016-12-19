@@ -19,9 +19,9 @@ $black-light  = #555
 $black-dim    = #333
 $black-deep   = #222
 $red          = #ff2a2a
-$blue-bright  = #5DC9FF
-$blue         = #008FF5
-$blue-deep    = #017CB9
+$blue-bright  = #87daff
+$blue         = #0684bd
+$blue-deep    = #262a30
 $orange       = #fc6423
 
 
@@ -35,9 +35,9 @@ $text-color                   = $black-light
 
 // Global link color.
 $link-color                   = $black-light
-$link-hover-color             = $blue
+$link-hover-color             = $black-deep
 $link-decoration-color        = $grey-light
-$link-decoration-hover-color  = $blue-bright
+$link-decoration-hover-color  = $black-deep
 
 // Global border color.
 $border-color                 = $grey-light
@@ -143,9 +143,8 @@ $table-row-hover-bg-color       = $whitesmoke
 // --------------------------------------------------
 $code-font-family               = $font-family-monospace
 $code-font-size                 = 13px
-$code-background                = $gainsboro
-$code-foreground                = $black-light
-$code-border-radius             = 4px
+$code-font-size                 = unit(hexo-config('font.codes.size'), px) if hexo-config('font.codes.size') is a 'unit'
+$code-border-radius             = 3px
 
 
 
@@ -206,7 +205,7 @@ $gap-between-main-and-footer    = 100px
 // Headband
 // --------------------------------------------------
 $headband-height                = 3px
-$headband-bg                    = $blue
+$headband-bg                    = $black-deep
 
 
 
@@ -220,7 +219,7 @@ $head-bg                        = white
 $site-meta-text-align           = center
 $brand-color                    = white
 $brand-hover-color              = white
-$brand-bg                       = $blue
+$brand-bg                       = $black-deep
 
 $logo-font-size                 = 20px
 $logo-font-size                 = unit(hexo-config('font.logo.size'), px) if hexo-config('font.logo.size') is a 'unit'
@@ -231,7 +230,7 @@ $subtitle-color                 = $grey-dark
 
 // Menu
 $menu-link-border               = transparent
-$menu-link-hover-border         = $blue-deep
+$menu-link-hover-border         = $black-deep
 
 
 
@@ -247,7 +246,7 @@ $posts-collapse-left-mobile     = 5px
 
 $read-more-color                = white
 $read-more-font-size            = 14px
-$read-more-bg-color             = $blue-deep
+$read-more-bg-color             = $black-deep
 $read-more-border-radius        = 0
 
 

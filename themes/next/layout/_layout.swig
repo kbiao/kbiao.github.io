@@ -5,13 +5,13 @@
   {% set html_class = html_class + ' use-motion' %}
 {% endif %}
 
-<html class="{{ html_class | lower }}">
+<html class="{{ html_class | lower }}" lang="{{ config.language }}">
 <head>
   {% include '_partials/head.swig' %}
   <title>{% block title %}{% endblock %}</title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="{{ config.language }}">
+<body itemscope itemtype="http://schema.org/WebPage" lang="{{ page.lang || page.language || config.language }}">
 
   {% include '_scripts/third-party/analytics.swig' %}
 
@@ -26,7 +26,10 @@
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"> {%- include '_partials/header.swig' %} </div>
     </header>
-
+    <style>
+    </style>
+    <div class="flower" style="transform: translate(-5.00483px, 3.98211px);"></div>
+   
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
@@ -71,6 +74,24 @@
   {% include '_scripts/third-party/mathjax.swig' %}
   {% include '_scripts/third-party/lean-analytics.swig' %}
   {% include '_scripts/baidu-push.swig' %}
+  {% include '_components/algolia-search/assets.swig' %}
+ <script type="text/javascript">
+    var s = $(window), l = s.height(), c = s.width(),o = 0, r = 0;
+    d = function(a, i, e) {
+        Math.abs(a - o) > 2 ? o += (a - o) / 6 : o = a,
+        Math.abs(i - r) > 2 ? r += (i - r) / 6 : r = i,
+        $(e).css({
+            transition: "all 0 linear",
+            transform: "translate(" + .03 * -o + "px ," + .03 * -r + "px)"
+        })
+    };
+     $("body").mousemove(function(e) {
+            a = e.clientX - c / 2,
+            i = e.clientY - l / 2,
+            d(a, i, ".flower")
+        });
 
+    
+    </script>
 </body>
 </html>

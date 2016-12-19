@@ -1,1 +1,66 @@
 // Custom styles.
+.posts-expand .post-title-link {
+  
+  &:hover {
+    color: $black-deep 
+
+    
+  }
+  &::before {
+    background-color: $blue-bright;
+    bottom: -5px;
+    left: 0px;
+  }
+}
+
+
+.feed-link {
+  margin-top: 20px;
+  a {  
+    color:  $blue-bright;
+    border: 1px solid  $blue-bright;
+    i {
+      color: $blue-bright;
+    }
+
+    &:hover {
+      color:white;
+      background:  $blue-bright;
+
+      i { color: white; }
+    }
+  }
+}
+
+.post-more-link {
+
+  .btn:hover {
+    border: 2px solid  $blue-bright;
+  }
+}
+
+
+ .flower {
+   +desktop-large(){
+    background: url(https://qnm.res.netease.com/pc/zt/20161213142129/img/inner/flowe_08eefcb.png) repeat-y ;
+    background-size: 1200px 456px;
+    width: 1200px;
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    margin-left: -762px;
+    top: 135px;
+    z-index: 2000;
+   }
+    +tablet(){
+    background: url(https://qnm.res.netease.com/pc/zt/20161213142129/img/inner/flowe_08eefcb.png) repeat-y ;
+    background-size: 1200px 456px;
+    width: 1200px;
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    margin-left: -762px;
+    top: 135px;
+    z-index: 2000;
+    }
+}

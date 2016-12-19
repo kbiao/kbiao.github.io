@@ -345,16 +345,21 @@
 </script>
 <script type="text/javascript">
 	var num=4;
+	var scriptSource = "<script type=\"text/javascript\" src=\"http://www.qq.com/404/search_children.js\" charset=\"utf-8\" \n\thomePageUrl=\"http://blog.kbiao.me\" homePageName=\"\u56DE\u5BB6\u627E\u5F6A\u5F6A\"/>"
+
 	function redirect(){
 		num--;
-		// document.getElementById("num").innerHTML=num;
+		//document.getElementById("num").innerHTML=num;
 		// if(num<0){
-		// 	document.getElementById("num").innerHTML=0;
-		// 	location.href="http://blog.kbiao.me";
+		// 	document.getElementById("404source").innerHTML=scriptSource;
+		// 	//location.href="http://blog.kbiao.me";
+		// 	num=4;
 		// 	}
+
 		}
 	setInterval("redirect()", 1000);
 </script>
+<div id = "404source"></div>
 </body>
 <script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8" 
 	homePageUrl="http://blog.kbiao.me" homePageName="回家找彪彪"></script>

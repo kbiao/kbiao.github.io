@@ -1,13 +1,16 @@
 .header {
   position: relative;
   margin: 0 auto;
-  width: 960px;
+  width: $main-desktop;
 
   +tablet() {
     width: auto;
   }
   +mobile() {
-    width: auto;
+    position: fixed;
+    width: 100%;
+    z-index: 2000;
+    top:0;
   }
 }
 
@@ -20,6 +23,7 @@
   background: white;
 
   +desktop-large() {
+    
     .container & { width: 240px; }
   }
   +tablet() {
@@ -69,6 +73,7 @@
     width: 100%;
     padding: 20px;
     min-height: auto;
+    margin-top: 102px;
   }
 }
 
@@ -84,7 +89,7 @@
     display: none;
   }
   +mobile() {
-    display: none;
+    display: block;
   }
 }
 

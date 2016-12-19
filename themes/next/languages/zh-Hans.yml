@@ -1,6 +1,7 @@
 title:
   archive: 归档
   category: 分类
+  schedule: 日程
   tag: 标签
 
 author: 博主
@@ -9,11 +10,11 @@ menu:
   home: 首页
   archives: 归档
   categories: 分类
+  schedule: 日程
   tags: 标签
   about: 关于
   search: 搜索
   commonweal: 公益404
-  lover: 培琦
 
 
 sidebar:
@@ -23,6 +24,7 @@ sidebar:
 post:
   sticky: 置顶
   posted: 发表于
+  modified: 更新于
   in: 分类于
   visitors: 阅读次数
   read_more: 阅读全文
@@ -59,11 +61,6 @@ state:
   pages: 页面
   tags: 标签
   categories: 分类
-
-social:
-  #LinkLabel: Link
-  github: GitHub
-  zhihu: 知乎
 
 cheers:
   um: 嗯..
