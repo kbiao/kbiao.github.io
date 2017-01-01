@@ -12,7 +12,7 @@ categories:
 
 ![](http://image.kbiao.me/16-5-21/64423504.jpg)
 
-## 问题的提出haha
+## 问题的提出
 如果我们访问的资源是不需要授权的，也就是在HTTP请求头中不包含`authentication`头那么以上做法就足够了。但是如果该资源是需要权限验证的，那么这个时候跨域请求的预检测**`option`请求，由于不会携带身份信息而被拒绝**。浏览器会报出401错误。<!-- more -->
 前几天的文章[Spring通过CORS协议解决跨域问题][1] 中提到了如何解决跨域问题的基本思路,解决了跨域请求时浏览器403错误。
 ```
@@ -20,7 +20,6 @@ Response to preflight request doesn't pass access control check:
 No 'Access-Control-Allow-Origin' header is present on the requested resource.
 Origin 'null' is therefore not allowed access. 
 The response had HTTP status code 403
-```
 401错误信息如下：
 ```
 Failed to load resource:
