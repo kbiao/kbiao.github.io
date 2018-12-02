@@ -28,8 +28,6 @@
     </header>
     <style>
     </style>
-    <div class="flower" style="transform: translate(-5.00483px, 3.98211px);"></div>
-   
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
