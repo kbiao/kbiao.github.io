@@ -1,0 +1,867 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//apps.bdimg.com/libs/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,MVP,demo," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="听雨小筑" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="写了很多的项目之后会有一种感觉就是好像啥也会点，但是啥也做不出来。缺少实践是学习中的一个致命弱点。最近做一个室内WIFI定位的项目，实践中需要一个可以收集环境中wifi信号强度的工具。">
+<meta name="keywords" content="Android,MVP,demo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android-MVP-Demo">
+<meta property="og:url" content="http://blog.kbiao.me/2016/05/06/Android-MVP-Demo/index.html">
+<meta property="og:site_name" content="听雨小筑">
+<meta property="og:description" content="写了很多的项目之后会有一种感觉就是好像啥也会点，但是啥也做不出来。缺少实践是学习中的一个致命弱点。最近做一个室内WIFI定位的项目，实践中需要一个可以收集环境中wifi信号强度的工具。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://image.kbiao.me/16-5-7/86536240.jpg">
+<meta property="og:image" content="http://image.kbiao.me/16-5-6/71782982.jpg">
+<meta property="og:image" content="http://image.kbiao.me/16-5-6/3836095.jpg">
+<meta property="og:image" content="http://image.kbiao.me/16-5-6/32834670.jpg">
+<meta property="og:image" content="http://image.kbiao.me/16-5-6/56555941.jpg">
+<meta property="og:updated_time" content="2018-12-02T07:08:59.751Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android-MVP-Demo">
+<meta name="twitter:description" content="写了很多的项目之后会有一种感觉就是好像啥也会点，但是啥也做不出来。缺少实践是学习中的一个致命弱点。最近做一个室内WIFI定位的项目，实践中需要一个可以收集环境中wifi信号强度的工具。">
+<meta name="twitter:image" content="http://image.kbiao.me/16-5-7/86536240.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.kbiao.me/2016/05/06/Android-MVP-Demo/"/>
+
+
+
+
+
+  <title> Android-MVP-Demo | 听雨小筑 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?40650f57a96f0df2cfe5cee491a33cae";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">听雨小筑</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">爱学习，有梦想，实力派</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+    <style>
+    </style>
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://blog.kbiao.me/2016/05/06/Android-MVP-Demo/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="K、Biao">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://image.kbiao.me/kbiao.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="听雨小筑">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="听雨小筑" src="http://image.kbiao.me/kbiao.jpg">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android-MVP-Demo
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-06T23:30:11+08:00">
+                2016-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/05/06/Android-MVP-Demo/" class="leancloud_visitors" data-flag-title="Android-MVP-Demo">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<p><img src="http://image.kbiao.me/16-5-7/86536240.jpg" alt=""><br>写了很多的项目之后会有一种感觉就是好像啥也会点，但是啥也做不出来。缺少实践是学习中的一个致命弱点。最近做一个室内WIFI定位的项目，实践中需要一个可以收集环境中wifi信号强度的工具。<a id="more"></a>需求很简单，读取wifi信号，并且上传指定服务器。这个很快就做出来了。后来又说这个wifi信号不及时，需要定时刷新，一秒钟之内多取样，我就继续改。后来又说信号强度需要排序，还需要记录位点，还需要客户端收到服务器的反馈……需求越来越多，然后经常是改一个功能就会出现莫名其妙的闪退或者其他bug。很是心烦。所以就想到了重构一遍整个代码。一个能投入实际应用的工具不能只是把以前学习过的demo的累加，更需要一种科学的构建方式。所以边学习了MVP，边实践了一次。</p>
+<p>以下是修改前后的项目模式结构对比：<br><code>修改前</code><br><img src="http://image.kbiao.me/16-5-6/71782982.jpg" alt="修改前"><br><code>修改后</code><br><img src="http://image.kbiao.me/16-5-6/3836095.jpg" alt="修改后"><br>明显感觉到文件变多了了，但是结构更清晰了。对于这样一个完全没有注释的项目，时隔一月再次拿起，说是需要添加学习模式，增加位点判断等。很快便完成而且不影响之前的任何设置。便深刻地感受到了这种模式的好处。</p>
+<h2 id="什么是MVP："><a href="#什么是MVP：" class="headerlink" title="什么是MVP："></a>什么是MVP：</h2><blockquote>
+<p>随着UI创建技术的功能日益增强，UI层也履行着越来越多的职责。为了更好地细分视图(View)与模型(Model)的功能，让View专注于处理数据的可视化以及与用户的交互，同时让Model只关系数据的处理，基于MVC概念的MVP(Model-View-Presenter)模式应运而生。</p>
+</blockquote>
+<p>在MVP模式里通常包含4个要素：</p>
+<ol>
+<li>View:负责绘制UI元素、与用户进行交互(在Android中体现为Activity);</li>
+<li>View interface:需要View实现的接口，View通过View interface与Presenter进行交互，降低耦合，方便进行单元测试;</li>
+<li>Model:负责存储、检索、操纵数据(有时也实现一个Model interface用来降低耦合);</li>
+<li>Presenter:作为View与Model交互的中间纽带，处理与用户交互的负责逻辑。</li>
+</ol>
+<p>也许我们经常听到的是MVC，这也是一种非常成熟的设计模式。在桌面应用，web应用中很常见，也方便我们理解，它实现了数据、界面、逻辑的分离。</p>
+<h2 id="MVP-与-MVC"><a href="#MVP-与-MVC" class="headerlink" title="MVP 与 MVC"></a>MVP 与 MVC</h2><blockquote>
+<p>MVP<br>是从经典的模式MVC演变而来，它们的基本思想有相通的地方：Controller/Presenter负责逻辑的处理，Model提供数据，View负<br>责显示。作为一种新的模式，MVP与MVC有着一个重大的区别：在MVP中View并不直接使用Model，它们之间的通信是通过Presenter<br>(MVC中的Controller)来进行的，所有的交互都发生在Presenter内部，而在MVC中View会从直接Model中读取数据而不是通过<br>Controller。</p>
+<p>在MVC里，View是可以直接访问Model的！从而，View里会包含Model信息，不可避免的还要包括一些业务逻辑。<br>在MVC模型里，更关注的Model的不变，而同时有多个对Model的不同显示，及View。所以，在MVC模型里，Model不依赖于View，但是<br>View是依赖于Model的。不仅如此，因为有一些业务逻辑在View里实现了，导致要更改View也是比较困难的，至少那些业务逻辑是无法重用的。</p>
+</blockquote>
+<p>我们在学习阶段，写的东西一般都是在Activity中完成，项目复杂了Activity中的代码越来越多，一会不看就不太记得前一个函数发生了什么，特别是执行一些后台任务的时候，与前面界面的交互是比较复杂的。这时候就比较容易理解这种模式直观的一个好处了———这是一个将后台任务和activities/views/fragment分离的方法，让它们独立于绝大多数跟生命周期相关的事件。这样应用就会变得更简单。当你需要写一个Activity，Fragment或者一个自定义View的时候，你可以将所有和后台任务相关的方法放在一个外部的或者静态的类中。这样你的后台任务就不会再与Activity相关联，不会在泄漏内存同时也不会依赖于Activity的重建。<br>同时也提供了更为清晰的项目结构，不同部分分别负责不通的工作也为测试提供了方便。</p>
+<h2 id="MVP实例"><a href="#MVP实例" class="headerlink" title="MVP实例"></a>MVP实例</h2><p>下面我就以项目中的具体一部分来说明如何使用这样的项目结构<br>项目的基本需求是收集附近的wifi信号信息，这里只展示把获得的wifi信号表示出来的部分。<br><code>效果图</code><br><img src="http://image.kbiao.me/16-5-6/32834670.jpg" alt="效果图"></p>
+<h3 id="1-定义模型："><a href="#1-定义模型：" class="headerlink" title="1.定义模型："></a>1.定义模型：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">public class WifiScan &#123;</span><br><span class="line"></span><br><span class="line">	private ScanResult scanResult;</span><br><span class="line">	private String tag;</span><br><span class="line"></span><br><span class="line">	public WifiScan(String tag, ScanResult scanResult) &#123;</span><br><span class="line">		this.tag = tag;</span><br><span class="line">		this.scanResult = scanResult;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public ScanResult getScanResult() &#123;</span><br><span class="line">		return scanResult;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public String getTag() &#123;</span><br><span class="line">		return tag;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void setTag(String tag) &#123;</span><br><span class="line">		this.tag = tag;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-建立View接口（更新ui中的view状态）"><a href="#2-建立View接口（更新ui中的view状态）" class="headerlink" title="2.建立View接口（更新ui中的view状态）"></a>2.建立View接口（更新ui中的view状态）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">WifiListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">abstract</span> Context <span class="title">getContext</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">handleWifiScan</span><span class="params">(List&lt;WifiScan&gt; wifiScans)</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">handleWifiTick</span><span class="params">(<span class="keyword">long</span> progress, <span class="keyword">long</span> max)</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-建立presenter"><a href="#3-建立presenter" class="headerlink" title="3.建立presenter"></a>3.建立presenter</h3><p>（主导器，通过iView和iModel接口操作model和view），activity可以把所有逻辑给presenter处理，这样java逻辑就从手机的activity中分离出来</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">WifiPresenter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">private</span> LinearLayout searching;</span><br><span class="line">       <span class="keyword">private</span> ListView listView;</span><br><span class="line"></span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="title">WifiPresenter</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">           <span class="keyword">this</span>.listView = (ListView) rootView.findViewById(android.R.id.list);</span><br><span class="line">           <span class="keyword">this</span>.searching = (LinearLayout) rootView.findViewById(R.id.wifi_searching);</span><br><span class="line"></span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateSearching</span><span class="params">(<span class="keyword">boolean</span> listEmpty)</span> </span>&#123;</span><br><span class="line">           <span class="keyword">if</span> (listEmpty) &#123;</span><br><span class="line">               <span class="keyword">this</span>.listView.setVisibility(View.GONE);</span><br><span class="line">               <span class="keyword">this</span>.searching.setVisibility(View.VISIBLE);</span><br><span class="line"></span><br><span class="line">           &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">               <span class="keyword">this</span>.listView.setVisibility(View.VISIBLE);</span><br><span class="line">               <span class="keyword">this</span>.searching.setVisibility(View.GONE);</span><br><span class="line"></span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-在Acitivity中调用-实现以上类"><a href="#4-在Acitivity中调用-实现以上类" class="headerlink" title="4.在Acitivity中调用/实现以上类"></a>4.在Acitivity中调用/实现以上类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WifiDetailFragment</span> <span class="keyword">extends</span> <span class="title">ListFragment</span> <span class="keyword">implements</span> <span class="title">WifiListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/*省略一些不重要的代码*/</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> WifiHandler wifiHandler;</span><br><span class="line">    <span class="keyword">protected</span> WifiAdapter adapter;</span><br><span class="line">    View  rootView;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isInit = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">private</span> List&lt;WifiScan&gt; scanResults;</span><br><span class="line">    <span class="keyword">private</span> WifiPresenter presenter;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">onCreateView</span><span class="params">(LayoutInflater inflater, ViewGroup container,</span></span></span><br><span class="line"><span class="function"><span class="params">                             Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        rootView = inflater.inflate(R.layout.fragment_wifidetail, container, <span class="keyword">false</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> rootView;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">doInit</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Init scan results</span></span><br><span class="line">        <span class="keyword">this</span>.scanResults = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Init adapter</span></span><br><span class="line">        <span class="keyword">this</span>.adapter = <span class="keyword">new</span> WifiAdapter(getContext(), R.layout.wifi_row, <span class="keyword">this</span>.scanResults);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Set adapter sort</span></span><br><span class="line">        <span class="keyword">this</span>.adapter.sort(WIFISCAN_COMPARATOR);</span><br><span class="line"></span><br><span class="line">        setListAdapter(<span class="keyword">this</span>.adapter);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Init Wifi handler</span></span><br><span class="line">        <span class="keyword">this</span>.wifiHandler = <span class="keyword">new</span> WifiHandler(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Listen to WiFi</span></span><br><span class="line">        <span class="keyword">this</span>.wifiHandler.doWifiListen();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Presenter</span></span><br><span class="line">        <span class="keyword">this</span>.presenter = <span class="keyword">new</span> WifiPresenter();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.isInit = <span class="keyword">true</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getWifiIcon</span><span class="params">(ScanResult scanResult)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (scanResult.level &gt; WIFI_LEVEL_HIGH) &#123;</span><br><span class="line">            <span class="keyword">return</span> R.drawable.wifi_4;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (scanResult.level &gt; WIFI_LEVEL_MEDIUM) &#123;</span><br><span class="line">            <span class="keyword">return</span> R.drawable.wifi_3;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (scanResult.level &gt; WIFI_LEVEL_LOW) &#123;</span><br><span class="line">            <span class="keyword">return</span> R.drawable.wifi_2;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (scanResult.level &gt; WIFI_LEVEL_LOWEST) &#123;</span><br><span class="line">            <span class="keyword">return</span> R.drawable.wifi_1;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> R.drawable.wifi_0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Context <span class="title">getContext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.getActivity().getApplicationContext();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleWifiScan</span><span class="params">(List&lt;WifiScan&gt; wifiScans)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Set scan results</span></span><br><span class="line">        <span class="keyword">this</span>.scanResults = wifiScans;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Sort wifi scans</span></span><br><span class="line">        Collections.sort(<span class="keyword">this</span>.scanResults, WIFISCAN_COMPARATOR);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Remove all from adapter</span></span><br><span class="line">        <span class="keyword">this</span>.adapter.clear();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Add Scan Result to adapter</span></span><br><span class="line">        <span class="keyword">for</span> (WifiScan scanResult : wifiScans) &#123;</span><br><span class="line">            <span class="keyword">this</span>.adapter.add(scanResult);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Update searching</span></span><br><span class="line">        <span class="keyword">this</span>.presenter.updateSearching(<span class="keyword">this</span>.adapter.isEmpty());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Notify data change</span></span><br><span class="line">        <span class="keyword">this</span>.adapter.notifyDataSetChanged();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleWifiTick</span><span class="params">(<span class="keyword">long</span> progress, <span class="keyword">long</span> max)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>MVP主要解决就是把逻辑层抽出来成P层，要是遇到需求逻辑上的更改就可以只需要修改P层了或者遇到逻辑上的大概我们可以直接从写一个P也可以，之前的项目把所有的东西都写在了Activity/Fragment里面这样一来遇到频繁改需求或者逻辑越来越复杂的时候，Activity /Fragment里面就会出现过多的混杂逻辑导致出错，所以MVP模式对于APP来对控制逻辑和UI的解耦来说是一个不错的选择！</p>
+<h2 id="项目其他页面"><a href="#项目其他页面" class="headerlink" title="项目其他页面"></a>项目其他页面</h2><p><img src="http://image.kbiao.me/16-5-6/56555941.jpg" alt=""></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/qrcode_wx.jpg" alt="K、Biao wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/MVP/" rel="tag"># MVP</a>
+          
+            <a href="/tags/demo/" rel="tag"># demo</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/01/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/07/Java-Convert-List-To-Array/" rel="prev" title="Java-Convert-List-to-Array">
+                Java-Convert-List-to-Array <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://image.kbiao.me/kbiao.jpg"
+               alt="K、Biao" />
+          <p class="site-author-name" itemprop="name">K、Biao</p>
+          <p class="site-description motion-element" itemprop="description">彪彪的技术博客</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/kbiao" target="_blank" title="知乎">
+                  
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/kbiao" target="_blank" title="GitHub">
+                  
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是MVP："><span class="nav-number">1.</span> <span class="nav-text">什么是MVP：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVP-与-MVC"><span class="nav-number">2.</span> <span class="nav-text">MVP 与 MVC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVP实例"><span class="nav-number">3.</span> <span class="nav-text">MVP实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-定义模型："><span class="nav-number">3.1.</span> <span class="nav-text">1.定义模型：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-建立View接口（更新ui中的view状态）"><span class="nav-number">3.2.</span> <span class="nav-text">2.建立View接口（更新ui中的view状态）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-建立presenter"><span class="nav-number">3.3.</span> <span class="nav-text">3.建立presenter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-在Acitivity中调用-实现以上类"><span class="nav-number">3.4.</span> <span class="nav-text">4.在Acitivity中调用/实现以上类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目其他页面"><span class="nav-number">5.</span> <span class="nav-text">项目其他页面</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">K、Biao</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//apps.bdimg.com/libs/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="//apps.bdimg.com/libs/jquery-lazyload/1.9.5/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="//apps.bdimg.com/libs/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("7OTu25XcWOiqFHBrfOA46xsT-gzGzoHsz", "bigXFjf3hf5a9TEukm9xO7uT");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+ <script type="text/javascript">
+    var s = $(window), l = s.height(), c = s.width(),o = 0, r = 0;
+    d = function(a, i, e) {
+        Math.abs(a - o) > 2 ? o += (a - o) / 6 : o = a,
+        Math.abs(i - r) > 2 ? r += (i - r) / 6 : r = i,
+        $(e).css({
+            transition: "all 0 linear",
+            transform: "translate(" + .03 * -o + "px ," + .03 * -r + "px)"
+        })
+    };
+     $("body").mousemove(function(e) {
+            a = e.clientX - c / 2,
+            i = e.clientY - l / 2,
+            d(a, i, ".flower")
+        });
+
+    
+    </script>
+</body>
+</html>

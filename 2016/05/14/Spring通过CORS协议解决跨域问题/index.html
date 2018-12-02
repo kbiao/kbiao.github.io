@@ -1,0 +1,855 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//apps.bdimg.com/libs/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="CORS,java,spring,跨域," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="听雨小筑" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="现在接手学校网络中心的一个项目，根据团队成员的实际情况以及开发需要，老师希望做到前后端完全分离。后台使用java提供restful API 作为核心，前台无论PC或者移动端可以共用一个核心。前期解决了哦oauth2，作为授权机制等问题，本以为大业将成。（最近打算详细介绍一下机遇Spring sercurity 实现oauth2的解决方案）结果又出现了一个跨域问题，让我们踩了一个大坑，记录在此，以绝">
+<meta name="keywords" content="CORS,java,spring,跨域">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring通过CORS协议解决跨域问题">
+<meta property="og:url" content="http://blog.kbiao.me/2016/05/14/Spring通过CORS协议解决跨域问题/index.html">
+<meta property="og:site_name" content="听雨小筑">
+<meta property="og:description" content="现在接手学校网络中心的一个项目，根据团队成员的实际情况以及开发需要，老师希望做到前后端完全分离。后台使用java提供restful API 作为核心，前台无论PC或者移动端可以共用一个核心。前期解决了哦oauth2，作为授权机制等问题，本以为大业将成。（最近打算详细介绍一下机遇Spring sercurity 实现oauth2的解决方案）结果又出现了一个跨域问题，让我们踩了一个大坑，记录在此，以绝">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://image.kbiao.me/16-5-15/23272345.jpg">
+<meta property="og:updated_time" content="2018-12-02T07:08:59.754Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring通过CORS协议解决跨域问题">
+<meta name="twitter:description" content="现在接手学校网络中心的一个项目，根据团队成员的实际情况以及开发需要，老师希望做到前后端完全分离。后台使用java提供restful API 作为核心，前台无论PC或者移动端可以共用一个核心。前期解决了哦oauth2，作为授权机制等问题，本以为大业将成。（最近打算详细介绍一下机遇Spring sercurity 实现oauth2的解决方案）结果又出现了一个跨域问题，让我们踩了一个大坑，记录在此，以绝">
+<meta name="twitter:image" content="http://image.kbiao.me/16-5-15/23272345.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.kbiao.me/2016/05/14/Spring通过CORS协议解决跨域问题/"/>
+
+
+
+
+
+  <title> Spring通过CORS协议解决跨域问题 | 听雨小筑 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?40650f57a96f0df2cfe5cee491a33cae";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">听雨小筑</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">爱学习，有梦想，实力派</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+    <style>
+    </style>
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://blog.kbiao.me/2016/05/14/Spring通过CORS协议解决跨域问题/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="K、Biao">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://image.kbiao.me/kbiao.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="听雨小筑">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="听雨小筑" src="http://image.kbiao.me/kbiao.jpg">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Spring通过CORS协议解决跨域问题
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-14T23:17:41+08:00">
+                2016-05-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Coding-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">Coding-Notes</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/05/14/Spring通过CORS协议解决跨域问题/" class="leancloud_visitors" data-flag-title="Spring通过CORS协议解决跨域问题">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://image.kbiao.me/16-5-15/23272345.jpg" alt=""><br>现在接手学校网络中心的一个项目，根据团队成员的实际情况以及开发需要，老师希望做到前后端完全分离。后台使用java提供restful API 作为核心，前台无论PC或者移动端可以共用一个核心。前期解决了哦oauth2，作为授权机制等问题，本以为大业将成。（最近打算详细介绍一下机遇Spring sercurity 实现oauth2的解决方案）结果又出现了一个跨域问题，让我们踩了一个大坑，记录在此，以绝后患。<br><a id="more"></a><br><strong>错误信息如下：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Response to preflight request doesn&apos;t pass access control check: No &apos;Access-Control-Allow-Origin&apos; header is present on the requested resource. Origin &apos;null&apos; is therefore not allowed access. The response had HTTP status code 403.</span><br></pre></td></tr></table></figure></p>
+<p>CORS实现跨域时授权问题（401错误）的解决]<a href="http://blog.kbiao.me/2016/05/21/CORS%E5%AE%9E%E7%8E%B0%E8%B7%A8%E5%9F%9F%E6%97%B6%E6%8E%88%E6%9D%83%E9%97%AE%E9%A2%98%EF%BC%88401%E9%94%99%E8%AF%AF%EF%BC%89%E7%9A%84%E8%A7%A3%E5%86%B3/">4</a>   由于授权而产生的403错误解决方案见此。</p>
+<h2 id="什么是跨域"><a href="#什么是跨域" class="headerlink" title="什么是跨域"></a>什么是跨域</h2><p>简单的说即为浏览器限制访问A站点下的js代码对B站点下的url进行ajax请求。比如说，前端域名是<a href="http://www.abc.com，那么在当前环境中运行的js代码，出于安全考虑，访问www.xyz.com域名下的资源，是受到限制的。现代浏览器默认都会基于安全原因而阻止跨域的ajax请求，这是现代浏览器中必备的功能，但是往往给开发带来不便。特别是对我这样后台开发人员来讲，这个事情简直神奇。" target="_blank" rel="noopener">www.abc.com，那么在当前环境中运行的js代码，出于安全考虑，访问www.xyz.com域名下的资源，是受到限制的。现代浏览器默认都会基于安全原因而阻止跨域的ajax请求，这是现代浏览器中必备的功能，但是往往给开发带来不便。特别是对我这样后台开发人员来讲，这个事情简直神奇。</a><br>但跨域的需求却一直都在，为了跨域，勤劳勇敢的程序猿们想出了许许多多的方法，例如，jsonP、代理文件等等。但这些做法增加了许多不必要的维护成本，而且应用场景也有许多限制，例如jsonP并非XHR，所以jsonP只能使用GET传递参数。更详细的资料可以看这里<a href="http://blog.csdn.net/fangaoxin/article/details/6929415" target="_blank" rel="noopener"> Web应用跨域访问解决方案汇总</a></p>
+<h2 id="CORS协议"><a href="#CORS协议" class="headerlink" title="CORS协议"></a>CORS协议</h2><p>如今的JS大有一统天下的趋势，浏览器已经成了大多应用最好的安身之所。哪怕在移动端也有各种Hybird方案，在本地文件系统的Web页面，也有需要获取外部数据的需求，而这些需求也必然是跨域的。在寻找跨域解决方案时，发现了最优雅解决方案就是HTML5来带了的“Cross-Origin Resource Sharing”的新特性，来赋予开发者权力决定资源是否允许被跨域访问。<br>CORS是一个W3C标准，全称是”跨域资源共享”（Cross-origin resource sharing）。<br>它允许浏览器向跨源服务器，发出XMLHttpRequest请求，从而克服了AJAX只能同源使用的限制。<br>为什么说它优雅呢？<br>整个CORS通信过程，都是浏览器自动完成，不需要用户参与。对于开发者来说，CORS通信与同源的AJAX通信没有差别，代码完全一样。浏览器一旦发现AJAX请求跨源，就会自动添加一些附加的头信息，有时还会多出一次附加的请求，但用户不会有感觉。<br>因此，实现CORS通信的关键是服务器。<strong>只要服务器实现了CORS接口</strong>，就可以跨源通信。<br>解决这个问题的关键就落在了我这个负责后台的程序猿身上。<br>看看文档也不是什么难事嘛，就是需要在http头中设置Access-Control-Allow-Origin来决定需要允许哪些站点来访问。关于CROS协议更详细内容参考<a href="http://www.ruanyifeng.com/blog/2016/04/cors.html" target="_blank" rel="noopener">跨域资源共享 CORS 详解</a></p>
+<h2 id="CORS常见header"><a href="#CORS常见header" class="headerlink" title="CORS常见header"></a>CORS常见header</h2><p>CORS具有以下常见的header<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: http://kbiao.me  </span><br><span class="line"></span><br><span class="line">Access-Control-Max-Age: 3628800</span><br><span class="line"></span><br><span class="line">Access-Control-Allow-Methods: GET，PUT, DELETE</span><br><span class="line"></span><br><span class="line">Access-Control-Allow-Headers: content-type</span><br></pre></td></tr></table></figure></p>
+<p>“Access-Control-Allow-Origin”表明它允许” <a href="http://kbiao.me" target="_blank" rel="noopener">http://kbiao.me</a>  “发起跨域请求</p>
+<p>“Access-Control-Max-Age”表明在3628800秒内，不需要再发送<em>预检验</em>请求，可以缓存该结果（上面的资料上我们知道CROS协议中，一个AJAX请求被分成了第一步的<code>OPTION</code>预检测请求和正式请求）</p>
+<p>“Access-Control-Allow-Methods”表明它允许GET、PUT、DELETE的外域请求</p>
+<p>“Access-Control-Allow-Headers”表明它允许跨域请求包含content-type头</p>
+<p>当然在处理这个问题的时候前端也有不少坑，特别是Chrome浏览器不允许localhost的跨域请求，详细方案见我项目中负责前端解决方案的小伙伴。<code>假装有链接</code></p>
+<h2 id="常规解决方案"><a href="#常规解决方案" class="headerlink" title="常规解决方案"></a>常规解决方案</h2><p>知道了问题的原因，也知道了配套的解决办法，现在就让我们来实现解决。思路很简单，当前端要请求跨域资源时候，我们给它加上响应的响应头即可。很显然我们自己定义一个过滤器是最简单不过了。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by kangb on 2016/5/10.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">myCORSFilter</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig filterConfig)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span> <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">        HttpServletResponse response = (HttpServletResponse) servletResponse;</span><br><span class="line">        String origin = (String) servletRequest.getRemoteHost()+<span class="string">":"</span>+servletRequest.getRemotePort();</span><br><span class="line">        response.setHeader(<span class="string">"Access-Control-Allow-Origin"</span>, <span class="string">"*"</span>);</span><br><span class="line">        response.setHeader(<span class="string">"Access-Control-Allow-Methods"</span>, <span class="string">"POST, GET, OPTIONS, DELETE"</span>);</span><br><span class="line">        response.setHeader(<span class="string">"Access-Control-Max-Age"</span>, <span class="string">"3600"</span>);</span><br><span class="line">        response.setHeader(<span class="string">"Access-Control-Allow-Headers"</span>, <span class="string">"x-requested-with,Authorization"</span>);</span><br><span class="line">        response.setHeader(<span class="string">"Access-Control-Allow-Credentials"</span>,<span class="string">"true"</span>);</span><br><span class="line">        filterChain.doFilter(servletRequest, servletResponse);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>@Component 是Spring的注解，关键部分在doFilter中，添加了我们需要的头，<code>option</code>是预检测需要所以需要允许，<code>Authorization</code>是做了oauth2登录响应所必须的，<code>Access-Control-Allow-Credentials</code>表示允许cookies。都是根据自己项目的实际需要配置。<br>再配置Web.xml使得过滤器生效<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>cors<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>·CLASS_PATH·.myeCORSFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>cors<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/api/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>接下来前端就可以像往常一样使用AJAX请求获得资源了，完全不需要做出什么改变。</p>
+<h2 id="SPRING-4中更优雅的办法"><a href="#SPRING-4中更优雅的办法" class="headerlink" title="SPRING 4中更优雅的办法"></a>SPRING 4中更优雅的办法</h2><p>SpringMVC4提供了非常方便的实现跨域的方法。在requestMapping中使用注解。<br><code>@CrossOrigin(origins = “http://kbiao.me”)</code><br>全局实现 .定义类继承WebMvcConfigurerAdapter,设置跨域相关的配置<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CorsConfigurerAdapter</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span></span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addCorsMappings</span><span class="params">(CorsRegistry registry)</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    registry.addMapping(<span class="string">"/api/*"</span>).allowedOrigins(<span class="string">"*"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>将该类注入到容器中：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"com.tmall.wireless.angel.web.config.CorsConfigurerAdapter"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>更详细的内容参考Spring 官方的hello world案例<a href="http://spring.io/guides/gs/rest-service-cors/" target="_blank" rel="noopener">Enabling Cross Origin Requests for a RESTful Web Service</a>     </p>
+<p><a href="http://spring.io/guides/gs/rest-service-cors/或者使用git下载示例源码" target="_blank" rel="noopener">http://spring.io/guides/gs/rest-service-cors/或者使用git下载示例源码</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/spring-guides/gs-rest-service-cors.git</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/qrcode_wx.jpg" alt="K、Biao wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CORS/" rel="tag"># CORS</a>
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/spring/" rel="tag"># spring</a>
+          
+            <a href="/tags/跨域/" rel="tag"># 跨域</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/11/nodeJS踩坑-记本地地址127-0-0-1与0-0-0-0的区别/" rel="next" title="nodeJS踩坑-记本地地址127.0.0.1与0.0.0.0的区别">
+                <i class="fa fa-chevron-left"></i> nodeJS踩坑-记本地地址127.0.0.1与0.0.0.0的区别
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/21/CORS实现跨域时授权问题（401错误）的解决/" rel="prev" title="CORS实现跨域时授权问题（401错误）的解决">
+                CORS实现跨域时授权问题（401错误）的解决 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://image.kbiao.me/kbiao.jpg"
+               alt="K、Biao" />
+          <p class="site-author-name" itemprop="name">K、Biao</p>
+          <p class="site-description motion-element" itemprop="description">彪彪的技术博客</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/kbiao" target="_blank" title="知乎">
+                  
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/kbiao" target="_blank" title="GitHub">
+                  
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是跨域"><span class="nav-number">1.</span> <span class="nav-text">什么是跨域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CORS协议"><span class="nav-number">2.</span> <span class="nav-text">CORS协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CORS常见header"><span class="nav-number">3.</span> <span class="nav-text">CORS常见header</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常规解决方案"><span class="nav-number">4.</span> <span class="nav-text">常规解决方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SPRING-4中更优雅的办法"><span class="nav-number">5.</span> <span class="nav-text">SPRING 4中更优雅的办法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">K、Biao</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//apps.bdimg.com/libs/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="//apps.bdimg.com/libs/jquery-lazyload/1.9.5/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="//apps.bdimg.com/libs/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("7OTu25XcWOiqFHBrfOA46xsT-gzGzoHsz", "bigXFjf3hf5a9TEukm9xO7uT");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+ <script type="text/javascript">
+    var s = $(window), l = s.height(), c = s.width(),o = 0, r = 0;
+    d = function(a, i, e) {
+        Math.abs(a - o) > 2 ? o += (a - o) / 6 : o = a,
+        Math.abs(i - r) > 2 ? r += (i - r) / 6 : r = i,
+        $(e).css({
+            transition: "all 0 linear",
+            transform: "translate(" + .03 * -o + "px ," + .03 * -r + "px)"
+        })
+    };
+     $("body").mousemove(function(e) {
+            a = e.clientX - c / 2,
+            i = e.clientY - l / 2,
+            d(a, i, ".flower")
+        });
+
+    
+    </script>
+</body>
+</html>
