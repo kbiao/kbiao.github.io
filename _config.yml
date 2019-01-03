@@ -7,7 +7,7 @@ title: 听雨小筑
 subtitle: 爱学习，有梦想，实力派
 description: 彪彪的技术博客
 author: K、Biao
-language: zh-Hans
+language: zh-CN
 timezone: Asia/Shanghai
 
 # URL
@@ -64,8 +64,8 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
-
+# theme: next
+theme: next-reloaded
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
