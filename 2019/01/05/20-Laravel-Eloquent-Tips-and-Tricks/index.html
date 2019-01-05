@@ -105,7 +105,7 @@
 <meta property="og:description" content="书接上文。 继续介绍 Laravel Eloquent 的小技巧">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://image.kbiao.me/2019-01-03-15465238831311.png">
-<meta property="og:updated_time" content="2019-01-05T09:08:51.178Z">
+<meta property="og:updated_time" content="2019-01-05T09:17:08.450Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【译】20个 Laravel Eloquent 小技巧（下）">
 <meta name="twitter:description" content="书接上文。 继续介绍 Laravel Eloquent 的小技巧">
@@ -410,7 +410,7 @@
                 
               
 
-              <time title="创建时间：2019-01-05 17:50:41 / 修改时间：17:08:51" itemprop="dateCreated datePublished" datetime="2019-01-05T17:50:41+08:00">2019-01-05</time>
+              <time title="创建时间：2019-01-05 17:50:41 / 修改时间：17:17:08" itemprop="dateCreated datePublished" datetime="2019-01-05T17:50:41+08:00">2019-01-05</time>
             
 
             
@@ -487,7 +487,9 @@
 <p> （设定了一个在返回对象时候的附加属性 ‘full_name’参见 tips5 模型属性: 时间戳, 附加属性（appends） 等）</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getFullNameAttribute</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;attributes[<span class="string">'first_name'</span>] . <span class="string">' '</span> . <span class="keyword">$this</span>-&gt;attributes[<span class="string">'last_name'</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>如果你想要按照 <code>full_name</code> 来排序的话？下面的代码是不行的：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$clients = Client::orderBy(<span class="string">'full_name'</span>)-&gt;get(); <span class="comment">// 不行滴~</span></span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">当然解决方案也是非常简单。我们需要在得到结果以后再对他们进行排序。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">```php</span><br><span class="line">$clients = Client::get()-&gt;sortBy(<span class="string">'full_name'</span>); <span class="comment">// 稳了!</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$clients = Client::orderBy(<span class="string">'full_name'</span>)-&gt;get(); <span class="comment">//不行滴</span></span><br></pre></td></tr></table></figure>
+<p>当然解决方案也是非常简单。<br>我们需要在得到结果以后再对他们进行排序。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$clients = Client::get()-&gt;sortBy(<span class="string">'full_name'</span>); <span class="comment">//稳了</span></span><br></pre></td></tr></table></figure>
 <p>注意两个方法名字是不一样的——不是 <code>orderBy</code> 而是 <code>sortBy</code>。</p>
 <p>（一个是 SQL 语句，自定义属性是数据库没有的字段当然不能直接用。但是查询的返回都是一个 Collection 对象，Laravel 为集合提供了很多方便的操作方法，sortBy 就是其中一个，当然还可以用 filter 等集合操作）</p>
 <h3 id="12-全局范围（global-scope）内的默认排序"><a href="#12-全局范围（global-scope）内的默认排序" class="headerlink" title="12. 全局范围（global scope）内的默认排序"></a>12. 全局范围（global scope）内的默认排序</h3><p>如果你希望User :: all（）始终按名称字段排序，该怎么办？ 你可以分配全局的查询作用域。 让我们回到上面已经提到的boot（）方法。</p>
