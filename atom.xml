@@ -195,6 +195,30 @@
   </entry>
   
   <entry>
+    <title>安卓手机与IOS相册自动同步小技巧</title>
+    <link href="http://blog.kbiao.me/2017/03/12/Automatic-Sync-Android-album-whith-IOS/"/>
+    <id>http://blog.kbiao.me/2017/03/12/Automatic-Sync-Android-album-whith-IOS/</id>
+    <published>2017-03-12T01:30:01.000Z</published>
+    <updated>2018-12-02T07:08:59.756Z</updated>
+    
+    <content type="html"><![CDATA[<p>如果拥有苹果全家桶，各种资料跨平台同步的感觉一定是很爽的。但是对于手机不喜欢iPhone,还用着iPad的我来说，就有点纠结。特别是对于相册，iPad拍的照很容易就同步进了我的Mac，真正拍照的主力手机确是安卓，想要分享一般还得借助QQ啥的把文件传来传去。无奈iCloud又不支持安卓，几经折腾我还是得到了一个比较适合的解决方案实现跨平台无缝自动同步。<br><a id="more"></a></p><h3 id="工具："><a href="#工具：" class="headerlink" title="工具："></a>工具：</h3><p><strong>坚果云：</strong> 非常良心的国产同步盘应用，也就是墙内的DropBox。一直在用它同步一些资料特别是多人共享，非常方便。<br><strong>Mac：</strong> 要是没有Mac 我也不会有这种需求，同时也是这个需求让我发现了Mac的新世界——AutoMator以及Apple Script。</p><h3 id="方法："><a href="#方法：" class="headerlink" title="方法："></a>方法：</h3><ol><li><p>安卓手机下载坚果云，并打开相册同步。</p><blockquote><p>坚果云每月限流量的，免费版用户谨慎操作。</p></blockquote></li><li><p>Mac上也下载并运行坚果云，设置一个相册同步的文件夹。</p><blockquote><p>这样只要在WiFi下手机就会自动把相册同步给Mac上的那个文件夹。</p></blockquote></li><li><p>建立一个AutoMator脚本。</p><ul><li>打开Mac上自带的AutoMator。<br><img src="http://image.kbiao.me/2017-03-12-14893039054210.jpg?imageView2/2/w/60/interlace/1/" alt=""></li><li>新建一个 <code>文件夹操作</code> </li><li>右侧脚本配置中选取文件夹，选择刚刚设定的坚果云相册同步文件夹。 </li><li>左侧的操作中搜索<code>相册</code> 并选择 <code>将文件导入到‘照片’</code>,拖到右侧配置中。填写下相关操作配置如下：<br><img src="http://image.kbiao.me/2017-03-12-14893045046245.jpg" alt=""></li></ul></li><li><p>保存后即可自动运行。</p><blockquote><p>脚本触发的条件就是那个文件夹项目有更新。一般我都会开机自动运行坚果云，所以手机端拍了新照片在连入WiFi时候自动同步给电脑，并触发文件夹操作，导入相册。这样在其他IOS设备，比如我的ipad上就可以同步看到了。整个过程非常流畅，没有任何认为操作，也不需要额外运行什么软件工具。我认为这是比较理想的解决方案。</p></blockquote></li><li><p>如何取消自动同步操作？</p><ul><li>在同步文件夹上右键——服务——文件夹操作设置 取消勾选这个workflow 即可</li><li><img src="http://image.kbiao.me/2017-03-12-14893049576378.jpg?imageView2/2/w/400/interlace/1/" alt=""></li></ul></li></ol><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>  是否可以在Windows上同步呢？我觉也是可以的，可以同时下载iCloud windows版，以及坚果云把他俩的同步文件夹设为同一个就可以吧。但是我没有试过。<br>  更关键的是，当我打开AutoMator后看到那么多的操作，以我一个程序员的思维自然是发现了新大陆。想象多少操作可以自动化完成，而且全凭自定义。不说了，我要去看看这个还有什么新玩法了。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;如果拥有苹果全家桶，各种资料跨平台同步的感觉一定是很爽的。但是对于手机不喜欢iPhone,还用着iPad的我来说，就有点纠结。特别是对于相册，iPad拍的照很容易就同步进了我的Mac，真正拍照的主力手机确是安卓，想要分享一般还得借助QQ啥的把文件传来传去。无奈iCloud又不支持安卓，几经折腾我还是得到了一个比较适合的解决方案实现跨平台无缝自动同步。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="ToolTips" scheme="http://blog.kbiao.me/categories/ToolTips/"/>
+    
+    
+      <category term="工具" scheme="http://blog.kbiao.me/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="tips" scheme="http://blog.kbiao.me/tags/tips/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Docker学习笔记———Get Start</title>
     <link href="http://blog.kbiao.me/2017/03/12/Docker-Learning-Notes-Get-Start/"/>
     <id>http://blog.kbiao.me/2017/03/12/Docker-Learning-Notes-Get-Start/</id>
@@ -217,30 +241,6 @@
     
     
       <category term="Docker" scheme="http://blog.kbiao.me/tags/Docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>安卓手机与IOS相册自动同步小技巧</title>
-    <link href="http://blog.kbiao.me/2017/03/12/Automatic-Sync-Android-album-whith-IOS/"/>
-    <id>http://blog.kbiao.me/2017/03/12/Automatic-Sync-Android-album-whith-IOS/</id>
-    <published>2017-03-12T01:30:01.000Z</published>
-    <updated>2018-12-02T07:08:59.756Z</updated>
-    
-    <content type="html"><![CDATA[<p>如果拥有苹果全家桶，各种资料跨平台同步的感觉一定是很爽的。但是对于手机不喜欢iPhone,还用着iPad的我来说，就有点纠结。特别是对于相册，iPad拍的照很容易就同步进了我的Mac，真正拍照的主力手机确是安卓，想要分享一般还得借助QQ啥的把文件传来传去。无奈iCloud又不支持安卓，几经折腾我还是得到了一个比较适合的解决方案实现跨平台无缝自动同步。<br><a id="more"></a></p><h3 id="工具："><a href="#工具：" class="headerlink" title="工具："></a>工具：</h3><p><strong>坚果云：</strong> 非常良心的国产同步盘应用，也就是墙内的DropBox。一直在用它同步一些资料特别是多人共享，非常方便。<br><strong>Mac：</strong> 要是没有Mac 我也不会有这种需求，同时也是这个需求让我发现了Mac的新世界——AutoMator以及Apple Script。</p><h3 id="方法："><a href="#方法：" class="headerlink" title="方法："></a>方法：</h3><ol><li><p>安卓手机下载坚果云，并打开相册同步。</p><blockquote><p>坚果云每月限流量的，免费版用户谨慎操作。</p></blockquote></li><li><p>Mac上也下载并运行坚果云，设置一个相册同步的文件夹。</p><blockquote><p>这样只要在WiFi下手机就会自动把相册同步给Mac上的那个文件夹。</p></blockquote></li><li><p>建立一个AutoMator脚本。</p><ul><li>打开Mac上自带的AutoMator。<br><img src="http://image.kbiao.me/2017-03-12-14893039054210.jpg?imageView2/2/w/60/interlace/1/" alt=""></li><li>新建一个 <code>文件夹操作</code> </li><li>右侧脚本配置中选取文件夹，选择刚刚设定的坚果云相册同步文件夹。 </li><li>左侧的操作中搜索<code>相册</code> 并选择 <code>将文件导入到‘照片’</code>,拖到右侧配置中。填写下相关操作配置如下：<br><img src="http://image.kbiao.me/2017-03-12-14893045046245.jpg" alt=""></li></ul></li><li><p>保存后即可自动运行。</p><blockquote><p>脚本触发的条件就是那个文件夹项目有更新。一般我都会开机自动运行坚果云，所以手机端拍了新照片在连入WiFi时候自动同步给电脑，并触发文件夹操作，导入相册。这样在其他IOS设备，比如我的ipad上就可以同步看到了。整个过程非常流畅，没有任何认为操作，也不需要额外运行什么软件工具。我认为这是比较理想的解决方案。</p></blockquote></li><li><p>如何取消自动同步操作？</p><ul><li>在同步文件夹上右键——服务——文件夹操作设置 取消勾选这个workflow 即可</li><li><img src="http://image.kbiao.me/2017-03-12-14893049576378.jpg?imageView2/2/w/400/interlace/1/" alt=""></li></ul></li></ol><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>  是否可以在Windows上同步呢？我觉也是可以的，可以同时下载iCloud windows版，以及坚果云把他俩的同步文件夹设为同一个就可以吧。但是我没有试过。<br>  更关键的是，当我打开AutoMator后看到那么多的操作，以我一个程序员的思维自然是发现了新大陆。想象多少操作可以自动化完成，而且全凭自定义。不说了，我要去看看这个还有什么新玩法了。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;如果拥有苹果全家桶，各种资料跨平台同步的感觉一定是很爽的。但是对于手机不喜欢iPhone,还用着iPad的我来说，就有点纠结。特别是对于相册，iPad拍的照很容易就同步进了我的Mac，真正拍照的主力手机确是安卓，想要分享一般还得借助QQ啥的把文件传来传去。无奈iCloud又不支持安卓，几经折腾我还是得到了一个比较适合的解决方案实现跨平台无缝自动同步。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="ToolTips" scheme="http://blog.kbiao.me/categories/ToolTips/"/>
-    
-    
-      <category term="工具" scheme="http://blog.kbiao.me/tags/%E5%B7%A5%E5%85%B7/"/>
-    
-      <category term="tips" scheme="http://blog.kbiao.me/tags/tips/"/>
     
   </entry>
   
