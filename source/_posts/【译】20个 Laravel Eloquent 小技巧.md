@@ -288,6 +288,8 @@ public function author()
 ```
 
 
-太长了，下一篇再续上🤔😘
+太长了，[下一篇](http://blog.kbiao.me/2019/01/05/20-Laravel-Eloquent-Tips-and-Tricks/)再续上🤔😘
+
+http://blog.kbiao.me/2019/01/05/20-Laravel-Eloquent-Tips-and-Tricks/
 
 
