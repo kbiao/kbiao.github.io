@@ -225,6 +225,7 @@ $q->orWhere(['b' => 2, 'c' => 3]);
 ```
 
 
+
 ### 原文地址 
 
 * [《20 Laravel Eloquent Tips and Tricks》](https://laravel-news.com/eloquent-tips-tricks)https://laravel-news.com/eloquent-tips-tricks
