@@ -6,7 +6,7 @@ tags:
 categories:
 	Coding-Notes
 ---
-![](http://image.kbiao.me/16-5-9/93479104.jpg)
+![](https://image.kbiao.me/16-5-9/93479104.jpg)
 ## 问题提出
 在公司里做项目，一般都是公司直接分配git账号。而我自己在GitHub上也托管了自己的博客。两边使用的账号是不同的对应的ssh key也不一样。每次都手工更改是很麻烦的，也不是程序员应有的解决方案。这里我记录下我是如何解决git多账号登录的。
 <!-- more -->

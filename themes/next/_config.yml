@@ -158,7 +158,7 @@ social_icons:
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.jpg
 # in site  directory(source/uploads): /uploads/avatar.jpg
-avatar: http://image.kbiao.me/kbiao.jpg
+avatar: https://image.kbiao.me/kbiao.jpg
 
 
 # Table Of Contents in the Sidebar
@@ -242,7 +242,7 @@ post_meta:
 #   image: url-of-image   - Images's url
 custom_logo:
   enabled: true
-  image: http://image.kbiao.me/kbiao.jpg
+  image: https://image.kbiao.me/kbiao.jpg
 
 
 # Code Highlight theme

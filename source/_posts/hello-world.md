@@ -2,8 +2,8 @@
 title: Hello World
 date: 2016-05-1 16:00:27
 photos:
-- http://image.kbiao.me/kbiao.jpg
-- http://image.kbiao.me/peach.jpg
+- https://image.kbiao.me/kbiao.jpg
+- https://image.kbiao.me/peach.jpg
 ---
 
 `Hello World` 是程序员给世界的第一声问候。对于做运维的小伙伴来说应该是`It works!`。这个句子在我们这些码农的生命中具有特殊的意义。像婴儿的第一声啼哭，是母亲生命中重要的纪念。在母亲节写下这样的句子还是非常应景的。第一篇文章取这个题目也是再合适不过的了。向世界问好，交出属于程序员自己的名片。

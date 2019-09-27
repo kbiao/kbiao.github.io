@@ -9,7 +9,7 @@ tags:
 categories:
     Coding-Notes
 ---
-![](http://image.kbiao.me/16-5-15/23272345.jpg)
+![](https://image.kbiao.me/16-5-15/23272345.jpg)
 现在接手学校网络中心的一个项目，根据团队成员的实际情况以及开发需要，老师希望做到前后端完全分离。后台使用java提供restful API 作为核心，前台无论PC或者移动端可以共用一个核心。前期解决了哦oauth2，作为授权机制等问题，本以为大业将成。（最近打算详细介绍一下机遇Spring sercurity 实现oauth2的解决方案）结果又出现了一个跨域问题，让我们踩了一个大坑，记录在此，以绝后患。
 <!-- more -->
 **错误信息如下：**

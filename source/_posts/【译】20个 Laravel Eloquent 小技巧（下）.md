@@ -9,7 +9,7 @@ categories:
 permalink: 20-Laravel-Eloquent-Tips-and-Tricks
 ---
 
-![](http://image.kbiao.me/2019-01-03-15465238831311.png)
+![](https://image.kbiao.me/2019-01-03-15465238831311.png)
 >
 [书接上文](http://blog.kbiao.me/2019/01/03/20-Laravel-Eloquent-Tips-and-Tricks/)。
 

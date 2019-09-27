@@ -8,7 +8,7 @@ categories:
 permalink: Docker-Learning-Notes-Get-Start
 
 ---
-![](http://image.kbiao.me/2017-03-12-14892908756333.jpg)
+![](https://image.kbiao.me/2017-03-12-14892908756333.jpg)
 
 > 做程序员最可怕的事情是不是自己学习的速度还不如这些工具产品版本号更新的快？
 
@@ -22,14 +22,14 @@ permalink: Docker-Learning-Notes-Get-Start
 
 也就是说只是换了一种版本号的，叫法成了 yy.mm格式，最新版也就是17年3月的版本。还好能跟得上节奏，上一个版本也就是1.13而已。
 
-![](http://image.kbiao.me/2017-03-12-14892819650098.jpg)
+![](https://image.kbiao.me/2017-03-12-14892819650098.jpg)
 
 
 Docker 的 Linux 发行版的软件仓库也从以前的https://apt.dockerproject.org / https://yum.dockerproject.org 变更为目前的 https://download.docker.com/。软件包名变更为 docker-ce(社区版) 和 docker-ee(企业版)。
 旧的仓库和包名(docker-engine)依旧可以使用，但不确定什么时候会被废弃，docker-engine 的版本号也变成了 17.03.0~ce-0 这种的版本号。
 
 这个新的企业版本中主要是针对企业用户的需求，增加了一些安全认证，审计，镜像仓库，数据中心（多租户）管理等方面的功能，方便企业部署应用，而且提供更长的支持周期，收费情况的话感觉还好（反正我也买不起，只是感觉和Oracle的产品定价比起来确实好多了）。
-![](http://image.kbiao.me/2017-03-12-14892831046889.jpg)
+![](https://image.kbiao.me/2017-03-12-14892831046889.jpg)
 还好这个版本区分并不会影响我学习Docker。
 
 ## 安装Docker-CE并运行hello-world

@@ -8,7 +8,7 @@ tags:
 categories:
 - java
 ---
-![](http://image.kbiao.me/16-7-23/73340367.jpg?imageView2/2/w/600/interlace/1/)
+![](https://image.kbiao.me/16-7-23/73340367.jpg?imageView2/2/w/600/interlace/1/)
 在一个单位中，可能是存在多个不同的应用，比如学校会有财务的系统会有学生工作的系统，还有图书馆的系统等等，如果每个系统都用独立的账号认证体系，会给用户带来很大困扰，也给管理带来很大不便。所以需要设计一种统一登录的解决方案。比如我登陆了百度账号，进贴吧时发现已经登录了，进糯米发现也自动登录了。常见的有两种情况，一种是SSO（单点登录）效果是一次输入密码多个网站可以识别在线状态；还有一种是多平台登录，效果是可以用一个账号（比如QQ账号）登录多个不同的网站。
 <!--  more-->
 
@@ -33,7 +33,7 @@ SSO一般用于同一单位的多个站点的登陆状态保持，技术上一�
 
 这一部分的操作是**应用服务器和验证服务器之间**的交互，这个过程对用户是透明的。这个过程中慕课网是不需要知道用户的账号密码也可以完成对用户身份的认证，这个token就可以用来标识用户资源。
 官方的运行流程图是这样的:
-![](http://image.kbiao.me/16-7-23/35133968.jpg)
+![](https://image.kbiao.me/16-7-23/35133968.jpg)
 ### OAuth的几种认证模式
 上述讲的是OAuth2中支持的授权码（CODE）方式的认证流程，也是其支持的四种认证方式里最复杂的，其他的三种种包括：
 
@@ -50,7 +50,7 @@ SSO一般用于同一单位的多个站点的登陆状态保持，技术上一�
 http://localhost:8090/oauth/authorize?response_type=code&scope=read write&client_id=test&redirect_uri=http://localhost:8000/login&state=09876999
 ```
 我们注意到几个重要的参数：
-![](http://image.kbiao.me/16-7-23/20532229.jpg)
+![](https://image.kbiao.me/16-7-23/20532229.jpg)
 
  - response_type：表示授权类型，就是上面讲的那四种类型，这里用的是code方式。
  - client_id：表示客户端的ID，代表哪个应用请求验证
@@ -119,7 +119,7 @@ localhost:8090/oauth/token?client_id=test&client_secret=test&grant_type=authoriz
 ```
 与之前请求类似只是多了一个code字段，去验证客户端的合法性。
 
-![](http://image.kbiao.me/16-7-23/3286696.jpg)
+![](https://image.kbiao.me/16-7-23/3286696.jpg)
 验证服务器会在收到code以后去查找是否有支持这种code的处理器，如果有则发放token。
 ```
 for (OAuthTokenHandler handler : handlers) {
@@ -168,7 +168,7 @@ curl -i -X GET \
 在这个reamls中根据token去查到用户信息，再去分发对应的资源。
 自此便完成了整个oauth2的流程。
 这个流程中认证服务系统需要配置三张数据表：
-![](http://image.kbiao.me/16-7-23/60634523.jpg)
+![](https://image.kbiao.me/16-7-23/60634523.jpg)
 
  - client_details表中存放注册的客户端数据。如回调地址，授权类型，是否信任，权限信息等
  - code中存放发放给客户端应用的code，使用后失效，以保证安全性

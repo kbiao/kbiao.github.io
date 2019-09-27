@@ -7,7 +7,7 @@ tags:
 - java
 - list
 ---
-![](http://image.kbiao.me/16-5-7/67479954.jpg)
+![](https://image.kbiao.me/16-5-7/67479954.jpg)
 ## 问题的提出
 今天在完成一个小功能的时候，需要把存放在List中的数据转化成字符串数组。 
 想当然地用了`List`的一个方法`toArray()`,它的返回值是`Object[]`类型，于是用强制类型转换。代码如下： 

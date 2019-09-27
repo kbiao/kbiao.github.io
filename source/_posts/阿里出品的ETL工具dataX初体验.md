@@ -9,7 +9,7 @@ categories:
     Coding-Notes
 ---
 
-![](http://image.kbiao.me/17-1-2/15001992-file_1483363944014_47b9.jpg)
+![](https://image.kbiao.me/17-1-2/15001992-file_1483363944014_47b9.jpg)
 我的毕设选择了大数据方向的题目。大数据的第一步就是要拿到足够的数据源。现实情况中我们需要的数据源分布在不同的业务系统中，而这些系统往往是异构的，而且我们的分析过程不能影响原有业务系统的运行。为了把不同的数据归集起来，我开始了解和接触ETL。本篇介绍阿里的开源ETL工具dataX。
 <!-- more -->
 ## ETL&&常用工具
@@ -30,7 +30,7 @@ categories:
 
 > ​ DataX 是一个异构数据源离线同步工具，致力于实现包括关系型数据库(MySQL、Oracle等)、HDFS、Hive、MaxCompute(原ODPS)、HBase、FTP等各种异构数据源之间稳定高效的数据同步功能。
 
-![](http://image.kbiao.me/17-1-2/64743029-file_1483363981430_e353.png)
+![](https://image.kbiao.me/17-1-2/64743029-file_1483363981430_e353.png)
 
 dataX本身只是一个数据库同步框架，通过插件体系完成数据同步过程reader插件用于读入，writer插件用于写出，中间的framework可以定义transform插件完成数据转化的需要。
 使用它之后，我们的数据同步工作就简化成了：根据数据源选择对应的reader或者writer插件，填写必要的一个配置文件，一句命令搞定全部。
@@ -121,7 +121,7 @@ $ python datax.py ../job/job.json
 
 ## 性能测试 
 单核8G的虚拟机，这个速度还算可以吧，可能是数据读写不在同一台机子上网络传输也消耗了不少时间。
-![](http://image.kbiao.me/17-1-2/70332950-file_1483365743611_16fe6.png)
+![](https://image.kbiao.me/17-1-2/70332950-file_1483365743611_16fe6.png)
 
 
   [1]: http://www.oracle.com/technetwork/cn/java/javase/downloads/index.html

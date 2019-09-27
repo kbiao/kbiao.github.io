@@ -29,18 +29,18 @@ permalink: Automatic-Sync-Android-album-whith-IOS
 
 3. 建立一个AutoMator脚本。
     * 打开Mac上自带的AutoMator。
-    ![](http://image.kbiao.me/2017-03-12-14893039054210.jpg?imageView2/2/w/60/interlace/1/)
+    ![](https://image.kbiao.me/2017-03-12-14893039054210.jpg?imageView2/2/w/60/interlace/1/)
     * 新建一个 ` 文件夹操作` 
     * 右侧脚本配置中选取文件夹，选择刚刚设定的坚果云相册同步文件夹。 
     * 左侧的操作中搜索`相册` 并选择 `将文件导入到‘照片’`,拖到右侧配置中。填写下相关操作配置如下：
-    ![](http://image.kbiao.me/2017-03-12-14893045046245.jpg)
+    ![](https://image.kbiao.me/2017-03-12-14893045046245.jpg)
 
 4. 保存后即可自动运行。
    > 脚本触发的条件就是那个文件夹项目有更新。一般我都会开机自动运行坚果云，所以手机端拍了新照片在连入WiFi时候自动同步给电脑，并触发文件夹操作，导入相册。这样在其他IOS设备，比如我的ipad上就可以同步看到了。整个过程非常流畅，没有任何认为操作，也不需要额外运行什么软件工具。我认为这是比较理想的解决方案。
 
 5. 如何取消自动同步操作？
  * 在同步文件夹上右键——服务——文件夹操作设置 取消勾选这个workflow 即可
- * ![](http://image.kbiao.me/2017-03-12-14893049576378.jpg?imageView2/2/w/400/interlace/1/)
+ * ![](https://image.kbiao.me/2017-03-12-14893049576378.jpg?imageView2/2/w/400/interlace/1/)
 
 
  ### 总结
