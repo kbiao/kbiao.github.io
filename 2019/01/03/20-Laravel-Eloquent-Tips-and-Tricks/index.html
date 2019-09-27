@@ -15,7 +15,7 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-CN">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -179,7 +179,7 @@
 
 </head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
@@ -189,7 +189,7 @@
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta">
     
@@ -372,20 +372,20 @@
 
   
 
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.kbiao.me/2019/01/03/20-Laravel-Eloquent-Tips-and-Tricks/">
 
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="K、Biao">
       <meta itemprop="description" content="彪彪的技术博客">
       <meta itemprop="image" content="http://image.kbiao.me/kbiao.jpg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="听雨小筑">
     </span>
 
@@ -454,7 +454,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/全干工程师的收藏夹/" itemprop="url" rel="index"><span itemprop="name">全干工程师的收藏夹</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/全干工程师的收藏夹/" itemprop="url" rel="index"><span itemprop="name">全干工程师的收藏夹</span></a></span>
 
                 
                 
@@ -509,7 +509,7 @@
       
 
       
-        <p><img src="http://image.kbiao.me/2019-01-03-15465238831311.png" alt=""></p>
+        <p><img src="http://image.kbiao.me/2019-01-03-15465238831311.png" alt></p>
 <blockquote>
 <p>腾讯实习的项目按照公司的主流技术选型是PHP 流派的，而我习惯了 JAVA 的体系面对这个最好的语言还是挺不适应的。特别是很多写法用法以及框架知识不在文档中，语法又及其灵活就产生和每次看别人的代码都有种woc 还能这么写的感觉。所以遵循语言的编程范式，总结理解一些小技巧也是很有必要的。下面是翻译自 Laravel-News 的一篇教程，总结了 Laravel 的对象关系映射框架（ORM）的几个小技巧。</p>
 </blockquote>
@@ -517,65 +517,91 @@
 <p>Eloquent ORM 在其表面简单易用的机制背后，还有很多半隐藏的功能或者少有人知的方法来实现一些很有用的需求。 在本文中，我将向您展示一些技巧。</p>
 <h3 id="1-增量和减少"><a href="#1-增量和减少" class="headerlink" title="1. 增量和减少"></a>1. 增量和减少</h3><p>如果你平时是这么做的：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$article = Article::find($article_id);</span><br><span class="line">$article-&gt;read_count++;</span><br><span class="line">$article-&gt;save();</span><br></pre></td></tr></table></figure>
+
 <p>那么你可以试试这样：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$article = Article::find($article_id);</span><br><span class="line">$article-&gt;increment(<span class="string">'read_count'</span>);</span><br></pre></td></tr></table></figure>
+
 <p>或者这样也是可以的：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Article::find($article_id)-&gt;increment(<span class="string">'read_count'</span>);</span><br><span class="line">Article::find($article_id)-&gt;increment(<span class="string">'read_count'</span>, <span class="number">10</span>); <span class="comment">// +10</span></span><br><span class="line">Product::find($produce_id)-&gt;decrement(<span class="string">'stock'</span>); <span class="comment">// -1</span></span><br></pre></td></tr></table></figure>
+
 <h3 id="2-XorY-方法"><a href="#2-XorY-方法" class="headerlink" title="2. XorY 方法"></a>2. XorY 方法</h3><p>Eloquent有很多方法是两个方法的组合，实现 “请做X，否则做Y”这样的需求。</p>
 <p><strong>例 1</strong> findOrFail():</p>
 <p>可以把这样的代码：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$user = User::find($id);</span><br><span class="line"><span class="keyword">if</span> (!$user) &#123; abort (<span class="number">404</span>); &#125;</span><br></pre></td></tr></table></figure>
+
 <p>换成这样：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$user = User::findOrFail($id);</span><br></pre></td></tr></table></figure>
+
 <p><strong>例 2</strong> firstOrCreate():</p>
 <p>不需要写这么长：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$user = User::where(&apos;email&apos;, $email)-&gt;first();</span><br><span class="line">if (!$user) &#123;</span><br><span class="line">  User::create([</span><br><span class="line">    &apos;email&apos; =&gt; $email</span><br><span class="line">  ]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>这样就够了：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$user = User::firstOrCreate([&apos;email&apos; =&gt; $email]);</span><br></pre></td></tr></table></figure>
+
 <h3 id="3-模型的-boot-方法"><a href="#3-模型的-boot-方法" class="headerlink" title="3. 模型的 boot() 方法"></a>3. 模型的 boot() 方法</h3><p>在Eloquent模型中有一个名为boot（）的神奇地方，您可以在其中覆盖默认行为：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">extends</span> <span class="title">Model</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">boot</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">parent</span>::boot();</span><br><span class="line">        <span class="keyword">static</span>::updating(<span class="function"><span class="keyword">function</span><span class="params">($model)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="comment">// 记录一些日志</span></span><br><span class="line">            <span class="comment">// 覆盖或者重写一些属性 比如$model-&gt;something = transform($something);</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>可能最常见的例子之一是在创建模型对象时设置一些字段值。比方说你需要在创建对象时候生成UUID字段。</p>
 <h3 id="4-带条件以及排序的关联关系模型"><a href="#4-带条件以及排序的关联关系模型" class="headerlink" title="4. 带条件以及排序的关联关系模型"></a>4. 带条件以及排序的关联关系模型</h3><p>通常定义关系模型的方法是这样的</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">users</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;hasMany(<span class="string">'App\User'</span>);    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>但你是否知道在定义关系模型的时候就已经可以增加 where 或者 orderBy 的条件了？ 比如说你需要定义一个特定类型的用户的关联关系并且用邮箱信息来排序，那你可以这么做：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">approvedUsers</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;hasMany(<span class="string">'App\User'</span>)-&gt;where(<span class="string">'approved'</span>, <span class="number">1</span>)-&gt;orderBy(<span class="string">'email'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="5-模型属性-时间戳-附加属性（appends）-等"><a href="#5-模型属性-时间戳-附加属性（appends）-等" class="headerlink" title="5. 模型属性: 时间戳, 附加属性（appends） 等"></a>5. 模型属性: 时间戳, 附加属性（appends） 等</h3><p>Eloquent模型有一些“参数”，会以该类的属性形式出现。 最常用的可能是这些：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">extends</span> <span class="title">Model</span> </span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> $table = <span class="string">'users'</span>;</span><br><span class="line">    <span class="keyword">protected</span> $fillable = [<span class="string">'email'</span>, <span class="string">'password'</span>]; <span class="comment">// 这些字段可以在模型的 create 方法中直接创建</span></span><br><span class="line">    <span class="keyword">protected</span> $dates = [<span class="string">'created_at'</span>, <span class="string">'deleted_at'</span>]; <span class="comment">// 这些字段将会转换成 Carbon类型的，可以方便的使用 Carbon 提供的时间方法</span></span><br><span class="line">    <span class="keyword">protected</span> $appends = [<span class="string">'field1'</span>, <span class="string">'field2'</span>]; <span class="comment">// 序列化时候附加的额外属性，通过模型中定义 getXXXAttribute 的方式来定义</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>可不仅仅有这些，还有：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> $primaryKey = <span class="string">'uuid'</span>; <span class="comment">// 模型的主键名称可以不是默认的 id</span></span><br><span class="line"><span class="keyword">public</span> $incrementing = <span class="keyword">false</span>; <span class="comment">// 甚至可以不必是自增的类型!</span></span><br><span class="line"><span class="keyword">protected</span> $perPage = <span class="number">25</span>; <span class="comment">// 是的，你还定义模型集合分页参数(默认是 15)</span></span><br><span class="line"><span class="keyword">const</span> CREATED_AT = <span class="string">'created_at'</span>;</span><br><span class="line"><span class="keyword">const</span> UPDATED_AT = <span class="string">'updated_at'</span>; <span class="comment">// 默认的时间戳字段也是可以改变的</span></span><br><span class="line"><span class="keyword">public</span> $timestamps = <span class="keyword">false</span>; <span class="comment">// 或者完全不用他</span></span><br></pre></td></tr></table></figure>
+
 <p>甚至还有更多，我仅仅列出了最有意思的一部分，更多请查看默认<a href="https://github.com/laravel/framework/blob/5.6/src/Illuminate/Database/Eloquent/Model.php" target="_blank" rel="noopener">抽象Model类</a>的代码，并查看所有使用的trait 方法。</p>
 <h3 id="6-查询多个实体对象"><a href="#6-查询多个实体对象" class="headerlink" title="6. 查询多个实体对象"></a>6. 查询多个实体对象</h3><p>find（）方法想必大家都知道的吧？</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$user = User::find(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
 <p>我很惊讶很少有人知道它可以接受多个ID作为数组：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$users = User::find([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]);</span><br></pre></td></tr></table></figure>
+
 <h3 id="7-WhereX"><a href="#7-WhereX" class="headerlink" title="7. WhereX"></a>7. WhereX</h3><p> 有一种很优雅的方式可以把下面的代码：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$users = User::where(<span class="string">'approved'</span>, <span class="number">1</span>)-&gt;get();</span><br></pre></td></tr></table></figure>
+
 <p>改成这样：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$users = User::whereApproved(<span class="number">1</span>)-&gt;get();</span><br></pre></td></tr></table></figure>
+
 <p>是的，你也可以改成任何字段的名称，并将其作为后缀附加到“where”，它将神奇的产生预想的效果（通过<em>魔术方法</em>实现调用）。</p>
 <p>此外，Eloquent中还有一些与日期/时间相关的预定义方法：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">User::whereDate(<span class="string">'created_at'</span>, date(<span class="string">'Y-m-d'</span>));</span><br><span class="line">User::whereDay(<span class="string">'created_at'</span>, date(<span class="string">'d'</span>));</span><br><span class="line">User::whereMonth(<span class="string">'created_at'</span>, date(<span class="string">'m'</span>));</span><br><span class="line">User::whereYear(<span class="string">'created_at'</span>, date(<span class="string">'Y'</span>));</span><br></pre></td></tr></table></figure>
+
 <h3 id="8-使用关系模型字段排序"><a href="#8-使用关系模型字段排序" class="headerlink" title="8. 使用关系模型字段排序"></a>8. 使用关系模型字段排序</h3><p>一个更复杂的“技巧”。 如果你有帖子，但要通过最新帖子对它们进行排序？ 顶部有最新更新主题的论坛中非常常见的要求，对吧？</p>
 <p>首先，定义关于该主题的最新帖子的关系：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">latestPost</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;hasOne(\App\Post::class)-&gt;latest();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>接下来可以在我们的控制器中用这个神奇的方法来实现：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$users = Topic::with(<span class="string">'latestPost'</span>)-&gt;get()-&gt;sortByDesc(<span class="string">'latestPost.created_at'</span>);</span><br></pre></td></tr></table></figure>
+
 <h3 id="9-Eloquent-when-–-不用再写-if-else-啦"><a href="#9-Eloquent-when-–-不用再写-if-else-啦" class="headerlink" title="9. Eloquent::when() – 不用再写 if -else 啦"></a>9. Eloquent::when() – 不用再写 if -else 啦</h3><p>大部分时候我们用 if-else 来实现按条件查询，类似这样的代码：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (request(<span class="string">'filter_by'</span>) == <span class="string">'likes'</span>) &#123;</span><br><span class="line">    $query-&gt;where(<span class="string">'likes'</span>, <span class="string">'&gt;'</span>, request(<span class="string">'likes_amount'</span>, <span class="number">0</span>));</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (request(<span class="string">'filter_by'</span>) == <span class="string">'date'</span>) &#123;</span><br><span class="line">    $query-&gt;orderBy(<span class="string">'created_at'</span>, request(<span class="string">'ordering_rule'</span>, <span class="string">'desc'</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>但是一个更好的方法是——使用 when（）方法</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$query = Author::query();</span><br><span class="line">$query-&gt;when(request(<span class="string">'filter_by'</span>) == <span class="string">'likes'</span>, <span class="function"><span class="keyword">function</span> <span class="params">($q)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> $q-&gt;where(<span class="string">'likes'</span>, <span class="string">'&gt;'</span>, request(<span class="string">'likes_amount'</span>, <span class="number">0</span>));</span><br><span class="line">&#125;);</span><br><span class="line">$query-&gt;when(request(<span class="string">'filter_by'</span>) == <span class="string">'date'</span>, <span class="function"><span class="keyword">function</span> <span class="params">($q)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> $q-&gt;orderBy(<span class="string">'created_at'</span>, request(<span class="string">'ordering_rule'</span>, <span class="string">'desc'</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
 <p>它看起来可能不会更短或更优雅，但最强大的是可以传递参数：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$query = User::query();</span><br><span class="line">$query-&gt;when(request(<span class="string">'role'</span>, <span class="keyword">false</span>), <span class="function"><span class="keyword">function</span> <span class="params">($q, $role)</span> </span>&#123; </span><br><span class="line">    <span class="keyword">return</span> $q-&gt;where(<span class="string">'role_id'</span>, $role);</span><br><span class="line">&#125;);</span><br><span class="line">$authors = $query-&gt;get();</span><br></pre></td></tr></table></figure>
+
 <h3 id="10-BelongsTo-关联的默认模型对象"><a href="#10-BelongsTo-关联的默认模型对象" class="headerlink" title="10. BelongsTo 关联的默认模型对象"></a>10. BelongsTo 关联的默认模型对象</h3><p>假设有个 Post（帖子） 对象属于 Author （作者）对象，在 Blade 模板中有下面的代码</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; $post-&gt;author-&gt;name &#125;&#125;</span><br></pre></td></tr></table></figure>
+
 <p>但是如果作者被删除，或者由于某种原因没有设置呢？ 那么就会导致报错，可能是“property of non-object（非对象属性）”。</p>
 <p>当然你可以用下面的代码来必变这种错误：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; $post-&gt;author-&gt;name ?? &apos;&apos; &#125;&#125;</span><br></pre></td></tr></table></figure>
+
 <p>不过你可以再模型定义时候就解决这个问题：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public function author()</span><br><span class="line">&#123;</span><br><span class="line">    return $this-&gt;belongsTo(&apos;App\Author&apos;)-&gt;withDefault();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>在这个例子中，在这个帖子下没有关联作者的时候，author（）关联关系将返回一个空的App\Author 模型。</p>
 <p>更进一步，我们可以设置一些默认属性个这个模型。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">author</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;belongsTo(<span class="string">'App\Author'</span>)-&gt;withDefault([</span><br><span class="line">        <span class="string">'name'</span> =&gt; <span class="string">'Guest Author'</span></span><br><span class="line">    ]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>太长了，<a href="http://blog.kbiao.me/2019/01/05/20-Laravel-Eloquent-Tips-and-Tricks/">下一篇</a>再续上🤔😘</p>
 <p><a href="http://blog.kbiao.me/2019/01/05/20-Laravel-Eloquent-Tips-and-Tricks/">http://blog.kbiao.me/2019/01/05/20-Laravel-Eloquent-Tips-and-Tricks/</a></p>
 
@@ -723,7 +749,7 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image" src="http://image.kbiao.me/kbiao.jpg" alt="K、Biao">
             

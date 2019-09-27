@@ -15,7 +15,7 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-CN">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -179,7 +179,7 @@
 
 </head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
@@ -189,7 +189,7 @@
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta">
     
@@ -372,20 +372,20 @@
 
   
 
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.kbiao.me/2016/05/07/Java-Convert-List-To-Array/">
 
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="K、Biao">
       <meta itemprop="description" content="彪彪的技术博客">
       <meta itemprop="image" content="http://image.kbiao.me/kbiao.jpg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="听雨小筑">
     </span>
 
@@ -454,7 +454,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Coding-Notes/" itemprop="url" rel="index"><span itemprop="name">Coding-Notes</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Coding-Notes/" itemprop="url" rel="index"><span itemprop="name">Coding-Notes</span></a></span>
 
                 
                 
@@ -509,8 +509,11 @@
       
 
       
-        <p><img src="http://image.kbiao.me/16-5-7/67479954.jpg" alt=""></p>
-<h2 id="问题的提出"><a href="#问题的提出" class="headerlink" title="问题的提出"></a>问题的提出</h2><p>今天在完成一个小功能的时候，需要把存放在List中的数据转化成字符串数组。<br>想当然地用了<code>List</code>的一个方法<code>toArray()</code>,它的返回值是<code>Object[]</code>类型，于是用强制类型转换。代码如下：<br><a id="more"></a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> String[] getDictValueList(String type)&#123; </span><br><span class="line">		List DictList = getDictList(type); </span><br><span class="line">		List DictValue = <span class="keyword">new</span> ArrayList&lt;&gt;(); </span><br><span class="line">		<span class="keyword">for</span> (Dict dict : DictList)&#123; </span><br><span class="line">			DictValue.add(dict.getLabel()); </span><br><span class="line">		&#125; </span><br><span class="line">		<span class="keyword">return</span> (String[])DictValue.toArray(); </span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+        <p><img src="http://image.kbiao.me/16-5-7/67479954.jpg" alt></p>
+<h2 id="问题的提出"><a href="#问题的提出" class="headerlink" title="问题的提出"></a>问题的提出</h2><p>今天在完成一个小功能的时候，需要把存放在List中的数据转化成字符串数组。<br>想当然地用了<code>List</code>的一个方法<code>toArray()</code>,它的返回值是<code>Object[]</code>类型，于是用强制类型转换。代码如下： </p>
+<a id="more"></a>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> String[] getDictValueList(String type)&#123; </span><br><span class="line">		List DictList = getDictList(type); </span><br><span class="line">		List DictValue = <span class="keyword">new</span> ArrayList&lt;&gt;(); </span><br><span class="line">		<span class="keyword">for</span> (Dict dict : DictList)&#123; </span><br><span class="line">			DictValue.add(dict.getLabel()); </span><br><span class="line">		&#125; </span><br><span class="line">		<span class="keyword">return</span> (String[])DictValue.toArray(); </span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
 <p>结果它报错了<code>Ljava.lang.Object; cannot be cast to [Ljava.lang.String;</code><br>这个错误看起来有点奇怪，不知道前面的L和半个方括号是什么意思。 </p>
 <h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><blockquote>
 <p>类型不匹配。</p>
@@ -520,8 +523,10 @@
 <li>List转换成为数组。（这里的List是实体是ArrayList)                调用<code>ArrayList</code>的<code>toArray</code>方法。<br><code>public T[] toArray(T[]a)</code>返回一个按照正确的顺序包含此列表中所有元素的数组；返回数组的运行时类型就是指定数组的运行时类型。如果列表能放入指定的数组，则返回放入此列表元素的数组。否则，将根据指定数组的运行时类型和此列表的大小分配一个新的数组。 所以我以上的返回代码修改为： </li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> DictValue.toArray(<span class="keyword">new</span> String[DictList.size()]);</span><br></pre></td></tr></table></figure>
+
 <ol start="2">
 <li>数组转换成为List<br>调用<code>Arrays</code>的 <code>asList</code>方法<br><code>.public static List asList(T... a)</code><br>返回一个受指定数组支持的固定大小的列表。（对返回列表的更改会“直写”到数组。）此方法同 Collection.toArray 一起，充当了基于数组的 API 与基于 collection 的 API 之间的桥梁。 此方法还提供了一个创建固定长度的列表的便捷方法，该列表被初始化为包含多个元素：<br><code>List stooges = Arrays.asList(&quot;Larry&quot;, &quot;Moe&quot;, &quot;Curly&quot;);</code><br>具体用法: <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String[] arr = <span class="keyword">new</span> String[] &#123;<span class="string">"1"</span>, <span class="string">"2"</span>&#125;; List list = Arrays.asList(arr);</span><br></pre></td></tr></table></figure>
+
 </li>
 </ol>
 <p>一个错误，两个知识点。好好学习，天天向上。<br>作者： K_Biao<br>链接：<a href="http://www.imooc.com/article/5435" target="_blank" rel="noopener">http://www.imooc.com/article/5435</a><br>来源：慕课网</p>
@@ -670,7 +675,7 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image" src="http://image.kbiao.me/kbiao.jpg" alt="K、Biao">
             

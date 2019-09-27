@@ -15,7 +15,7 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-CN">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -181,7 +181,7 @@
 
 </head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
@@ -191,7 +191,7 @@
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta">
     
@@ -374,20 +374,20 @@
 
   
 
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.kbiao.me/2018/07/24/全干工程师的收藏夹【第一期】/">
 
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="K、Biao">
       <meta itemprop="description" content="彪彪的技术博客">
       <meta itemprop="image" content="http://image.kbiao.me/kbiao.jpg">
     </span>
 
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="听雨小筑">
     </span>
 
@@ -456,7 +456,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/全干工程师的收藏夹/" itemprop="url" rel="index"><span itemprop="name">全干工程师的收藏夹</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/全干工程师的收藏夹/" itemprop="url" rel="index"><span itemprop="name">全干工程师的收藏夹</span></a></span>
 
                 
                 
@@ -518,20 +518,21 @@
 <p>今天的三个文章背后共同的主题是选型和决策。工程师的任务就是在现实的约束下去求解问题，很多时候我们学习的教条式的知识让我们总忍不住去找最佳实践，而忽略了工程师的本职。我以为科学家的要义是在理想条件下寻找极限，工程师的任务是在现实条件下寻求平衡。为什么这个问题对于科学家和工程师来讲一样重要。</p>
 </blockquote>
 <a id="more"></a>
+
 <hr>
-<h3 id="MySQL在GitHub的高可用性"><a href="#MySQL在GitHub的高可用性" class="headerlink" title="MySQL在GitHub的高可用性"></a><a href="https://githubengineering.com/mysql-high-availability-at-github/" target="_blank" rel="noopener">MySQL在GitHub的高可用性</a></h3><p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1532446882722&amp;di=7ac3f62eb8fc4a4ce70de14843931ed3&amp;imgtype=jpg&amp;src=http://img4.imgtn.bdimg.com/it/u=1140509074,84803110&amp;fm=214&amp;gp=0.jpg" alt="mysql"></p>
+<h3 id="MySQL在GitHub的高可用性"><a href="#MySQL在GitHub的高可用性" class="headerlink" title="MySQL在GitHub的高可用性"></a><a href="https://githubengineering.com/mysql-high-availability-at-github/" target="_blank" rel="noopener">MySQL在GitHub的高可用性</a></h3><p><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532446882722&di=7ac3f62eb8fc4a4ce70de14843931ed3&imgtype=jpg&src=http://img4.imgtn.bdimg.com/it/u=1140509074,84803110&fm=214&gp=0.jpg" alt="mysql"></p>
 <p>架构设计的主要目的是为了解决软件系统复杂度带来的问题。复杂度的主要来源包括高性能，高扩展和高可用以及成本安全等方面的考虑。本文阐述了GitHub的MySQL高可用性和主服务发现解决方案，这个方案使得我们能够可靠地进行跨数据中心运维、克服数据中心隔离的影响并实现故障时的短宕机时间。现实的案例的演进过程可以让我们学习到每个决策背后的原因，而不是一味的为了高大上而去设计架构，做到有据可依。</p>
 <blockquote>
 <p>原链：<a href="https://githubengineering.com/mysql-high-availability-at-github/" target="_blank" rel="noopener">https://githubengineering.com/mysql-high-availability-at-github/</a>  约15分钟读完</p>
 </blockquote>
 <hr>
-<h3 id="为什么说JSON不是一门好的配置语言"><a href="#为什么说JSON不是一门好的配置语言" class="headerlink" title="为什么说JSON不是一门好的配置语言"></a><a href="https://www.lucidchart.com/techblog/2018/07/16/why-json-isnt-a-good-configuration-language/" target="_blank" rel="noopener">为什么说JSON不是一门好的配置语言</a></h3><p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1532447581070&amp;di=ac5e7de29f2ca1dcc25edfb7dcb2ee1e&amp;imgtype=jpg&amp;src=http://img2.imgtn.bdimg.com/it/u=3849388262,3599136548&amp;fm=214&amp;gp=0.jpg" alt="json"></p>
+<h3 id="为什么说JSON不是一门好的配置语言"><a href="#为什么说JSON不是一门好的配置语言" class="headerlink" title="为什么说JSON不是一门好的配置语言"></a><a href="https://www.lucidchart.com/techblog/2018/07/16/why-json-isnt-a-good-configuration-language/" target="_blank" rel="noopener">为什么说JSON不是一门好的配置语言</a></h3><p><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532447581070&di=ac5e7de29f2ca1dcc25edfb7dcb2ee1e&imgtype=jpg&src=http://img2.imgtn.bdimg.com/it/u=3849388262,3599136548&fm=214&gp=0.jpg" alt="json"></p>
 <p>优劣之争总是一个很有意思的话题。本文的角度不是一般的语言框架的问题，而是一个通用的配置文件的组织结构。任何一个方案都要放在一个具体的场景下去讨论才有意义，json作为一种通用数据交换格式无疑是非常有效率的，也几乎成为了restful设计的事实通信标准。但是，在作为配置文件的角度来说它却不是那么完美。作者分析了json的一些缺点后也给出了推荐的解决方案，虽然我们不是每个人都有机会构建自己的框架或者库，但是这些理由在我们日后决策之时必然可以提示一些思考的方向。</p>
 <blockquote>
 <p>原链：<a href="https://www.lucidchart.com/techblog/2018/07/16/why-json-isnt-a-good-configuration-language/" target="_blank" rel="noopener">https://www.lucidchart.com/techblog/2018/07/16/why-json-isnt-a-good-configuration-language/</a>  约8分钟读完</p>
 </blockquote>
 <hr>
-<h3 id="Vue和React大比拼"><a href="#Vue和React大比拼" class="headerlink" title="Vue和React大比拼"></a><a href="https://mp.weixin.qq.com/s?__biz=MzUxMzcxMzE5Ng==&amp;mid=2247489220&amp;idx=1&amp;sn=495ed9f9278f92bd671ea54ca30df2ae&amp;chksm=f951a387ce262a91a13328c9420777e90c285078ac1c5a4456ef31e5003df271e682812dc6e3#rd" target="_blank" rel="noopener">Vue和React大比拼</a></h3><p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1532447876248&amp;di=b3aa83dd2b2ad57365a0bee4595d475e&amp;imgtype=0&amp;src=http://p0.qhimg.com/t016ed168688ebc74f8.jpg" alt="Vue 和React 大比拼"></p>
+<h3 id="Vue和React大比拼"><a href="#Vue和React大比拼" class="headerlink" title="Vue和React大比拼"></a><a href="https://mp.weixin.qq.com/s?__biz=MzUxMzcxMzE5Ng==&mid=2247489220&idx=1&sn=495ed9f9278f92bd671ea54ca30df2ae&chksm=f951a387ce262a91a13328c9420777e90c285078ac1c5a4456ef31e5003df271e682812dc6e3#rd" target="_blank" rel="noopener">Vue和React大比拼</a></h3><p><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532447876248&di=b3aa83dd2b2ad57365a0bee4595d475e&imgtype=0&src=http://p0.qhimg.com/t016ed168688ebc74f8.jpg" alt="Vue 和React 大比拼"></p>
 <p>前端圈内的争斗从未休止，在做技术选型之时总是一个逃不开的话题。vue的官方文档中也附带了一篇与其他框架对比的文章。这一篇文章相对来说比较客观和全面，集中讨论vue与react的异同（angular已经不在讨论范围了么？？版本更新大家hold不住了吧）。每个框架设计要解决的主要问题不尽相同，解决问题相同时候使用的策略也不相同，这就决定了他们场景的差异，一味支持谁终将变成黑粉。码农到工程师的进化应该主要体现在能结合现实场景去考虑问题吧。</p>
 <blockquote>
 <p>原链：<a href="https://mp.weixin.qq.com/s?__biz=MzUxMzcxMzE5Ng==&amp;mid=2247489220&amp;idx=1&amp;sn=495ed9f9278f92bd671ea54ca30df2ae&amp;chksm=f951a387ce262a91a13328c9420777e90c285078ac1c5a4456ef31e5003df271e682812dc6e3#rd" target="_blank" rel="noopener">https://mp.weixin.qq.com/s?__biz=MzUxMzcxMzE5Ng==&amp;mid=2247489220&amp;idx=1&amp;sn=495ed9f9278f92bd671ea54ca30df2ae&amp;chksm=f951a387ce262a91a13328c9420777e90c285078ac1c5a4456ef31e5003df271e682812dc6e3#rd</a>  约10分钟读完</p>
@@ -540,7 +541,7 @@
 <h3 id="原文链接："><a href="#原文链接：" class="headerlink" title="原文链接："></a>原文链接：</h3><ul>
 <li><a href="https://githubengineering.com/mysql-high-availability-at-github/" target="_blank" rel="noopener">（一）MySQL在GitHub的高可用性</a></li>
 <li><a href="https://www.lucidchart.com/techblog/2018/07/16/why-json-isnt-a-good-configuration-language/" target="_blank" rel="noopener">（二）为什么说JSON不是一门好的配置语言</a></li>
-<li><a href="https://mp.weixin.qq.com/s?__biz=MzUxMzcxMzE5Ng==&amp;mid=2247489220&amp;idx=1&amp;sn=495ed9f9278f92bd671ea54ca30df2ae&amp;chksm=f951a387ce262a91a13328c9420777e90c285078ac1c5a4456ef31e5003df271e682812dc6e3#rd" target="_blank" rel="noopener">（三）Vue和React大比拼</a></li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzUxMzcxMzE5Ng==&mid=2247489220&idx=1&sn=495ed9f9278f92bd671ea54ca30df2ae&chksm=f951a387ce262a91a13328c9420777e90c285078ac1c5a4456ef31e5003df271e682812dc6e3#rd" target="_blank" rel="noopener">（三）Vue和React大比拼</a></li>
 </ul>
 <hr>
 
@@ -686,7 +687,7 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image" src="http://image.kbiao.me/kbiao.jpg" alt="K、Biao">
             
