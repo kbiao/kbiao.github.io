@@ -6,6 +6,7 @@
 <meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="null//null" crossorigin>
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
@@ -15,10 +16,10 @@
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.kbiao.me","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.kbiao.me","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="高中时候跨年的仪式感大概来自于南方周末的新年献词，内容妙语连珠，评论力透纸背，串起一年的大事件，又总能给人以温暖和信心。这几年报纸都几乎要消失了，跨年的方式也多种多样了起来。从15年的第一场《时间的朋友》演讲开始，罗胖给了大家一种除了歌舞喧嚣之外的又一种跨年选择。罗胖确实是一个很厉害的人。他一直坚持到现在的60秒语音，到《罗辑思维》脱口秀节目发展成为得到 APP，几乎是现在最成功的知识付费应用了，">
 <meta property="og:type" content="blog">
@@ -29,7 +30,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://image.kbiao.me/2019-01-01-15463501406666.jpg">
 <meta property="article:published_time" content="2019-01-01T10:50:41.000Z">
-<meta property="article:modified_time" content="2022-05-03T11:31:58.912Z">
+<meta property="article:modified_time" content="2022-05-03T12:54:00.436Z">
 <meta property="article:author" content="K、Biao">
 <meta property="article:tag" content="碎碎念">
 <meta name="twitter:card" content="summary">
@@ -237,7 +238,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-05-03 19:31:58" itemprop="dateModified" datetime="2022-05-03T19:31:58+08:00">2022-05-03</time>
+      <time title="修改时间：2022-05-03 20:54:00" itemprop="dateModified" datetime="2022-05-03T20:54:00+08:00">2022-05-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -267,7 +268,8 @@
     
     <div class="post-body" itemprop="articleBody">
         <p><img src="https://image.kbiao.me/2019-01-01-15463501406666.jpg"><br>高中时候跨年的仪式感大概来自于南方周末的新年献词，内容妙语连珠，评论力透纸背，串起一年的大事件，又总能给人以温暖和信心。这几年报纸都几乎要消失了，跨年的方式也多种多样了起来。从15年的第一场《时间的朋友》演讲开始，罗胖给了大家一种除了歌舞喧嚣之外的又一种跨年选择。<br>罗胖确实是一个很厉害的人。他一直坚持到现在的60秒语音，到《罗辑思维》脱口秀节目发展成为得到 APP，几乎是现在最成功的知识付费应用了，在做知识分享商业化非常成功。当然人红是非多，这个长达四小时的演讲几乎算是互联网小圈子的春晚了。演讲还在进行，知乎上问题讨论就多了起来，而且是负面的声音占了主流。我的阅历见识还不足以评判罗胖输出的所有知识观点，我只是凑热闹聊聊这个演讲。</p>
-<!--  more-->
+<span id="more"></span>
+
 <p>从演讲本身来说真的是非常成功，内容节奏，现场气氛整体给人都比较舒服，这样的呈现效果来说确实是很难得。很少有人能把长达四个小时的演讲把握的如此精彩的，当然也离不开配乐以及 PPT 团队的贡献，说实话这个现场的演示幻灯片确实是顶级的，比某些厂商产品发布会走心多了。把一场演讲能做成这种程度的产品，确实离不开背后一个很厉害的团队。不少人吐槽广告问题，本来这个演讲就是作为一个产品或者商品出现的，我觉得还是可以接受的，广告多少，收钱不影响演讲本身的水平和诚意。</p>
 <p>内容方面给我感触也比较深。很多人把罗辑思维吐槽为知识的二道贩子，通过贩卖焦虑来收割韭菜。不过我却觉得他的演讲是近一段时间看到文章的一股清流，他在总体不是很景气的大环境下说了很多鼓舞人心的话，传递着一种积极乐观的情绪。第一部分的开篇就说了大实话：</p>
 <blockquote>
@@ -369,7 +371,7 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/20-Laravel-Eloquent-Tips-and-Tricks" rel="next" title="【译】20个 Laravel Eloquent 小技巧（上）">
+                <a href="/20-Laravel-Eloquent-Tips-and-Tricks/" rel="next" title="【译】20个 Laravel Eloquent 小技巧（上）">
                   【译】20个 Laravel Eloquent 小技巧（上） <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
@@ -400,21 +402,21 @@
   </span>
   <span class="author" itemprop="copyrightHolder">K、Biao</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
 
     </div>
   </footer>
 
   
-  <script size="160" alpha="0.6" zIndex="-1" src="https://cdn.jsdelivr.net/npm/ribbon.js@1.0.2/dist/ribbon.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script size="160" alpha="0.6" zIndex="-1" src="https://unpkg.com/ribbon.js@1.0.2/dist/ribbon.min.js"></script>
+  <script src="https://unpkg.com/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
 
 
-  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@9.0.1/dist/mermaid.min.js","integrity":"sha256-CemUs9ITT7liCZpVMktcEw0BpAOZ1+mujlMB3UyuImU="}}</script>
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://unpkg.com/mermaid@9.0.1/dist/mermaid.min.js","integrity":"sha256-CemUs9ITT7liCZpVMktcEw0BpAOZ1+mujlMB3UyuImU="}}</script>
   <script src="/js/third-party/tags/mermaid.js"></script>
 
 
@@ -426,9 +428,6 @@
   <script src="/js/third-party/statistics/lean-analytics.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.2.0/dist/quicklink.umd.js" integrity="sha256-4kQf9z5ntdQrzsBC3YSHnEz02Z9C1UeW/E9OgnvlzSY=" crossorigin="anonymous"></script>
-  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://blog.kbiao.me/talk-about-Luo-2018-New-Year-Speech"}</script>
-  <script src="/js/third-party/quicklink.js"></script>
 
 </body>
 </html>
