@@ -1,11 +1,25 @@
-/* global hexo */
-// Class: default, primary, success, info, warning, danger
-// Usage: {% note class %} Content {% endnote %}
+/**
+ * note.js | https://theme-next.js.org/docs/tag-plugins/note
+ */
 
-function bscallOut (args, content) {
-  return '<div class="note ' + args.join(' ') + '">' +
-            hexo.render.renderSync({text: content, engine: 'markdown'}) +
-          '</div>';
-}
+'use strict';
 
-hexo.extend.tag.register('note', bscallOut, {ends: true});
+module.exports = ctx => function(args, content) {
+  const keywords = ['default', 'primary', 'info', 'success', 'warning', 'danger', 'no-icon'];
+  const className = [];
+  for (let i = 0; i < 2; i++) {
+    if (keywords.includes(args[0])) {
+      className.push(args.shift());
+    } else {
+      break;
+    }
+  }
+
+  content = ctx.render.renderSync({ text: content, engine: 'markdown' });
+  if (args.length === 0) {
+    return `<div class="note ${className.join(' ')}">${content}</div>`;
+  }
+  return `<details class="note ${className.join(' ')}"><summary>${ctx.render.renderSync({ text: args.join(' '), engine: 'markdown' })}</summary>
+${content}
+</details>`;
+};
