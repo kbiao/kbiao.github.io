@@ -284,8 +284,8 @@ reward:
 follow_me:
   #Twitter: https://twitter.com/username || fab fa-twitter
   #Telegram: https://t.me/channel_name || fab fa-telegram
-  WeChat: /uploads/qrcode_wx.jpg || fab fa-weixin
-  RSS: /atom.xml || fa fa-rss
+  # WeChat: /uploads/qrcode_wx.jpg || fab fa-weixin
+  # RSS: /atom.xml || fa fa-rss
 
 # Related popular posts
 # Dependencies: https://github.com/sergeyzwezdin/hexo-related-posts
