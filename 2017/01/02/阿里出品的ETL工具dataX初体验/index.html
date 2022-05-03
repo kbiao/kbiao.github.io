@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+<link rel="preconnect" href="null//null" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+  <link rel="mask-icon" href="/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.kbiao.me","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="我的毕设选择了大数据方向的题目。大数据的第一步就是要拿到足够的数据源。现实情况中我们需要的数据源分布在不同的业务系统中，而这些系统往往是异构的，而且我们的分析过程不能影响原有业务系统的运行。为了把不同的数据归集起来，我开始了解和接触ETL。本篇介绍阿里的开源ETL工具dataX。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="阿里出品的ETL工具dataX初体验">
+<meta property="og:url" content="http://blog.kbiao.me/2017/01/02/%E9%98%BF%E9%87%8C%E5%87%BA%E5%93%81%E7%9A%84ETL%E5%B7%A5%E5%85%B7dataX%E5%88%9D%E4%BD%93%E9%AA%8C/index.html">
+<meta property="og:site_name" content="听雨小筑">
+<meta property="og:description" content="我的毕设选择了大数据方向的题目。大数据的第一步就是要拿到足够的数据源。现实情况中我们需要的数据源分布在不同的业务系统中，而这些系统往往是异构的，而且我们的分析过程不能影响原有业务系统的运行。为了把不同的数据归集起来，我开始了解和接触ETL。本篇介绍阿里的开源ETL工具dataX。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://image.kbiao.me/17-1-2/15001992-file_1483363944014_47b9.jpg">
+<meta property="og:image" content="https://image.kbiao.me/17-1-2/64743029-file_1483363981430_e353.png">
+<meta property="og:image" content="https://image.kbiao.me/17-1-2/70332950-file_1483365743611_16fe6.png">
+<meta property="article:published_time" content="2017-01-02T14:16:11.000Z">
+<meta property="article:modified_time" content="2022-05-03T07:51:32.065Z">
+<meta property="article:author" content="K、Biao">
+<meta property="article:tag" content="ETL">
+<meta property="article:tag" content="大数据">
+<meta property="article:tag" content="DataX">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://image.kbiao.me/17-1-2/15001992-file_1483363944014_47b9.jpg">
+
+
+<link rel="canonical" href="http://blog.kbiao.me/2017/01/02/%E9%98%BF%E9%87%8C%E5%87%BA%E5%93%81%E7%9A%84ETL%E5%B7%A5%E5%85%B7dataX%E5%88%9D%E4%BD%93%E9%AA%8C/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://blog.kbiao.me/2017/01/02/%E9%98%BF%E9%87%8C%E5%87%BA%E5%93%81%E7%9A%84ETL%E5%B7%A5%E5%85%B7dataX%E5%88%9D%E4%BD%93%E9%AA%8C/","path":"2017/01/02/阿里出品的ETL工具dataX初体验/","title":"阿里出品的ETL工具dataX初体验"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>阿里出品的ETL工具dataX初体验 | 听雨小筑</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?40650f57a96f0df2cfe5cee491a33cae"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="听雨小筑" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">听雨小筑</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">爱学习，有梦想，实力派</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ETL-amp-amp-%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7"><span class="nav-text">ETL&amp;&amp;常用工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dataX%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE"><span class="nav-text">dataX安装配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D"><span class="nav-text">配置文件介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#windows%E4%B8%8B%E4%B9%B1%E7%A0%81%E4%BF%AE%E5%A4%8D"><span class="nav-text">windows下乱码修复</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="nav-text">性能测试</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="K、Biao"
+      src="https://image.kbiao.me/kbiao.jpg">
+  <p class="site-author-name" itemprop="name">K、Biao</p>
+  <div class="site-description" itemprop="description">彪彪的技术博客</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kbiao" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kbiao" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://www.zhihu.com/people/kbiao" title="知乎 → http:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;kbiao" rel="noopener" target="_blank">知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kbiao@qq.com" title="E-Mail → mailto:kbiao@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.kbiao.me/2017/01/02/%E9%98%BF%E9%87%8C%E5%87%BA%E5%93%81%E7%9A%84ETL%E5%B7%A5%E5%85%B7dataX%E5%88%9D%E4%BD%93%E9%AA%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://image.kbiao.me/kbiao.jpg">
+      <meta itemprop="name" content="K、Biao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="听雨小筑">
+      <meta itemprop="description" content="彪彪的技术博客">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="阿里出品的ETL工具dataX初体验 | 听雨小筑">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          阿里出品的ETL工具dataX初体验
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2017-01-02 22:16:11" itemprop="dateCreated datePublished" datetime="2017-01-02T22:16:11+08:00">2017-01-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-05-03 15:51:32" itemprop="dateModified" datetime="2022-05-03T15:51:32+08:00">2022-05-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Coding-Notes/" itemprop="url" rel="index"><span itemprop="name">Coding-Notes</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2017/01/02/%E9%98%BF%E9%87%8C%E5%87%BA%E5%93%81%E7%9A%84ETL%E5%B7%A5%E5%85%B7dataX%E5%88%9D%E4%BD%93%E9%AA%8C/" class="post-meta-item leancloud_visitors" data-flag-title="阿里出品的ETL工具dataX初体验" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><img src="https://image.kbiao.me/17-1-2/15001992-file_1483363944014_47b9.jpg" alt><br>我的毕设选择了大数据方向的题目。大数据的第一步就是要拿到足够的数据源。现实情况中我们需要的数据源分布在不同的业务系统中，而这些系统往往是异构的，而且我们的分析过程不能影响原有业务系统的运行。为了把不同的数据归集起来，我开始了解和接触ETL。本篇介绍阿里的开源ETL工具dataX。</p>
+<a id="more"></a>
+<h2 id="ETL-amp-amp-常用工具"><a href="#ETL-amp-amp-常用工具" class="headerlink" title="ETL&amp;&amp;常用工具"></a>ETL&amp;&amp;常用工具</h2><blockquote>
+<p>ETL，是英文 Extract-Transform-Load 的缩写，用来描述将数据从来源端经过抽取（extract）、转换（transform）、加载（load）至目的端的过程。</p>
+</blockquote>
+<p>我的理解就是从业务系统中根据所要分析的主题，建立数据仓库的过程。大数据的应用已经非常广泛，ETL过程现在已经发展成为一个比较专门的职业，相关联的包括ETL工程师，BI分析师等等。</p>
+<p>数据的迁移和集成都需要ETL来实现，一般来说在数据仓库的开发过程中ETL会占到70%到80%的时间，我了解到的ETL工具包括：</p>
+<ol>
+<li>Kattle是一个开源的ETL工具，优点是免费，资料挺多。功能挺全面的，我折腾过一段时间，感觉不是很符合需要，想要在web上使用确实会有点困难，也可能是了解不深。</li>
+<li>DataStage，这是IBM为其配套的DB2开发的ETL工具，也可以用于其它数据库数据的集成，这个工具不错，银行用的挺多的。</li>
+<li>Informatica，这是美国的一个数据集成公司的开发的数据集成工具，有图形界面。 </li>
+<li>sqoop，这个是hadoop生态里的一个数据导入工具，但是它依赖于hadoop环境，也有点不符合我现在阶段的需要。</li>
+</ol>
+<p>当然还有其他挺多，毕竟对于数据的处理需求从信息机书诞生开始就一直存在。上面提到的这些工具比较强大，功能全面，但可能目前知识技能有限，驾驭起来不是很方便，折腾过一段时间后放弃了。我们常用的一些数据库工具也会带有导入导出功能，通过文本文件，csv文件等都能完成一个数据中专过程，但相对比较麻烦，而且功能太少对数据处理不是很方便。</p>
+<p>直到我去云栖大会听说了DataX ，这个简洁，高效，开箱即用的ETL工具，测试过后效率也不错，调试信息也很丰富，才发现这就是我需要的。官方介绍如下：</p>
+<blockquote>
+<p>​ DataX 是一个异构数据源离线同步工具，致力于实现包括关系型数据库(MySQL、Oracle等)、HDFS、Hive、MaxCompute(原ODPS)、HBase、FTP等各种异构数据源之间稳定高效的数据同步功能。</p>
+</blockquote>
+<p><img src="https://image.kbiao.me/17-1-2/64743029-file_1483363981430_e353.png" alt></p>
+<p>dataX本身只是一个数据库同步框架，通过插件体系完成数据同步过程reader插件用于读入，writer插件用于写出，中间的framework可以定义transform插件完成数据转化的需要。<br>使用它之后，我们的数据同步工作就简化成了：根据数据源选择对应的reader或者writer插件，填写必要的一个配置文件，一句命令搞定全部。</p>
+<h2 id="dataX安装配置"><a href="#dataX安装配置" class="headerlink" title="dataX安装配置"></a>dataX安装配置</h2><ol>
+<li><p>系统环境windows 、linux均可，其他必须的依赖包括：</p>
+<ul>
+<li><a href="http://www.oracle.com/technetwork/cn/java/javase/downloads/index.html" target="_blank" rel="noopener">JDK(1.8)</a> </li>
+<li><a href="https://www.python.org/downloads/" target="_blank" rel="noopener">Python(推荐Python2.6.X)</a> </li>
+<li><a href="https://maven.apache.org/download.cgi" target="_blank" rel="noopener">Apache Maven 3.x</a> （想通过源码编译的话需要，否则直接用二进制包即可）</li>
+</ul>
+</li>
+<li><p>安装</p>
+<ul>
+<li><a href="http://datax-opensource.oss-cn-hangzhou.aliyuncs.com/datax.tar.gz" target="_blank" rel="noopener">下载安装tar包（https://github.com/alibaba/DataX)</a></li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>解压至本地某个目录，修改权限为755，进入bin目录，即可运行样例同步作业。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ tar zxvf datax.tar.gz</span><br><span class="line">$ sudo chmod -R 755 &#123;YOUR_DATAX_HOME&#125;</span><br><span class="line">$ <span class="built_in">cd</span>  &#123;YOUR_DATAX_HOME&#125;/bin</span><br><span class="line">$ python datax.py ../job/job.json</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>如果一切顺利就会看到样例输出，说明工具已经就绪可以使用了。    </p>
+<h2 id="配置文件介绍"><a href="#配置文件介绍" class="headerlink" title="配置文件介绍"></a>配置文件介绍</h2><p>他的全部使用就如同安装配置部分所说,仅仅是执行一个python脚本，传入一个json配置文件。我们的关键工作就是定义这个json配置。在bin目录下也已经给出了样例配置，不过针对不同的数据源还是会有些许区别。<br>我们可以使用如下命令查看我们具体需要的配置文件样例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python datax.py -r &#123;YOUR_READER&#125; -w &#123;YOUR_WRITER&#125;</span><br></pre></td></tr></table></figure>
+
+<p>比如我现在需要的是从sqlserver读入，写到mysql，那么就可以尝试：<br><code>python datax.py -r sqlservereader -w mysqlwriter</code><br>输出如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"job"</span>: &#123;</span><br><span class="line">        <span class="attr">"content"</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">"reader"</span>: &#123;</span><br><span class="line">                    <span class="attr">"name"</span>: <span class="string">"sqlserverreader"</span>,</span><br><span class="line">                    <span class="attr">"parameter"</span>: &#123;</span><br><span class="line">                        <span class="attr">"connection"</span>: [</span><br><span class="line">                            &#123;</span><br><span class="line">                               /***省略多条****/</span><br><span class="line">                            &#125;</span><br><span class="line">                        ],</span><br><span class="line">			"column": ["*"],</span><br><span class="line">                         /***省略多条****/</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                "writer": &#123;</span><br><span class="line">                    "name": "mysqlwriter",</span><br><span class="line">                    "parameter": &#123;</span><br><span class="line">                        "column": ['*'],</span><br><span class="line">                        "connection": [</span><br><span class="line">                            &#123;</span><br><span class="line">                                 /***省略多条****/</span><br><span class="line">                            &#125;</span><br><span class="line">                        ],</span><br><span class="line">                        "password": " /***省略多条****/",</span><br><span class="line">                        "username": "root",</span><br><span class="line">                        "writeMode": "insert"</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ],</span><br><span class="line">        "setting": &#123;</span><br><span class="line">            "speed": &#123;</span><br><span class="line">                "channel": "5"</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>大致也是非常容易理解的，配置数据库账号密码，配置同步的表名列名等等信息。</p>
+</li>
+<li><p>jdbcUrl，username，password，table，column，writeMode（insert/replace/update）等为必选项，见名知意。</p>
+</li>
+<li><p>按照json格式填写即可，reader支持配置多个连接，只要有一个连通即可，writer只能配置一个连接。</p>
+</li>
+<li><p>更详细的配置参考官方wiki：<br><a href="https://github.com/alibaba/DataX/wiki/DataX-all-data-channels" target="_blank" rel="noopener">https://github.com/alibaba/DataX/wiki/DataX-all-data-channels</a></p>
+</li>
+<li><p>Transformer的使用见下：<br><a href="https://github.com/alibaba/DataX/blob/master/transformer/doc/transformer.md" target="_blank" rel="noopener">https://github.com/alibaba/DataX/blob/master/transformer/doc/transformer.md</a></p>
+<h2 id="windows下乱码修复"><a href="#windows下乱码修复" class="headerlink" title="windows下乱码修复"></a>windows下乱码修复</h2><p>我把这个工具迁移到一台windows主机上使用时候看到控制台友好的中文提示居然都变成了乱码了（话说有中文提示也是我选择他很重要的理由啊）。还好官方也给出了解决方案：</p>
+<ol>
+<li>打开CMD.exe命令行窗口</li>
+<li>通过 chcp命令改变代码页，UTF-8的代码页为65001<br>​ <code>chcp 65001</code><br>执行该操作后，代码页就被变成UTF-8了。但是，在窗口中仍旧不能正确显示UTF-8字符。</li>
+<li>修改窗口属性，改变字体<br>​ 在命令行标题栏上点击右键，选择”属性”-&gt;”字体”，将字体修改为True Type字体”Lucida Console”，然后点击确定将属性应用到当前窗口。</li>
+</ol>
+</li>
+</ul>
+<h2 id="性能测试"><a href="#性能测试" class="headerlink" title="性能测试"></a>性能测试</h2><p>单核8G的虚拟机，这个速度还算可以吧，可能是数据读写不在同一台机子上网络传输也消耗了不少时间。<br><img src="https://image.kbiao.me/17-1-2/70332950-file_1483365743611_16fe6.png" alt></p>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/uploads/rewards_wx.jpg" alt="K、Biao 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/ETL/" rel="tag"><i class="fa fa-tag"></i> ETL</a>
+              <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag"><i class="fa fa-tag"></i> 大数据</a>
+              <a href="/tags/DataX/" rel="tag"><i class="fa fa-tag"></i> DataX</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/01/01/my-Senior-life/" rel="prev" title="16 狂奔， 17 成长">
+                  <i class="fa fa-chevron-left"></i> 16 狂奔， 17 成长
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/03/12/Automatic-Sync-Android-album-whith-IOS/" rel="next" title="安卓手机与IOS相册自动同步小技巧">
+                  安卓手机与IOS相册自动同步小技巧 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">赣ICP备15005339号 </a>
+  </div>
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">K、Biao</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@9.0.1/dist/mermaid.min.js","integrity":"sha256-CemUs9ITT7liCZpVMktcEw0BpAOZ1+mujlMB3UyuImU="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"7OTu25XcWOiqFHBrfOA46xsT-gzGzoHsz","app_key":"bigXFjf3hf5a9TEukm9xO7uT","server_url":"https://blog-api.kbiao.me","security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.2.0/dist/quicklink.umd.js" integrity="sha256-4kQf9z5ntdQrzsBC3YSHnEz02Z9C1UeW/E9OgnvlzSY=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://blog.kbiao.me/2017/01/02/%E9%98%BF%E9%87%8C%E5%87%BA%E5%93%81%E7%9A%84ETL%E5%B7%A5%E5%85%B7dataX%E5%88%9D%E4%BD%93%E9%AA%8C/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+</body>
+</html>
