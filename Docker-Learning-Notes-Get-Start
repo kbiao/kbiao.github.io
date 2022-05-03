@@ -23,7 +23,7 @@
     <meta name="description" content="做程序员最可怕的事情是不是自己学习的速度还不如这些工具产品版本号更新的快？  搁置了一个假期的docker学习计划，重新启动docker时候发现版本号已经跳到17.03。恍惚记得上一次用它还是1.12来着，版本号跳的恍如隔世。倒也给我提了醒，学习不能拖拉，不然总是被牵着鼻子跑。">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="Docker学习笔记———Get Start">
-<meta property="og:url" content="https://blog.kbiao.me/2017/03/12/Docker-Learning-Notes-Get-Start/index.html">
+<meta property="og:url" content="https://blog.kbiao.me/Docker-Learning-Notes-Get-Start">
 <meta property="og:site_name" content="听雨小筑">
 <meta property="og:description" content="做程序员最可怕的事情是不是自己学习的速度还不如这些工具产品版本号更新的快？  搁置了一个假期的docker学习计划，重新启动docker时候发现版本号已经跳到17.03。恍惚记得上一次用它还是1.12来着，版本号跳的恍如隔世。倒也给我提了醒，学习不能拖拉，不然总是被牵着鼻子跑。">
 <meta property="og:locale" content="zh_CN">
@@ -31,18 +31,18 @@
 <meta property="og:image" content="https://image.kbiao.me/2017-03-12-14892819650098.jpg">
 <meta property="og:image" content="https://image.kbiao.me/2017-03-12-14892831046889.jpg">
 <meta property="article:published_time" content="2017-03-12T01:30:01.000Z">
-<meta property="article:modified_time" content="2022-05-03T07:51:32.058Z">
+<meta property="article:modified_time" content="2022-05-03T11:31:58.909Z">
 <meta property="article:author" content="K、Biao">
 <meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://image.kbiao.me/2017-03-12-14892908756333.jpg">
 
 
-<link rel="canonical" href="https://blog.kbiao.me/2017/03/12/Docker-Learning-Notes-Get-Start/">
+<link rel="canonical" href="https://blog.kbiao.me/Docker-Learning-Notes-Get-Start">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.kbiao.me/2017/03/12/Docker-Learning-Notes-Get-Start/","path":"2017/03/12/Docker-Learning-Notes-Get-Start/","title":"Docker学习笔记———Get Start"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.kbiao.me/Docker-Learning-Notes-Get-Start","path":"/Docker-Learning-Notes-Get-Start","title":"Docker学习笔记———Get Start"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>Docker学习笔记———Get Start | 听雨小筑</title>
@@ -124,7 +124,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-%E5%8F%91%E5%B8%83%E9%87%8D%E5%A4%A7%E6%9B%B4%E6%96%B0%EF%BC%8C%E5%AE%A3%E5%B8%83%E4%BC%81%E4%B8%9A%E7%89%88%E5%88%B0%E6%9D%A5"><span class="nav-text">Docker 发布重大更新，宣布企业版到来</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Docker-CE%E5%B9%B6%E8%BF%90%E8%A1%8Chello-world"><span class="nav-text">安装Docker-CE并运行hello-world</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mac-Windows-%E4%B8%8B%E4%BD%BF%E7%94%A8Docker"><span class="nav-text">Mac &#x2F; Windows 下使用Docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cent-OS-%E4%B8%AD%E5%AE%89%E8%A3%85Docker"><span class="nav-text">Cent OS 中安装Docker</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%B8%E8%BD%BD%E6%97%A7%E7%89%88%E6%9C%AC"><span class="nav-text">卸载旧版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-repository-%E5%AE%89%E8%A3%85"><span class="nav-text">使用 repository 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%AD%98%E5%82%A8%E5%BA%93"><span class="nav-text">设置存储库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A3%E5%BC%8F%E5%AE%89%E8%A3%85DOCKER"><span class="nav-text">正式安装DOCKER</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%AE%89%E8%A3%85"><span class="nav-text">下载软件包安装</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-%E5%8F%91%E5%B8%83%E9%87%8D%E5%A4%A7%E6%9B%B4%E6%96%B0%EF%BC%8C%E5%AE%A3%E5%B8%83%E4%BC%81%E4%B8%9A%E7%89%88%E5%88%B0%E6%9D%A5"><span class="nav-text">Docker 发布重大更新，宣布企业版到来</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Docker-CE%E5%B9%B6%E8%BF%90%E8%A1%8Chello-world"><span class="nav-text">安装Docker-CE并运行hello-world</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mac-x2F-Windows-%E4%B8%8B%E4%BD%BF%E7%94%A8Docker"><span class="nav-text">Mac &#x2F; Windows 下使用Docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cent-OS-%E4%B8%AD%E5%AE%89%E8%A3%85Docker"><span class="nav-text">Cent OS 中安装Docker</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%B8%E8%BD%BD%E6%97%A7%E7%89%88%E6%9C%AC"><span class="nav-text">卸载旧版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-repository-%E5%AE%89%E8%A3%85"><span class="nav-text">使用 repository 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%AD%98%E5%82%A8%E5%BA%93"><span class="nav-text">设置存储库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A3%E5%BC%8F%E5%AE%89%E8%A3%85DOCKER"><span class="nav-text">正式安装DOCKER</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%AE%89%E8%A3%85"><span class="nav-text">下载软件包安装</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -203,7 +203,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.kbiao.me/2017/03/12/Docker-Learning-Notes-Get-Start/">
+    <link itemprop="mainEntityOfPage" href="https://blog.kbiao.me/Docker-Learning-Notes-Get-Start">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://image.kbiao.me/kbiao.jpg">
@@ -239,7 +239,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-05-03 15:51:32" itemprop="dateModified" datetime="2022-05-03T15:51:32+08:00">2022-05-03</time>
+      <time title="修改时间：2022-05-03 19:31:58" itemprop="dateModified" datetime="2022-05-03T19:31:58+08:00">2022-05-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -252,7 +252,7 @@
     </span>
 
   
-    <span id="/2017/03/12/Docker-Learning-Notes-Get-Start/" class="post-meta-item leancloud_visitors" data-flag-title="Docker学习笔记———Get Start" title="阅读次数">
+    <span id="/Docker-Learning-Notes-Get-Start" class="post-meta-item leancloud_visitors" data-flag-title="Docker学习笔记———Get Start" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -268,92 +268,85 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p><img src="https://image.kbiao.me/2017-03-12-14892908756333.jpg" alt></p>
+        <p><img src="https://image.kbiao.me/2017-03-12-14892908756333.jpg"></p>
 <blockquote>
 <p>做程序员最可怕的事情是不是自己学习的速度还不如这些工具产品版本号更新的快？</p>
 </blockquote>
 <p>搁置了一个假期的docker学习计划，重新启动docker时候发现版本号已经跳到<code>17.03</code>。恍惚记得上一次用它还是<code>1.12</code>来着，版本号跳的恍如隔世。倒也给我提了醒，<strong>学习不能拖拉，不然总是被牵着鼻子跑</strong>。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h2 id="Docker-发布重大更新，宣布企业版到来"><a href="#Docker-发布重大更新，宣布企业版到来" class="headerlink" title="Docker 发布重大更新，宣布企业版到来"></a>Docker 发布重大更新，宣布企业版到来</h2><p><em>3 月 2 日，Docker 官方发布了一篇博客 ，宣布企业版到来。版本也从 1.13.x 一跃到 17.03。之后，Docker 会每月发布一个 edge 版本(17.03, 17.04, 17.05…)，每三个月发布一个 stable 版本(17.03, 17.06, 17.09…)，企业版(EE) 和 stable 版本号保持一致，但每个版本提供一年维护。</em></p>
 <p>也就是说只是换了一种版本号的，叫法成了 yy.mm格式，最新版也就是17年3月的版本。还好能跟得上节奏，上一个版本也就是1.13而已。</p>
-<p><img src="https://image.kbiao.me/2017-03-12-14892819650098.jpg" alt></p>
-<p>Docker 的 Linux 发行版的软件仓库也从以前的<a href="https://apt.dockerproject.org" target="_blank" rel="noopener">https://apt.dockerproject.org</a> / <a href="https://yum.dockerproject.org" target="_blank" rel="noopener">https://yum.dockerproject.org</a> 变更为目前的 <a href="https://download.docker.com/。软件包名变更为" target="_blank" rel="noopener">https://download.docker.com/。软件包名变更为</a> docker-ce(社区版) 和 docker-ee(企业版)。<br>旧的仓库和包名(docker-engine)依旧可以使用，但不确定什么时候会被废弃，docker-engine 的版本号也变成了 17.03.0~ce-0 这种的版本号。</p>
-<p>这个新的企业版本中主要是针对企业用户的需求，增加了一些安全认证，审计，镜像仓库，数据中心（多租户）管理等方面的功能，方便企业部署应用，而且提供更长的支持周期，收费情况的话感觉还好（反正我也买不起，只是感觉和Oracle的产品定价比起来确实好多了）。<br><img src="https://image.kbiao.me/2017-03-12-14892831046889.jpg" alt><br>还好这个版本区分并不会影响我学习Docker。</p>
+<p><img src="https://image.kbiao.me/2017-03-12-14892819650098.jpg"></p>
+<p>Docker 的 Linux 发行版的软件仓库也从以前的<a target="_blank" rel="noopener" href="https://apt.dockerproject.org/">https://apt.dockerproject.org</a> &#x2F; <a target="_blank" rel="noopener" href="https://yum.dockerproject.org/">https://yum.dockerproject.org</a> 变更为目前的 <a target="_blank" rel="noopener" href="https://download.docker.com/%E3%80%82%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%90%8D%E5%8F%98%E6%9B%B4%E4%B8%BA">https://download.docker.com/。软件包名变更为</a> docker-ce(社区版) 和 docker-ee(企业版)。<br>旧的仓库和包名(docker-engine)依旧可以使用，但不确定什么时候会被废弃，docker-engine 的版本号也变成了 17.03.0~ce-0 这种的版本号。</p>
+<p>这个新的企业版本中主要是针对企业用户的需求，增加了一些安全认证，审计，镜像仓库，数据中心（多租户）管理等方面的功能，方便企业部署应用，而且提供更长的支持周期，收费情况的话感觉还好（反正我也买不起，只是感觉和Oracle的产品定价比起来确实好多了）。<br><img src="https://image.kbiao.me/2017-03-12-14892831046889.jpg"><br>还好这个版本区分并不会影响我学习Docker。</p>
 <h2 id="安装Docker-CE并运行hello-world"><a href="#安装Docker-CE并运行hello-world" class="headerlink" title="安装Docker-CE并运行hello-world"></a>安装Docker-CE并运行hello-world</h2><p>作为学习我们当然是安装社区版就足够啦。</p>
-<h3 id="Mac-Windows-下使用Docker"><a href="#Mac-Windows-下使用Docker" class="headerlink" title="Mac / Windows 下使用Docker"></a>Mac / Windows 下使用Docker</h3><p>在新版本的Mac或者Windows中都可以直接安装运行Docker应用程序。Windows 要求 win 10 pro 并且开启 Hyper-V虚拟化，Mac要求OS X 10 以上，但是会与Virtual Box有冲突。</p>
+<h3 id="Mac-x2F-Windows-下使用Docker"><a href="#Mac-x2F-Windows-下使用Docker" class="headerlink" title="Mac &#x2F; Windows 下使用Docker"></a>Mac &#x2F; Windows 下使用Docker</h3><p>在新版本的Mac或者Windows中都可以直接安装运行Docker应用程序。Windows 要求 win 10 pro 并且开启 Hyper-V虚拟化，Mac要求OS X 10 以上，但是会与Virtual Box有冲突。</p>
 <ul>
-<li>Windows下载  <a href="https://download.docker.com/win/stable/InstallDocker.msi" target="_blank" rel="noopener">https://download.docker.com/win/stable/InstallDocker.msi</a></li>
-<li>Mac OS 下载  <a href="https://download.docker.com/mac/stable/Docker.dmg" target="_blank" rel="noopener">https://download.docker.com/mac/stable/Docker.dmg</a></li>
+<li>Windows下载  <a target="_blank" rel="noopener" href="https://download.docker.com/win/stable/InstallDocker.msi">https://download.docker.com/win/stable/InstallDocker.msi</a></li>
+<li>Mac OS 下载  <a target="_blank" rel="noopener" href="https://download.docker.com/mac/stable/Docker.dmg">https://download.docker.com/mac/stable/Docker.dmg</a></li>
 </ul>
 <p>不符合以上条件的可以去官网下载Docker-Tool-Box，来模拟Docker 的运行环境，也是可以学习的。Docker 是一个基于Linux内核的工具，新版中也针对其他操作系统的虚拟化技术做了兼容，配置一个学习环境还是比较容易的。<br>下载安装启动小鲸鱼以后，就可以在系统终端中执行Docker 命令了。</p>
 <h3 id="Cent-OS-中安装Docker"><a href="#Cent-OS-中安装Docker" class="headerlink" title="Cent OS 中安装Docker"></a>Cent OS 中安装Docker</h3><p>系统官方推荐是要<code>7.3</code>，系统必须64位的.<br>由于新版本的Docker更换了发行版的仓库，以及包名，安装也和以前不太一样，最好是卸载旧版本。</p>
 <h4 id="卸载旧版本"><a href="#卸载旧版本" class="headerlink" title="卸载旧版本"></a>卸载旧版本</h4><p>旧版本的Docker的软件包名为<code>docker</code>或<code>docker-engine</code>。如果以前安装过就要卸载：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum remove docker \</span><br><span class="line">                  docker-common \</span><br><span class="line">                  container-selinux \</span><br><span class="line">                  docker-selinux \</span><br><span class="line">                  docker-engine</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum remove docker \</span><br><span class="line">                  docker-common \</span><br><span class="line">                  container-selinux \</span><br><span class="line">                  docker-selinux \</span><br><span class="line">                  docker-engine</span><br></pre></td></tr></table></figure>
 <p>另外原来<code>/var/lib/docker/</code>目录下的镜像，容器，数据卷，网络等都会保留，新安装的docker任然可以使用这些内容。</p>
 <h4 id="使用-repository-安装"><a href="#使用-repository-安装" class="headerlink" title="使用 repository 安装"></a>使用 repository 安装</h4><p>第一次安装新版本需要配置一下新版 docker 的 repository </p>
 <h5 id="设置存储库"><a href="#设置存储库" class="headerlink" title="设置存储库"></a><strong>设置存储库</strong></h5><p><em>repository 设置对于Docker CE和 Docker EE来说有些不一样。</em></p>
 <ul>
 <li>安装yum-utils，它提供yum-config-manager可以用来配置repo：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum install -y yum-utils</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum install -y yum-utils</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>使用以下命令设置稳定版 repository ：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">    https://download.docker.com/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">    https://download.docker.com/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>如果需要的话可以开启edge版本的更新，这个 repository 包含在上面的repo文件中，但默认情况下禁用。可以用下面的命令开启：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum-config-manager --enable docker-ce-edge</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum-config-manager --enable docker-ce-edge</span><br></pre></td></tr></table></figure>
 <p>要禁用edge更新：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum-config-manager --disable docker-ce-edge</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum-config-manager --disable docker-ce-edge</span><br></pre></td></tr></table></figure>
 
 <h5 id="正式安装DOCKER"><a href="#正式安装DOCKER" class="headerlink" title="正式安装DOCKER"></a><strong>正式安装DOCKER</strong></h5><ul>
 <li>更新yum包索引。</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum makecache fast</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum makecache fast</span><br></pre></td></tr></table></figure>
+
 
 <ul>
-<li><p>安装最新版本docker</p>
-<p>Docker CE    <code>sudo yum install docker-ce</code><br>Docker EE    <code>sudo yum install docker-ee</code><br>如果这是在添加Docker存储库之后第一次刷新包索引，会提示接受GPG密钥，并且将显示密钥的指纹。验证指纹是否正确，如果是，请接受密钥。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> 从 https://download.docker.com/linux/centos/gpg 检索密钥</span><br><span class="line">导入 GPG key 0x621E9F35:</span><br><span class="line"> 用户ID     : &quot;Docker Release (CE rpm) &lt;docker@docker.com&gt;&quot;</span><br><span class="line"> 指纹       : 060a 61c5 1b55 8a7f 742b 77aa c52f eb6b 621e 9f35</span><br><span class="line"> 来自       : https://download.docker.com/linux/centos/gpg</span><br><span class="line">是否继续？[y/N]：y</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装特定版本的docker<br>生产系统中不可能总是用最新版本，需要安装特定版本的话也是比较简单的。<code>yum list</code>命令列出可用版本：</p>
-</li>
+<li>安装最新版本docker</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum list docker-ce  --showduplicates |sort -r</span><br></pre></td></tr></table></figure>
+<p> Docker CE	<code>sudo yum install docker-ce</code><br> Docker EE	<code>sudo yum install docker-ee</code><br> 如果这是在添加Docker存储库之后第一次刷新包索引，会提示接受GPG密钥，并且将显示密钥的指纹。验证指纹是否正确，如果是，请接受密钥。</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> 从 https://download.docker.com/linux/centos/gpg 检索密钥</span><br><span class="line">导入 GPG key 0x621E9F35:</span><br><span class="line"> 用户ID     : &quot;Docker Release (CE rpm) &lt;docker@docker.com&gt;&quot;</span><br><span class="line"> 指纹       : 060a 61c5 1b55 8a7f 742b 77aa c52f eb6b 621e 9f35</span><br><span class="line"> 来自       : https://download.docker.com/linux/centos/gpg</span><br><span class="line">是否继续？[y/N]：y</span><br></pre></td></tr></table></figure>
 
+<ul>
+<li>安装特定版本的docker<br>生产系统中不可能总是用最新版本，需要安装特定版本的话也是比较简单的。<code>yum list</code>命令列出可用版本：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum list docker-ce  --showduplicates |sort -r</span><br></pre></td></tr></table></figure>
 <p> 列出并按版本号排序。<br>  然后选择需要的版本安装：<br>  Docker CE： <code>sudo yum install docker-ce-&lt;VERSION&gt;</code><br>  Docker EE： <code>sudo yum install docker-ee-&lt;VERSION&gt;</code></p>
 <ul>
 <li>启动Docker</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl start docker</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl start docker</span><br></pre></td></tr></table></figure>
 <p>docker通过运行hello-world 验证是否已正确安装。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker run hello-world</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker run hello-world</span><br></pre></td></tr></table></figure>
 <p>被墙掉的小伙伴可能会报错，要不先试试 docker version 命令的输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Client:</span><br><span class="line"> Version:      17.03.0-ce</span><br><span class="line"> API version:  1.26</span><br><span class="line"> Go version:   go1.7.5</span><br><span class="line"> Git commit:   3a232c8</span><br><span class="line"> Built:        Tue Feb 28 08:10:07 2017</span><br><span class="line"> OS/Arch:      linux/amd64</span><br><span class="line"></span><br><span class="line">Server:</span><br><span class="line"> Version:      17.03.0-ce</span><br><span class="line"> API version:  1.26 (minimum version 1.12)</span><br><span class="line"> Go version:   go1.7.5</span><br><span class="line"> Git commit:   3a232c8</span><br><span class="line"> Built:        Tue Feb 28 08:10:07 2017</span><br><span class="line"> OS/Arch:      linux/amd64</span><br><span class="line"> Experimental: false</span><br></pre></td></tr></table></figure>
-
-<p>也基本证明了安装正确。<br>或者注册一个daoCloud的账号，配置一下<a href="https://www.daocloud.io/mirror" target="_blank" rel="noopener">docker加速器</a>国内访问也就没什么问题了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Client:</span><br><span class="line"> Version:      17.03.0-ce</span><br><span class="line"> API version:  1.26</span><br><span class="line"> Go version:   go1.7.5</span><br><span class="line"> Git commit:   3a232c8</span><br><span class="line"> Built:        Tue Feb 28 08:10:07 2017</span><br><span class="line"> OS/Arch:      linux/amd64</span><br><span class="line"></span><br><span class="line">Server:</span><br><span class="line"> Version:      17.03.0-ce</span><br><span class="line"> API version:  1.26 (minimum version 1.12)</span><br><span class="line"> Go version:   go1.7.5</span><br><span class="line"> Git commit:   3a232c8</span><br><span class="line"> Built:        Tue Feb 28 08:10:07 2017</span><br><span class="line"> OS/Arch:      linux/amd64</span><br><span class="line"> Experimental: false</span><br></pre></td></tr></table></figure>
+<p>也基本证明了安装正确。<br>或者注册一个daoCloud的账号，配置一下<a target="_blank" rel="noopener" href="https://www.daocloud.io/mirror">docker加速器</a>国内访问也就没什么问题了。</p>
 <ul>
 <li><p>升级docker </p>
 <p>这种方式安装之后如果需要升级，只需要再次更新下yum包索引。<code>$ sudo yum makecache fast</code> 然后继续选择需要安装的版本即可。</p>
 </li>
-<li><p>卸载docker<br>Docker CE     :  <code>sudo yum remove docker-ce</code><br>Docker EE     :  <code>sudo yum remove docker-ee</code><br>不会自动删除主机上的镜像，容器，数据卷或自定义配置文件。要删除所有镜像，容器和卷：</p>
+<li><p>卸载docker<br>Docker CE	 :  <code>sudo yum remove docker-ce</code><br>Docker EE	 :  <code>sudo yum remove docker-ee</code><br>不会自动删除主机上的镜像，容器，数据卷或自定义配置文件。要删除所有镜像，容器和卷：</p>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo rm -rf /var/lib/docker</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo rm -rf /var/lib/docker</span><br></pre></td></tr></table></figure>
 <h4 id="下载软件包安装"><a href="#下载软件包安装" class="headerlink" title="下载软件包安装"></a>下载软件包安装</h4><ul>
-<li>Docker CE：<br>访问 <a href="https://download.docker.com/linux/centos/7/x86_64/stable/Packages/" target="_blank" rel="noopener">https://download.docker.com/linux/centos/7/x86_64/stable/Packages/</a> 并下载.rpm要安装的Docker版本的文件。</li>
-<li>安装Docker，将下面的路径更改为您下载Docker包的路径。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum install /path/to/package.rpm</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>Docker CE：<br>访问 <a target="_blank" rel="noopener" href="https://download.docker.com/linux/centos/7/x86_64/stable/Packages/">https://download.docker.com/linux/centos/7/x86_64/stable/Packages/</a> 并下载.rpm要安装的Docker版本的文件。</li>
+<li>安装Docker，将下面的路径更改为您下载Docker包的路径。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum install /path/to/package.rpm</span><br></pre></td></tr></table></figure></li>
 </ul>
 
     </div>
@@ -388,7 +381,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://blog.kbiao.me/2017/03/12/Docker-Learning-Notes-Get-Start/" title="Docker学习笔记———Get Start">https://blog.kbiao.me/2017/03/12/Docker-Learning-Notes-Get-Start/</a>
+      <a href="https://blog.kbiao.me/Docker-Learning-Notes-Get-Start" title="Docker学习笔记———Get Start">https://blog.kbiao.me/Docker-Learning-Notes-Get-Start</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -431,12 +424,12 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2017/03/12/Automatic-Sync-Android-album-whith-IOS/" rel="prev" title="安卓手机与IOS相册自动同步小技巧">
+                <a href="/Automatic-Sync-Android-album-whith-IOS" rel="prev" title="安卓手机与IOS相册自动同步小技巧">
                   <i class="fa fa-chevron-left"></i> 安卓手机与IOS相册自动同步小技巧
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2017/03/12/My-life-with-some-awesome-apps/" rel="next" title="我的数字生活——效率工具推荐">
+                <a href="/My-life-with-some-awesome-apps" rel="next" title="我的数字生活——效率工具推荐">
                   我的数字生活——效率工具推荐 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
@@ -494,7 +487,7 @@
 
 
   <script src="https://cdn.jsdelivr.net/npm/quicklink@2.2.0/dist/quicklink.umd.js" integrity="sha256-4kQf9z5ntdQrzsBC3YSHnEz02Z9C1UeW/E9OgnvlzSY=" crossorigin="anonymous"></script>
-  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://blog.kbiao.me/2017/03/12/Docker-Learning-Notes-Get-Start/"}</script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://blog.kbiao.me/Docker-Learning-Notes-Get-Start"}</script>
   <script src="/js/third-party/quicklink.js"></script>
 
 </body>

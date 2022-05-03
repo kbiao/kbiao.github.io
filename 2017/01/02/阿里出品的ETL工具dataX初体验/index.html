@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://image.kbiao.me/17-1-2/64743029-file_1483363981430_e353.png">
 <meta property="og:image" content="https://image.kbiao.me/17-1-2/70332950-file_1483365743611_16fe6.png">
 <meta property="article:published_time" content="2017-01-02T14:16:11.000Z">
-<meta property="article:modified_time" content="2022-05-03T07:51:32.065Z">
+<meta property="article:modified_time" content="2022-05-03T11:31:58.915Z">
 <meta property="article:author" content="K、Biao">
 <meta property="article:tag" content="ETL">
 <meta property="article:tag" content="大数据">
@@ -241,7 +241,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-05-03 15:51:32" itemprop="dateModified" datetime="2022-05-03T15:51:32+08:00">2022-05-03</time>
+      <time title="修改时间：2022-05-03 19:31:58" itemprop="dateModified" datetime="2022-05-03T19:31:58+08:00">2022-05-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -270,8 +270,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p><img src="https://image.kbiao.me/17-1-2/15001992-file_1483363944014_47b9.jpg" alt><br>我的毕设选择了大数据方向的题目。大数据的第一步就是要拿到足够的数据源。现实情况中我们需要的数据源分布在不同的业务系统中，而这些系统往往是异构的，而且我们的分析过程不能影响原有业务系统的运行。为了把不同的数据归集起来，我开始了解和接触ETL。本篇介绍阿里的开源ETL工具dataX。</p>
-<a id="more"></a>
+        <p><img src="https://image.kbiao.me/17-1-2/15001992-file_1483363944014_47b9.jpg"><br>我的毕设选择了大数据方向的题目。大数据的第一步就是要拿到足够的数据源。现实情况中我们需要的数据源分布在不同的业务系统中，而这些系统往往是异构的，而且我们的分析过程不能影响原有业务系统的运行。为了把不同的数据归集起来，我开始了解和接触ETL。本篇介绍阿里的开源ETL工具dataX。</p>
+<span id="more"></span>
 <h2 id="ETL-amp-amp-常用工具"><a href="#ETL-amp-amp-常用工具" class="headerlink" title="ETL&amp;&amp;常用工具"></a>ETL&amp;&amp;常用工具</h2><blockquote>
 <p>ETL，是英文 Extract-Transform-Load 的缩写，用来描述将数据从来源端经过抽取（extract）、转换（transform）、加载（load）至目的端的过程。</p>
 </blockquote>
@@ -288,53 +288,42 @@
 <blockquote>
 <p>​ DataX 是一个异构数据源离线同步工具，致力于实现包括关系型数据库(MySQL、Oracle等)、HDFS、Hive、MaxCompute(原ODPS)、HBase、FTP等各种异构数据源之间稳定高效的数据同步功能。</p>
 </blockquote>
-<p><img src="https://image.kbiao.me/17-1-2/64743029-file_1483363981430_e353.png" alt></p>
+<p><img src="https://image.kbiao.me/17-1-2/64743029-file_1483363981430_e353.png"></p>
 <p>dataX本身只是一个数据库同步框架，通过插件体系完成数据同步过程reader插件用于读入，writer插件用于写出，中间的framework可以定义transform插件完成数据转化的需要。<br>使用它之后，我们的数据同步工作就简化成了：根据数据源选择对应的reader或者writer插件，填写必要的一个配置文件，一句命令搞定全部。</p>
 <h2 id="dataX安装配置"><a href="#dataX安装配置" class="headerlink" title="dataX安装配置"></a>dataX安装配置</h2><ol>
-<li><p>系统环境windows 、linux均可，其他必须的依赖包括：</p>
-<ul>
-<li><a href="http://www.oracle.com/technetwork/cn/java/javase/downloads/index.html" target="_blank" rel="noopener">JDK(1.8)</a> </li>
-<li><a href="https://www.python.org/downloads/" target="_blank" rel="noopener">Python(推荐Python2.6.X)</a> </li>
-<li><a href="https://maven.apache.org/download.cgi" target="_blank" rel="noopener">Apache Maven 3.x</a> （想通过源码编译的话需要，否则直接用二进制包即可）</li>
-</ul>
-</li>
-<li><p>安装</p>
-<ul>
-<li><a href="http://datax-opensource.oss-cn-hangzhou.aliyuncs.com/datax.tar.gz" target="_blank" rel="noopener">下载安装tar包（https://github.com/alibaba/DataX)</a></li>
-</ul>
-</li>
+<li>系统环境windows 、linux均可，其他必须的依赖包括：</li>
 </ol>
 <ul>
-<li>解压至本地某个目录，修改权限为755，进入bin目录，即可运行样例同步作业。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ tar zxvf datax.tar.gz</span><br><span class="line">$ sudo chmod -R 755 &#123;YOUR_DATAX_HOME&#125;</span><br><span class="line">$ <span class="built_in">cd</span>  &#123;YOUR_DATAX_HOME&#125;/bin</span><br><span class="line">$ python datax.py ../job/job.json</span><br></pre></td></tr></table></figure>
-
-</li>
+<li><a target="_blank" rel="noopener" href="http://www.oracle.com/technetwork/cn/java/javase/downloads/index.html">JDK(1.8)</a> </li>
+<li><a target="_blank" rel="noopener" href="https://www.python.org/downloads/">Python(推荐Python2.6.X)</a> </li>
+<li><a target="_blank" rel="noopener" href="https://maven.apache.org/download.cgi">Apache Maven 3.x</a> （想通过源码编译的话需要，否则直接用二进制包即可）</li>
 </ul>
-<p>如果一切顺利就会看到样例输出，说明工具已经就绪可以使用了。    </p>
+<ol start="2">
+<li>安装</li>
+</ol>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://datax-opensource.oss-cn-hangzhou.aliyuncs.com/datax.tar.gz">下载安装tar包（https://github.com/alibaba/DataX)</a></li>
+<li>解压至本地某个目录，修改权限为755，进入bin目录，即可运行样例同步作业。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ tar zxvf datax.tar.gz</span><br><span class="line">$ sudo <span class="built_in">chmod</span> -R 755 &#123;YOUR_DATAX_HOME&#125;</span><br><span class="line">$ <span class="built_in">cd</span>  &#123;YOUR_DATAX_HOME&#125;/bin</span><br><span class="line">$ python datax.py ../job/job.json</span><br></pre></td></tr></table></figure>
+如果一切顺利就会看到样例输出，说明工具已经就绪可以使用了。</li>
+</ul>
 <h2 id="配置文件介绍"><a href="#配置文件介绍" class="headerlink" title="配置文件介绍"></a>配置文件介绍</h2><p>他的全部使用就如同安装配置部分所说,仅仅是执行一个python脚本，传入一个json配置文件。我们的关键工作就是定义这个json配置。在bin目录下也已经给出了样例配置，不过针对不同的数据源还是会有些许区别。<br>我们可以使用如下命令查看我们具体需要的配置文件样例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python datax.py -r &#123;YOUR_READER&#125; -w &#123;YOUR_WRITER&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python datax.py -r &#123;YOUR_READER&#125; -w &#123;YOUR_WRITER&#125;</span><br></pre></td></tr></table></figure>
 <p>比如我现在需要的是从sqlserver读入，写到mysql，那么就可以尝试：<br><code>python datax.py -r sqlservereader -w mysqlwriter</code><br>输出如下：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"job"</span>: &#123;</span><br><span class="line">        <span class="attr">"content"</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">"reader"</span>: &#123;</span><br><span class="line">                    <span class="attr">"name"</span>: <span class="string">"sqlserverreader"</span>,</span><br><span class="line">                    <span class="attr">"parameter"</span>: &#123;</span><br><span class="line">                        <span class="attr">"connection"</span>: [</span><br><span class="line">                            &#123;</span><br><span class="line">                               /***省略多条****/</span><br><span class="line">                            &#125;</span><br><span class="line">                        ],</span><br><span class="line">			"column": ["*"],</span><br><span class="line">                         /***省略多条****/</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                "writer": &#123;</span><br><span class="line">                    "name": "mysqlwriter",</span><br><span class="line">                    "parameter": &#123;</span><br><span class="line">                        "column": ['*'],</span><br><span class="line">                        "connection": [</span><br><span class="line">                            &#123;</span><br><span class="line">                                 /***省略多条****/</span><br><span class="line">                            &#125;</span><br><span class="line">                        ],</span><br><span class="line">                        "password": " /***省略多条****/",</span><br><span class="line">                        "username": "root",</span><br><span class="line">                        "writeMode": "insert"</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ],</span><br><span class="line">        "setting": &#123;</span><br><span class="line">            "speed": &#123;</span><br><span class="line">                "channel": "5"</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;job&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;content&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;reader&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                    <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;sqlserverreader&quot;</span><span class="punctuation">,</span></span><br><span class="line">                    <span class="attr">&quot;parameter&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                        <span class="attr">&quot;connection&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                            <span class="punctuation">&#123;</span></span><br><span class="line">                               <span class="comment">/***省略多条****/</span></span><br><span class="line">                            <span class="punctuation">&#125;</span></span><br><span class="line">                        <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">			<span class="attr">&quot;column&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;*&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">                         <span class="comment">/***省略多条****/</span></span><br><span class="line">                    <span class="punctuation">&#125;</span></span><br><span class="line">                <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;writer&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                    <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;mysqlwriter&quot;</span><span class="punctuation">,</span></span><br><span class="line">                    <span class="attr">&quot;parameter&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                        <span class="attr">&quot;column&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span>&#x27;*&#x27;<span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">                        <span class="attr">&quot;connection&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                            <span class="punctuation">&#123;</span></span><br><span class="line">                                 <span class="comment">/***省略多条****/</span></span><br><span class="line">                            <span class="punctuation">&#125;</span></span><br><span class="line">                        <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">                        <span class="attr">&quot;password&quot;</span><span class="punctuation">:</span> <span class="string">&quot; /***省略多条****/&quot;</span><span class="punctuation">,</span></span><br><span class="line">                        <span class="attr">&quot;username&quot;</span><span class="punctuation">:</span> <span class="string">&quot;root&quot;</span><span class="punctuation">,</span></span><br><span class="line">                        <span class="attr">&quot;writeMode&quot;</span><span class="punctuation">:</span> <span class="string">&quot;insert&quot;</span></span><br><span class="line">                    <span class="punctuation">&#125;</span></span><br><span class="line">                <span class="punctuation">&#125;</span></span><br><span class="line">            <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;setting&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;speed&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;channel&quot;</span><span class="punctuation">:</span> <span class="string">&quot;5&quot;</span></span><br><span class="line">            <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><p>大致也是非常容易理解的，配置数据库账号密码，配置同步的表名列名等等信息。</p>
-</li>
-<li><p>jdbcUrl，username，password，table，column，writeMode（insert/replace/update）等为必选项，见名知意。</p>
-</li>
-<li><p>按照json格式填写即可，reader支持配置多个连接，只要有一个连通即可，writer只能配置一个连接。</p>
-</li>
-<li><p>更详细的配置参考官方wiki：<br><a href="https://github.com/alibaba/DataX/wiki/DataX-all-data-channels" target="_blank" rel="noopener">https://github.com/alibaba/DataX/wiki/DataX-all-data-channels</a></p>
-</li>
-<li><p>Transformer的使用见下：<br><a href="https://github.com/alibaba/DataX/blob/master/transformer/doc/transformer.md" target="_blank" rel="noopener">https://github.com/alibaba/DataX/blob/master/transformer/doc/transformer.md</a></p>
-<h2 id="windows下乱码修复"><a href="#windows下乱码修复" class="headerlink" title="windows下乱码修复"></a>windows下乱码修复</h2><p>我把这个工具迁移到一台windows主机上使用时候看到控制台友好的中文提示居然都变成了乱码了（话说有中文提示也是我选择他很重要的理由啊）。还好官方也给出了解决方案：</p>
+<li>大致也是非常容易理解的，配置数据库账号密码，配置同步的表名列名等等信息。</li>
+<li>jdbcUrl，username，password，table，column，writeMode（insert&#x2F;replace&#x2F;update）等为必选项，见名知意。</li>
+<li>按照json格式填写即可，reader支持配置多个连接，只要有一个连通即可，writer只能配置一个连接。</li>
+<li>更详细的配置参考官方wiki：<br><a target="_blank" rel="noopener" href="https://github.com/alibaba/DataX/wiki/DataX-all-data-channels">https://github.com/alibaba/DataX/wiki/DataX-all-data-channels</a></li>
+<li>Transformer的使用见下：<br><a target="_blank" rel="noopener" href="https://github.com/alibaba/DataX/blob/master/transformer/doc/transformer.md">https://github.com/alibaba/DataX/blob/master/transformer/doc/transformer.md</a><h2 id="windows下乱码修复"><a href="#windows下乱码修复" class="headerlink" title="windows下乱码修复"></a>windows下乱码修复</h2>我把这个工具迁移到一台windows主机上使用时候看到控制台友好的中文提示居然都变成了乱码了（话说有中文提示也是我选择他很重要的理由啊）。还好官方也给出了解决方案：</li>
+</ul>
 <ol>
 <li>打开CMD.exe命令行窗口</li>
 <li>通过 chcp命令改变代码页，UTF-8的代码页为65001<br>​ <code>chcp 65001</code><br>执行该操作后，代码页就被变成UTF-8了。但是，在窗口中仍旧不能正确显示UTF-8字符。</li>
 <li>修改窗口属性，改变字体<br>​ 在命令行标题栏上点击右键，选择”属性”-&gt;”字体”，将字体修改为True Type字体”Lucida Console”，然后点击确定将属性应用到当前窗口。</li>
 </ol>
-</li>
-</ul>
-<h2 id="性能测试"><a href="#性能测试" class="headerlink" title="性能测试"></a>性能测试</h2><p>单核8G的虚拟机，这个速度还算可以吧，可能是数据读写不在同一台机子上网络传输也消耗了不少时间。<br><img src="https://image.kbiao.me/17-1-2/70332950-file_1483365743611_16fe6.png" alt></p>
+<h2 id="性能测试"><a href="#性能测试" class="headerlink" title="性能测试"></a>性能测试</h2><p>单核8G的虚拟机，这个速度还算可以吧，可能是数据读写不在同一台机子上网络传输也消耗了不少时间。<br><img src="https://image.kbiao.me/17-1-2/70332950-file_1483365743611_16fe6.png"></p>
 
     </div>
 
@@ -413,12 +402,12 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2017/01/01/my-Senior-life/" rel="prev" title="16 狂奔， 17 成长">
+                <a href="/my-Senior-life" rel="prev" title="16 狂奔， 17 成长">
                   <i class="fa fa-chevron-left"></i> 16 狂奔， 17 成长
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2017/03/12/Automatic-Sync-Android-album-whith-IOS/" rel="next" title="安卓手机与IOS相册自动同步小技巧">
+                <a href="/Automatic-Sync-Android-album-whith-IOS" rel="next" title="安卓手机与IOS相册自动同步小技巧">
                   安卓手机与IOS相册自动同步小技巧 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
