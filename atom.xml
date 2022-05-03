@@ -3,11 +3,11 @@
   <title>听雨小筑</title>
   
   <subtitle>爱学习，有梦想，实力派</subtitle>
-  <link href="http://blog.kbiao.me/atom.xml" rel="self"/>
+  <link href="https://blog.kbiao.me/atom.xml" rel="self"/>
   
-  <link href="http://blog.kbiao.me/"/>
+  <link href="https://blog.kbiao.me/"/>
   <updated>2022-05-03T07:51:32.060Z</updated>
-  <id>http://blog.kbiao.me/</id>
+  <id>https://blog.kbiao.me/</id>
   
   <author>
     <name>K、Biao</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>【译】20个 Laravel Eloquent 小技巧（下）</title>
-    <link href="http://blog.kbiao.me/2019/01/05/20-Laravel-Eloquent-Tips-and-Tricks/"/>
-    <id>http://blog.kbiao.me/2019/01/05/20-Laravel-Eloquent-Tips-and-Tricks/</id>
+    <link href="https://blog.kbiao.me/2019/01/05/20-Laravel-Eloquent-Tips-and-Tricks/"/>
+    <id>https://blog.kbiao.me/2019/01/05/20-Laravel-Eloquent-Tips-and-Tricks/</id>
     <published>2019-01-05T09:50:41.000Z</published>
     <updated>2022-05-03T07:51:32.060Z</updated>
     
@@ -34,19 +34,19 @@
     
     
     
-    <category term="全干工程师的收藏夹" scheme="http://blog.kbiao.me/categories/%E5%85%A8%E5%B9%B2%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E6%94%B6%E8%97%8F%E5%A4%B9/"/>
+    <category term="全干工程师的收藏夹" scheme="https://blog.kbiao.me/categories/%E5%85%A8%E5%B9%B2%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E6%94%B6%E8%97%8F%E5%A4%B9/"/>
     
     
-    <category term="php" scheme="http://blog.kbiao.me/tags/php/"/>
+    <category term="php" scheme="https://blog.kbiao.me/tags/php/"/>
     
-    <category term="laravel" scheme="http://blog.kbiao.me/tags/laravel/"/>
+    <category term="laravel" scheme="https://blog.kbiao.me/tags/laravel/"/>
     
   </entry>
   
   <entry>
     <title>【译】20个 Laravel Eloquent 小技巧（上）</title>
-    <link href="http://blog.kbiao.me/2019/01/03/20-Laravel-Eloquent-Tips-and-Tricks/"/>
-    <id>http://blog.kbiao.me/2019/01/03/20-Laravel-Eloquent-Tips-and-Tricks/</id>
+    <link href="https://blog.kbiao.me/2019/01/03/20-Laravel-Eloquent-Tips-and-Tricks/"/>
+    <id>https://blog.kbiao.me/2019/01/03/20-Laravel-Eloquent-Tips-and-Tricks/</id>
     <published>2019-01-03T10:50:41.000Z</published>
     <updated>2022-05-03T07:51:32.060Z</updated>
     
@@ -60,19 +60,19 @@
     
     
     
-    <category term="全干工程师的收藏夹" scheme="http://blog.kbiao.me/categories/%E5%85%A8%E5%B9%B2%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E6%94%B6%E8%97%8F%E5%A4%B9/"/>
+    <category term="全干工程师的收藏夹" scheme="https://blog.kbiao.me/categories/%E5%85%A8%E5%B9%B2%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E6%94%B6%E8%97%8F%E5%A4%B9/"/>
     
     
-    <category term="php" scheme="http://blog.kbiao.me/tags/php/"/>
+    <category term="php" scheme="https://blog.kbiao.me/tags/php/"/>
     
-    <category term="laravel" scheme="http://blog.kbiao.me/tags/laravel/"/>
+    <category term="laravel" scheme="https://blog.kbiao.me/tags/laravel/"/>
     
   </entry>
   
   <entry>
     <title>也来聊聊罗胖的2018跨年演讲</title>
-    <link href="http://blog.kbiao.me/2019/01/01/talk-about-Luo-2018-New-Year-Speech/"/>
-    <id>http://blog.kbiao.me/2019/01/01/talk-about-Luo-2018-New-Year-Speech/</id>
+    <link href="https://blog.kbiao.me/2019/01/01/talk-about-Luo-2018-New-Year-Speech/"/>
+    <id>https://blog.kbiao.me/2019/01/01/talk-about-Luo-2018-New-Year-Speech/</id>
     <published>2019-01-01T10:50:41.000Z</published>
     <updated>2022-05-03T07:51:32.061Z</updated>
     
@@ -83,17 +83,17 @@
     
     
     
-    <category term="大学生活" scheme="http://blog.kbiao.me/categories/%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%B4%BB/"/>
+    <category term="大学生活" scheme="https://blog.kbiao.me/categories/%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%B4%BB/"/>
     
     
-    <category term="碎碎念" scheme="http://blog.kbiao.me/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    <category term="碎碎念" scheme="https://blog.kbiao.me/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
     
   </entry>
   
   <entry>
     <title>努力奔跑 诸事顺利</title>
-    <link href="http://blog.kbiao.me/2019/01/01/lucky-2019/"/>
-    <id>http://blog.kbiao.me/2019/01/01/lucky-2019/</id>
+    <link href="https://blog.kbiao.me/2019/01/01/lucky-2019/"/>
+    <id>https://blog.kbiao.me/2019/01/01/lucky-2019/</id>
     <published>2018-12-31T16:50:41.000Z</published>
     <updated>2022-05-03T07:51:32.062Z</updated>
     
@@ -105,17 +105,17 @@
     
     
     
-    <category term="大学生活" scheme="http://blog.kbiao.me/categories/%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%B4%BB/"/>
+    <category term="大学生活" scheme="https://blog.kbiao.me/categories/%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%B4%BB/"/>
     
     
-    <category term="碎碎念" scheme="http://blog.kbiao.me/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    <category term="碎碎念" scheme="https://blog.kbiao.me/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
     
   </entry>
   
   <entry>
     <title>全干工程师的收藏夹【第二期】</title>
-    <link href="http://blog.kbiao.me/2018/07/29/%E5%85%A8%E5%B9%B2%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E6%94%B6%E8%97%8F%E5%A4%B9%E3%80%90%E7%AC%AC%E4%BA%8C%E6%9C%9F%E3%80%91/"/>
-    <id>http://blog.kbiao.me/2018/07/29/%E5%85%A8%E5%B9%B2%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E6%94%B6%E8%97%8F%E5%A4%B9%E3%80%90%E7%AC%AC%E4%BA%8C%E6%9C%9F%E3%80%91/</id>
+    <link href="https://blog.kbiao.me/2018/07/29/%E5%85%A8%E5%B9%B2%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E6%94%B6%E8%97%8F%E5%A4%B9%E3%80%90%E7%AC%AC%E4%BA%8C%E6%9C%9F%E3%80%91/"/>
+    <id>https://blog.kbiao.me/2018/07/29/%E5%85%A8%E5%B9%B2%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E6%94%B6%E8%97%8F%E5%A4%B9%E3%80%90%E7%AC%AC%E4%BA%8C%E6%9C%9F%E3%80%91/</id>
     <published>2018-07-29T12:21:41.000Z</published>
     <updated>2022-05-03T07:51:32.062Z</updated>
     
@@ -131,17 +131,17 @@
     
     
     
-    <category term="全干工程师的收藏夹" scheme="http://blog.kbiao.me/categories/%E5%85%A8%E5%B9%B2%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E6%94%B6%E8%97%8F%E5%A4%B9/"/>
+    <category term="全干工程师的收藏夹" scheme="https://blog.kbiao.me/categories/%E5%85%A8%E5%B9%B2%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E6%94%B6%E8%97%8F%E5%A4%B9/"/>
     
     
-    <category term="阅读" scheme="http://blog.kbiao.me/tags/%E9%98%85%E8%AF%BB/"/>
+    <category term="阅读" scheme="https://blog.kbiao.me/tags/%E9%98%85%E8%AF%BB/"/>
     
   </entry>
   
   <entry>
     <title>全干工程师的收藏夹【第一期】</title>
-    <link href="http://blog.kbiao.me/2018/07/24/%E5%85%A8%E5%B9%B2%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E6%94%B6%E8%97%8F%E5%A4%B9%E3%80%90%E7%AC%AC%E4%B8%80%E6%9C%9F%E3%80%91/"/>
-    <id>http://blog.kbiao.me/2018/07/24/%E5%85%A8%E5%B9%B2%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E6%94%B6%E8%97%8F%E5%A4%B9%E3%80%90%E7%AC%AC%E4%B8%80%E6%9C%9F%E3%80%91/</id>
+    <link href="https://blog.kbiao.me/2018/07/24/%E5%85%A8%E5%B9%B2%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E6%94%B6%E8%97%8F%E5%A4%B9%E3%80%90%E7%AC%AC%E4%B8%80%E6%9C%9F%E3%80%91/"/>
+    <id>https://blog.kbiao.me/2018/07/24/%E5%85%A8%E5%B9%B2%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E6%94%B6%E8%97%8F%E5%A4%B9%E3%80%90%E7%AC%AC%E4%B8%80%E6%9C%9F%E3%80%91/</id>
     <published>2018-07-24T12:21:41.000Z</published>
     <updated>2022-05-03T07:51:32.061Z</updated>
     
@@ -157,17 +157,17 @@
     
     
     
-    <category term="全干工程师的收藏夹" scheme="http://blog.kbiao.me/categories/%E5%85%A8%E5%B9%B2%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E6%94%B6%E8%97%8F%E5%A4%B9/"/>
+    <category term="全干工程师的收藏夹" scheme="https://blog.kbiao.me/categories/%E5%85%A8%E5%B9%B2%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E6%94%B6%E8%97%8F%E5%A4%B9/"/>
     
     
-    <category term="阅读" scheme="http://blog.kbiao.me/tags/%E9%98%85%E8%AF%BB/"/>
+    <category term="阅读" scheme="https://blog.kbiao.me/tags/%E9%98%85%E8%AF%BB/"/>
     
   </entry>
   
   <entry>
     <title>我的数字生活——效率工具推荐</title>
-    <link href="http://blog.kbiao.me/2017/03/12/My-life-with-some-awesome-apps/"/>
-    <id>http://blog.kbiao.me/2017/03/12/My-life-with-some-awesome-apps/</id>
+    <link href="https://blog.kbiao.me/2017/03/12/My-life-with-some-awesome-apps/"/>
+    <id>https://blog.kbiao.me/2017/03/12/My-life-with-some-awesome-apps/</id>
     <published>2017-03-12T11:29:53.000Z</published>
     <updated>2022-05-03T07:51:32.064Z</updated>
     
@@ -178,19 +178,19 @@
     
     
     
-    <category term="ToolTips" scheme="http://blog.kbiao.me/categories/ToolTips/"/>
+    <category term="ToolTips" scheme="https://blog.kbiao.me/categories/ToolTips/"/>
     
     
-    <category term="工具" scheme="http://blog.kbiao.me/tags/%E5%B7%A5%E5%85%B7/"/>
+    <category term="工具" scheme="https://blog.kbiao.me/tags/%E5%B7%A5%E5%85%B7/"/>
     
-    <category term="tips" scheme="http://blog.kbiao.me/tags/tips/"/>
+    <category term="tips" scheme="https://blog.kbiao.me/tags/tips/"/>
     
   </entry>
   
   <entry>
     <title>Docker学习笔记———Get Start</title>
-    <link href="http://blog.kbiao.me/2017/03/12/Docker-Learning-Notes-Get-Start/"/>
-    <id>http://blog.kbiao.me/2017/03/12/Docker-Learning-Notes-Get-Start/</id>
+    <link href="https://blog.kbiao.me/2017/03/12/Docker-Learning-Notes-Get-Start/"/>
+    <id>https://blog.kbiao.me/2017/03/12/Docker-Learning-Notes-Get-Start/</id>
     <published>2017-03-12T01:30:01.000Z</published>
     <updated>2022-05-03T07:51:32.058Z</updated>
     
@@ -205,17 +205,17 @@
     
     
     
-    <category term="Coding-Notes" scheme="http://blog.kbiao.me/categories/Coding-Notes/"/>
+    <category term="Coding-Notes" scheme="https://blog.kbiao.me/categories/Coding-Notes/"/>
     
     
-    <category term="Docker" scheme="http://blog.kbiao.me/tags/Docker/"/>
+    <category term="Docker" scheme="https://blog.kbiao.me/tags/Docker/"/>
     
   </entry>
   
   <entry>
     <title>安卓手机与IOS相册自动同步小技巧</title>
-    <link href="http://blog.kbiao.me/2017/03/12/Automatic-Sync-Android-album-whith-IOS/"/>
-    <id>http://blog.kbiao.me/2017/03/12/Automatic-Sync-Android-album-whith-IOS/</id>
+    <link href="https://blog.kbiao.me/2017/03/12/Automatic-Sync-Android-album-whith-IOS/"/>
+    <id>https://blog.kbiao.me/2017/03/12/Automatic-Sync-Android-album-whith-IOS/</id>
     <published>2017-03-12T01:30:01.000Z</published>
     <updated>2022-05-03T07:51:32.063Z</updated>
     
@@ -226,19 +226,19 @@
     
     
     
-    <category term="ToolTips" scheme="http://blog.kbiao.me/categories/ToolTips/"/>
+    <category term="ToolTips" scheme="https://blog.kbiao.me/categories/ToolTips/"/>
     
     
-    <category term="工具" scheme="http://blog.kbiao.me/tags/%E5%B7%A5%E5%85%B7/"/>
+    <category term="工具" scheme="https://blog.kbiao.me/tags/%E5%B7%A5%E5%85%B7/"/>
     
-    <category term="tips" scheme="http://blog.kbiao.me/tags/tips/"/>
+    <category term="tips" scheme="https://blog.kbiao.me/tags/tips/"/>
     
   </entry>
   
   <entry>
     <title>阿里出品的ETL工具dataX初体验</title>
-    <link href="http://blog.kbiao.me/2017/01/02/%E9%98%BF%E9%87%8C%E5%87%BA%E5%93%81%E7%9A%84ETL%E5%B7%A5%E5%85%B7dataX%E5%88%9D%E4%BD%93%E9%AA%8C/"/>
-    <id>http://blog.kbiao.me/2017/01/02/%E9%98%BF%E9%87%8C%E5%87%BA%E5%93%81%E7%9A%84ETL%E5%B7%A5%E5%85%B7dataX%E5%88%9D%E4%BD%93%E9%AA%8C/</id>
+    <link href="https://blog.kbiao.me/2017/01/02/%E9%98%BF%E9%87%8C%E5%87%BA%E5%93%81%E7%9A%84ETL%E5%B7%A5%E5%85%B7dataX%E5%88%9D%E4%BD%93%E9%AA%8C/"/>
+    <id>https://blog.kbiao.me/2017/01/02/%E9%98%BF%E9%87%8C%E5%87%BA%E5%93%81%E7%9A%84ETL%E5%B7%A5%E5%85%B7dataX%E5%88%9D%E4%BD%93%E9%AA%8C/</id>
     <published>2017-01-02T14:16:11.000Z</published>
     <updated>2022-05-03T07:51:32.065Z</updated>
     
@@ -249,21 +249,21 @@
     
     
     
-    <category term="Coding-Notes" scheme="http://blog.kbiao.me/categories/Coding-Notes/"/>
+    <category term="Coding-Notes" scheme="https://blog.kbiao.me/categories/Coding-Notes/"/>
     
     
-    <category term="ETL" scheme="http://blog.kbiao.me/tags/ETL/"/>
+    <category term="ETL" scheme="https://blog.kbiao.me/tags/ETL/"/>
     
-    <category term="大数据" scheme="http://blog.kbiao.me/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    <category term="大数据" scheme="https://blog.kbiao.me/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
-    <category term="DataX" scheme="http://blog.kbiao.me/tags/DataX/"/>
+    <category term="DataX" scheme="https://blog.kbiao.me/tags/DataX/"/>
     
   </entry>
   
   <entry>
     <title>16 狂奔， 17 成长</title>
-    <link href="http://blog.kbiao.me/2017/01/01/my-Senior-life/"/>
-    <id>http://blog.kbiao.me/2017/01/01/my-Senior-life/</id>
+    <link href="https://blog.kbiao.me/2017/01/01/my-Senior-life/"/>
+    <id>https://blog.kbiao.me/2017/01/01/my-Senior-life/</id>
     <published>2016-12-31T16:00:26.000Z</published>
     <updated>2022-05-03T07:51:32.061Z</updated>
     
@@ -274,17 +274,17 @@
     
     
     
-    <category term="大学生活" scheme="http://blog.kbiao.me/categories/%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%B4%BB/"/>
+    <category term="大学生活" scheme="https://blog.kbiao.me/categories/%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%B4%BB/"/>
     
     
-    <category term="碎碎念" scheme="http://blog.kbiao.me/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    <category term="碎碎念" scheme="https://blog.kbiao.me/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
     
   </entry>
   
   <entry>
     <title>基于OAUTH2的统一认证的实例解析</title>
-    <link href="http://blog.kbiao.me/2016/07/23/%E5%9F%BA%E4%BA%8EOAUTH2%E7%9A%84%E7%BB%9F%E4%B8%80%E8%AE%A4%E8%AF%81%E7%9A%84%E5%AE%9E%E4%BE%8B%E8%A7%A3%E6%9E%90/"/>
-    <id>http://blog.kbiao.me/2016/07/23/%E5%9F%BA%E4%BA%8EOAUTH2%E7%9A%84%E7%BB%9F%E4%B8%80%E8%AE%A4%E8%AF%81%E7%9A%84%E5%AE%9E%E4%BE%8B%E8%A7%A3%E6%9E%90/</id>
+    <link href="https://blog.kbiao.me/2016/07/23/%E5%9F%BA%E4%BA%8EOAUTH2%E7%9A%84%E7%BB%9F%E4%B8%80%E8%AE%A4%E8%AF%81%E7%9A%84%E5%AE%9E%E4%BE%8B%E8%A7%A3%E6%9E%90/"/>
+    <id>https://blog.kbiao.me/2016/07/23/%E5%9F%BA%E4%BA%8EOAUTH2%E7%9A%84%E7%BB%9F%E4%B8%80%E8%AE%A4%E8%AF%81%E7%9A%84%E5%AE%9E%E4%BE%8B%E8%A7%A3%E6%9E%90/</id>
     <published>2016-07-23T09:48:40.000Z</published>
     <updated>2022-05-03T07:51:32.063Z</updated>
     
@@ -295,21 +295,21 @@
     
     
     
-    <category term="java" scheme="http://blog.kbiao.me/categories/java/"/>
+    <category term="java" scheme="https://blog.kbiao.me/categories/java/"/>
     
     
-    <category term="OAuth2" scheme="http://blog.kbiao.me/tags/OAuth2/"/>
+    <category term="OAuth2" scheme="https://blog.kbiao.me/tags/OAuth2/"/>
     
-    <category term="shiro" scheme="http://blog.kbiao.me/tags/shiro/"/>
+    <category term="shiro" scheme="https://blog.kbiao.me/tags/shiro/"/>
     
-    <category term="统一认证" scheme="http://blog.kbiao.me/tags/%E7%BB%9F%E4%B8%80%E8%AE%A4%E8%AF%81/"/>
+    <category term="统一认证" scheme="https://blog.kbiao.me/tags/%E7%BB%9F%E4%B8%80%E8%AE%A4%E8%AF%81/"/>
     
   </entry>
   
   <entry>
     <title>我的大学成长手册</title>
-    <link href="http://blog.kbiao.me/2016/07/21/%E6%88%91%E7%9A%84%E5%A4%A7%E5%AD%A6%E6%88%90%E9%95%BF%E6%89%8B%E5%86%8C/"/>
-    <id>http://blog.kbiao.me/2016/07/21/%E6%88%91%E7%9A%84%E5%A4%A7%E5%AD%A6%E6%88%90%E9%95%BF%E6%89%8B%E5%86%8C/</id>
+    <link href="https://blog.kbiao.me/2016/07/21/%E6%88%91%E7%9A%84%E5%A4%A7%E5%AD%A6%E6%88%90%E9%95%BF%E6%89%8B%E5%86%8C/"/>
+    <id>https://blog.kbiao.me/2016/07/21/%E6%88%91%E7%9A%84%E5%A4%A7%E5%AD%A6%E6%88%90%E9%95%BF%E6%89%8B%E5%86%8C/</id>
     <published>2016-07-21T06:42:34.000Z</published>
     <updated>2022-05-03T07:51:32.063Z</updated>
     
@@ -320,17 +320,17 @@
     
     
     
-    <category term="大学生活" scheme="http://blog.kbiao.me/categories/%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%B4%BB/"/>
+    <category term="大学生活" scheme="https://blog.kbiao.me/categories/%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%B4%BB/"/>
     
-    <category term="新生" scheme="http://blog.kbiao.me/categories/%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%B4%BB/%E6%96%B0%E7%94%9F/"/>
+    <category term="新生" scheme="https://blog.kbiao.me/categories/%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%B4%BB/%E6%96%B0%E7%94%9F/"/>
     
     
   </entry>
   
   <entry>
     <title>CORS实现跨域时授权问题（401错误）的解决</title>
-    <link href="http://blog.kbiao.me/2016/05/21/CORS%E5%AE%9E%E7%8E%B0%E8%B7%A8%E5%9F%9F%E6%97%B6%E6%8E%88%E6%9D%83%E9%97%AE%E9%A2%98%EF%BC%88401%E9%94%99%E8%AF%AF%EF%BC%89%E7%9A%84%E8%A7%A3%E5%86%B3/"/>
-    <id>http://blog.kbiao.me/2016/05/21/CORS%E5%AE%9E%E7%8E%B0%E8%B7%A8%E5%9F%9F%E6%97%B6%E6%8E%88%E6%9D%83%E9%97%AE%E9%A2%98%EF%BC%88401%E9%94%99%E8%AF%AF%EF%BC%89%E7%9A%84%E8%A7%A3%E5%86%B3/</id>
+    <link href="https://blog.kbiao.me/2016/05/21/CORS%E5%AE%9E%E7%8E%B0%E8%B7%A8%E5%9F%9F%E6%97%B6%E6%8E%88%E6%9D%83%E9%97%AE%E9%A2%98%EF%BC%88401%E9%94%99%E8%AF%AF%EF%BC%89%E7%9A%84%E8%A7%A3%E5%86%B3/"/>
+    <id>https://blog.kbiao.me/2016/05/21/CORS%E5%AE%9E%E7%8E%B0%E8%B7%A8%E5%9F%9F%E6%97%B6%E6%8E%88%E6%9D%83%E9%97%AE%E9%A2%98%EF%BC%88401%E9%94%99%E8%AF%AF%EF%BC%89%E7%9A%84%E8%A7%A3%E5%86%B3/</id>
     <published>2016-05-20T17:54:32.000Z</published>
     <updated>2022-05-03T07:51:32.058Z</updated>
     
@@ -342,21 +342,21 @@
     
     
     
-    <category term="Coding-Notes" scheme="http://blog.kbiao.me/categories/Coding-Notes/"/>
+    <category term="Coding-Notes" scheme="https://blog.kbiao.me/categories/Coding-Notes/"/>
     
     
-    <category term="CORS" scheme="http://blog.kbiao.me/tags/CORS/"/>
+    <category term="CORS" scheme="https://blog.kbiao.me/tags/CORS/"/>
     
-    <category term="Spring" scheme="http://blog.kbiao.me/tags/Spring/"/>
+    <category term="Spring" scheme="https://blog.kbiao.me/tags/Spring/"/>
     
-    <category term="java web" scheme="http://blog.kbiao.me/tags/java-web/"/>
+    <category term="java web" scheme="https://blog.kbiao.me/tags/java-web/"/>
     
   </entry>
   
   <entry>
     <title>Spring通过CORS协议解决跨域问题</title>
-    <link href="http://blog.kbiao.me/2016/05/14/Spring%E9%80%9A%E8%BF%87CORS%E5%8D%8F%E8%AE%AE%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/"/>
-    <id>http://blog.kbiao.me/2016/05/14/Spring%E9%80%9A%E8%BF%87CORS%E5%8D%8F%E8%AE%AE%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</id>
+    <link href="https://blog.kbiao.me/2016/05/14/Spring%E9%80%9A%E8%BF%87CORS%E5%8D%8F%E8%AE%AE%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/"/>
+    <id>https://blog.kbiao.me/2016/05/14/Spring%E9%80%9A%E8%BF%87CORS%E5%8D%8F%E8%AE%AE%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</id>
     <published>2016-05-14T15:17:41.000Z</published>
     <updated>2022-05-03T07:51:32.059Z</updated>
     
@@ -367,23 +367,23 @@
     
     
     
-    <category term="Coding-Notes" scheme="http://blog.kbiao.me/categories/Coding-Notes/"/>
+    <category term="Coding-Notes" scheme="https://blog.kbiao.me/categories/Coding-Notes/"/>
     
     
-    <category term="CORS" scheme="http://blog.kbiao.me/tags/CORS/"/>
+    <category term="CORS" scheme="https://blog.kbiao.me/tags/CORS/"/>
     
-    <category term="spring" scheme="http://blog.kbiao.me/tags/spring/"/>
+    <category term="spring" scheme="https://blog.kbiao.me/tags/spring/"/>
     
-    <category term="java" scheme="http://blog.kbiao.me/tags/java/"/>
+    <category term="java" scheme="https://blog.kbiao.me/tags/java/"/>
     
-    <category term="跨域" scheme="http://blog.kbiao.me/tags/%E8%B7%A8%E5%9F%9F/"/>
+    <category term="跨域" scheme="https://blog.kbiao.me/tags/%E8%B7%A8%E5%9F%9F/"/>
     
   </entry>
   
   <entry>
     <title>nodeJS踩坑-记本地地址127.0.0.1与0.0.0.0的区别</title>
-    <link href="http://blog.kbiao.me/2016/05/11/nodeJS%E8%B8%A9%E5%9D%91-%E8%AE%B0%E6%9C%AC%E5%9C%B0%E5%9C%B0%E5%9D%80127-0-0-1%E4%B8%8E0-0-0-0%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
-    <id>http://blog.kbiao.me/2016/05/11/nodeJS%E8%B8%A9%E5%9D%91-%E8%AE%B0%E6%9C%AC%E5%9C%B0%E5%9C%B0%E5%9D%80127-0-0-1%E4%B8%8E0-0-0-0%E7%9A%84%E5%8C%BA%E5%88%AB/</id>
+    <link href="https://blog.kbiao.me/2016/05/11/nodeJS%E8%B8%A9%E5%9D%91-%E8%AE%B0%E6%9C%AC%E5%9C%B0%E5%9C%B0%E5%9D%80127-0-0-1%E4%B8%8E0-0-0-0%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>https://blog.kbiao.me/2016/05/11/nodeJS%E8%B8%A9%E5%9D%91-%E8%AE%B0%E6%9C%AC%E5%9C%B0%E5%9C%B0%E5%9D%80127-0-0-1%E4%B8%8E0-0-0-0%E7%9A%84%E5%8C%BA%E5%88%AB/</id>
     <published>2016-05-11T13:55:31.000Z</published>
     <updated>2022-05-03T07:51:32.060Z</updated>
     
@@ -394,19 +394,19 @@
     
     
     
-    <category term="Coding-Notes" scheme="http://blog.kbiao.me/categories/Coding-Notes/"/>
+    <category term="Coding-Notes" scheme="https://blog.kbiao.me/categories/Coding-Notes/"/>
     
     
-    <category term="node.js" scheme="http://blog.kbiao.me/tags/node-js/"/>
+    <category term="node.js" scheme="https://blog.kbiao.me/tags/node-js/"/>
     
-    <category term="计算机网络" scheme="http://blog.kbiao.me/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    <category term="计算机网络" scheme="https://blog.kbiao.me/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
     
   </entry>
   
   <entry>
     <title>谁说这些东西只有程序员才能玩</title>
-    <link href="http://blog.kbiao.me/2016/05/10/%E8%B0%81%E8%AF%B4%E8%BF%99%E4%BA%9B%E4%B8%9C%E8%A5%BF%E5%8F%AA%E6%9C%89%E7%A8%8B%E5%BA%8F%E5%91%98%E6%89%8D%E8%83%BD%E7%8E%A9/"/>
-    <id>http://blog.kbiao.me/2016/05/10/%E8%B0%81%E8%AF%B4%E8%BF%99%E4%BA%9B%E4%B8%9C%E8%A5%BF%E5%8F%AA%E6%9C%89%E7%A8%8B%E5%BA%8F%E5%91%98%E6%89%8D%E8%83%BD%E7%8E%A9/</id>
+    <link href="https://blog.kbiao.me/2016/05/10/%E8%B0%81%E8%AF%B4%E8%BF%99%E4%BA%9B%E4%B8%9C%E8%A5%BF%E5%8F%AA%E6%9C%89%E7%A8%8B%E5%BA%8F%E5%91%98%E6%89%8D%E8%83%BD%E7%8E%A9/"/>
+    <id>https://blog.kbiao.me/2016/05/10/%E8%B0%81%E8%AF%B4%E8%BF%99%E4%BA%9B%E4%B8%9C%E8%A5%BF%E5%8F%AA%E6%9C%89%E7%A8%8B%E5%BA%8F%E5%91%98%E6%89%8D%E8%83%BD%E7%8E%A9/</id>
     <published>2016-05-10T08:00:27.000Z</published>
     <updated>2022-05-03T07:51:32.064Z</updated>
     
@@ -423,8 +423,8 @@
   
   <entry>
     <title>Git配置多账号登录</title>
-    <link href="http://blog.kbiao.me/2016/05/09/Git%E9%85%8D%E7%BD%AE%E5%A4%9A%E8%B4%A6%E5%8F%B7%E7%99%BB%E5%BD%95/"/>
-    <id>http://blog.kbiao.me/2016/05/09/Git%E9%85%8D%E7%BD%AE%E5%A4%9A%E8%B4%A6%E5%8F%B7%E7%99%BB%E5%BD%95/</id>
+    <link href="https://blog.kbiao.me/2016/05/09/Git%E9%85%8D%E7%BD%AE%E5%A4%9A%E8%B4%A6%E5%8F%B7%E7%99%BB%E5%BD%95/"/>
+    <id>https://blog.kbiao.me/2016/05/09/Git%E9%85%8D%E7%BD%AE%E5%A4%9A%E8%B4%A6%E5%8F%B7%E7%99%BB%E5%BD%95/</id>
     <published>2016-05-09T05:06:16.000Z</published>
     <updated>2022-05-03T07:51:32.058Z</updated>
     
@@ -436,17 +436,17 @@
     
     
     
-    <category term="Coding-Notes" scheme="http://blog.kbiao.me/categories/Coding-Notes/"/>
+    <category term="Coding-Notes" scheme="https://blog.kbiao.me/categories/Coding-Notes/"/>
     
     
-    <category term="git" scheme="http://blog.kbiao.me/tags/git/"/>
+    <category term="git" scheme="https://blog.kbiao.me/tags/git/"/>
     
   </entry>
   
   <entry>
     <title>Java-Convert-List-to-Array</title>
-    <link href="http://blog.kbiao.me/2016/05/07/Java-Convert-List-To-Array/"/>
-    <id>http://blog.kbiao.me/2016/05/07/Java-Convert-List-To-Array/</id>
+    <link href="https://blog.kbiao.me/2016/05/07/Java-Convert-List-To-Array/"/>
+    <id>https://blog.kbiao.me/2016/05/07/Java-Convert-List-To-Array/</id>
     <published>2016-05-06T16:21:45.000Z</published>
     <updated>2022-05-03T07:51:32.059Z</updated>
     
@@ -458,19 +458,19 @@
     
     
     
-    <category term="Coding-Notes" scheme="http://blog.kbiao.me/categories/Coding-Notes/"/>
+    <category term="Coding-Notes" scheme="https://blog.kbiao.me/categories/Coding-Notes/"/>
     
     
-    <category term="java" scheme="http://blog.kbiao.me/tags/java/"/>
+    <category term="java" scheme="https://blog.kbiao.me/tags/java/"/>
     
-    <category term="list" scheme="http://blog.kbiao.me/tags/list/"/>
+    <category term="list" scheme="https://blog.kbiao.me/tags/list/"/>
     
   </entry>
   
   <entry>
     <title>Android-MVP-Demo</title>
-    <link href="http://blog.kbiao.me/2016/05/06/Android-MVP-Demo/"/>
-    <id>http://blog.kbiao.me/2016/05/06/Android-MVP-Demo/</id>
+    <link href="https://blog.kbiao.me/2016/05/06/Android-MVP-Demo/"/>
+    <id>https://blog.kbiao.me/2016/05/06/Android-MVP-Demo/</id>
     <published>2016-05-06T15:30:11.000Z</published>
     <updated>2022-05-03T07:51:32.057Z</updated>
     
@@ -482,14 +482,14 @@
     
     
     
-    <category term="Android" scheme="http://blog.kbiao.me/categories/Android/"/>
+    <category term="Android" scheme="https://blog.kbiao.me/categories/Android/"/>
     
     
-    <category term="Android" scheme="http://blog.kbiao.me/tags/Android/"/>
+    <category term="Android" scheme="https://blog.kbiao.me/tags/Android/"/>
     
-    <category term="MVP" scheme="http://blog.kbiao.me/tags/MVP/"/>
+    <category term="MVP" scheme="https://blog.kbiao.me/tags/MVP/"/>
     
-    <category term="demo" scheme="http://blog.kbiao.me/tags/demo/"/>
+    <category term="demo" scheme="https://blog.kbiao.me/tags/demo/"/>
     
   </entry>
   

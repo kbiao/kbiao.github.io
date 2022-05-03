@@ -19,12 +19,12 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.kbiao.me","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.kbiao.me","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="在一个单位中，可能是存在多个不同的应用，比如学校会有财务的系统会有学生工作的系统，还有图书馆的系统等等，如果每个系统都用独立的账号认证体系，会给用户带来很大困扰，也给管理带来很大不便。所以需要设计一种统一登录的解决方案。比如我登陆了百度账号，进贴吧时发现已经登录了，进糯米发现也自动登录了。常见的有两种情况，一种是SSO（单点登录）效果是一次输入密码多个网站可以识别在线状态；还有一种是多平台登录，效">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于OAUTH2的统一认证的实例解析">
-<meta property="og:url" content="http://blog.kbiao.me/2016/07/23/%E5%9F%BA%E4%BA%8EOAUTH2%E7%9A%84%E7%BB%9F%E4%B8%80%E8%AE%A4%E8%AF%81%E7%9A%84%E5%AE%9E%E4%BE%8B%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:url" content="https://blog.kbiao.me/2016/07/23/%E5%9F%BA%E4%BA%8EOAUTH2%E7%9A%84%E7%BB%9F%E4%B8%80%E8%AE%A4%E8%AF%81%E7%9A%84%E5%AE%9E%E4%BE%8B%E8%A7%A3%E6%9E%90/index.html">
 <meta property="og:site_name" content="听雨小筑">
 <meta property="og:description" content="在一个单位中，可能是存在多个不同的应用，比如学校会有财务的系统会有学生工作的系统，还有图书馆的系统等等，如果每个系统都用独立的账号认证体系，会给用户带来很大困扰，也给管理带来很大不便。所以需要设计一种统一登录的解决方案。比如我登陆了百度账号，进贴吧时发现已经登录了，进糯米发现也自动登录了。常见的有两种情况，一种是SSO（单点登录）效果是一次输入密码多个网站可以识别在线状态；还有一种是多平台登录，效">
 <meta property="og:locale" content="zh_CN">
@@ -43,11 +43,11 @@
 <meta name="twitter:image" content="https://image.kbiao.me/16-7-23/73340367.jpg?imageView2/2/w/600/interlace/1/">
 
 
-<link rel="canonical" href="http://blog.kbiao.me/2016/07/23/%E5%9F%BA%E4%BA%8EOAUTH2%E7%9A%84%E7%BB%9F%E4%B8%80%E8%AE%A4%E8%AF%81%E7%9A%84%E5%AE%9E%E4%BE%8B%E8%A7%A3%E6%9E%90/">
+<link rel="canonical" href="https://blog.kbiao.me/2016/07/23/%E5%9F%BA%E4%BA%8EOAUTH2%E7%9A%84%E7%BB%9F%E4%B8%80%E8%AE%A4%E8%AF%81%E7%9A%84%E5%AE%9E%E4%BE%8B%E8%A7%A3%E6%9E%90/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://blog.kbiao.me/2016/07/23/%E5%9F%BA%E4%BA%8EOAUTH2%E7%9A%84%E7%BB%9F%E4%B8%80%E8%AE%A4%E8%AF%81%E7%9A%84%E5%AE%9E%E4%BE%8B%E8%A7%A3%E6%9E%90/","path":"2016/07/23/基于OAUTH2的统一认证的实例解析/","title":"基于OAUTH2的统一认证的实例解析"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.kbiao.me/2016/07/23/%E5%9F%BA%E4%BA%8EOAUTH2%E7%9A%84%E7%BB%9F%E4%B8%80%E8%AE%A4%E8%AF%81%E7%9A%84%E5%AE%9E%E4%BE%8B%E8%A7%A3%E6%9E%90/","path":"2016/07/23/基于OAUTH2的统一认证的实例解析/","title":"基于OAUTH2的统一认证的实例解析"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>基于OAUTH2的统一认证的实例解析 | 听雨小筑</title>
@@ -170,6 +170,9 @@
       <span class="links-of-author-item">
         <a href="mailto:kbiao@qq.com" title="E-Mail → mailto:kbiao@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/kbiao" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;kbiao" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</a>
+      </span>
   </div>
 
 
@@ -205,7 +208,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.kbiao.me/2016/07/23/%E5%9F%BA%E4%BA%8EOAUTH2%E7%9A%84%E7%BB%9F%E4%B8%80%E8%AE%A4%E8%AF%81%E7%9A%84%E5%AE%9E%E4%BE%8B%E8%A7%A3%E6%9E%90/">
+    <link itemprop="mainEntityOfPage" href="https://blog.kbiao.me/2016/07/23/%E5%9F%BA%E4%BA%8EOAUTH2%E7%9A%84%E7%BB%9F%E4%B8%80%E8%AE%A4%E8%AF%81%E7%9A%84%E5%AE%9E%E4%BE%8B%E8%A7%A3%E6%9E%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://image.kbiao.me/kbiao.jpg">
@@ -370,6 +373,50 @@
   </div>
 </div>
 
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>K、Biao
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://blog.kbiao.me/2016/07/23/%E5%9F%BA%E4%BA%8EOAUTH2%E7%9A%84%E7%BB%9F%E4%B8%80%E8%AE%A4%E8%AF%81%E7%9A%84%E5%AE%9E%E4%BE%8B%E8%A7%A3%E6%9E%90/" title="基于OAUTH2的统一认证的实例解析">https://blog.kbiao.me/2016/07/23/基于OAUTH2的统一认证的实例解析/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/uploads/qrcode_wx.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">WeChat</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
           <div class="post-tags">
               <a href="/tags/OAuth2/" rel="tag"><i class="fa fa-tag"></i> OAuth2</a>
               <a href="/tags/shiro/" rel="tag"><i class="fa fa-tag"></i> shiro</a>
@@ -416,7 +463,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">K、Biao</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
 
     </div>
@@ -442,7 +489,7 @@
 
 
   <script src="https://cdn.jsdelivr.net/npm/quicklink@2.2.0/dist/quicklink.umd.js" integrity="sha256-4kQf9z5ntdQrzsBC3YSHnEz02Z9C1UeW/E9OgnvlzSY=" crossorigin="anonymous"></script>
-  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://blog.kbiao.me/2016/07/23/%E5%9F%BA%E4%BA%8EOAUTH2%E7%9A%84%E7%BB%9F%E4%B8%80%E8%AE%A4%E8%AF%81%E7%9A%84%E5%AE%9E%E4%BE%8B%E8%A7%A3%E6%9E%90/"}</script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://blog.kbiao.me/2016/07/23/%E5%9F%BA%E4%BA%8EOAUTH2%E7%9A%84%E7%BB%9F%E4%B8%80%E8%AE%A4%E8%AF%81%E7%9A%84%E5%AE%9E%E4%BE%8B%E8%A7%A3%E6%9E%90/"}</script>
   <script src="/js/third-party/quicklink.js"></script>
 
 </body>

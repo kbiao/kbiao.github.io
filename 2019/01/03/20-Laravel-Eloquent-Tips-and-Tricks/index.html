@@ -19,12 +19,12 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.kbiao.me","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.kbiao.me","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="腾讯实习的项目按照公司的主流技术选型是PHP 流派的，而我习惯了 JAVA 的体系面对这个最好的语言还是挺不适应的。特别是很多写法用法以及框架知识不在文档中，语法又及其灵活就产生和每次看别人的代码都有种woc 还能这么写的感觉。所以遵循语言的编程范式，总结理解一些小技巧也是很有必要的。下面是翻译自 Laravel-News 的一篇教程，总结了 Laravel 的对象关系映射框架（ORM）的几个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【译】20个 Laravel Eloquent 小技巧（上）">
-<meta property="og:url" content="http://blog.kbiao.me/2019/01/03/20-Laravel-Eloquent-Tips-and-Tricks/index.html">
+<meta property="og:url" content="https://blog.kbiao.me/2019/01/03/20-Laravel-Eloquent-Tips-and-Tricks/index.html">
 <meta property="og:site_name" content="听雨小筑">
 <meta property="og:description" content="腾讯实习的项目按照公司的主流技术选型是PHP 流派的，而我习惯了 JAVA 的体系面对这个最好的语言还是挺不适应的。特别是很多写法用法以及框架知识不在文档中，语法又及其灵活就产生和每次看别人的代码都有种woc 还能这么写的感觉。所以遵循语言的编程范式，总结理解一些小技巧也是很有必要的。下面是翻译自 Laravel-News 的一篇教程，总结了 Laravel 的对象关系映射框架（ORM）的几个">
 <meta property="og:locale" content="zh_CN">
@@ -38,11 +38,11 @@
 <meta name="twitter:image" content="https://image.kbiao.me/2019-01-03-15465238831311.png">
 
 
-<link rel="canonical" href="http://blog.kbiao.me/2019/01/03/20-Laravel-Eloquent-Tips-and-Tricks/">
+<link rel="canonical" href="https://blog.kbiao.me/2019/01/03/20-Laravel-Eloquent-Tips-and-Tricks/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://blog.kbiao.me/2019/01/03/20-Laravel-Eloquent-Tips-and-Tricks/","path":"2019/01/03/20-Laravel-Eloquent-Tips-and-Tricks/","title":"【译】20个 Laravel Eloquent 小技巧（上）"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.kbiao.me/2019/01/03/20-Laravel-Eloquent-Tips-and-Tricks/","path":"2019/01/03/20-Laravel-Eloquent-Tips-and-Tricks/","title":"【译】20个 Laravel Eloquent 小技巧（上）"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>【译】20个 Laravel Eloquent 小技巧（上） | 听雨小筑</title>
@@ -165,6 +165,9 @@
       <span class="links-of-author-item">
         <a href="mailto:kbiao@qq.com" title="E-Mail → mailto:kbiao@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/kbiao" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;kbiao" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</a>
+      </span>
   </div>
 
 
@@ -200,7 +203,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.kbiao.me/2019/01/03/20-Laravel-Eloquent-Tips-and-Tricks/">
+    <link itemprop="mainEntityOfPage" href="https://blog.kbiao.me/2019/01/03/20-Laravel-Eloquent-Tips-and-Tricks/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://image.kbiao.me/kbiao.jpg">
@@ -384,6 +387,50 @@
   </div>
 </div>
 
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>K、Biao
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://blog.kbiao.me/2019/01/03/20-Laravel-Eloquent-Tips-and-Tricks/" title="【译】20个 Laravel Eloquent 小技巧（上）">https://blog.kbiao.me/2019/01/03/20-Laravel-Eloquent-Tips-and-Tricks/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/uploads/qrcode_wx.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">WeChat</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
           <div class="post-tags">
               <a href="/tags/php/" rel="tag"><i class="fa fa-tag"></i> php</a>
               <a href="/tags/laravel/" rel="tag"><i class="fa fa-tag"></i> laravel</a>
@@ -429,7 +476,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">K、Biao</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
 
     </div>
@@ -455,7 +502,7 @@
 
 
   <script src="https://cdn.jsdelivr.net/npm/quicklink@2.2.0/dist/quicklink.umd.js" integrity="sha256-4kQf9z5ntdQrzsBC3YSHnEz02Z9C1UeW/E9OgnvlzSY=" crossorigin="anonymous"></script>
-  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://blog.kbiao.me/2019/01/03/20-Laravel-Eloquent-Tips-and-Tricks/"}</script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://blog.kbiao.me/2019/01/03/20-Laravel-Eloquent-Tips-and-Tricks/"}</script>
   <script src="/js/third-party/quicklink.js"></script>
 
 </body>
