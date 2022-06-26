@@ -12,10 +12,12 @@ timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://blog.kbiao.me
+url: https://blog.kbiao.me/
 root: /
-permalink: :year/:month/:day/:title/
-permalink_defaults:
+permalink: :title-:hash/
+
+
+
 
 # Directory
 source_dir: source
@@ -74,8 +76,18 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: git
-  repo: git@github.com:kbiao/kbiao.github.io.git
-  branch: master
+  - type: git
+    repo: git@github.com:kbiao/kbiao.github.io.git
+    branch: master
+  - type: leancloud_counter_security_sync
 
 #baidu_analytics: 40650f57a96f0df2cfe5cee491a33cae
+
+leancloud_counter_security:
+  enable_sync: true
+  app_id: 7OTu25XcWOiqFHBrfOA46xsT-gzGzoHsz # <your app id>
+  app_key: bigXFjf3hf5a9TEukm9xO7uT #<your app key>
+  # Required for apps from CN region
+  server_url: https://blog-api.kbiao.me # <your server url>
+  username: kbiao # Will be asked while deploying if is left blank
+  password: biaobiao # Recommmended to be left blank. Will be asked while deploying if is left blank

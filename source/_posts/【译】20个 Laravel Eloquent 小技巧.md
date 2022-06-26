@@ -6,7 +6,7 @@ tags:
 - laravel
 categories:
 - 全干工程师的收藏夹
-permalink: 20-Laravel-Eloquent-Tips-and-Tricks
+permalink: 20-Laravel-Eloquent-Tips-and-Tricks/
 ---
 
 

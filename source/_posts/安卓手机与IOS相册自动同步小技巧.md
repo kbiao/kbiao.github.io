@@ -6,7 +6,7 @@ tags:
 - tips
 categories:
   ToolTips
-permalink: Automatic-Sync-Android-album-whith-IOS   
+permalink: Automatic-Sync-Android-album-whith-IOS/   
 
 ---
 

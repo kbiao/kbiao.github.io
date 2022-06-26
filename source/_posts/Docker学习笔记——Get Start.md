@@ -5,7 +5,7 @@ tags:
   Docker
 categories:
   Coding-Notes
-permalink: Docker-Learning-Notes-Get-Start
+permalink: Docker-Learning-Notes-Get-Start/
 
 ---
 ![](https://image.kbiao.me/2017-03-12-14892908756333.jpg)

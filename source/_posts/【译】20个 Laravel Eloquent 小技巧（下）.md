@@ -6,7 +6,9 @@ tags:
 - laravel
 categories:
 - 全干工程师的收藏夹
-permalink: 20-Laravel-Eloquent-Tips-and-Tricks
+
+permalink: 20-Laravel-Eloquent-Tips-and-Tricks-part2/
+
 ---
 
 ![](https://image.kbiao.me/2019-01-03-15465238831311.png)
