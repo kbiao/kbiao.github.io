@@ -21,31 +21,30 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"blog.kbiao.me","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="问题的提出今天在完成一个小功能的时候，需要把存放在List中的数据转化成字符串数组。想当然地用了List的一个方法toArray(),它的返回值是Object[]类型，于是用强制类型转换。代码如下：">
+    <meta name="description" content="22年倏忽一下就过去了一半，最近的几周里我一个职场菜鸡也学着前辈的模样，开始做半年的技术规划。虽说只是照猫画虎，毕竟功力不够，也是压力颇大。最大的问题可能是我思维太过发散，始终无法收敛出一条清晰主线，说明白从哪来到哪去和如何去的问题（当然这终极三问可能确实复杂，但能给到我的话题和上下文还是比较小的）。然而在自己的生活中，思维发散却不常是一件坏事，往往还是生活中一些小确幸时刻的来源。">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="Java-Convert-List-to-Array">
-<meta property="og:url" content="https://blog.kbiao.me/Java-Convert-List-To-Array-24935f750060/index.html">
+<meta property="og:title" content="工作日登山_礼拜天结网">
+<meta property="og:url" content="https://blog.kbiao.me/%E5%B7%A5%E4%BD%9C%E6%97%A5%E7%99%BB%E5%B1%B1-%E7%A4%BC%E6%8B%9C%E5%A4%A9%E7%BB%93%E7%BD%91-e378de6552f5/index.html">
 <meta property="og:site_name" content="听雨小筑">
-<meta property="og:description" content="问题的提出今天在完成一个小功能的时候，需要把存放在List中的数据转化成字符串数组。想当然地用了List的一个方法toArray(),它的返回值是Object[]类型，于是用强制类型转换。代码如下：">
+<meta property="og:description" content="22年倏忽一下就过去了一半，最近的几周里我一个职场菜鸡也学着前辈的模样，开始做半年的技术规划。虽说只是照猫画虎，毕竟功力不够，也是压力颇大。最大的问题可能是我思维太过发散，始终无法收敛出一条清晰主线，说明白从哪来到哪去和如何去的问题（当然这终极三问可能确实复杂，但能给到我的话题和上下文还是比较小的）。然而在自己的生活中，思维发散却不常是一件坏事，往往还是生活中一些小确幸时刻的来源。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://image.kbiao.me/16-5-7/67479954.jpg">
-<meta property="article:published_time" content="2016-05-06T16:21:45.000Z">
-<meta property="article:modified_time" content="2022-05-03T11:31:58.910Z">
+<meta property="og:image" content="https://image.kbiao.me/blog/img/20220703174848.png">
+<meta property="og:image" content="https://image.kbiao.me/blog/img/20220703174920.png">
+<meta property="article:published_time" content="2022-07-03T09:47:18.000Z">
+<meta property="article:modified_time" content="2022-07-03T10:01:13.782Z">
 <meta property="article:author" content="K、Biao">
-<meta property="article:tag" content="java">
-<meta property="article:tag" content="list">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://image.kbiao.me/16-5-7/67479954.jpg">
+<meta name="twitter:image" content="https://image.kbiao.me/blog/img/20220703174848.png">
 
 
-<link rel="canonical" href="https://blog.kbiao.me/Java-Convert-List-To-Array-24935f750060/">
+<link rel="canonical" href="https://blog.kbiao.me/%E5%B7%A5%E4%BD%9C%E6%97%A5%E7%99%BB%E5%B1%B1-%E7%A4%BC%E6%8B%9C%E5%A4%A9%E7%BB%93%E7%BD%91-e378de6552f5/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.kbiao.me/Java-Convert-List-To-Array-24935f750060/","path":"Java-Convert-List-To-Array-24935f750060/","title":"Java-Convert-List-to-Array"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.kbiao.me/%E5%B7%A5%E4%BD%9C%E6%97%A5%E7%99%BB%E5%B1%B1-%E7%A4%BC%E6%8B%9C%E5%A4%A9%E7%BB%93%E7%BD%91-e378de6552f5/","path":"工作日登山-礼拜天结网-e378de6552f5/","title":"工作日登山_礼拜天结网"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Java-Convert-List-to-Array | 听雨小筑</title>
+<title>工作日登山_礼拜天结网 | 听雨小筑</title>
   
 
   <script src="/js/third-party/analytics/baidu-analytics.js"></script>
@@ -111,7 +110,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -124,7 +123,6 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E7%9A%84%E6%8F%90%E5%87%BA"><span class="nav-text">问题的提出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0"><span class="nav-text">原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="nav-text">解决办法</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -203,7 +201,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.kbiao.me/Java-Convert-List-To-Array-24935f750060/">
+    <link itemprop="mainEntityOfPage" href="https://blog.kbiao.me/%E5%B7%A5%E4%BD%9C%E6%97%A5%E7%99%BB%E5%B1%B1-%E7%A4%BC%E6%8B%9C%E5%A4%A9%E7%BB%93%E7%BD%91-e378de6552f5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://image.kbiao.me/kbiao.jpg">
@@ -216,12 +214,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Java-Convert-List-to-Array | 听雨小筑">
+      <meta itemprop="name" content="工作日登山_礼拜天结网 | 听雨小筑">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Java-Convert-List-to-Array
+          工作日登山_礼拜天结网
         </h1>
 
         <div class="post-meta-container">
@@ -232,27 +230,18 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2016-05-07 00:21:45" itemprop="dateCreated datePublished" datetime="2016-05-07T00:21:45+08:00">2016-05-07</time>
+      <time title="创建时间：2022-07-03 17:47:18" itemprop="dateCreated datePublished" datetime="2022-07-03T17:47:18+08:00">2022-07-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-05-03 19:31:58" itemprop="dateModified" datetime="2022-05-03T19:31:58+08:00">2022-05-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Coding-Notes/" itemprop="url" rel="index"><span itemprop="name">Coding-Notes</span></a>
-        </span>
+      <time title="修改时间：2022-07-03 18:01:13" itemprop="dateModified" datetime="2022-07-03T18:01:13+08:00">2022-07-03</time>
     </span>
 
   
-    <span id="/Java-Convert-List-To-Array-24935f750060/" class="post-meta-item leancloud_visitors" data-flag-title="Java-Convert-List-to-Array" title="阅读次数">
+    <span id="/%E5%B7%A5%E4%BD%9C%E6%97%A5%E7%99%BB%E5%B1%B1-%E7%A4%BC%E6%8B%9C%E5%A4%A9%E7%BB%93%E7%BD%91-e378de6552f5/" class="post-meta-item leancloud_visitors" data-flag-title="工作日登山_礼拜天结网" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -268,23 +257,21 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p><img src="https://image.kbiao.me/16-5-7/67479954.jpg"></p>
-<h2 id="问题的提出"><a href="#问题的提出" class="headerlink" title="问题的提出"></a>问题的提出</h2><p>今天在完成一个小功能的时候，需要把存放在List中的数据转化成字符串数组。<br>想当然地用了<code>List</code>的一个方法<code>toArray()</code>,它的返回值是<code>Object[]</code>类型，于是用强制类型转换。代码如下： </p>
+        <p><img src="https://image.kbiao.me/blog/img/20220703174848.png"></p>
+<p>22年倏忽一下就过去了一半，最近的几周里我一个职场菜鸡也学着前辈的模样，开始做半年的技术规划。虽说只是照猫画虎，毕竟功力不够，也是压力颇大。最大的问题可能是我思维太过发散，始终无法收敛出一条清晰主线，说明白从哪来到哪去和如何去的问题（当然这终极三问可能确实复杂，但能给到我的话题和上下文还是比较小的）。然而在自己的生活中，思维发散却不常是一件坏事，往往还是生活中一些小确幸时刻的来源。</p>
 <span id="more"></span>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> String[] getDictValueList(String type)&#123; </span><br><span class="line">		<span class="type">List</span> <span class="variable">DictList</span> <span class="operator">=</span> getDictList(type); </span><br><span class="line">		<span class="type">List</span> <span class="variable">DictValue</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(); </span><br><span class="line">		<span class="keyword">for</span> (Dict dict : DictList)&#123; </span><br><span class="line">			DictValue.add(dict.getLabel()); </span><br><span class="line">		&#125; </span><br><span class="line">		<span class="keyword">return</span> (String[])DictValue.toArray(); </span><br><span class="line">	&#125; </span><br></pre></td></tr></table></figure>
-<p>结果它报错了<code>Ljava.lang.Object; cannot be cast to [Ljava.lang.String;</code><br>这个错误看起来有点奇怪，不知道前面的L和半个方括号是什么意思。 </p>
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><blockquote>
-<p>类型不匹配。</p>
+
+
+<p>最近我买了一本书《创作的基因：我和我所爱着的MEME们》， 作者是小岛秀夫，是一名游戏制作人。这本书不是单独买的，是作为游戏同名小说《死亡搁浅》的套装一起。<br>《死亡搁浅》是一部气质非常独特的游戏，讲述了“死亡搁浅”后世界濒临毁灭，快递员山姆用一次次送货之旅，徒步穿越美国让世界重新连接，让人们获得新世界的希望。游戏中的配乐全部都是如电影一般，制作人精选的专辑音乐，而不是特地为游戏制作的音乐。气质上却融合得来。而且音乐本身能作为一种奖励机制。大战完 BT 的紧张中，从躲过时间雨后的压力中，从翻山越岭的疲惫中，突然响起悠扬的歌声告诉你苦难过去了，生活还是美好的，沉浸感是如此强烈。游戏一开头提出的棍棒与绳索的隐喻在一次次“快递”送货之旅中让玩家能有非常深刻的体会。但是也由于游戏过于“文青”的气质和非主流的玩法，在一段时间内也收获了褒贬不一的评价。</p>
+<p>不过这个气质却很对我的脑电波，新书发售自然要买一本作为粉丝的收藏。《创作的基因：我和我所爱着的MEME们》是小岛的书评，影评集。作为一个游戏人，他的阅读涉猎之多之广确实让人叹服，强大的输出果然离不开更为强大的输入做支撑。更厉害的在于，对于读过的作品，拥有的经历能有非常充分的个人风格的思考，消化，将其中的精髓和带给自己的心灵的触动转化为持续创作的灵感和动力。要说预期能把“创作的基因”通过这本书传递给我，那就预期太高了。它本质仅是一份书单，影单的合集，还得阅读品味，兴趣方向能和作者对上才会觉得满意。不必说我买它的初衷也仅仅是带着粉丝滤镜的冲动购物。</p>
+<p>书的标题提到了一个叫MEME 的概念，是仿着 GENE 造的一个词。 可以拆成 ME + ME ，解释为人与人的经历的连结。生物学上的基因🧬（GENE）传递的是肉体生命， 而MEME 是指传递文化，习惯，价值观。这种精神思想是用读书，看电影，玩游戏连结起来的人们，通过话语，文字，文化不停地进行着传承。小岛的游戏本身就是这种理念的呈现。这个概念确实新奇，而我在阅读了几篇以后立马有了现实的体会。<br>在其中读到一篇《山月记》的读后感，引用了一段原文：</p>
+<blockquote>
+<p>“我深怕自己本非美玉，故而不敢加以刻苦琢磨，却又半信自己是块美玉，故又不肯庸庸碌碌，与瓦砾为伍。于是我渐渐地脱离凡尘，疏远世人，结果便是一任愤懑与羞恨日益助长内心那怯弱的自尊心”</p>
 </blockquote>
-<p><code>toArray()</code>是一个抽象方法，返回Object[]类型,没有泛型，无法强转成String[]类型。要想让它返回对应的类型可以使用它的重载方法：<code> T[] toArray(T[] a);</code> </p>
-<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><ol>
-<li>List转换成为数组。（这里的List是实体是ArrayList)                调用<code>ArrayList</code>的<code>toArray</code>方法。<br><code>public T[] toArray(T[]a)</code>返回一个按照正确的顺序包含此列表中所有元素的数组；返回数组的运行时类型就是指定数组的运行时类型。如果列表能放入指定的数组，则返回放入此列表元素的数组。否则，将根据指定数组的运行时类型和此列表的大小分配一个新的数组。 所以我以上的返回代码修改为：</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> DictValue.toArray(<span class="keyword">new</span> <span class="title class_">String</span>[DictList.size()]);</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>数组转换成为List<br>调用<code>Arrays</code>的 <code>asList</code>方法<br><code>.public static List asList(T... a)</code><br>返回一个受指定数组支持的固定大小的列表。（对返回列表的更改会“直写”到数组。）此方法同 Collection.toArray 一起，充当了基于数组的 API 与基于 collection 的 API 之间的桥梁。 此方法还提供了一个创建固定长度的列表的便捷方法，该列表被初始化为包含多个元素：<br><code>List stooges = Arrays.asList(&quot;Larry&quot;, &quot;Moe&quot;, &quot;Curly&quot;); </code><br>具体用法: <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String[] arr = <span class="keyword">new</span> <span class="title class_">String</span>[] &#123;<span class="string">&quot;1&quot;</span>, <span class="string">&quot;2&quot;</span>&#125;; <span class="type">List</span> <span class="variable">list</span> <span class="operator">=</span> Arrays.asList(arr); </span><br></pre></td></tr></table></figure>
-一个错误，两个知识点。好好学习，天天向上。<br>作者： K_Biao<br>链接：<a target="_blank" rel="noopener" href="http://www.imooc.com/article/5435">http://www.imooc.com/article/5435</a><br>来源：慕课网</li>
-</ol>
+<p>这段话写的是真的好，把这种纠结，拧巴的心态描绘的栩栩如生，而又能立马映射到自己曾经多少次也拥有过这样的心态。就像我现在在努力尝试做的技术规划，为了自己的成长，想要驯服心中欲望的野兽，却也同时质疑自己能否驾驭，于是有了各种坐立不安纠结痛苦的时刻。共鸣之强我立马摘录并发了一条朋友圈。<br>《山月记》其实是一位日本作者中岛敦改编自中国唐代李景亮所著的《人虎传》的变身奇谭，抑或说是个寓言故事。这一篇改编的文章还被收录到了日本高中语文的教科书里。然后我又去翻了《山月记》原书，除了这个人变虎的故事，也还有“纪昌学射”这样我们熟悉故事的改编。日本的学者改编的中国故事，读起来确实又熟悉又陌生，别有一番意味。游戏到读书，日本到中国，这一个又一个的MEME 把我和那些我素未谋面的人和时空异位的事联系起来，成了我最近生活中突然觉得有点小惊喜和小确幸的时刻。<br>游戏我也没通关，这本影评集我也没读完，生涩的古文我过了这个新鲜劲头便也不会再啃下去了，但是我的快乐已经获得了。这据说可以被唤作“陶渊明派”读书法 —— 好读书，不求甚解。</p>
+<p>工作的世界里，一条条的待办，一次次的 OKR 是一座座山，要攻坚克难，要勇攀高峰，要追求极致。需要目标，需要手段，需要衡量。周末生活里读书、游戏的闲情像一张张网，连结起生活本身的意义。我在这张网里游曳，从一个点愉快跳向另一个点。这些没有什么特别目的的事物组成了生活的意义之网。</p>
+<p>山有高低次序，而网处处相通。工作日登山， 礼拜天结网，生命的节奏在两种模式里延展开来。</p>
+<p><img src="https://image.kbiao.me/blog/img/20220703174920.png"></p>
 
     </div>
 
@@ -318,7 +305,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://blog.kbiao.me/Java-Convert-List-To-Array-24935f750060/" title="Java-Convert-List-to-Array">https://blog.kbiao.me/Java-Convert-List-To-Array-24935f750060/</a>
+      <a href="https://blog.kbiao.me/%E5%B7%A5%E4%BD%9C%E6%97%A5%E7%99%BB%E5%B1%B1-%E7%A4%BC%E6%8B%9C%E5%A4%A9%E7%BB%93%E7%BD%91-e378de6552f5/" title="工作日登山_礼拜天结网">https://blog.kbiao.me/工作日登山-礼拜天结网-e378de6552f5/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -353,23 +340,16 @@
   </div>
 </div>
 
-          <div class="post-tags">
-              <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
-              <a href="/tags/list/" rel="tag"><i class="fa fa-tag"></i> list</a>
-          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/Android-MVP-Demo-be303a8bb542/" rel="prev" title="Android-MVP-Demo">
-                  <i class="fa fa-chevron-left"></i> Android-MVP-Demo
+                <a href="/%E5%85%B3%E9%97%A8%E7%9A%84%E6%8A%A5%E5%88%8A%E4%BA%AD%E5%92%8C%E6%89%8E%E5%A0%86%E7%9A%84%E6%A0%B8%E9%85%B8%E4%BA%AD-41d8d32f88d8/" rel="prev" title="关门的报刊亭和扎堆的核酸亭">
+                  <i class="fa fa-chevron-left"></i> 关门的报刊亭和扎堆的核酸亭
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/Git%E9%85%8D%E7%BD%AE%E5%A4%9A%E8%B4%A6%E5%8F%B7%E7%99%BB%E5%BD%95-4e3b1b4a716e/" rel="next" title="Git配置多账号登录">
-                  Git配置多账号登录 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
