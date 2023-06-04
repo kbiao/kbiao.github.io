@@ -3,9 +3,7 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
-
-<link rel="preconnect" href="null//null" crossorigin>
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
 <link rel="preconnect" href="https://unpkg.com" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
@@ -16,10 +14,10 @@
 
 
 
-<link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://unpkg.com/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.kbiao.me","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.kbiao.me","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="我的毕设选择了大数据方向的题目。大数据的第一步就是要拿到足够的数据源。现实情况中我们需要的数据源分布在不同的业务系统中，而这些系统往往是异构的，而且我们的分析过程不能影响原有业务系统的运行。为了把不同的数据归集起来，我开始了解和接触ETL。本篇介绍阿里的开源ETL工具dataX。">
 <meta property="og:type" content="blog">
@@ -57,6 +55,9 @@
 
 
 
+
+
+
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -67,8 +68,8 @@
   <div class="headband"></div>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏" role="button">
         <span class="toggle-line"></span>
@@ -88,7 +89,7 @@
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
     </div>
   </div>
 </div>
@@ -103,15 +104,9 @@
 
 
 
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
@@ -132,13 +127,13 @@
         <!--/noindex-->
 
         <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="K、Biao"
       src="https://image.kbiao.me/kbiao.jpg">
   <p class="site-author-name" itemprop="name">K、Biao</p>
   <div class="site-description" itemprop="description">彪彪的技术博客</div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
@@ -158,42 +153,30 @@
       </div>
   </nav>
 </div>
-  <div class="links-of-author site-overview-item animated">
+  <div class="links-of-author animated">
       <span class="links-of-author-item">
-        <a href="https://github.com/kbiao" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kbiao" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+        <a href="https://github.com/kbiao" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kbiao" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://www.zhihu.com/people/kbiao" title="知乎 → http:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;kbiao" rel="noopener" target="_blank"></a>
+        <a href="http://www.zhihu.com/people/kbiao" title="知乎 → http:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;kbiao" rel="noopener me" target="_blank"></a>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:kbiao@qq.com" title="E-Mail → mailto:kbiao@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+        <a href="mailto:kbiao@qq.com" title="E-Mail → mailto:kbiao@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://stackoverflow.com/kbiao" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;kbiao" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i></a>
+        <a href="https://stackoverflow.com/kbiao" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;kbiao" rel="noopener me" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i></a>
       </span>
   </div>
-
-
 
         </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  </aside>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    </div>
 
     <div class="main-inner post posts-expand">
 
@@ -270,8 +253,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-        <p><img src="https://image.kbiao.me/17-1-2/15001992-file_1483363944014_47b9.jpg"><br>我的毕设选择了大数据方向的题目。大数据的第一步就是要拿到足够的数据源。现实情况中我们需要的数据源分布在不同的业务系统中，而这些系统往往是异构的，而且我们的分析过程不能影响原有业务系统的运行。为了把不同的数据归集起来，我开始了解和接触ETL。本篇介绍阿里的开源ETL工具dataX。</p>
+    <div class="post-body" itemprop="articleBody"><p><img src="https://image.kbiao.me/17-1-2/15001992-file_1483363944014_47b9.jpg"><br>我的毕设选择了大数据方向的题目。大数据的第一步就是要拿到足够的数据源。现实情况中我们需要的数据源分布在不同的业务系统中，而这些系统往往是异构的，而且我们的分析过程不能影响原有业务系统的运行。为了把不同的数据归集起来，我开始了解和接触ETL。本篇介绍阿里的开源ETL工具dataX。</p>
 <span id="more"></span>
 <h2 id="ETL-amp-amp-常用工具"><a href="#ETL-amp-amp-常用工具" class="headerlink" title="ETL&amp;&amp;常用工具"></a>ETL&amp;&amp;常用工具</h2><blockquote>
 <p>ETL，是英文 Extract-Transform-Load 的缩写，用来描述将数据从来源端经过抽取（extract）、转换（transform）、加载（load）至目的端的过程。</p>
@@ -331,12 +313,10 @@
     
     
     
-      
-
 
     <footer class="post-footer">
           <div class="reward-container">
-  <div>Buy me a coffee</div>
+  <div>请我一杯咖啡吧！</div>
   <button>
     赞赏
   </button>
@@ -361,7 +341,7 @@
       <a href="https://blog.kbiao.me/%E9%98%BF%E9%87%8C%E5%87%BA%E5%93%81%E7%9A%84ETL%E5%B7%A5%E5%85%B7dataX%E5%88%9D%E4%BD%93%E9%AA%8C-f9bdf797cd4c/" title="阿里出品的ETL工具dataX初体验">https://blog.kbiao.me/阿里出品的ETL工具dataX初体验-f9bdf797cd4c/</a>
   </li>
   <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
   </li>
 </ul>
 </div>
@@ -372,23 +352,25 @@
   <div class="social-list">
 
       <div class="social-item">
-        <a target="_blank" class="social-link" href="/uploads/qrcode_wx.jpg">
-          <span class="icon">
-            <i class="fab fa-weixin"></i>
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
           </span>
 
-          <span class="label">WeChat</span>
-        </a>
+          <img class="social-item-img" src="/uploads/qrcode_wx.jpg">
       </div>
 
       <div class="social-item">
-        <a target="_blank" class="social-link" href="/atom.xml">
-          <span class="icon">
-            <i class="fa fa-rss"></i>
-          </span>
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
 
-          <span class="label">RSS</span>
-        </a>
+            <span class="label">RSS</span>
+          </a>
       </div>
   </div>
 </div>
@@ -433,7 +415,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -446,15 +428,27 @@
   </footer>
 
   
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
   <script size="160" alpha="0.6" zIndex="-1" src="https://unpkg.com/ribbon.js@1.0.2/dist/ribbon.min.js"></script>
   <script src="https://unpkg.com/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
 
-
-  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://unpkg.com/mermaid@9.0.1/dist/mermaid.min.js","integrity":"sha256-CemUs9ITT7liCZpVMktcEw0BpAOZ1+mujlMB3UyuImU="}}</script>
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://unpkg.com/mermaid@9.4.3/dist/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
   <script src="/js/third-party/tags/mermaid.js"></script>
+
+
 
 
 

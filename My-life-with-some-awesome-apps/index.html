@@ -3,9 +3,7 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
-
-<link rel="preconnect" href="null//null" crossorigin>
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
 <link rel="preconnect" href="https://unpkg.com" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
@@ -16,10 +14,10 @@
 
 
 
-<link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://unpkg.com/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.kbiao.me","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.kbiao.me","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="工欲善其事必先利其器。提升效率很重要的一点就是要学会善用工具，工具可以帮助我们减少很多不必要的麻烦。对于新时代的我们，驾驭工具也成了一门必修课。选对工具，用好工具可以让我们在追求进步的路上，走的更扎实。本篇我想通过分享我自己的数字生活实践，整理和推荐一些效率工具。">
 <meta property="og:type" content="blog">
@@ -58,6 +56,9 @@
 
 
 
+
+
+
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -68,8 +69,8 @@
   <div class="headband"></div>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏" role="button">
         <span class="toggle-line"></span>
@@ -89,7 +90,7 @@
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
     </div>
   </div>
 </div>
@@ -104,15 +105,9 @@
 
 
 
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
@@ -133,13 +128,13 @@
         <!--/noindex-->
 
         <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="K、Biao"
       src="https://image.kbiao.me/kbiao.jpg">
   <p class="site-author-name" itemprop="name">K、Biao</p>
   <div class="site-description" itemprop="description">彪彪的技术博客</div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
@@ -159,42 +154,30 @@
       </div>
   </nav>
 </div>
-  <div class="links-of-author site-overview-item animated">
+  <div class="links-of-author animated">
       <span class="links-of-author-item">
-        <a href="https://github.com/kbiao" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kbiao" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+        <a href="https://github.com/kbiao" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kbiao" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://www.zhihu.com/people/kbiao" title="知乎 → http:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;kbiao" rel="noopener" target="_blank"></a>
+        <a href="http://www.zhihu.com/people/kbiao" title="知乎 → http:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;kbiao" rel="noopener me" target="_blank"></a>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:kbiao@qq.com" title="E-Mail → mailto:kbiao@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+        <a href="mailto:kbiao@qq.com" title="E-Mail → mailto:kbiao@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://stackoverflow.com/kbiao" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;kbiao" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i></a>
+        <a href="https://stackoverflow.com/kbiao" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;kbiao" rel="noopener me" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i></a>
       </span>
   </div>
-
-
 
         </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  </aside>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    </div>
 
     <div class="main-inner post posts-expand">
 
@@ -271,8 +254,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-        <p>工欲善其事必先利其器。提升效率很重要的一点就是要学会善用工具，工具可以帮助我们减少很多不必要的麻烦。对于新时代的我们，驾驭工具也成了一门必修课。选对工具，用好工具可以让我们在追求进步的路上，走的更扎实。本篇我想通过分享我自己的数字生活实践，整理和推荐一些效率工具。</p>
+    <div class="post-body" itemprop="articleBody"><p>工欲善其事必先利其器。提升效率很重要的一点就是要学会善用工具，工具可以帮助我们减少很多不必要的麻烦。对于新时代的我们，驾驭工具也成了一门必修课。选对工具，用好工具可以让我们在追求进步的路上，走的更扎实。本篇我想通过分享我自己的数字生活实践，整理和推荐一些效率工具。</p>
 <span id="more"></span>
 <h2 id="工具的意义"><a href="#工具的意义" class="headerlink" title="工具的意义"></a>工具的意义</h2><p>我始终认为重要的是思维方式，而不是工具的应用。工具的意义在于实践某种思维方式，或者提升某种行为的效率。工具与思维方式不匹配，那是产生不了价值的。就这个简单的道理，很多同学都会陷入不断搜罗工具的误区，甚至会迷信某种工具即可改变自己的多年的坏习惯。这种行为是本末倒置的，也是一种偷懒的表现。因为下载一个APP远比改掉自己一个坏习惯容易多了。这篇文章的思路就是以我日常工作生活中的思维习惯展开延伸到帮助我践行这些习惯所用到的软件工具。</p>
 <h2 id="专注才能提高效率"><a href="#专注才能提高效率" class="headerlink" title="专注才能提高效率"></a>专注才能提高效率</h2><p>我们都认同一个道理，成功来自于努力。比如前些日子盛传的王健林的日程表，我们会感叹成功人士是多么的努力。其实在感叹的背后也默默给自己找到了不成功的借口，我不成功是因为我不够努力。所以接下来的某段时间里就会被工作加班，学习熬夜这样表面上的‘努力’感动到自己。其实这一切原因只是自己平时的专注程度不足罢了。<br>努力的核心是专注。单纯的努力并不能换来提升，有用的是那些‘有效’的努力。这个‘有效’的努力不仅仅是时间上的累积，否则楼下看门的大爷早已走向人生巅峰。<br>而专注又很难做到。手机的消息太多，查单词的途中就被微博拐跑；已到晚期的拖延症，不到最后关头绝不动手的恶习；时间紧任务重，无法专注等等已经是我们的生活常态。<br>为了解决这些问题，我从三个方面去寻求解法：</p>
@@ -382,12 +364,10 @@
     
     
     
-      
-
 
     <footer class="post-footer">
           <div class="reward-container">
-  <div>Buy me a coffee</div>
+  <div>请我一杯咖啡吧！</div>
   <button>
     赞赏
   </button>
@@ -412,7 +392,7 @@
       <a href="https://blog.kbiao.me/My-life-with-some-awesome-apps/" title="我的数字生活——效率工具推荐">https://blog.kbiao.me/My-life-with-some-awesome-apps/</a>
   </li>
   <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
   </li>
 </ul>
 </div>
@@ -423,23 +403,25 @@
   <div class="social-list">
 
       <div class="social-item">
-        <a target="_blank" class="social-link" href="/uploads/qrcode_wx.jpg">
-          <span class="icon">
-            <i class="fab fa-weixin"></i>
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
           </span>
 
-          <span class="label">WeChat</span>
-        </a>
+          <img class="social-item-img" src="/uploads/qrcode_wx.jpg">
       </div>
 
       <div class="social-item">
-        <a target="_blank" class="social-link" href="/atom.xml">
-          <span class="icon">
-            <i class="fa fa-rss"></i>
-          </span>
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
 
-          <span class="label">RSS</span>
-        </a>
+            <span class="label">RSS</span>
+          </a>
       </div>
   </div>
 </div>
@@ -483,7 +465,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -496,15 +478,27 @@
   </footer>
 
   
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
   <script size="160" alpha="0.6" zIndex="-1" src="https://unpkg.com/ribbon.js@1.0.2/dist/ribbon.min.js"></script>
   <script src="https://unpkg.com/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
 
-
-  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://unpkg.com/mermaid@9.0.1/dist/mermaid.min.js","integrity":"sha256-CemUs9ITT7liCZpVMktcEw0BpAOZ1+mujlMB3UyuImU="}}</script>
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://unpkg.com/mermaid@9.4.3/dist/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
   <script src="/js/third-party/tags/mermaid.js"></script>
+
+
 
 
 
