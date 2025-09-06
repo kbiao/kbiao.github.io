@@ -2,6 +2,9 @@
   "name": "hexo-site",
   "version": "0.0.0",
   "private": true,
+  "scripts": {
+    "postinstall": "patch-package"
+  },
   "hexo": {
     "version": "7.3.0"
   },
@@ -20,5 +23,8 @@
     "hexo-renderer-stylus": "^3.0.0",
     "hexo-server": "^3.0.0",
     "hexo-theme-next": "^8.18.0"
+  },
+  "devDependencies": {
+    "patch-package": "^8.0.0"
   }
 }

@@ -1,0 +1,13 @@
+diff --git a/node_modules/hexo-leancloud-counter-security/index.js b/node_modules/hexo-leancloud-counter-security/index.js
+index 8b43311..4f71238 100644
+--- a/node_modules/hexo-leancloud-counter-security/index.js
++++ b/node_modules/hexo-leancloud-counter-security/index.js
+@@ -70,7 +70,7 @@ function postOperation(env, cnt, limit, newData, memoData) {
+     var readStream = fs.createReadStream(srcFile);
+     var writeStream = fs.createWriteStream(destFile);
+     readStream.pipe(writeStream);
+-    this.log.info('leancloud.memo successfully updated.');
++    env.log.info('leancloud.memo successfully updated.');
+ }
+ 
+ async function sync() {
