@@ -83,8 +83,25 @@ deploy:
 
 #baidu_analytics: 40650f57a96f0df2cfe5cee491a33cae
 
+# hexo-neat plugin for minification
+neat_enable: true
+neat_html:
+  enable: true
+  exclude:
+neat_css:
+  enable: true
+  exclude:
+    - '*.min.css'
+neat_js:
+  enable: true
+  mangle: true
+  output:
+  compress:
+  exclude:
+    - '*.min.js'
+
 leancloud_counter_security:
-  enable_sync: true
+  enable_sync: false
   app_id: 7OTu25XcWOiqFHBrfOA46xsT-gzGzoHsz # <your app id>
   app_key: bigXFjf3hf5a9TEukm9xO7uT #<your app key>
   # Required for apps from CN region
