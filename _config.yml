@@ -108,3 +108,10 @@ leancloud_counter_security:
   server_url: https://blog-api.kbiao.me # <your server url>
   username: kbiao # Will be asked while deploying if is left blank
   password: biaobiao # Recommmended to be left blank. Will be asked while deploying if is left blank
+
+# Search
+search:
+  path: search.xml
+  field: post
+  content: true
+  format: html
