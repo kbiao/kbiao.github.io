@@ -1,5 +1,5 @@
 ---
-title: Agent工程时代：LLM之上的新层级与工程师的新机遇
+title: 从LLM到Agents再到Claws——三层堆栈里的工程师机会
 date: 2026-02-22 12:00:00
 tags: [LLM, Agent, 工程, 职业发展]
 categories: 技术人生
