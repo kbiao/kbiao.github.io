@@ -64,35 +64,6 @@ public void setTag(String tag) {
       </tags>
   </entry>
   <entry>
-    <title>CORS实现跨域时授权问题（401错误）的解决</title>
-    <url>/CORS%E5%AE%9E%E7%8E%B0%E8%B7%A8%E5%9F%9F%E6%97%B6%E6%8E%88%E6%9D%83%E9%97%AE%E9%A2%98%EF%BC%88401%E9%94%99%E8%AF%AF%EF%BC%89%E7%9A%84%E8%A7%A3%E5%86%B3-e460ee12b01e/</url>
-    <content><![CDATA[<p><img data-src="https://image.kbiao.me/16-5-21/64423504.jpg"></p>
-<h2 id="问题的提出"><a href="#问题的提出" class="headerlink" title="问题的提出"></a>问题的提出</h2><p>如果我们访问的资源是不需要授权的，也就是在HTTP请求头中不包含<code>authentication</code>头那么以上做法就足够了。但是如果该资源是需要权限验证的，那么这个时候跨域请求的预检测**<code>option</code>请求，由于不会携带身份信息而被拒绝**。浏览器会报出401错误。<span id="more"></span><br>前几天的文章<a href="http://blog.kbiao.me/2016/05/14/Spring%E9%80%9A%E8%BF%87CORS%E5%8D%8F%E8%AE%AE%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">Spring通过CORS协议解决跨域问题</a> 中提到了如何解决跨域问题的基本思路,解决了跨域请求时浏览器403错误。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Response to preflight request doesn&#x27;t pass access control check:</span><br><span class="line">No &#x27;Access-Control-Allow-Origin&#x27; header is present on the requested resource.</span><br><span class="line">Origin &#x27;null&#x27; is therefore not allowed access. </span><br><span class="line">The response had HTTP status code 403</span><br><span class="line">401错误信息如下：</span><br></pre></td></tr></table></figure>
-<p>Failed to load resource:<br>the server responded with a status of 401 (Unauthorized)<br>XMLHttpRequest cannot load <a href="http://localhost/api/test">http://localhost/api/test</a>.<br>Response for preflight has invalid HTTP status code 401</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">既然知道了问题的原因，答案也就很容易得出：**对需要进行跨域请求的资源（api），当服务端检测到是`OPTONS`请求时候统统放行，给出HTTP.OK(200)的状态和必要的响应头，哪怕它是不带身份信息的**。</span><br><span class="line">这个问题既可以通过编写对应的后端代码实现，也可以通过设置服务器配置文件实现。也就是如何设置响应头和返回200状态码的办法了。</span><br><span class="line"></span><br><span class="line">## Spring+Shrio的解决方案</span><br><span class="line"></span><br><span class="line">shiro中可以在自己实现的身份验证filter中加入以下代码：</span><br><span class="line">```java</span><br><span class="line">  @Override</span><br><span class="line">    protected boolean preHandle(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception &#123;</span><br><span class="line">        HttpServletRequest request = (HttpServletRequest) servletRequest;</span><br><span class="line">        HttpServletResponse response = (HttpServletResponse) servletResponse;</span><br><span class="line">        if(request.getMethod().equals(RequestMethod.OPTIONS.name()))</span><br><span class="line">        &#123;</span><br><span class="line">            response.setStatus(HttpStatus.OK.value());</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        return super.preHandle(request, response);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>shiro中AccessControlFilter提供了访问控制的基础功能；比如是否允许访问&#x2F;当访问拒绝时如何处理等，也是我们一般自定义权限验证时候的一个父类，我们通过重写他的<code>onPreHandle</code>方法判断是否是<code>option</code>请求，如果是则设置相应状态，（响应头已经在<a href="http://blog.kbiao.me/2016/05/14/Spring%E9%80%9A%E8%BF%87CORS%E5%8D%8F%E8%AE%AE%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">之前文章</a>中通过filter配置过了）返回false表示该拦截器实例已经处理了，将直接返回即可。</p>
-<h2 id="Tomcat配置"><a href="#Tomcat配置" class="headerlink" title="Tomcat配置"></a>Tomcat配置</h2><p>需要修改tomcat的全局web.xml文件在<code>CATALINA_HOME/conf</code>下，加入以下配置。</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>CorsFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>org.apache.catalina.filters.CorsFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>CorsFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Nginx配置"><a href="#Nginx配置" class="headerlink" title="Nginx配置"></a>Nginx配置</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">add_header &#x27;Access-Control-Allow-Methods&#x27; &#x27;GET,OPTIONS,PUT,DELETE&#x27; always;</span><br><span class="line">add_header &#x27;Access-Control-Allow-Credentials&#x27; &#x27;true&#x27; always;</span><br><span class="line">add_header &#x27;Access-Control-Allow-Origin&#x27; &#x27;$http_origin&#x27; always;</span><br><span class="line">add_header &#x27;Access-Control-Allow-Headers&#x27; &#x27;Authorization,DNT,User-Agent,Keep-Alive,Content-Type,accept,origin,X-Requested-With&#x27; always;</span><br><span class="line"></span><br><span class="line">if ($request_method = OPTIONS ) &#123;</span><br><span class="line">    return 200;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Apache配置"><a href="#Apache配置" class="headerlink" title="Apache配置"></a>Apache配置</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Header always set Access-Control-Allow-Origin &quot;http://waffle&quot;</span><br><span class="line">Header always set Access-Control-Allow-Methods &quot;POST, GET, OPTIONS&quot;</span><br><span class="line">Header always set Access-Control-Allow-Credentials &quot;true&quot;</span><br><span class="line">Header always set Access-Control-Allow-Headers &quot;Authorization,DNT,User-Agent,Keep-Alive,Content-Type,accept,origin,X-Requested-With&quot;</span><br><span class="line"></span><br><span class="line">RewriteCond %&#123;REQUEST_METHOD&#125; OPTIONS</span><br><span class="line">RewriteRule ^(.*)$ $1 [R=200,L]</span><br></pre></td></tr></table></figure>
-<h2 id="js请求示例"><a href="#js请求示例" class="headerlink" title="js请求示例"></a>js请求示例</h2><p>请求时候需要加上<code>Authorization </code>和<code>Content-Type</code>头。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$http(&#123;</span><br><span class="line">  method: &#x27;POST&#x27;,</span><br><span class="line">  url: scope.webdav.url,</span><br><span class="line">  withCredentials: true,</span><br><span class="line">  headers: &#123;</span><br><span class="line">    Authorization: &#x27;Basic &#x27; + btoa(user + &#x27;:&#x27; + password),</span><br><span class="line">    &#x27;Content-Type&#x27;: &#x27;application/vnd.google-earth.kml+xml; charset=utf-8&#x27;</span><br><span class="line">  &#125;,</span><br><span class="line">  data: getKml()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>参考文章：<a href="http://www.jujens.eu/posts/en/2015/Jun/27/webdav-options/">http://www.jujens.eu/posts/en/2015/Jun/27/webdav-options/</a></p>
-]]></content>
-      <categories>
-        <category>Coding-Notes</category>
-      </categories>
-      <tags>
-        <tag>CORS</tag>
-        <tag>Spring</tag>
-        <tag>java web</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Docker学习笔记———Get Start</title>
     <url>//Docker-Learning-Notes-Get-Start/</url>
     <content><![CDATA[<p><img data-src="https://image.kbiao.me/2017-03-12-14892908756333.jpg"></p>
@@ -405,10 +376,68 @@ public void setTag(String tag) {
         <category>Coding-Notes</category>
       </categories>
       <tags>
-        <tag>CORS</tag>
         <tag>java</tag>
         <tag>spring</tag>
+        <tag>CORS</tag>
         <tag>跨域</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CORS实现跨域时授权问题（401错误）的解决</title>
+    <url>/CORS%E5%AE%9E%E7%8E%B0%E8%B7%A8%E5%9F%9F%E6%97%B6%E6%8E%88%E6%9D%83%E9%97%AE%E9%A2%98%EF%BC%88401%E9%94%99%E8%AF%AF%EF%BC%89%E7%9A%84%E8%A7%A3%E5%86%B3-e460ee12b01e/</url>
+    <content><![CDATA[<p><img data-src="https://image.kbiao.me/16-5-21/64423504.jpg"></p>
+<h2 id="问题的提出"><a href="#问题的提出" class="headerlink" title="问题的提出"></a>问题的提出</h2><p>如果我们访问的资源是不需要授权的，也就是在HTTP请求头中不包含<code>authentication</code>头那么以上做法就足够了。但是如果该资源是需要权限验证的，那么这个时候跨域请求的预检测**<code>option</code>请求，由于不会携带身份信息而被拒绝**。浏览器会报出401错误。<span id="more"></span><br>前几天的文章<a href="http://blog.kbiao.me/2016/05/14/Spring%E9%80%9A%E8%BF%87CORS%E5%8D%8F%E8%AE%AE%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">Spring通过CORS协议解决跨域问题</a> 中提到了如何解决跨域问题的基本思路,解决了跨域请求时浏览器403错误。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Response to preflight request doesn&#x27;t pass access control check:</span><br><span class="line">No &#x27;Access-Control-Allow-Origin&#x27; header is present on the requested resource.</span><br><span class="line">Origin &#x27;null&#x27; is therefore not allowed access. </span><br><span class="line">The response had HTTP status code 403</span><br><span class="line">401错误信息如下：</span><br></pre></td></tr></table></figure>
+<p>Failed to load resource:<br>the server responded with a status of 401 (Unauthorized)<br>XMLHttpRequest cannot load <a href="http://localhost/api/test">http://localhost/api/test</a>.<br>Response for preflight has invalid HTTP status code 401</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">既然知道了问题的原因，答案也就很容易得出：**对需要进行跨域请求的资源（api），当服务端检测到是`OPTONS`请求时候统统放行，给出HTTP.OK(200)的状态和必要的响应头，哪怕它是不带身份信息的**。</span><br><span class="line">这个问题既可以通过编写对应的后端代码实现，也可以通过设置服务器配置文件实现。也就是如何设置响应头和返回200状态码的办法了。</span><br><span class="line"></span><br><span class="line">## Spring+Shrio的解决方案</span><br><span class="line"></span><br><span class="line">shiro中可以在自己实现的身份验证filter中加入以下代码：</span><br><span class="line">```java</span><br><span class="line">  @Override</span><br><span class="line">    protected boolean preHandle(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception &#123;</span><br><span class="line">        HttpServletRequest request = (HttpServletRequest) servletRequest;</span><br><span class="line">        HttpServletResponse response = (HttpServletResponse) servletResponse;</span><br><span class="line">        if(request.getMethod().equals(RequestMethod.OPTIONS.name()))</span><br><span class="line">        &#123;</span><br><span class="line">            response.setStatus(HttpStatus.OK.value());</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        return super.preHandle(request, response);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>shiro中AccessControlFilter提供了访问控制的基础功能；比如是否允许访问&#x2F;当访问拒绝时如何处理等，也是我们一般自定义权限验证时候的一个父类，我们通过重写他的<code>onPreHandle</code>方法判断是否是<code>option</code>请求，如果是则设置相应状态，（响应头已经在<a href="http://blog.kbiao.me/2016/05/14/Spring%E9%80%9A%E8%BF%87CORS%E5%8D%8F%E8%AE%AE%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">之前文章</a>中通过filter配置过了）返回false表示该拦截器实例已经处理了，将直接返回即可。</p>
+<h2 id="Tomcat配置"><a href="#Tomcat配置" class="headerlink" title="Tomcat配置"></a>Tomcat配置</h2><p>需要修改tomcat的全局web.xml文件在<code>CATALINA_HOME/conf</code>下，加入以下配置。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>CorsFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>org.apache.catalina.filters.CorsFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>CorsFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Nginx配置"><a href="#Nginx配置" class="headerlink" title="Nginx配置"></a>Nginx配置</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">add_header &#x27;Access-Control-Allow-Methods&#x27; &#x27;GET,OPTIONS,PUT,DELETE&#x27; always;</span><br><span class="line">add_header &#x27;Access-Control-Allow-Credentials&#x27; &#x27;true&#x27; always;</span><br><span class="line">add_header &#x27;Access-Control-Allow-Origin&#x27; &#x27;$http_origin&#x27; always;</span><br><span class="line">add_header &#x27;Access-Control-Allow-Headers&#x27; &#x27;Authorization,DNT,User-Agent,Keep-Alive,Content-Type,accept,origin,X-Requested-With&#x27; always;</span><br><span class="line"></span><br><span class="line">if ($request_method = OPTIONS ) &#123;</span><br><span class="line">    return 200;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Apache配置"><a href="#Apache配置" class="headerlink" title="Apache配置"></a>Apache配置</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Header always set Access-Control-Allow-Origin &quot;http://waffle&quot;</span><br><span class="line">Header always set Access-Control-Allow-Methods &quot;POST, GET, OPTIONS&quot;</span><br><span class="line">Header always set Access-Control-Allow-Credentials &quot;true&quot;</span><br><span class="line">Header always set Access-Control-Allow-Headers &quot;Authorization,DNT,User-Agent,Keep-Alive,Content-Type,accept,origin,X-Requested-With&quot;</span><br><span class="line"></span><br><span class="line">RewriteCond %&#123;REQUEST_METHOD&#125; OPTIONS</span><br><span class="line">RewriteRule ^(.*)$ $1 [R=200,L]</span><br></pre></td></tr></table></figure>
+<h2 id="js请求示例"><a href="#js请求示例" class="headerlink" title="js请求示例"></a>js请求示例</h2><p>请求时候需要加上<code>Authorization </code>和<code>Content-Type</code>头。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$http(&#123;</span><br><span class="line">  method: &#x27;POST&#x27;,</span><br><span class="line">  url: scope.webdav.url,</span><br><span class="line">  withCredentials: true,</span><br><span class="line">  headers: &#123;</span><br><span class="line">    Authorization: &#x27;Basic &#x27; + btoa(user + &#x27;:&#x27; + password),</span><br><span class="line">    &#x27;Content-Type&#x27;: &#x27;application/vnd.google-earth.kml+xml; charset=utf-8&#x27;</span><br><span class="line">  &#125;,</span><br><span class="line">  data: getKml()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>参考文章：<a href="http://www.jujens.eu/posts/en/2015/Jun/27/webdav-options/">http://www.jujens.eu/posts/en/2015/Jun/27/webdav-options/</a></p>
+]]></content>
+      <categories>
+        <category>Coding-Notes</category>
+      </categories>
+      <tags>
+        <tag>CORS</tag>
+        <tag>Spring</tag>
+        <tag>java web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>nodeJS踩坑-记本地地址127.0.0.1与0.0.0.0的区别</title>
+    <url>/nodeJS%E8%B8%A9%E5%9D%91-%E8%AE%B0%E6%9C%AC%E5%9C%B0%E5%9C%B0%E5%9D%80127-0-0-1%E4%B8%8E0-0-0-0%E7%9A%84%E5%8C%BA%E5%88%AB-58e1062e389a/</url>
+    <content><![CDATA[<p><img data-src="https://image.kbiao.me/16-5-11/42548547.jpg"><br><em>注：本文和Node.js本身关系不大，只是这个这个知识点由学习Node时候引出，主要是关于网络的一个小知识点</em></p>
+<span id="more"></span>
+<h2 id="问题的提出"><a href="#问题的提出" class="headerlink" title="问题的提出"></a>问题的提出</h2><p>nodejs中创建web服务时，作为小白的我自然是跟着官网文档走起</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line">http.<span class="title function_">createServer</span>(<span class="keyword">function</span> (<span class="params">req, res</span>) &#123;</span><br><span class="line">  res.<span class="title function_">writeHead</span>(<span class="number">200</span>, &#123;<span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;text/plain&#x27;</span>&#125;);</span><br><span class="line">  res.<span class="title function_">end</span>(<span class="string">&#x27;Hello World\n&#x27;</span>);</span><br><span class="line">&#125;).<span class="title function_">listen</span>(<span class="number">1337</span>, <span class="string">&#x27;127.0.0.1&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Server running at http://127.0.0.1:1337/&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>然后很自然本地就可以用<code>localhost</code>或者<code>127.0.0.1</code>访问了。那我想用本机ip访问呢？那就再<code>listen(192.168.1.10)</code> <code>listen(localhost)</code>啥的吧？结果却不行。我再挂到服务器上想要通过ip访问？怎么也访问不成功。<br>开始觉得是不是端口问题，设置了半天云主机的防火墙啥的还是没有用。果然太年轻，一开始就把问题方向搞错了。</p>
+<h2 id="问题的基本解决"><a href="#问题的基本解决" class="headerlink" title="问题的基本解决"></a>问题的基本解决</h2><p>看看官网的文档有这么一句：</p>
+<blockquote>
+<p>server.listen(port, [hostname], [backlog], [callback])#<br>Begin accepting connections on the specified port and hostname. If the hostname is omitted, the server will accept connections directed to any IPv4 address (INADDR_ANY).</p>
+</blockquote>
+<p>意思就是说如果不填写主机名<code>hostname</code>字段，默认是监听<code>INADDR_ANY</code>，也就是任意的IPv4地址。<br>所以解决这个问题就很简单了直接<code>listen(1337)</code>或者<code>listen(1337,&#39;0.0.0.0&#39;)</code>就可以了。<br>这个0.0.0.0也就是所谓的<code>INADDR_ANY</code><br>问题是解决了可是这个知识点还要进一步理清。</p>
+<h2 id="127-0-0-1与0-0-0-0"><a href="#127-0-0-1与0-0-0-0" class="headerlink" title="127.0.0.1与0.0.0.0"></a>127.0.0.1与0.0.0.0</h2><p>127.0.0.1是一个回送地址，指本地机，一般用来测试使用。大家常用来ping 127.0.0.1来看本地ip&#x2F;tcp正不正常，如能ping通即可正常使用。对于大多数习惯用localhost的来说，实质上就是指向127.0.0.1这个本地IP地址。在操作系统中有个配置文件将localhost与127.0.0.1绑定在了一起。可以理解为本地主机的意思。<br>这个知识点应该是没有什么问题的。其实不只有127.0.0.1，<code>127.x.x.x</code>都是本机回送地址（Loopback Address）,只不过在系统配置中把localhost和<code>127.0.0.1</code>做了绑定，我们习惯用它而已。那么这个<code>INADDR_ANY</code>又是什么呢？</p>
+<h3 id="INADDR-ANY"><a href="#INADDR-ANY" class="headerlink" title="INADDR_ANY"></a>INADDR_ANY</h3><p>这个也叫通配地址，也就是说它不单单指本机。<br>0.0.0.0&#x2F;8可以表示本网络中的所有主机<br>0.0.0.0&#x2F;32可以用作本机的源地址<br>0.0.0.0&#x2F;8也可表示本网络上的某个特定主机<br>综合起来可以说0.0.0.0表示整个网络<br>忽然想起来上计算机网络课程的时候有个默认路由的设置：</p>
+<blockquote>
+<p>在路由器配置中可用0.0.0.0&#x2F;0表示默认路由，作用是帮助路由器发送路由表中无法查询的包。如果设置了全零网络的路由，路由表中无法查询的包都将送到全零网络的路由中去。</p>
+</blockquote>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在我们刚刚nodejs配置web服务的语境下。0.0.0.0可以表示所有可以访问的地址，也就是本机的所有IPv4地址。</p>
+<p>基础知识还是要扎实掌握才好，不然不会为了这么一点东西而大费周章。也让我想起了在腾讯面试中被问起的ICP四次回收过程，改日写博客详细记录。希望通过博客的点点滴滴助力我更扎实的成长。</p>
+]]></content>
+      <categories>
+        <category>Coding-Notes</category>
+      </categories>
+      <tags>
+        <tag>node.js</tag>
+        <tag>计算机网络</tag>
       </tags>
   </entry>
   <entry>
@@ -451,35 +480,6 @@ public void setTag(String tag) {
 
 <p>More info: <a href="https://hexo.io/docs/deployment.html">Deployment</a></p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>nodeJS踩坑-记本地地址127.0.0.1与0.0.0.0的区别</title>
-    <url>/nodeJS%E8%B8%A9%E5%9D%91-%E8%AE%B0%E6%9C%AC%E5%9C%B0%E5%9C%B0%E5%9D%80127-0-0-1%E4%B8%8E0-0-0-0%E7%9A%84%E5%8C%BA%E5%88%AB-58e1062e389a/</url>
-    <content><![CDATA[<p><img data-src="https://image.kbiao.me/16-5-11/42548547.jpg"><br><em>注：本文和Node.js本身关系不大，只是这个这个知识点由学习Node时候引出，主要是关于网络的一个小知识点</em></p>
-<span id="more"></span>
-<h2 id="问题的提出"><a href="#问题的提出" class="headerlink" title="问题的提出"></a>问题的提出</h2><p>nodejs中创建web服务时，作为小白的我自然是跟着官网文档走起</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line">http.<span class="title function_">createServer</span>(<span class="keyword">function</span> (<span class="params">req, res</span>) &#123;</span><br><span class="line">  res.<span class="title function_">writeHead</span>(<span class="number">200</span>, &#123;<span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;text/plain&#x27;</span>&#125;);</span><br><span class="line">  res.<span class="title function_">end</span>(<span class="string">&#x27;Hello World\n&#x27;</span>);</span><br><span class="line">&#125;).<span class="title function_">listen</span>(<span class="number">1337</span>, <span class="string">&#x27;127.0.0.1&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Server running at http://127.0.0.1:1337/&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<p>然后很自然本地就可以用<code>localhost</code>或者<code>127.0.0.1</code>访问了。那我想用本机ip访问呢？那就再<code>listen(192.168.1.10)</code> <code>listen(localhost)</code>啥的吧？结果却不行。我再挂到服务器上想要通过ip访问？怎么也访问不成功。<br>开始觉得是不是端口问题，设置了半天云主机的防火墙啥的还是没有用。果然太年轻，一开始就把问题方向搞错了。</p>
-<h2 id="问题的基本解决"><a href="#问题的基本解决" class="headerlink" title="问题的基本解决"></a>问题的基本解决</h2><p>看看官网的文档有这么一句：</p>
-<blockquote>
-<p>server.listen(port, [hostname], [backlog], [callback])#<br>Begin accepting connections on the specified port and hostname. If the hostname is omitted, the server will accept connections directed to any IPv4 address (INADDR_ANY).</p>
-</blockquote>
-<p>意思就是说如果不填写主机名<code>hostname</code>字段，默认是监听<code>INADDR_ANY</code>，也就是任意的IPv4地址。<br>所以解决这个问题就很简单了直接<code>listen(1337)</code>或者<code>listen(1337,&#39;0.0.0.0&#39;)</code>就可以了。<br>这个0.0.0.0也就是所谓的<code>INADDR_ANY</code><br>问题是解决了可是这个知识点还要进一步理清。</p>
-<h2 id="127-0-0-1与0-0-0-0"><a href="#127-0-0-1与0-0-0-0" class="headerlink" title="127.0.0.1与0.0.0.0"></a>127.0.0.1与0.0.0.0</h2><p>127.0.0.1是一个回送地址，指本地机，一般用来测试使用。大家常用来ping 127.0.0.1来看本地ip&#x2F;tcp正不正常，如能ping通即可正常使用。对于大多数习惯用localhost的来说，实质上就是指向127.0.0.1这个本地IP地址。在操作系统中有个配置文件将localhost与127.0.0.1绑定在了一起。可以理解为本地主机的意思。<br>这个知识点应该是没有什么问题的。其实不只有127.0.0.1，<code>127.x.x.x</code>都是本机回送地址（Loopback Address）,只不过在系统配置中把localhost和<code>127.0.0.1</code>做了绑定，我们习惯用它而已。那么这个<code>INADDR_ANY</code>又是什么呢？</p>
-<h3 id="INADDR-ANY"><a href="#INADDR-ANY" class="headerlink" title="INADDR_ANY"></a>INADDR_ANY</h3><p>这个也叫通配地址，也就是说它不单单指本机。<br>0.0.0.0&#x2F;8可以表示本网络中的所有主机<br>0.0.0.0&#x2F;32可以用作本机的源地址<br>0.0.0.0&#x2F;8也可表示本网络上的某个特定主机<br>综合起来可以说0.0.0.0表示整个网络<br>忽然想起来上计算机网络课程的时候有个默认路由的设置：</p>
-<blockquote>
-<p>在路由器配置中可用0.0.0.0&#x2F;0表示默认路由，作用是帮助路由器发送路由表中无法查询的包。如果设置了全零网络的路由，路由表中无法查询的包都将送到全零网络的路由中去。</p>
-</blockquote>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在我们刚刚nodejs配置web服务的语境下。0.0.0.0可以表示所有可以访问的地址，也就是本机的所有IPv4地址。</p>
-<p>基础知识还是要扎实掌握才好，不然不会为了这么一点东西而大费周章。也让我想起了在腾讯面试中被问起的ICP四次回收过程，改日写博客详细记录。希望通过博客的点点滴滴助力我更扎实的成长。</p>
-]]></content>
-      <categories>
-        <category>Coding-Notes</category>
-      </categories>
-      <tags>
-        <tag>node.js</tag>
-        <tag>计算机网络</tag>
-      </tags>
   </entry>
   <entry>
     <title>【译】20个 Laravel Eloquent 小技巧（上）</title>
@@ -975,6 +975,39 @@ public void setTag(String tag) {
       </tags>
   </entry>
   <entry>
+    <title>努力奔跑 诸事顺利</title>
+    <url>//lucky-2019/</url>
+    <content><![CDATA[<p>每年的最后一天配合着周末，大家都生出了一些仪式感。媒体们回顾着年度大事，名人们开始总结年度汉字，互联网应用纷纷发布了年度数据替我们回顾过去的365天把时间都分配给了谁。总体看起来过去的一年大家都不是很顺利，但是也都对未来充满了希望。</p>
+<span id="more"></span>
+
+<p>年初的一只蛙让从象牙塔过渡到职场的我们90后找到了一个生活关键词——佛系；年中的世界杯德国没有出线大家都一起感觉到今年不是很顺于是慌得一批；年末开始人人祈求锦鲤给跌宕起伏的18年加一点上扬的音符。这些流行语关键字勾勒出了一年的起伏节奏，是国家的节奏，是社会的节奏，更是我们每个人的节奏。</p>
+<p>大概是十年一个轮回，上次能明显的感受到挫折中又饱含信念与希望的大概是2008年。十年前的我，还没有那么多的生活体验让我发现这一年的不同。如今站在2018年的尾巴上回望，那些曾经感觉遥远的经济，政治，文化事件前所未有的感觉到和自己开始产生了关联，我不再是个孩童，听别人转述故事或者自己好奇的观察这个世界，而是逐步迈出自己的脚步参与到社会的洪流之中。</p>
+<h3 id="生命需要一种仪式感"><a href="#生命需要一种仪式感" class="headerlink" title="生命需要一种仪式感"></a>生命需要一种仪式感</h3><p>生命需要一种仪式感，给约定加上些许情怀与重量。每年给自己写一份总结便是我大学以来一直的一种仪式感。以往每年我都会有年初的计划作为参照，然后发现自己的计划几乎从来没有赶得上变化。到了17年末的自己大概已经放弃了这个仪式感，让在18年末回望的时候就无据可依。这时候才有体会，计划总结不是为了刻板执行，而真的就是一种仪式感，记录自己走过的路，让接下来的脚步更加扎实有方向。总结计划不是一个 todo list，更多的是锚定一个方向，也给自己一些时间看看走过的路。失去了这个锚点，就让我感觉仿佛研究生的这一年没有往年那么精彩。</p>
+<h3 id="在家人的眼里我已经是个大人了"><a href="#在家人的眼里我已经是个大人了" class="headerlink" title="在家人的眼里我已经是个大人了"></a>在家人的眼里我已经是个大人了</h3><p>在家人的眼里我已经是个大人了，毕竟25岁的我已经长的和25年前的爸爸几乎一样。那时候的爸爸已经开始打拼自己的事业，虽说我还是读研，有着学生的身份，但是也已经到了慢慢需要转变自己角色的时候。家里的事情，爸妈开始和我商量；我自己的方向，父母已经无法导航。</p>
+<p><img data-src="https://image.kbiao.me/2019-01-01-E57D196F-F50F-4479-9F21-B98A88003726.png" alt="E57D196F-F50F-4479-9F21-B98A88003726"></p>
+<p>带着爷爷等家人一起逛北京让我真正开始感觉自己长大了。借着女朋友工作了力量，我在北京也算是有了一个自己的小窝。虽然只有十几平米，但足够给爸妈，姑姑和爷爷一起准备一顿中秋的晚饭，这是个值得铭记时刻。陪着爷爷看故宫的时候，爷爷开心的和大家说，我们也算是京城有人了。这一句听起来半开玩笑的话给祖孙三代一起在他乡度过的这个中秋写下了一个注脚。一生面朝黄土背朝天的爷爷，把爸爸送到了城里，爸爸支持我能开始在首都学习生活。一代代人的接力，我们都在奔跑，我们都是追梦人。如今我是他们的骄傲，接力棒交到了我的手里我应该要有自己的担当，守护家人的笑容。</p>
+<p><img data-src="https://image.kbiao.me/2019-01-01-UNADJUSTEDNONRAW_thumb_1160.jpg" alt="UNADJUSTEDNONRAW_thumb_1160"></p>
+<h3 id="身心健康都由自己掌控"><a href="#身心健康都由自己掌控" class="headerlink" title="身心健康都由自己掌控"></a>身心健康都由自己掌控</h3><p>对家庭，责任的认识的增强是成长一部分，对个人身体健康的关注又是成长的另一面。段子都在说90后的脱发和枸杞保温杯，对身体健康的关注确实是今年的有一个关键词。年初就来了一场大病，大过年让家人陪着医院折腾了几天，一年里断断续续几次感冒高烧，最严重一次医院打了三天吊瓶。虽说自己本来也没有强壮的体格，但是过去一年里身体的问题表现是越来越明显了，立志要坚持运动也总是做不到。主要的问题就是颈椎，腰椎这些职业病，以及长期不锻炼带来的体质弱，气候变化就容易感冒发烧。解决方案就是，椅子加靠垫，显示器尽量抬高，工作之余尽量走动，少喝咖啡多喝茶水。当然更重要的还是要养成运动的习惯，为自己，为家人，2019要保重身体。</p>
+<p>游戏成为生活的一部分，也是我的2018不太一样的地方。虽然作为一个90后也是在电子游戏的陪伴下成长的，以前也玩过不少游戏，但是不是像过去的一年里一样他成为生活的重要组成部分。一方面我的时间经济都有了自己支配的自由，我可以更容易去接触更多游戏，另一方面游戏也迎来一个好年，无论是电竞逐步认可，几大赛事中国队夺魁带来的社会影响，以及游戏行业的努力，给游戏正名。游戏成为了文化生活的一部分，而不再是那个电子海洛因，毁掉一代年轻人。毕竟一代代年轻人被收音机，电视机，摇滚街舞都一遍遍毁灭过了，也到了浴火重生的时候了。一月份入手 Switch，随后收了二手 PS4，年初有了马里奥和塞尔达让我看到了不一样的游戏世界，不是只有中国式网游的氪金养成和打打杀杀；随后的底特律，蜘蛛侠以及战神都在以比电影更有代入感的方式讲了一个好故事；马里奥赛车和星露谷物语消磨了很多时光，也带来了很多快乐。有时候甚至感觉，玩游戏的时候时间才是真正属于自己的。<br> <img data-src="https://image.kbiao.me/2019-01-01-UNADJUSTEDNONRAW_thumb_9da.jpg" alt="UNADJUSTEDNONRAW_thumb_9da"></p>
+<h3 id="个人成长的焦虑在过去的一年只增不减"><a href="#个人成长的焦虑在过去的一年只增不减" class="headerlink" title="个人成长的焦虑在过去的一年只增不减"></a>个人成长的焦虑在过去的一年只增不减</h3><p>买了十几门网课，几十本电子书几乎都没有看完。还不如本科时候，只在慕课网就有上千小时的学习记录带来的收获感强。不过也说明了自己在不断地成长，了解的越多越感觉自己的无知，这也才是我不断追求的兴奋点。</p>
+<p>一直以来我都有个习惯，隔一段时间就要去大书店，大图书馆逛逛，很多时候不是为了看书，因为我已经很习惯电子阅读了，而为了感觉一下图书馆的氛围，看那么多的书我没有看过，那么多事情我还不知道，那么多东西和我相关我却没有看见，就是找这种觉得自己无知的感觉，是不断刺激我探索来源。</p>
+<p>现在获取知识信息的成本越来越低了，一门课，一本书几块钱到几十块钱，日常外出吃饭的花销都比这个大，所以很容易就屯了很多知识。这个习惯有好有坏。适当的焦虑提醒自己无知，别人的总结梳理帮自己快速打开新世界的大门，在这个时代，快速高效地甄别提取信息是个非常重要的能力，个人的成长要依赖越来越多的周边知识，需要不断扩充知识面来抓住可能的机遇。但是过分的焦虑就会适得其反，甚至让人感觉放弃治疗。一般情况是比较讨厌某些公众号推广时候管用的几十个 G 的资料分享，基本上一辈子葬身网盘永无出头之日，更会让自己习惯了用硬盘学习而不是用脑使得心态上更加浮躁。<br>19年里自己要保持对知识的兴奋和追求，增加这种兴趣落地和实践的机会，让知识逐步化身自己的能力。</p>
+<h3 id="工作项目还算有些成果"><a href="#工作项目还算有些成果" class="headerlink" title="工作项目还算有些成果"></a>工作项目还算有些成果</h3><p>实际工作方面，18年参与了两个项目，上线了一个自己的产品，去斯里兰卡参加一次学术会议。  </p>
+<p>在北航的平台上确实让我有了不一样的机会。中航工业的消息中间件项目，让我感受到实际的业务环境和自己平时通过博客资料了解的技术是多么的不一样。当我知道是一个消息中间件时候，我本能的可以想到有很多成熟的产品，为什么要自己做。在一次次需求的探讨设计中，我慢慢感觉到，技术只有在实际场景中落地才有意义。无论是学校的教的知识还是自己看到的新技术，大多是给了一个思考问题的方向，而真正的落地需要自己亲自实践体会。</p>
+<p>后半年主要参与的实验室与腾讯的合作项目，让我看到了大公司，一个产品级团队的分工与合作。不过体会更深的可能是 “PHP 是世界上最好的语言”吧。一直以来我都是 JAVA 技术栈的养成，而参与这边的项目时候配合团队和公司业务习惯使用 PHP。这里不会展开谈语言的优劣，让我体会深刻的主要是能力的迁移。我用 java 做系统时候需要考虑的问题，在用 php 也同样会遇到，离开平台，语言提供的便利以后我是否还能清楚的明白其中的细节，以及在深入的使用之后才能客观做出评价煤种语言的优劣好坏不是一句话的事情。新的语言也让我看到了新的范式，看到解决同一个问题时候的不同思路，这样一个项目经历对我来说成长就不只是技术方面的了。<br><img data-src="https://image.kbiao.me/2019-01-01-F42DD77F-DDBE-495B-9D37-079D746AEBED.png" alt="F42DD77F-DDBE-495B-9D37-079D746AEBED"></p>
+<p>另外自己大二就一直想着有自己的产品，今年终于在女朋友的大力支持下完成上线，得益于导师的支持推广，半年时间获得五千多用户，也算是一个不小的成绩。通过这个猫途校园小项目，我也有机会自己亲自参与一个产品的建设过程，而且是自己的亲儿子。技术并不是产品的全部，而且需求很多时候是无法预设的。做出来比想得好重要的多。产品虽小，半年时间也经历了二三十个版本的迭代，很多细节功能是无法提前预设的，很多技术难点也不是实现之前可以想得到的。这样的一段经历，让我以后作为手艺人吃饭的日子里能更有大局观。当然有了儿子还得想办法养大，作为一个工具产品，怎么能让流量养活自己是我接下来需要认真思考的问题了，好的产品总不能总靠赞助活着。<br><img data-src="https://image.kbiao.me/2019-01-01-E6C50F4F-C965-486B-9ACD-1C6252CD922A.png" alt="E6C50F4F-C965-486B-9ACD-1C6252CD922A"></p>
+<p>虽说本科时候就跟着水过论文，但是正儿八经的学术会议今年是第一次参加。不能说这个会议有多么高级，但这样的一次经历也是弥足珍贵，感受学术氛围，参与论文写作，也是读研究生的意义所在。文章来源于实验室长期维护的产品北航在线编程平台，我也接过了学长们传递的接力棒，负责接下来的开发运维工作。也希望能继续深耕这个项目，挖掘自己的价值，产出属于自己的学术成果。<br><img data-src="https://image.kbiao.me/2019-01-01-510F00A2-ACA1-47C0-A766-D8E2ED03A5D8.png" alt="510F00A2-ACA1-47C0-A766-D8E2ED03A5D8"></p>
+<h3 id="生活的本来面貌"><a href="#生活的本来面貌" class="headerlink" title="生活的本来面貌"></a>生活的本来面貌</h3><p>拉拉杂杂的总结下来，过去的一年自己还是做了不少事情的。只是长期没有表达输出，便开始越来越惧怕写作。没有写作输出，表达能力愈发退化，越无法说清楚事情，就干脆不再总结思考，这么浑浑噩噩过了一年。以上几千字可能也有不少语句不通，表达不清的地方，很多话想说想总结，到头来却只是记叙，记录一下18年发生在自己身上的一些重要事情，记录一下此时此刻的感觉。更重要的是通过这样的一个仪式感给19年开个好头，对自己表达输出的训练应该要成为19年的一个小目标。</p>
+<p>什么才是生活的本来面貌？家庭、健康、工作一件件的都开始在我的总结规划上体现，不再是空谈梦想与远方，这可能就是成长。以为可以消除一切压力与焦虑，摆脱所有传统习俗与社会舆论，随心所欲，自由自在；事实上逐步认识到到自由与责任永远相伴相生。没有什么容易不容易，丰富的经历，起起落落的剧情就是生活本来的面貌，在此基础上，不堕信心，不失希望，不断从中汲取前行的力量。<br>愿19年诸事顺利！</p>
+]]></content>
+      <categories>
+        <category>大学生活</category>
+      </categories>
+      <tags>
+        <tag>碎碎念</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>关门的报刊亭和扎堆的核酸亭</title>
     <url>/%E5%85%B3%E9%97%A8%E7%9A%84%E6%8A%A5%E5%88%8A%E4%BA%AD%E5%92%8C%E6%89%8E%E5%A0%86%E7%9A%84%E6%A0%B8%E9%85%B8%E4%BA%AD-41d8d32f88d8/</url>
     <content><![CDATA[<p><img data-src="https://image.kbiao.me/blog/img/IMG_2313.JPG?imageslim"><br>南方周末报纸出到了两千期。我从初中开始就有断续订阅或者去报刊亭买着追更，虽然近来大多都是看电子刊或者 APP 的文章了，但想着2000期还是挺有纪念意义的，值得收藏一份纸质版。</p>
@@ -1014,36 +1047,55 @@ public void setTag(String tag) {
       </tags>
   </entry>
   <entry>
-    <title>努力奔跑 诸事顺利</title>
-    <url>//lucky-2019/</url>
-    <content><![CDATA[<p>每年的最后一天配合着周末，大家都生出了一些仪式感。媒体们回顾着年度大事，名人们开始总结年度汉字，互联网应用纷纷发布了年度数据替我们回顾过去的365天把时间都分配给了谁。总体看起来过去的一年大家都不是很顺利，但是也都对未来充满了希望。</p>
+    <title>四月二十三日风雨大作</title>
+    <url>//2024/05/23/birth-in-storm/</url>
+    <content><![CDATA[<p><img data-src="https://image.kbiao.me/blog/img202509062154449.jpeg" alt="新生儿第一张照片"></p>
+<p>你出生一个月了。</p>
+<p>一个月前4月22号，是周一，她开始休产假的第一天。前一天我们像往常一样度过了一个普通的二人世界周末，一起逛街、吃饭，还囤了些零食，计划利用剩下的几周时间做好迎接家庭新成员的准备。</p>
 <span id="more"></span>
 
-<p>年初的一只蛙让从象牙塔过渡到职场的我们90后找到了一个生活关键词——佛系；年中的世界杯德国没有出线大家都一起感觉到今年不是很顺于是慌得一批；年末开始人人祈求锦鲤给跌宕起伏的18年加一点上扬的音符。这些流行语关键字勾勒出了一年的起伏节奏，是国家的节奏，是社会的节奏，更是我们每个人的节奏。</p>
-<p>大概是十年一个轮回，上次能明显的感受到挫折中又饱含信念与希望的大概是2008年。十年前的我，还没有那么多的生活体验让我发现这一年的不同。如今站在2018年的尾巴上回望，那些曾经感觉遥远的经济，政治，文化事件前所未有的感觉到和自己开始产生了关联，我不再是个孩童，听别人转述故事或者自己好奇的观察这个世界，而是逐步迈出自己的脚步参与到社会的洪流之中。</p>
-<h3 id="生命需要一种仪式感"><a href="#生命需要一种仪式感" class="headerlink" title="生命需要一种仪式感"></a>生命需要一种仪式感</h3><p>生命需要一种仪式感，给约定加上些许情怀与重量。每年给自己写一份总结便是我大学以来一直的一种仪式感。以往每年我都会有年初的计划作为参照，然后发现自己的计划几乎从来没有赶得上变化。到了17年末的自己大概已经放弃了这个仪式感，让在18年末回望的时候就无据可依。这时候才有体会，计划总结不是为了刻板执行，而真的就是一种仪式感，记录自己走过的路，让接下来的脚步更加扎实有方向。总结计划不是一个 todo list，更多的是锚定一个方向，也给自己一些时间看看走过的路。失去了这个锚点，就让我感觉仿佛研究生的这一年没有往年那么精彩。</p>
-<h3 id="在家人的眼里我已经是个大人了"><a href="#在家人的眼里我已经是个大人了" class="headerlink" title="在家人的眼里我已经是个大人了"></a>在家人的眼里我已经是个大人了</h3><p>在家人的眼里我已经是个大人了，毕竟25岁的我已经长的和25年前的爸爸几乎一样。那时候的爸爸已经开始打拼自己的事业，虽说我还是读研，有着学生的身份，但是也已经到了慢慢需要转变自己角色的时候。家里的事情，爸妈开始和我商量；我自己的方向，父母已经无法导航。</p>
-<p><img data-src="https://image.kbiao.me/2019-01-01-E57D196F-F50F-4479-9F21-B98A88003726.png" alt="E57D196F-F50F-4479-9F21-B98A88003726"></p>
-<p>带着爷爷等家人一起逛北京让我真正开始感觉自己长大了。借着女朋友工作了力量，我在北京也算是有了一个自己的小窝。虽然只有十几平米，但足够给爸妈，姑姑和爷爷一起准备一顿中秋的晚饭，这是个值得铭记时刻。陪着爷爷看故宫的时候，爷爷开心的和大家说，我们也算是京城有人了。这一句听起来半开玩笑的话给祖孙三代一起在他乡度过的这个中秋写下了一个注脚。一生面朝黄土背朝天的爷爷，把爸爸送到了城里，爸爸支持我能开始在首都学习生活。一代代人的接力，我们都在奔跑，我们都是追梦人。如今我是他们的骄傲，接力棒交到了我的手里我应该要有自己的担当，守护家人的笑容。</p>
-<p><img data-src="https://image.kbiao.me/2019-01-01-UNADJUSTEDNONRAW_thumb_1160.jpg" alt="UNADJUSTEDNONRAW_thumb_1160"></p>
-<h3 id="身心健康都由自己掌控"><a href="#身心健康都由自己掌控" class="headerlink" title="身心健康都由自己掌控"></a>身心健康都由自己掌控</h3><p>对家庭，责任的认识的增强是成长一部分，对个人身体健康的关注又是成长的另一面。段子都在说90后的脱发和枸杞保温杯，对身体健康的关注确实是今年的有一个关键词。年初就来了一场大病，大过年让家人陪着医院折腾了几天，一年里断断续续几次感冒高烧，最严重一次医院打了三天吊瓶。虽说自己本来也没有强壮的体格，但是过去一年里身体的问题表现是越来越明显了，立志要坚持运动也总是做不到。主要的问题就是颈椎，腰椎这些职业病，以及长期不锻炼带来的体质弱，气候变化就容易感冒发烧。解决方案就是，椅子加靠垫，显示器尽量抬高，工作之余尽量走动，少喝咖啡多喝茶水。当然更重要的还是要养成运动的习惯，为自己，为家人，2019要保重身体。</p>
-<p>游戏成为生活的一部分，也是我的2018不太一样的地方。虽然作为一个90后也是在电子游戏的陪伴下成长的，以前也玩过不少游戏，但是不是像过去的一年里一样他成为生活的重要组成部分。一方面我的时间经济都有了自己支配的自由，我可以更容易去接触更多游戏，另一方面游戏也迎来一个好年，无论是电竞逐步认可，几大赛事中国队夺魁带来的社会影响，以及游戏行业的努力，给游戏正名。游戏成为了文化生活的一部分，而不再是那个电子海洛因，毁掉一代年轻人。毕竟一代代年轻人被收音机，电视机，摇滚街舞都一遍遍毁灭过了，也到了浴火重生的时候了。一月份入手 Switch，随后收了二手 PS4，年初有了马里奥和塞尔达让我看到了不一样的游戏世界，不是只有中国式网游的氪金养成和打打杀杀；随后的底特律，蜘蛛侠以及战神都在以比电影更有代入感的方式讲了一个好故事；马里奥赛车和星露谷物语消磨了很多时光，也带来了很多快乐。有时候甚至感觉，玩游戏的时候时间才是真正属于自己的。<br> <img data-src="https://image.kbiao.me/2019-01-01-UNADJUSTEDNONRAW_thumb_9da.jpg" alt="UNADJUSTEDNONRAW_thumb_9da"></p>
-<h3 id="个人成长的焦虑在过去的一年只增不减"><a href="#个人成长的焦虑在过去的一年只增不减" class="headerlink" title="个人成长的焦虑在过去的一年只增不减"></a>个人成长的焦虑在过去的一年只增不减</h3><p>买了十几门网课，几十本电子书几乎都没有看完。还不如本科时候，只在慕课网就有上千小时的学习记录带来的收获感强。不过也说明了自己在不断地成长，了解的越多越感觉自己的无知，这也才是我不断追求的兴奋点。</p>
-<p>一直以来我都有个习惯，隔一段时间就要去大书店，大图书馆逛逛，很多时候不是为了看书，因为我已经很习惯电子阅读了，而为了感觉一下图书馆的氛围，看那么多的书我没有看过，那么多事情我还不知道，那么多东西和我相关我却没有看见，就是找这种觉得自己无知的感觉，是不断刺激我探索来源。</p>
-<p>现在获取知识信息的成本越来越低了，一门课，一本书几块钱到几十块钱，日常外出吃饭的花销都比这个大，所以很容易就屯了很多知识。这个习惯有好有坏。适当的焦虑提醒自己无知，别人的总结梳理帮自己快速打开新世界的大门，在这个时代，快速高效地甄别提取信息是个非常重要的能力，个人的成长要依赖越来越多的周边知识，需要不断扩充知识面来抓住可能的机遇。但是过分的焦虑就会适得其反，甚至让人感觉放弃治疗。一般情况是比较讨厌某些公众号推广时候管用的几十个 G 的资料分享，基本上一辈子葬身网盘永无出头之日，更会让自己习惯了用硬盘学习而不是用脑使得心态上更加浮躁。<br>19年里自己要保持对知识的兴奋和追求，增加这种兴趣落地和实践的机会，让知识逐步化身自己的能力。</p>
-<h3 id="工作项目还算有些成果"><a href="#工作项目还算有些成果" class="headerlink" title="工作项目还算有些成果"></a>工作项目还算有些成果</h3><p>实际工作方面，18年参与了两个项目，上线了一个自己的产品，去斯里兰卡参加一次学术会议。  </p>
-<p>在北航的平台上确实让我有了不一样的机会。中航工业的消息中间件项目，让我感受到实际的业务环境和自己平时通过博客资料了解的技术是多么的不一样。当我知道是一个消息中间件时候，我本能的可以想到有很多成熟的产品，为什么要自己做。在一次次需求的探讨设计中，我慢慢感觉到，技术只有在实际场景中落地才有意义。无论是学校的教的知识还是自己看到的新技术，大多是给了一个思考问题的方向，而真正的落地需要自己亲自实践体会。</p>
-<p>后半年主要参与的实验室与腾讯的合作项目，让我看到了大公司，一个产品级团队的分工与合作。不过体会更深的可能是 “PHP 是世界上最好的语言”吧。一直以来我都是 JAVA 技术栈的养成，而参与这边的项目时候配合团队和公司业务习惯使用 PHP。这里不会展开谈语言的优劣，让我体会深刻的主要是能力的迁移。我用 java 做系统时候需要考虑的问题，在用 php 也同样会遇到，离开平台，语言提供的便利以后我是否还能清楚的明白其中的细节，以及在深入的使用之后才能客观做出评价煤种语言的优劣好坏不是一句话的事情。新的语言也让我看到了新的范式，看到解决同一个问题时候的不同思路，这样一个项目经历对我来说成长就不只是技术方面的了。<br><img data-src="https://image.kbiao.me/2019-01-01-F42DD77F-DDBE-495B-9D37-079D746AEBED.png" alt="F42DD77F-DDBE-495B-9D37-079D746AEBED"></p>
-<p>另外自己大二就一直想着有自己的产品，今年终于在女朋友的大力支持下完成上线，得益于导师的支持推广，半年时间获得五千多用户，也算是一个不小的成绩。通过这个猫途校园小项目，我也有机会自己亲自参与一个产品的建设过程，而且是自己的亲儿子。技术并不是产品的全部，而且需求很多时候是无法预设的。做出来比想得好重要的多。产品虽小，半年时间也经历了二三十个版本的迭代，很多细节功能是无法提前预设的，很多技术难点也不是实现之前可以想得到的。这样的一段经历，让我以后作为手艺人吃饭的日子里能更有大局观。当然有了儿子还得想办法养大，作为一个工具产品，怎么能让流量养活自己是我接下来需要认真思考的问题了，好的产品总不能总靠赞助活着。<br><img data-src="https://image.kbiao.me/2019-01-01-E6C50F4F-C965-486B-9ACD-1C6252CD922A.png" alt="E6C50F4F-C965-486B-9ACD-1C6252CD922A"></p>
-<p>虽说本科时候就跟着水过论文，但是正儿八经的学术会议今年是第一次参加。不能说这个会议有多么高级，但这样的一次经历也是弥足珍贵，感受学术氛围，参与论文写作，也是读研究生的意义所在。文章来源于实验室长期维护的产品北航在线编程平台，我也接过了学长们传递的接力棒，负责接下来的开发运维工作。也希望能继续深耕这个项目，挖掘自己的价值，产出属于自己的学术成果。<br><img data-src="https://image.kbiao.me/2019-01-01-510F00A2-ACA1-47C0-A766-D8E2ED03A5D8.png" alt="510F00A2-ACA1-47C0-A766-D8E2ED03A5D8"></p>
-<h3 id="生活的本来面貌"><a href="#生活的本来面貌" class="headerlink" title="生活的本来面貌"></a>生活的本来面貌</h3><p>拉拉杂杂的总结下来，过去的一年自己还是做了不少事情的。只是长期没有表达输出，便开始越来越惧怕写作。没有写作输出，表达能力愈发退化，越无法说清楚事情，就干脆不再总结思考，这么浑浑噩噩过了一年。以上几千字可能也有不少语句不通，表达不清的地方，很多话想说想总结，到头来却只是记叙，记录一下18年发生在自己身上的一些重要事情，记录一下此时此刻的感觉。更重要的是通过这样的一个仪式感给19年开个好头，对自己表达输出的训练应该要成为19年的一个小目标。</p>
-<p>什么才是生活的本来面貌？家庭、健康、工作一件件的都开始在我的总结规划上体现，不再是空谈梦想与远方，这可能就是成长。以为可以消除一切压力与焦虑，摆脱所有传统习俗与社会舆论，随心所欲，自由自在；事实上逐步认识到到自由与责任永远相伴相生。没有什么容易不容易，丰富的经历，起起落落的剧情就是生活本来的面貌，在此基础上，不堕信心，不失希望，不断从中汲取前行的力量。<br>愿19年诸事顺利！</p>
+<h2 id="突如其来的征兆"><a href="#突如其来的征兆" class="headerlink" title="突如其来的征兆"></a>突如其来的征兆</h2><p>但是，生活总有自己的节奏，你可能有了自己的想法。22号清晨，天刚蒙蒙亮，你与这个世界打了个招呼。她叫醒我说她可能要生了。我努力回想在抖音和小红书上刷到的各种待产征兆和应急预案，在迷糊的睡意和兴奋中保持冷静。</p>
+<p>我们确实预想过很多次这个时刻，这一刻心里彩排了很多次，熟悉得像梦，真实得也像梦。打车，去医院，办理住院，折腾了一番，然后通知爸妈，他们需要从老家赶来北京。他们需要过来的吧。嗯，我感觉自己像个大人了。</p>
+<p>医生说我来的时间有点早，但也还算合适，孩子在24小时内出生的概率不大。安顿好住院手续，我回公司上了半天班，尽力安顿和交接了一些事情，确信一切都还在计划之中。</p>
+<h2 id="风雨将至的夜晚"><a href="#风雨将至的夜晚" class="headerlink" title="风雨将至的夜晚"></a>风雨将至的夜晚</h2><p>晚上，她发来短信，看起来产程已经接近了。我抬头望向室外，天空乌云密布，暴雨将至。于是我赶紧把手头的事情处理完，这还是比原计划提前了些。</p>
+<p>外面开始电闪雷鸣，我的手机锁屏壁纸也应景地变成了狂风暴雨。看来是”神龙降世”，龙年出生的宝宝，大事发生时天气总是会起到烘托气氛的作用，语文课上讲过嘛。大人物出生的时候，天总是会有一些异象的，史书上也是这么写的。</p>
+<p><img data-src="https://image.kbiao.me/blog/img202509062156500.png"></p>
+<p>打车，可能有点堵，坐了地铁，但总觉得比平时慢。回家锁了两次门才出发去医院。去医院不远，骑电动车很快。这条路最近演习了很多遍。但是第一次出门还是忘了带钥匙。</p>
+<h2 id="漫长的等待"><a href="#漫长的等待" class="headerlink" title="漫长的等待"></a>漫长的等待</h2><p>23号凌晨，突然开始下冰雹，狂风拍打着玻璃，啪啪作响。风在树木之间呼啸，雨滴狠狠地砸在医院的窗户上，像某种不经意间的节奏，为那刻增加着心跳的节拍。其他孕妇的呻吟声穿过床帘，小孩的哭声提醒着我，生命的诞生是痛苦的。是我从未想象过的痛苦。</p>
+<p>后半夜，进了产房开始准备助产。产房的灯光透过门缝投射出来，我与你们隔了一个世界。我预习过知道生产的过程可能很长，但是这一夜也太长，太长了。走廊墙上的钟表，真的一动不动。听着雨打玻璃的声音，排水管流水声，若隐若现的呻吟，偶尔几声啼哭，但是我的手机没有响动，又困，又清醒。</p>
+<p>直到23号中午时分，云层渐渐散去，阳光洒下。我的爸妈也都从老家赶来了。我们在住院部楼下公园里，等待着。有一句没一句聊着家里的琐事。</p>
+<h2 id="那个决定性的电话"><a href="#那个决定性的电话" class="headerlink" title="那个决定性的电话"></a>那个决定性的电话</h2><p>13点32分，电话响了，是她打来的。</p>
+<p>我问她：”情况怎么样？我现在上去。”</p>
+<p>她说：”生完了，一切都还好”我听得出来呼吸有点急促。</p>
+<p>我又问：”你感觉怎么样？”</p>
+<p>她说：”我没事。”</p>
+<p>“孩子是女孩还是男孩？”</p>
+<p>她稍微提高了声量向护士问道”男孩，女孩？” 然后轻轻回应我：”哦，是男孩。”</p>
+<p>她又说：”还没处理完呢，等会儿再说。”</p>
+<p>“好，我现在就上楼。” 但是她已经挂了电话。预习过很多种场景，她也许刚刚经历了巨大的危险，也结束了我永远无法体会的十多个小时的阵痛，努力把担心转换成祈福​。但这一刻，我想，应该是母子平安了吧​。</p>
+<h2 id="第一次见面的准备"><a href="#第一次见面的准备" class="headerlink" title="第一次见面的准备"></a>第一次见面的准备</h2><p>脚步一顿，我已停留在产房门外。保安淡定地扔下一声：”还得等，约莫一个小时。”心绪，好似一场斗篷上的风，旋转坠落于眼前这扇门后的世界。</p>
+<p>我在想我应该什么表情进去。第一次见面要怎么表示一下。先看她？还是先看他？</p>
+<p>她最辛苦最危险了，应该先关心她。带点好吃的？医生好像不让乱吃。那我可以抱抱她​？</p>
+<p>待产包的东西有没有漏的，新生儿那部分的清单再看看？</p>
+<p>和他第一次见面需要什么仪式吗？我也很好奇他会长什么样子啊。</p>
+<p>我还是回家看看有没有漏掉什么东西吧。对了和家里的小咪和米粒也要通知一声。</p>
+<p>带上了葡萄，还有一个刚到的快递。给孩子，带了一本书，《我是你爸爸》。终于派上用场了。在返回医院的路上，天朗气清，神龙走了，那是来我身边了吧。</p>
+<h2 id="初次相遇"><a href="#初次相遇" class="headerlink" title="初次相遇"></a>初次相遇</h2><p>我第一次见到了你的样子，红彤彤的，还皱巴巴的。也不哭，也不闹，和预想的完全不一样，我没听到你的哭声。努力分辨这眉眼像谁，谁也不像。你只是安静的睡着我应该干点啥？她需要休息，你完全不理我。我有点多余。</p>
+<p><img data-src="https://image.kbiao.me/blog/img202509062157041.jpeg"></p>
+<p>床边卡片记录着：3.35kg，51cm，2024.4.23 13:31。世界读书日，应该会爱读书有学问吧。农历三月十五。吉日，提前两周，即兴而来。摸出手机，翻查生成八字。土命之相，试图在他的天命中寻找最适切的名字。虽然我是唯物主义者，但我的孩子可不能缺了啥。好的我都可以信，但首先，名字应该朗朗上口。</p>
+<p>阳光透过窗，撒到了病床上​。她睡着了​。脸上还有一层薄薄的汗珠，温柔地闪耀着​。她嘴角翕动了一下​，悬着的心可以放下了​。瞧，我们也是一家三口了。</p>
+<h2 id="学习做父亲"><a href="#学习做父亲" class="headerlink" title="学习做父亲"></a>学习做父亲</h2><p>短暂接触几分钟，就让我们离开了。还得在医院看护三天。再后来的事情就如计划一样，出院后回到了太原。我开始实践自己的父亲身份，学习喂奶，调配温奶器，练习换尿布，一遍又一遍。拍嗝，正确抱姿，判断冷暖。翻看育儿书，小红书和抖音开始学新的技能。</p>
+<p>黄疸，迟迟不退。乳糖不耐，似我这体质，遗传。生活多了些许意外与挑战。她隔几个小时就要喂奶，生物钟彻底被打乱​，但我却帮不了太多​。我觉得该为她做点什么，大多数时候却只是旁观者，陪着看着​。她突然之间就像个妈妈一样了，什么都会。</p>
+<p><img data-src="https://image.kbiao.me/blog/img202509062158569.jpeg"></p>
+<h2 id="新世界的开始"><a href="#新世界的开始" class="headerlink" title="新世界的开始"></a>新世界的开始</h2><p>​转眼间，我当爸爸已经一个月了。​我可以抱着你，稳稳地，甚至能哄睡，但还是有点陌生。我又回到了工位，已经是一个满是软肋的打工人了，但一个更大的世界在我工位之外开始生长了起来。</p>
 ]]></content>
       <categories>
-        <category>大学生活</category>
+        <category>生活</category>
       </categories>
       <tags>
-        <tag>碎碎念</tag>
+        <tag>生活</tag>
+        <tag>成长</tag>
+        <tag>父亲</tag>
       </tags>
   </entry>
   <entry>
@@ -1155,17 +1207,13 @@ public void setTag(String tag) {
 <p><strong>⭐ 推荐</strong>：值得精读（安全威胁预警）</p>
 <p><strong>🔗 原文链接</strong>：<a href="https://krebsonsecurity.com/2026/02/starkiller-phishing-service-proxies-real-login-pages-mfa/">https://krebsonsecurity.com/2026/02/starkiller-phishing-service-proxies-real-login-pages-mfa/</a></p>
 <hr>
-<h2 id="💭-彪彪思语"><a href="#💭-彪彪思语" class="headerlink" title="💭 彪彪思语"></a>💭 彪彪思语</h2><p>今天的新闻让我思考一个问题：当我们在谈论AI的”进步”时，我们到底在谈论什么？</p>
-<p>是OpenAI的模型性能提升30%？还是Taalas的17,000 tokens&#x2F;秒？又或者是ggml.ai这样的草根创新被大厂收购？</p>
-<p>我想起之前在《买书作为一种生活方式》里写的：”读书毕竟不是个轻松的事儿，无论是虚构还是非虚构的故事，与现实相比，都少了许多无聊但又漫长的重复过程，而这恰恰是无可避免又至关重要的。”</p>
-<p>放到今天的语境里，OpenAI的性能优化是”可见的进步”，Taalas的硬件突破是”底层的创新”，而ggml.ai被收购，则是”生态的演进”。这三者缺一不可，但我们往往最容易关注第一个，最容易忽视第二个。</p>
-<p>就像买书不只是为了阅读，更是为了保持对知识的敬畏；关注AI新闻也不只是为了追热点，更是为了理解这个行业正在发生的深层变化。17,000 tokens&#x2F;秒这个数字，可能比很多光鲜的发布会都更有分量——因为它代表着一种可能性：本地AI真的可以跑起来，而且跑得很快。</p>
-<p>这种”基础设施级别的创新”，往往是最容易被忽视，但又最能带来长期影响的。就像我书架上那些未曾读过的书，它们安安静静地躺在那里，等待着某个合适的时候为我提供新的视角。</p>
+<h2 id="💭-彪彪思语"><a href="#💭-彪彪思语" class="headerlink" title="💭 彪彪思语"></a>💭 彪彪思语</h2><p>今天的几条新闻放在一起看，很有意思。</p>
+<p>OpenAI在优化模型性能，Taalas在做硬件加速，ggml.ai被Hugging Face收购——这三件事其实代表了AI行业的三个层面：算法层、基础设施层、生态层。</p>
+<p>我们平时最容易关注的是算法层的进步，比如某个模型又刷新了榜单，某个API又降价了。但真正能改变行业格局的，往往是基础设施层的创新。17,000 tokens&#x2F;秒这个数字为什么重要？因为它意味着本地AI不再是一个”玩具”，而是真的可以在生产环境中跑起来，而且跑得很快。</p>
+<p>这让我想起个人电脑刚出现的时候。一开始大家都在争论哪家的CPU更快，但真正让PC普及的，是整个生态的成熟——从硬件到软件，从开发工具到用户体验。AI行业现在可能也处在类似的阶段：我们在关注模型参数的同时，也应该关注那些能让AI”好用”的基础设施。</p>
+<p>ggml.ai被收购这件事也值得思考。一个草根项目能对整个行业产生这么大的影响，最后被大厂收购，这本身就说明了开源和社区的力量。有时候，最有价值的创新不是来自大公司的实验室，而是来自某个只想”让它跑起来”的个人。</p>
+<p>所以看AI新闻的时候，我觉得可以多关注那些”不那么性感”的部分——比如硬件优化、工具链、生态建设。这些东西可能不会上头条，但它们才是真正能让AI从”概念”变成”日常”的东西。</p>
 <hr>
-<h2 id="📚-延伸阅读"><a href="#📚-延伸阅读" class="headerlink" title="📚 延伸阅读"></a>📚 延伸阅读</h2><ul>
-<li><a href="https://blog.kbiao.me/%E4%BB%8E-Prompt-%E5%B7%A5%E7%A8%8B%E5%88%B0-Skills-%E6%BC%94%E8%BF%9B-LLM-%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E7%9A%84%E5%B7%A5%E7%A8%8B%E6%BC%94%E8%BF%9B-e29ef2d0e18f/">从 Prompt 工程到 Skills：LLM 上下文管理的工程演进</a></li>
-<li><a href="https://blog.kbiao.me/%E4%B9%B0%E4%B9%A6%E4%BD%9C%E4%B8%BA%E4%B8%80%E7%A7%8D%E7%94%9F%E6%B4%BB%E6%96%B9%E5%BC%8F-fbc2b1f52244/">买书作为一种生活方式</a></li>
-</ul>
 <hr>
 <p><em>编辑：小龙 🐉 | 审校：彪彪 ✍️</em><br><em>专栏：听雨早读 | 博客：听雨小筑</em></p>
 ]]></content>
@@ -1181,55 +1229,52 @@ public void setTag(String tag) {
       </tags>
   </entry>
   <entry>
-    <title>四月二十三日风雨大作</title>
-    <url>//2024/05/23/birth-in-storm/</url>
-    <content><![CDATA[<p><img data-src="https://image.kbiao.me/blog/img202509062154449.jpeg" alt="新生儿第一张照片"></p>
-<p>你出生一个月了。</p>
-<p>一个月前4月22号，是周一，她开始休产假的第一天。前一天我们像往常一样度过了一个普通的二人世界周末，一起逛街、吃饭，还囤了些零食，计划利用剩下的几周时间做好迎接家庭新成员的准备。</p>
+    <title>安卓手机与IOS相册自动同步小技巧</title>
+    <url>//Automatic-Sync-Android-album-whith-IOS/</url>
+    <content><![CDATA[<p>如果拥有苹果全家桶，各种资料跨平台同步的感觉一定是很爽的。但是对于手机不喜欢iPhone,还用着iPad的我来说，就有点纠结。特别是对于相册，iPad拍的照很容易就同步进了我的Mac，真正拍照的主力手机确是安卓，想要分享一般还得借助QQ啥的把文件传来传去。无奈iCloud又不支持安卓，几经折腾我还是得到了一个比较适合的解决方案实现跨平台无缝自动同步。</p>
 <span id="more"></span>
 
-<h2 id="突如其来的征兆"><a href="#突如其来的征兆" class="headerlink" title="突如其来的征兆"></a>突如其来的征兆</h2><p>但是，生活总有自己的节奏，你可能有了自己的想法。22号清晨，天刚蒙蒙亮，你与这个世界打了个招呼。她叫醒我说她可能要生了。我努力回想在抖音和小红书上刷到的各种待产征兆和应急预案，在迷糊的睡意和兴奋中保持冷静。</p>
-<p>我们确实预想过很多次这个时刻，这一刻心里彩排了很多次，熟悉得像梦，真实得也像梦。打车，去医院，办理住院，折腾了一番，然后通知爸妈，他们需要从老家赶来北京。他们需要过来的吧。嗯，我感觉自己像个大人了。</p>
-<p>医生说我来的时间有点早，但也还算合适，孩子在24小时内出生的概率不大。安顿好住院手续，我回公司上了半天班，尽力安顿和交接了一些事情，确信一切都还在计划之中。</p>
-<h2 id="风雨将至的夜晚"><a href="#风雨将至的夜晚" class="headerlink" title="风雨将至的夜晚"></a>风雨将至的夜晚</h2><p>晚上，她发来短信，看起来产程已经接近了。我抬头望向室外，天空乌云密布，暴雨将至。于是我赶紧把手头的事情处理完，这还是比原计划提前了些。</p>
-<p>外面开始电闪雷鸣，我的手机锁屏壁纸也应景地变成了狂风暴雨。看来是”神龙降世”，龙年出生的宝宝，大事发生时天气总是会起到烘托气氛的作用，语文课上讲过嘛。大人物出生的时候，天总是会有一些异象的，史书上也是这么写的。</p>
-<p><img data-src="https://image.kbiao.me/blog/img202509062156500.png"></p>
-<p>打车，可能有点堵，坐了地铁，但总觉得比平时慢。回家锁了两次门才出发去医院。去医院不远，骑电动车很快。这条路最近演习了很多遍。但是第一次出门还是忘了带钥匙。</p>
-<h2 id="漫长的等待"><a href="#漫长的等待" class="headerlink" title="漫长的等待"></a>漫长的等待</h2><p>23号凌晨，突然开始下冰雹，狂风拍打着玻璃，啪啪作响。风在树木之间呼啸，雨滴狠狠地砸在医院的窗户上，像某种不经意间的节奏，为那刻增加着心跳的节拍。其他孕妇的呻吟声穿过床帘，小孩的哭声提醒着我，生命的诞生是痛苦的。是我从未想象过的痛苦。</p>
-<p>后半夜，进了产房开始准备助产。产房的灯光透过门缝投射出来，我与你们隔了一个世界。我预习过知道生产的过程可能很长，但是这一夜也太长，太长了。走廊墙上的钟表，真的一动不动。听着雨打玻璃的声音，排水管流水声，若隐若现的呻吟，偶尔几声啼哭，但是我的手机没有响动，又困，又清醒。</p>
-<p>直到23号中午时分，云层渐渐散去，阳光洒下。我的爸妈也都从老家赶来了。我们在住院部楼下公园里，等待着。有一句没一句聊着家里的琐事。</p>
-<h2 id="那个决定性的电话"><a href="#那个决定性的电话" class="headerlink" title="那个决定性的电话"></a>那个决定性的电话</h2><p>13点32分，电话响了，是她打来的。</p>
-<p>我问她：”情况怎么样？我现在上去。”</p>
-<p>她说：”生完了，一切都还好”我听得出来呼吸有点急促。</p>
-<p>我又问：”你感觉怎么样？”</p>
-<p>她说：”我没事。”</p>
-<p>“孩子是女孩还是男孩？”</p>
-<p>她稍微提高了声量向护士问道”男孩，女孩？” 然后轻轻回应我：”哦，是男孩。”</p>
-<p>她又说：”还没处理完呢，等会儿再说。”</p>
-<p>“好，我现在就上楼。” 但是她已经挂了电话。预习过很多种场景，她也许刚刚经历了巨大的危险，也结束了我永远无法体会的十多个小时的阵痛，努力把担心转换成祈福​。但这一刻，我想，应该是母子平安了吧​。</p>
-<h2 id="第一次见面的准备"><a href="#第一次见面的准备" class="headerlink" title="第一次见面的准备"></a>第一次见面的准备</h2><p>脚步一顿，我已停留在产房门外。保安淡定地扔下一声：”还得等，约莫一个小时。”心绪，好似一场斗篷上的风，旋转坠落于眼前这扇门后的世界。</p>
-<p>我在想我应该什么表情进去。第一次见面要怎么表示一下。先看她？还是先看他？</p>
-<p>她最辛苦最危险了，应该先关心她。带点好吃的？医生好像不让乱吃。那我可以抱抱她​？</p>
-<p>待产包的东西有没有漏的，新生儿那部分的清单再看看？</p>
-<p>和他第一次见面需要什么仪式吗？我也很好奇他会长什么样子啊。</p>
-<p>我还是回家看看有没有漏掉什么东西吧。对了和家里的小咪和米粒也要通知一声。</p>
-<p>带上了葡萄，还有一个刚到的快递。给孩子，带了一本书，《我是你爸爸》。终于派上用场了。在返回医院的路上，天朗气清，神龙走了，那是来我身边了吧。</p>
-<h2 id="初次相遇"><a href="#初次相遇" class="headerlink" title="初次相遇"></a>初次相遇</h2><p>我第一次见到了你的样子，红彤彤的，还皱巴巴的。也不哭，也不闹，和预想的完全不一样，我没听到你的哭声。努力分辨这眉眼像谁，谁也不像。你只是安静的睡着我应该干点啥？她需要休息，你完全不理我。我有点多余。</p>
-<p><img data-src="https://image.kbiao.me/blog/img202509062157041.jpeg"></p>
-<p>床边卡片记录着：3.35kg，51cm，2024.4.23 13:31。世界读书日，应该会爱读书有学问吧。农历三月十五。吉日，提前两周，即兴而来。摸出手机，翻查生成八字。土命之相，试图在他的天命中寻找最适切的名字。虽然我是唯物主义者，但我的孩子可不能缺了啥。好的我都可以信，但首先，名字应该朗朗上口。</p>
-<p>阳光透过窗，撒到了病床上​。她睡着了​。脸上还有一层薄薄的汗珠，温柔地闪耀着​。她嘴角翕动了一下​，悬着的心可以放下了​。瞧，我们也是一家三口了。</p>
-<h2 id="学习做父亲"><a href="#学习做父亲" class="headerlink" title="学习做父亲"></a>学习做父亲</h2><p>短暂接触几分钟，就让我们离开了。还得在医院看护三天。再后来的事情就如计划一样，出院后回到了太原。我开始实践自己的父亲身份，学习喂奶，调配温奶器，练习换尿布，一遍又一遍。拍嗝，正确抱姿，判断冷暖。翻看育儿书，小红书和抖音开始学新的技能。</p>
-<p>黄疸，迟迟不退。乳糖不耐，似我这体质，遗传。生活多了些许意外与挑战。她隔几个小时就要喂奶，生物钟彻底被打乱​，但我却帮不了太多​。我觉得该为她做点什么，大多数时候却只是旁观者，陪着看着​。她突然之间就像个妈妈一样了，什么都会。</p>
-<p><img data-src="https://image.kbiao.me/blog/img202509062158569.jpeg"></p>
-<h2 id="新世界的开始"><a href="#新世界的开始" class="headerlink" title="新世界的开始"></a>新世界的开始</h2><p>​转眼间，我当爸爸已经一个月了。​我可以抱着你，稳稳地，甚至能哄睡，但还是有点陌生。我又回到了工位，已经是一个满是软肋的打工人了，但一个更大的世界在我工位之外开始生长了起来。</p>
+<h3 id="工具："><a href="#工具：" class="headerlink" title="工具："></a>工具：</h3><p><strong>坚果云：</strong> 非常良心的国产同步盘应用，也就是墙内的DropBox。一直在用它同步一些资料特别是多人共享，非常方便。<br><strong>Mac：</strong> 要是没有Mac 我也不会有这种需求，同时也是这个需求让我发现了Mac的新世界——AutoMator以及Apple Script。</p>
+<h3 id="方法："><a href="#方法：" class="headerlink" title="方法："></a>方法：</h3><ol>
+<li><p>安卓手机下载坚果云，并打开相册同步。</p>
+<blockquote>
+<p>坚果云每月限流量的，免费版用户谨慎操作。
+ </p>
+</blockquote>
+</li>
+<li><p>Mac上也下载并运行坚果云，设置一个相册同步的文件夹。</p>
+<blockquote>
+<p>这样只要在WiFi下手机就会自动把相册同步给Mac上的那个文件夹。</p>
+</blockquote>
+</li>
+<li><p>建立一个AutoMator脚本。</p>
+<ul>
+<li>打开Mac上自带的AutoMator。<br> <img data-src="https://image.kbiao.me/2017-03-12-14893039054210.jpg?imageView2/2/w/60/interlace/1/"></li>
+<li>新建一个 <code> 文件夹操作</code> </li>
+<li>右侧脚本配置中选取文件夹，选择刚刚设定的坚果云相册同步文件夹。 </li>
+<li>左侧的操作中搜索<code>相册</code> 并选择 <code>将文件导入到‘照片’</code>,拖到右侧配置中。填写下相关操作配置如下：<br> <img data-src="https://image.kbiao.me/2017-03-12-14893045046245.jpg"></li>
+</ul>
+</li>
+<li><p>保存后即可自动运行。</p>
+<blockquote>
+<p>脚本触发的条件就是那个文件夹项目有更新。一般我都会开机自动运行坚果云，所以手机端拍了新照片在连入WiFi时候自动同步给电脑，并触发文件夹操作，导入相册。这样在其他IOS设备，比如我的ipad上就可以同步看到了。整个过程非常流畅，没有任何认为操作，也不需要额外运行什么软件工具。我认为这是比较理想的解决方案。</p>
+</blockquote>
+</li>
+<li><p>如何取消自动同步操作？</p>
+</li>
+</ol>
+<ul>
+<li>在同步文件夹上右键——服务——文件夹操作设置 取消勾选这个workflow 即可</li>
+<li><img data-src="https://image.kbiao.me/2017-03-12-14893049576378.jpg?imageView2/2/w/400/interlace/1/"></li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>  是否可以在Windows上同步呢？我觉也是可以的，可以同时下载iCloud windows版，以及坚果云把他俩的同步文件夹设为同一个就可以吧。但是我没有试过。<br>  更关键的是，当我打开AutoMator后看到那么多的操作，以我一个程序员的思维自然是发现了新大陆。想象多少操作可以自动化完成，而且全凭自定义。不说了，我要去看看这个还有什么新玩法了。</p>
 ]]></content>
       <categories>
-        <category>生活</category>
+        <category>ToolTips</category>
       </categories>
       <tags>
-        <tag>生活</tag>
-        <tag>成长</tag>
-        <tag>父亲</tag>
+        <tag>工具</tag>
+        <tag>tips</tag>
       </tags>
   </entry>
   <entry>
@@ -1351,73 +1396,6 @@ public void setTag(String tag) {
       </tags>
   </entry>
   <entry>
-    <title>安卓手机与IOS相册自动同步小技巧</title>
-    <url>//Automatic-Sync-Android-album-whith-IOS/</url>
-    <content><![CDATA[<p>如果拥有苹果全家桶，各种资料跨平台同步的感觉一定是很爽的。但是对于手机不喜欢iPhone,还用着iPad的我来说，就有点纠结。特别是对于相册，iPad拍的照很容易就同步进了我的Mac，真正拍照的主力手机确是安卓，想要分享一般还得借助QQ啥的把文件传来传去。无奈iCloud又不支持安卓，几经折腾我还是得到了一个比较适合的解决方案实现跨平台无缝自动同步。</p>
-<span id="more"></span>
-
-<h3 id="工具："><a href="#工具：" class="headerlink" title="工具："></a>工具：</h3><p><strong>坚果云：</strong> 非常良心的国产同步盘应用，也就是墙内的DropBox。一直在用它同步一些资料特别是多人共享，非常方便。<br><strong>Mac：</strong> 要是没有Mac 我也不会有这种需求，同时也是这个需求让我发现了Mac的新世界——AutoMator以及Apple Script。</p>
-<h3 id="方法："><a href="#方法：" class="headerlink" title="方法："></a>方法：</h3><ol>
-<li><p>安卓手机下载坚果云，并打开相册同步。</p>
-<blockquote>
-<p>坚果云每月限流量的，免费版用户谨慎操作。
- </p>
-</blockquote>
-</li>
-<li><p>Mac上也下载并运行坚果云，设置一个相册同步的文件夹。</p>
-<blockquote>
-<p>这样只要在WiFi下手机就会自动把相册同步给Mac上的那个文件夹。</p>
-</blockquote>
-</li>
-<li><p>建立一个AutoMator脚本。</p>
-<ul>
-<li>打开Mac上自带的AutoMator。<br> <img data-src="https://image.kbiao.me/2017-03-12-14893039054210.jpg?imageView2/2/w/60/interlace/1/"></li>
-<li>新建一个 <code> 文件夹操作</code> </li>
-<li>右侧脚本配置中选取文件夹，选择刚刚设定的坚果云相册同步文件夹。 </li>
-<li>左侧的操作中搜索<code>相册</code> 并选择 <code>将文件导入到‘照片’</code>,拖到右侧配置中。填写下相关操作配置如下：<br> <img data-src="https://image.kbiao.me/2017-03-12-14893045046245.jpg"></li>
-</ul>
-</li>
-<li><p>保存后即可自动运行。</p>
-<blockquote>
-<p>脚本触发的条件就是那个文件夹项目有更新。一般我都会开机自动运行坚果云，所以手机端拍了新照片在连入WiFi时候自动同步给电脑，并触发文件夹操作，导入相册。这样在其他IOS设备，比如我的ipad上就可以同步看到了。整个过程非常流畅，没有任何认为操作，也不需要额外运行什么软件工具。我认为这是比较理想的解决方案。</p>
-</blockquote>
-</li>
-<li><p>如何取消自动同步操作？</p>
-</li>
-</ol>
-<ul>
-<li>在同步文件夹上右键——服务——文件夹操作设置 取消勾选这个workflow 即可</li>
-<li><img data-src="https://image.kbiao.me/2017-03-12-14893049576378.jpg?imageView2/2/w/400/interlace/1/"></li>
-</ul>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>  是否可以在Windows上同步呢？我觉也是可以的，可以同时下载iCloud windows版，以及坚果云把他俩的同步文件夹设为同一个就可以吧。但是我没有试过。<br>  更关键的是，当我打开AutoMator后看到那么多的操作，以我一个程序员的思维自然是发现了新大陆。想象多少操作可以自动化完成，而且全凭自定义。不说了，我要去看看这个还有什么新玩法了。</p>
-]]></content>
-      <categories>
-        <category>ToolTips</category>
-      </categories>
-      <tags>
-        <tag>工具</tag>
-        <tag>tips</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>当我跑步时我在想什么</title>
-    <url>/%E5%BD%93%E6%88%91%E8%B7%91%E6%AD%A5%E6%97%B6%E6%88%91%E5%9C%A8%E6%83%B3%E4%BB%80%E4%B9%88-a177e6765feb/</url>
-    <content><![CDATA[<p>每天 30 分钟跑步，是我去年新养成的习惯。一年下来打卡一百三十多次。一开始三公里都跑完一次就要歇一一天，到现在能稳定拿下 5 公里，偶尔挑战一下六公里，虽不甚专业，也算不得什么健身计划，但是坚持下来还是有点成就感的。</p>
-<span id="more"></span>
-
-<p>说是坚持，也不全对。细想下来需要坚持的事情，一般是坚持不下去的。坚持必须用力，吃力的事情必难持久。所以可以说是养成了新的习惯，或者说跑步是工作日常的一部分了。第一次进入健身房跑步只是在同事的带领下的尝试，当时仅是觉得公司的福利，得尝试着物尽其用。但到这周还在跑的理由，倒不是健康、健身的想法激励。而是我发现，工作日的时间，就是需要有跑步这样一项活动参与。每天的跑步是我对抗不确定性的一种仪式感。<br>跑步属于一种看得见的进步。对于我这种业余的选手来说，跑完第一周和跑完一个月以后能明显看到，平均配速就是一点点稳定提高的。在周会，OKR 到半年规划一个赶一个推着我往前走的互联网工作节奏中，难得发现有一件事情是我完全可控的。投入了就有进步，努力和收获成正比的事情好像在离开校园以后就没那么多了。连续坚持三天和休息两天再来上跑步机的感觉是不一样的，不进则退。如果耽搁多几天，加个放肆的周末，那么下一周哪怕多跑一天也最多恢复到上一周的基准线。为了多保持点进步的确定感，一般是不愿意荒废的，这反而也成了“坚持”的一种动力。<br>这甚至是一种无法大力出奇迹的进步。人在互联网总容易带入一种大力出奇迹的叙事中，但我很确信跑步不行。今天跑一小时也取代不了明天的三十分钟，更有可能导致明天跑不了十分钟。跟着大神选装备，吃健身餐也取代不了每天来三十分钟，学习很多技巧跑法以后也得一次次三十分钟的积累熟悉。跑了几周就意识到，我需要接受自己只能慢慢地进步，勉强的努力除了感动自己，并无实际收益。<br>这种进步在充满不确定性的工作中是一剂提神良方。虽然我不知道我今天做完了什么工作，这周达成了什么结果，这月推动了哪个指标。但我很确信今天跑完了三十分钟，这个 ToDo 是我想完成一定可以完成的，而且指标上一般还比昨天完成的漂亮些。所以哪怕在一个一事无成的工作日，相信我的身子还是比昨天健康了些的，晚上的睡眠也会好一些。<br>开始跑步以后读了村上春树的一本书《当我谈跑步时，我谈些什么》， 他谈的是如何训练自己的身体与意志，如何增加生活的趣味，如何与磨难相处。我跑了仅仅一年还是只跑步机上的慢跑，着实谈不了什么大道理。但是可以谈谈我在想什么，也许可以对也想试着用健身房提神的工友们一些启发。<br>前半年我在想的是怎么跑完。一开始，跑步机上的半个小时还是挺漫长的，比数学老师讲课还漫长，脑子里想着要达成半小时目标，然后只盯着时间看的话很容易就气馁了。为了避免大脑无聊，开始在脑子里做数学题，去计算配速。新手上路进步空间是有的，跑步也不是匀速全程，一般会缓慢提速热身，然后尽可能在最高配速坚持更久的时间。比如现在以 8 km 的配速跑了 5 分钟，那么距离完成 5km 的目标是快多少慢了多少，下一分钟如果我配速加到 9 又会拉回来多少的目标完成度呢。小学应用题级别的难度，但是在跑步缺氧的状态下感觉还是有点难度，且成功转移了对身体抗拒的注意力。计算几个轮次以后，发现我马上就要跑完三十分钟了，血清素的分泌又让我期待起了明天的运动时光。还有一个小技巧是可以切换跑步机显示模式是按操场跑圈的模式，一圈 400 ，这个值比里程增长的快些，也是个加快反馈循环的方式，跑起来时候感觉大脑还是很容易被骗的。<br>现在我会任由思绪散佚，看会不会有什么惊喜。现在跑满半个小时或者跑满五公里已经不是一个挑战了，不再需要一些技巧让自己坚持下来，空下来的脑袋便开始听播客，听小说，虽说只有半个小时，累积下来也听完成了四五本书。平时读的书多是纪实的或者理论的，虚构的总觉得是无用的。但跑步时候不同，跑步本身就很有用，无需再多些用。一些小说还会加入丰富的环境音和切换不同角色的配音，在跑步机上时候大脑显卡功率是可以开满的，对小说的代入感就极强，也是一种很特别的体验。<br>形成了习惯之后，日历上固定给占上时间，工友们便知道这个点人不在岗。这半个小时是难得的无人打扰的时光，让我不断超频的大脑切换另一种模式，往往对接下来的工作和思考能提供意外的灵感。在跑步机上，不需要特别集中注意力，又实际上在非常努力协调全身肌肉。这种状态下，脑袋里后台运行的线程说不定就有了意外的产出，可能是它跳出了之前陷入的某个死循环，在更大的范围内找到了新的可能性。于是跑步这个习惯就形成了正向的循环，也就不需要坚持的坚持下来了。<br>下周，下个月，也许到明年，我应该还会继续跑的。毕竟写了一篇文章来说自己跑的挺开心，那就不能被看到这篇文章的同事抓包说偷懒，这不体面。而且健身房打卡的次数都记着呢，突然断了觉得有些可惜，有些沉默成本在里头，这也算是一种套牢吧。</p>
-<blockquote>
-<p>题图来自 pixel dance<br>portrait of a chinese young man running towards the camera, photography</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>工作日登山_礼拜天结网</title>
     <url>/%E5%B7%A5%E4%BD%9C%E6%97%A5%E7%99%BB%E5%B1%B1-%E7%A4%BC%E6%8B%9C%E5%A4%A9%E7%BB%93%E7%BD%91-e378de6552f5/</url>
     <content><![CDATA[<p><img data-src="https://image.kbiao.me/blog/img/20220703174848.png"></p>
@@ -1436,6 +1414,24 @@ public void setTag(String tag) {
 <p>山有高低次序，而网处处相通。工作日登山， 礼拜天结网，生命的节奏在两种模式里延展开来。</p>
 <p><img data-src="https://image.kbiao.me/blog/img/20220703174920.png"></p>
 ]]></content>
+      <tags>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>当我跑步时我在想什么</title>
+    <url>/%E5%BD%93%E6%88%91%E8%B7%91%E6%AD%A5%E6%97%B6%E6%88%91%E5%9C%A8%E6%83%B3%E4%BB%80%E4%B9%88-a177e6765feb/</url>
+    <content><![CDATA[<p>每天 30 分钟跑步，是我去年新养成的习惯。一年下来打卡一百三十多次。一开始三公里都跑完一次就要歇一一天，到现在能稳定拿下 5 公里，偶尔挑战一下六公里，虽不甚专业，也算不得什么健身计划，但是坚持下来还是有点成就感的。</p>
+<span id="more"></span>
+
+<p>说是坚持，也不全对。细想下来需要坚持的事情，一般是坚持不下去的。坚持必须用力，吃力的事情必难持久。所以可以说是养成了新的习惯，或者说跑步是工作日常的一部分了。第一次进入健身房跑步只是在同事的带领下的尝试，当时仅是觉得公司的福利，得尝试着物尽其用。但到这周还在跑的理由，倒不是健康、健身的想法激励。而是我发现，工作日的时间，就是需要有跑步这样一项活动参与。每天的跑步是我对抗不确定性的一种仪式感。<br>跑步属于一种看得见的进步。对于我这种业余的选手来说，跑完第一周和跑完一个月以后能明显看到，平均配速就是一点点稳定提高的。在周会，OKR 到半年规划一个赶一个推着我往前走的互联网工作节奏中，难得发现有一件事情是我完全可控的。投入了就有进步，努力和收获成正比的事情好像在离开校园以后就没那么多了。连续坚持三天和休息两天再来上跑步机的感觉是不一样的，不进则退。如果耽搁多几天，加个放肆的周末，那么下一周哪怕多跑一天也最多恢复到上一周的基准线。为了多保持点进步的确定感，一般是不愿意荒废的，这反而也成了“坚持”的一种动力。<br>这甚至是一种无法大力出奇迹的进步。人在互联网总容易带入一种大力出奇迹的叙事中，但我很确信跑步不行。今天跑一小时也取代不了明天的三十分钟，更有可能导致明天跑不了十分钟。跟着大神选装备，吃健身餐也取代不了每天来三十分钟，学习很多技巧跑法以后也得一次次三十分钟的积累熟悉。跑了几周就意识到，我需要接受自己只能慢慢地进步，勉强的努力除了感动自己，并无实际收益。<br>这种进步在充满不确定性的工作中是一剂提神良方。虽然我不知道我今天做完了什么工作，这周达成了什么结果，这月推动了哪个指标。但我很确信今天跑完了三十分钟，这个 ToDo 是我想完成一定可以完成的，而且指标上一般还比昨天完成的漂亮些。所以哪怕在一个一事无成的工作日，相信我的身子还是比昨天健康了些的，晚上的睡眠也会好一些。<br>开始跑步以后读了村上春树的一本书《当我谈跑步时，我谈些什么》， 他谈的是如何训练自己的身体与意志，如何增加生活的趣味，如何与磨难相处。我跑了仅仅一年还是只跑步机上的慢跑，着实谈不了什么大道理。但是可以谈谈我在想什么，也许可以对也想试着用健身房提神的工友们一些启发。<br>前半年我在想的是怎么跑完。一开始，跑步机上的半个小时还是挺漫长的，比数学老师讲课还漫长，脑子里想着要达成半小时目标，然后只盯着时间看的话很容易就气馁了。为了避免大脑无聊，开始在脑子里做数学题，去计算配速。新手上路进步空间是有的，跑步也不是匀速全程，一般会缓慢提速热身，然后尽可能在最高配速坚持更久的时间。比如现在以 8 km 的配速跑了 5 分钟，那么距离完成 5km 的目标是快多少慢了多少，下一分钟如果我配速加到 9 又会拉回来多少的目标完成度呢。小学应用题级别的难度，但是在跑步缺氧的状态下感觉还是有点难度，且成功转移了对身体抗拒的注意力。计算几个轮次以后，发现我马上就要跑完三十分钟了，血清素的分泌又让我期待起了明天的运动时光。还有一个小技巧是可以切换跑步机显示模式是按操场跑圈的模式，一圈 400 ，这个值比里程增长的快些，也是个加快反馈循环的方式，跑起来时候感觉大脑还是很容易被骗的。<br>现在我会任由思绪散佚，看会不会有什么惊喜。现在跑满半个小时或者跑满五公里已经不是一个挑战了，不再需要一些技巧让自己坚持下来，空下来的脑袋便开始听播客，听小说，虽说只有半个小时，累积下来也听完成了四五本书。平时读的书多是纪实的或者理论的，虚构的总觉得是无用的。但跑步时候不同，跑步本身就很有用，无需再多些用。一些小说还会加入丰富的环境音和切换不同角色的配音，在跑步机上时候大脑显卡功率是可以开满的，对小说的代入感就极强，也是一种很特别的体验。<br>形成了习惯之后，日历上固定给占上时间，工友们便知道这个点人不在岗。这半个小时是难得的无人打扰的时光，让我不断超频的大脑切换另一种模式，往往对接下来的工作和思考能提供意外的灵感。在跑步机上，不需要特别集中注意力，又实际上在非常努力协调全身肌肉。这种状态下，脑袋里后台运行的线程说不定就有了意外的产出，可能是它跳出了之前陷入的某个死循环，在更大的范围内找到了新的可能性。于是跑步这个习惯就形成了正向的循环，也就不需要坚持的坚持下来了。<br>下周，下个月，也许到明年，我应该还会继续跑的。毕竟写了一篇文章来说自己跑的挺开心，那就不能被看到这篇文章的同事抓包说偷懒，这不体面。而且健身房打卡的次数都记着呢，突然断了觉得有些可惜，有些沉默成本在里头，这也算是一种套牢吧。</p>
+<blockquote>
+<p>题图来自 pixel dance<br>portrait of a chinese young man running towards the camera, photography</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
       <tags>
         <tag>生活</tag>
       </tags>
