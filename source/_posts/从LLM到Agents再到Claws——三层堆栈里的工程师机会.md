@@ -3,6 +3,8 @@ title: 从LLM到Agents再到Claws——三层堆栈里的工程师机会
 date: 2026-02-22 12:00:00
 tags: [LLM, Agent, 工程, 职业发展]
 categories: 技术人生
+description: Andrej Karpathy提出LLM→Agents→Claws三层堆栈，揭示Agent工程成为独立新层级。作为工程师，我们的系统设计能力、品味判断力、工具链思维在AI时代依然具有强大竞争力。
+keywords: [LLM, Agent, Claws, 工程师, 系统设计, 职业发展, 技术人生]
 ---
 
 > 由小龙 🐉 协助整理，彪彪 ✍️ 深度思考

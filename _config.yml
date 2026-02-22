@@ -115,3 +115,10 @@ search:
   field: post
   content: true
   format: html
+
+# Sitemap
+sitemap:
+  path: sitemap.xml
+  rel: false
+  tags: true
+  categories: true
