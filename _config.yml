@@ -122,3 +122,16 @@ sitemap:
   rel: false
   tags: true
   categories: true
+
+# Qiniu Image Sync
+# 七牛云图床配置
+# 获取配置信息：https://portal.qiniu.com/
+qiniu:
+  enable: true  # 已启用
+  bucket: image        # 七牛云bucket名称
+  access_key: Fd9eTHCaz4rB9UC2k3ksIEHiGMhtAuNq     # 七牛云AccessKey
+  secret_key: jDQO-rzfoAxn8AmXskRCdFZBpHLqWyqbp_YvGPs0     # 七牛云SecretKey
+  dirPrefix: blog/img/                  # 七牛云存储路径
+  urlPrefix: https://image.kbiao.me/blog/img/  # 图片访问URL前缀
+  local_dir: source/uploads/             # 本地图片目录
+  update_exist: true                    # 是否更新已存在的图片

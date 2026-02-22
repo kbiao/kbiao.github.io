@@ -20,6 +20,7 @@
     "hexo-generator-tag": "^2.0.0",
     "hexo-leancloud-counter-security": "^1.5.0",
     "hexo-neat": "^1.0.9",
+    "hexo-qiniu-sync": "^1.4.7",
     "hexo-renderer-ejs": "^2.0.0",
     "hexo-renderer-marked": "^6.3.0",
     "hexo-renderer-stylus": "^3.0.0",
