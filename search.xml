@@ -219,30 +219,24 @@ public void setTag(String tag) {
       </tags>
   </entry>
   <entry>
-    <title>从一次AI写的那个有Bug的API说起：Harness工程的小事洞察</title>
+    <title>Harness工程——Mitchell Hashimoto的思想与实践</title>
     <url>/Harness%E5%B7%A5%E7%A8%8B%E2%80%94%E2%80%94Mitchell%20Hashimoto%E7%9A%84%E6%80%9D%E6%83%B3%E4%B8%8E%E5%AE%9E%E8%B7%B5-fbecce3925d9/</url>
-    <content><![CDATA[<h2 id="一个小故事"><a href="#一个小故事" class="headerlink" title="一个小故事"></a>一个小故事</h2><p>上周我让AI写一个简单的API端点。</p>
-<p>任务很简单：用户注册接口。</p>
-<p>AI很快就写出了代码，看起来很完美：参数验证、错误处理、数据库操作，一应俱全。</p>
-<p>我很满意，合并到了主分支。</p>
-<p>然后生产环境很快就报错了。</p>
-<p>问题是：当用户名为空字符串的时候，代码会创建一个用户名为空的用户。</p>
-<p>AI没有处理这个边界情况。</p>
-<p>我的第一反应是：”AI怎么这么蠢？”</p>
-<p>然后我修复了这个Bug。</p>
-<p>故事到这里就结束了。</p>
-<p>但几天之后，同样的Bug又出现了。</p>
-<p>这次是在另一个API端点。</p>
-<p>这次是邮箱格式验证有问题。</p>
-<p>我又修复了。</p>
-<p>同样的模式，第三次出现了。</p>
-<p>这次我意识到：问题不在AI。问题在我。</p>
-<p>我只是在修复症状，而没有解决根本原因。</p>
-<p>这就是我意识到：Harness工程的价值。</p>
+    <content><![CDATA[<p><img data-src="https://image.kbiao.me/blog/img202602231423184.png"></p>
+<span id="more"></span>
+
+<h2 id="一个小故事"><a href="#一个小故事" class="headerlink" title="一个小故事"></a>一个小故事</h2><p>假设让 AI 处理一个简单的任务：用户注册接口。<br>AI很快就可以写出了代码，看起来很完美：参数验证、错误处理、数据库操作，一应俱全。<br>目测很满意，合并到了主分支。<br>然后生产环境很快就报错了。遇到的问题是：当用户名为空字符串的时候，代码会创建一个用户名为空的用户。</p>
+<p>AI没有处理这个边界情况。作为工程师第一反应当然是是：”AI怎么这么蠢？” 然后我们反手就可以修复了这个Bug。故事到这里就结束了。</p>
+<p>但几天之后，同样的Bug又出现了。这次是在另一个API端点。这次是邮箱格式验证有问题。当然又被人工修复了。</p>
+<p>同样的模式，第三次出现了。是不是说 AI 能力都是被吹嘘的，所谓的大模型进步距离取代我们还远着呢，这么简单的问题都搞不定还需要我们背锅呢。 </p>
+<p>我们是否能意识到：问题不在AI。问题在我。因为作为工程师，只是在修复症状，而没有解决根本原因。</p>
+<p>我们在运维一个系统的时候显然会有这样的意识，对于一类问题多次出现我们需要构建新的解决方案； 但是与 AI 协作或者评价 AI 工作时候我们会忽略这点。</p>
+<p>而这就是被Mitchell Hashimoto 提出的，一个叫 Harness 工程的概念。</p>
 <hr>
 <h2 id="Mitchell-Hashimoto是谁？"><a href="#Mitchell-Hashimoto是谁？" class="headerlink" title="Mitchell Hashimoto是谁？"></a>Mitchell Hashimoto是谁？</h2><p>Mitchell Hashimoto是HashiCorp的创始人，他创造了Vagrant、Terraform等革命性的基础设施即代码工具。</p>
-<p>但在AI时代，他最有价值的贡献可能不是这些工具，而是他关于如何让Agent更可靠的思想。</p>
-<p>这就是Harness工程。</p>
+<p>他在尝试与 AI 协作完成大量日常工作后，总结了关于如何让Agent更可靠的思想。称为 Harness工程。</p>
+<blockquote>
+<p><a href="https://mitchellh.com/writing/my-ai-adoption-journey#step-5-engineer-the-harness">https://mitchellh.com/writing/my-ai-adoption-journey#step-5-engineer-the-harness</a> </p>
+</blockquote>
 <hr>
 <h2 id="Harness工程的核心思想"><a href="#Harness工程的核心思想" class="headerlink" title="Harness工程的核心思想"></a>Harness工程的核心思想</h2><p>Harness工程的核心思想非常简单，但非常深刻：</p>
 <blockquote>
@@ -312,7 +306,7 @@ public void setTag(String tag) {
 <h3 id="5-Guardrails（护栏）"><a href="#5-Guardrails（护栏）" class="headerlink" title="5. Guardrails（护栏）"></a>5. Guardrails（护栏）</h3><p>定义AI不能做什么。</p>
 <p>这是预防性的Harness。</p>
 <h3 id="6-Feedback（反馈记录）"><a href="#6-Feedback（反馈记录）" class="headerlink" title="6. Feedback（反馈记录）"></a>6. Feedback（反馈记录）</h3><p>记录AI犯的错误，以及你是如何修复的。</p>
-<p>这是Harness工程的学习循环。</p>
+<p>这是Harness工程的学习循环。当我们自己作为一个初级工程师的时候也是通过 IDE 的配置，lint ，ci cd 的日志和各类文档中学习和成长的。</p>
 <hr>
 <h2 id="Harness工程的实践步骤"><a href="#Harness工程的实践步骤" class="headerlink" title="Harness工程的实践步骤"></a>Harness工程的实践步骤</h2><p>那么，如何开始实践Harness工程？</p>
 <h3 id="第一步：记录错误"><a href="#第一步：记录错误" class="headerlink" title="第一步：记录错误"></a>第一步：记录错误</h3><p>每次AI犯错误，记录下来。</p>
@@ -337,13 +331,12 @@ public void setTag(String tag) {
 <h3 id="第四步：持续改进"><a href="#第四步：持续改进" class="headerlink" title="第四步：持续改进"></a>第四步：持续改进</h3><p>Harness工程不是一次性的项目。它是一个持续的过程。</p>
 <p>每次发现新的错误，都要更新你的Harness目录。</p>
 <hr>
-<h2 id="与韦青的工具箱的对应"><a href="#与韦青的工具箱的对应" class="headerlink" title="与韦青的工具箱的对应"></a>与韦青的工具箱的对应</h2><p>Harness工程与韦青的”错误三分法”完全对应：</p>
+<h2 id="惟以改过为能，不以无过为贵"><a href="#惟以改过为能，不以无过为贵" class="headerlink" title="惟以改过为能，不以无过为贵"></a>惟以改过为能，不以无过为贵</h2><p>当把 AI 作为一个系统或者协作者的时候，我们显然会需要有类似 mentor 一个新人的意识；我们希望参与协作的人是拥有成长型思维的人。</p>
 <ul>
 <li><strong>认错</strong>：承认错误发生了</li>
 <li><strong>知错</strong>：理解错误为什么会发生</li>
 <li><strong>改错</strong>：设计系统让错误不再发生</li>
 </ul>
-<p>韦青说：”惟以改过为能，不以无过为贵。”</p>
 <p>这正是Harness工程的核心思想。不要追求”从不犯错”，而要追求”从错误中学习，并且不再犯同样的错误”。</p>
 <hr>
 <h2 id="Harness工程的心态"><a href="#Harness工程的心态" class="headerlink" title="Harness工程的心态"></a>Harness工程的心态</h2><p>Harness工程不仅是一套技术，更是一种心态。</p>
@@ -359,10 +352,10 @@ public void setTag(String tag) {
 <p>让AI第一次就做对。这是Harness工程的目标。</p>
 <p>但Harness工程不仅仅是关于AI的。它也是关于我们自己的。</p>
 <p>它是关于我们如何从错误中学习。<br>它是关于我们如何设计更好的系统。<br>它是关于我们如何成为更好的工程师。</p>
-<p>在AI时代，我们的价值不在于写出完美的代码。而在于设计出让AI也能写出可靠代码的系统。</p>
+<p>在AI时代，我们的价值不在于写出完美的代码。而在于设计出让AI也能写出可靠代码的系统。构建和工程能力依然重要</p>
 <p>这就是Harness工程的真正意义。</p>
 <hr>
-<p><em>彪彪思语：不要把AI的错误当作麻烦。把它们当作构建更好系统的机会。每一个错误都是一次投资的机会。</em></p>
+<p><em>不要把AI的错误当作麻烦。把它们当作构建更好系统的机会。每一个错误都是一次投资的机会。</em></p>
 ]]></content>
       <categories>
         <category>裁云记</category>
