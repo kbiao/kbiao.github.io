@@ -6,7 +6,7 @@
   <link href="https://blog.kbiao.me/atom.xml" rel="self"/>
   
   <link href="https://blog.kbiao.me/"/>
-  <updated>2026-02-22T04:57:45.613Z</updated>
+  <updated>2026-02-23T05:35:07.354Z</updated>
   <id>https://blog.kbiao.me/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>从一次AI写的那个有Bug的API说起：Harness工程的小事洞察</title>
+    <link href="https://blog.kbiao.me/Harness%E5%B7%A5%E7%A8%8B%E2%80%94%E2%80%94Mitchell%20Hashimoto%E7%9A%84%E6%80%9D%E6%83%B3%E4%B8%8E%E5%AE%9E%E8%B7%B5-fbecce3925d9/"/>
+    <id>https://blog.kbiao.me/Harness%E5%B7%A5%E7%A8%8B%E2%80%94%E2%80%94Mitchell%20Hashimoto%E7%9A%84%E6%80%9D%E6%83%B3%E4%B8%8E%E5%AE%9E%E8%B7%B5-fbecce3925d9/</id>
+    <published>2026-02-23T06:15:00.000Z</published>
+    <updated>2026-02-23T05:35:07.354Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="一个小故事"><a href="#一个小故事" class="headerlink" title="一个小故事"></a>一个小故事</h2><p>上周我让AI写一个简单的API端点。</p><p>任务很简单：用户注册接口。</p><p>AI很快就写出了代码，看起来很完美：参数验证、错误处理、数据库操作，一应俱全。</p><p>我很满意，合并到了主分支。</p><p>然后生产环境很快就报错了。</p><p>问题是：当用户名为空字符串的时候，代码会创建一个用户名为空的用户。</p><p>AI没有处理这个边界情况。</p><p>我的第一反应是：”AI怎么这么蠢？”</p><p>然后我修复了这个Bug。</p><p>故事到这里就结束了。</p><p>但几天之后，同样的Bug又出现了。</p><p>这次是在另一个API端点。</p><p>这次是邮箱格式验证有问题。</p><p>我又修复了。</p><p>同样的模式，第三次出现了。</p><p>这次我意识到：问题不在AI。问题在我。</p><p>我只是在修复症状，而没有解决根本原因。</p><p>这就是我意识到：Harness工程的价值。</p><hr><h2 id="Mitchell-Hashimoto是谁？"><a href="#Mitchell-Hashimoto是谁？" class="headerlink" title="Mitchell Hashimoto是谁？"></a>Mitchell Hashimoto是谁？</h2><p>Mitchell Hashimoto是HashiCorp的创始人，他创造了Vagrant、Terraform等革命性的基础设施即代码工具。</p><p>但在AI时代，他最有价值的贡献可能不是这些工具，而是他关于如何让Agent更可靠的思想。</p><p>这就是Harness工程。</p><hr><h2 id="Harness工程的核心思想"><a href="#Harness工程的核心思想" class="headerlink" title="Harness工程的核心思想"></a>Harness工程的核心思想</h2><p>Harness工程的核心思想非常简单，但非常深刻：</p><blockquote><p>**不要把AI的错误当作”一次性”问题。每次发现错误，都要设计一个系统来防止它再次发生。</p></blockquote><p>这是一个范式转变。</p><p>从：</p><ul><li>AI犯了一个错误</li><li>我来修复它</li><li>继续</li></ul><p>到：</p><ul><li>AI犯了一个错误</li><li>我来理解它为什么会犯这个错误</li><li>我设计一个系统让它永远不会再犯这个错误</li><li>我把这个系统添加到我的Harness目录中</li><li>继续</li></ul><p>这是从”反应式”到”主动式”的转变。</p><hr><h2 id="回到那个API的故事"><a href="#回到那个API的故事" class="headerlink" title="回到那个API的故事"></a>回到那个API的故事</h2><p>让我们回到那个API的故事。</p><p>**第一次，我只是修复了那个Bug。</p><p><strong>第二次</strong>，同样的Bug又出现了。</p><p><strong>第三次</strong>，我决定用Harness工程的方式来处理。</p><p>我没有只修复Bug。我设计了一个系统：</p><ol><li><strong>记录错误</strong>：AI在写API端点时，经常忘记处理边界情况</li><li><strong>理解原因</strong>：我的提示词不够明确，没有要求处理边界情况</li><li><strong>设计护栏</strong>：<ul><li>更新提示词模板，开头第一句就是：”请确保处理所有边界情况，包括但不限于：空字符串、null、undefined、空数组、空对象”</li><li>创建检查清单，包含”是否处理了边界情况？”</li><li>添加自动化测试，验证边界情况</li></ul></li><li><strong>测试护栏</strong>：用过去的例子测试，确保护栏有效</li><li><strong>持续改进</strong>：未来如果发现其他类型的错误，继续更新Harness目录</li></ol><p>从那以后，同样的Bug再也没有出现过。</p><p>一次投资，永久受益。</p><hr><h2 id="为什么Harness工程重要？"><a href="#为什么Harness工程重要？" class="headerlink" title="为什么Harness工程重要？"></a>为什么Harness工程重要？</h2><p>在AI时代，Harness工程之所以重要，有三个原因：</p><h3 id="1-AI的错误模式是可预测的"><a href="#1-AI的错误模式是可预测的" class="headerlink" title="1. AI的错误模式是可预测的"></a>1. AI的错误模式是可预测的</h3><p>AI不会随机犯错。它会犯系统性的错误。</p><p>如果你发现AI在某件事上犯了错误，很可能它会在类似的事情上再次犯同样的错误。</p><p>Harness工程就是要识别这些模式，并设计系统来防止它们。</p><h3 id="2-规模效应"><a href="#2-规模效应" class="headerlink" title="2. 规模效应"></a>2. 规模效应</h3><p>如果你手动修复AI的每个错误，你会很累。</p><p>但如果你设计一个系统来防止这类错误，那么这个系统会在未来的所有时间里持续保护你。</p><p>这就是规模效应。一次投资，永久受益。</p><h3 id="3-信任建立"><a href="#3-信任建立" class="headerlink" title="3. 信任建立"></a>3. 信任建立</h3><p>当AI第一次就做对时，你对它的信任会增加。</p><p>Harness工程就是要让AI尽可能第一次就做对。</p><hr><h2 id="Harness目录应该包含什么？"><a href="#Harness目录应该包含什么？" class="headerlink" title="Harness目录应该包含什么？"></a>Harness目录应该包含什么？</h2><p>Mitchell Hashimoto没有明确说Harness目录应该包含什么，但基于他的思想，这里有一些建议：</p><h3 id="1-Prompts（提示词库）"><a href="#1-Prompts（提示词库）" class="headerlink" title="1. Prompts（提示词库）"></a>1. Prompts（提示词库）</h3><p>好的提示词是Harness工程的基础。</p><p>不要把提示词当作”一次性”的东西。把它们当作代码一样管理：</p><ul><li>版本控制</li><li>测试</li><li>文档化</li></ul><h3 id="2-Scripts（可执行脚本）"><a href="#2-Scripts（可执行脚本）" class="headerlink" title="2. Scripts（可执行脚本）"></a>2. Scripts（可执行脚本）</h3><p>有些任务最好通过脚本来完成，而不是让AI来做。</p><p>把这些脚本放在Harness目录中，让AI可以调用它们。</p><h3 id="3-Templates（代码模板）"><a href="#3-Templates（代码模板）" class="headerlink" title="3. Templates（代码模板）"></a>3. Templates（代码模板）</h3><p>对于常见的模式，创建模板。</p><p>这样AI就不需要从零开始，而是从一个已知良好的起点开始。</p><h3 id="4-Checklists（检查清单）"><a href="#4-Checklists（检查清单）" class="headerlink" title="4. Checklists（检查清单）"></a>4. Checklists（检查清单）</h3><p>在AI完成任务后，用检查清单来验证。</p><p>这是最后的防线。</p><h3 id="5-Guardrails（护栏）"><a href="#5-Guardrails（护栏）" class="headerlink" title="5. Guardrails（护栏）"></a>5. Guardrails（护栏）</h3><p>定义AI不能做什么。</p><p>这是预防性的Harness。</p><h3 id="6-Feedback（反馈记录）"><a href="#6-Feedback（反馈记录）" class="headerlink" title="6. Feedback（反馈记录）"></a>6. Feedback（反馈记录）</h3><p>记录AI犯的错误，以及你是如何修复的。</p><p>这是Harness工程的学习循环。</p><hr><h2 id="Harness工程的实践步骤"><a href="#Harness工程的实践步骤" class="headerlink" title="Harness工程的实践步骤"></a>Harness工程的实践步骤</h2><p>那么，如何开始实践Harness工程？</p><h3 id="第一步：记录错误"><a href="#第一步：记录错误" class="headerlink" title="第一步：记录错误"></a>第一步：记录错误</h3><p>每次AI犯错误，记录下来。</p><p>包括：</p><ul><li>错误是什么</li><li>为什么会发生</li><li>你如何修复它</li><li>你如何防止它再次发生</li></ul><p>这是Harness工程的基础数据。</p><h3 id="第二步：设计护栏"><a href="#第二步：设计护栏" class="headerlink" title="第二步：设计护栏"></a>第二步：设计护栏</h3><p>基于记录的错误，设计护栏。</p><p>护栏可以是：</p><ul><li>更明确的提示词</li><li>检查清单</li><li>自动化测试</li><li>约束条件</li></ul><h3 id="第三步：测试护栏"><a href="#第三步：测试护栏" class="headerlink" title="第三步：测试护栏"></a>第三步：测试护栏</h3><p>不要假设护栏会工作。测试它们。</p><p>用过去的错误来测试你的护栏，确保它们能防止类似的错误。</p><h3 id="第四步：持续改进"><a href="#第四步：持续改进" class="headerlink" title="第四步：持续改进"></a>第四步：持续改进</h3><p>Harness工程不是一次性的项目。它是一个持续的过程。</p><p>每次发现新的错误，都要更新你的Harness目录。</p><hr><h2 id="与韦青的工具箱的对应"><a href="#与韦青的工具箱的对应" class="headerlink" title="与韦青的工具箱的对应"></a>与韦青的工具箱的对应</h2><p>Harness工程与韦青的”错误三分法”完全对应：</p><ul><li><strong>认错</strong>：承认错误发生了</li><li><strong>知错</strong>：理解错误为什么会发生</li><li><strong>改错</strong>：设计系统让错误不再发生</li></ul><p>韦青说：”惟以改过为能，不以无过为贵。”</p><p>这正是Harness工程的核心思想。不要追求”从不犯错”，而要追求”从错误中学习，并且不再犯同样的错误”。</p><hr><h2 id="Harness工程的心态"><a href="#Harness工程的心态" class="headerlink" title="Harness工程的心态"></a>Harness工程的心态</h2><p>Harness工程不仅是一套技术，更是一种心态。</p><p>这种心态包括：</p><h3 id="1-长期思维"><a href="#1-长期思维" class="headerlink" title="1. 长期思维"></a>1. 长期思维</h3><p>不要只看眼前的错误。要看这个错误在未来会重复多少次。</p><h3 id="2-系统思维"><a href="#2-系统思维" class="headerlink" title="2. 系统思维"></a>2. 系统思维</h3><p>不要只修复错误。要修复产生错误的系统。</p><h3 id="3-学习心态"><a href="#3-学习心态" class="headerlink" title="3. 学习心态"></a>3. 学习心态</h3><p>不要把错误当作失败。把它们当作学习的机会。</p><h3 id="4-投资心态"><a href="#4-投资心态" class="headerlink" title="4. 投资心态"></a>4. 投资心态</h3><p>把Harness工程当作投资。现在花时间，未来节省更多时间。</p><hr><h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><blockquote><p>“Agents are much more efficient when they produce the right result the first time.”</p></blockquote><p>让AI第一次就做对。这是Harness工程的目标。</p><p>但Harness工程不仅仅是关于AI的。它也是关于我们自己的。</p><p>它是关于我们如何从错误中学习。<br>它是关于我们如何设计更好的系统。<br>它是关于我们如何成为更好的工程师。</p><p>在AI时代，我们的价值不在于写出完美的代码。而在于设计出让AI也能写出可靠代码的系统。</p><p>这就是Harness工程的真正意义。</p><hr><p><em>彪彪思语：不要把AI的错误当作麻烦。把它们当作构建更好系统的机会。每一个错误都是一次投资的机会。</em></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;一个小故事&quot;&gt;&lt;a href=&quot;#一个小故事&quot; class=&quot;headerlink&quot; title=&quot;一个小故事&quot;&gt;&lt;/a&gt;一个小故事&lt;/h2&gt;&lt;p&gt;上周我让AI写一个简单的API端点。&lt;/p&gt;
+&lt;p&gt;任务很简单：用户注册接口。&lt;/p&gt;
+&lt;p&gt;AI很快就写出了代码，</summary>
+      
+    
+    
+    
+    <category term="裁云记" scheme="https://blog.kbiao.me/categories/%E8%A3%81%E4%BA%91%E8%AE%B0/"/>
+    
+    
+    <category term="AI" scheme="https://blog.kbiao.me/tags/AI/"/>
+    
+    <category term="Harness工程" scheme="https://blog.kbiao.me/tags/Harness%E5%B7%A5%E7%A8%8B/"/>
+    
+    <category term="Mitchell Hashimoto" scheme="https://blog.kbiao.me/tags/Mitchell-Hashimoto/"/>
+    
+    <category term="系统设计" scheme="https://blog.kbiao.me/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/"/>
+    
+  </entry>
   
   <entry>
     <title>从LLM到Agents再到Claws——三层堆栈里的工程师机会</title>
@@ -60,11 +92,11 @@
     <category term="技术人生" scheme="https://blog.kbiao.me/categories/%E6%8A%80%E6%9C%AF%E4%BA%BA%E7%94%9F/"/>
     
     
+    <category term="AI" scheme="https://blog.kbiao.me/tags/AI/"/>
+    
     <category term="RSS" scheme="https://blog.kbiao.me/tags/RSS/"/>
     
     <category term="早报" scheme="https://blog.kbiao.me/tags/%E6%97%A9%E6%8A%A5/"/>
-    
-    <category term="AI" scheme="https://blog.kbiao.me/tags/AI/"/>
     
     <category term="技术" scheme="https://blog.kbiao.me/tags/%E6%8A%80%E6%9C%AF/"/>
     
@@ -89,11 +121,11 @@
     <category term="技术人生" scheme="https://blog.kbiao.me/categories/%E6%8A%80%E6%9C%AF%E4%BA%BA%E7%94%9F/"/>
     
     
+    <category term="AI" scheme="https://blog.kbiao.me/tags/AI/"/>
+    
     <category term="RSS" scheme="https://blog.kbiao.me/tags/RSS/"/>
     
     <category term="早报" scheme="https://blog.kbiao.me/tags/%E6%97%A9%E6%8A%A5/"/>
-    
-    <category term="AI" scheme="https://blog.kbiao.me/tags/AI/"/>
     
     <category term="技术" scheme="https://blog.kbiao.me/tags/%E6%8A%80%E6%9C%AF/"/>
     
@@ -118,11 +150,11 @@
     <category term="技术人生" scheme="https://blog.kbiao.me/categories/%E6%8A%80%E6%9C%AF%E4%BA%BA%E7%94%9F/"/>
     
     
+    <category term="AI" scheme="https://blog.kbiao.me/tags/AI/"/>
+    
     <category term="RSS" scheme="https://blog.kbiao.me/tags/RSS/"/>
     
     <category term="早报" scheme="https://blog.kbiao.me/tags/%E6%97%A9%E6%8A%A5/"/>
-    
-    <category term="AI" scheme="https://blog.kbiao.me/tags/AI/"/>
     
     <category term="技术" scheme="https://blog.kbiao.me/tags/%E6%8A%80%E6%9C%AF/"/>
     
@@ -469,32 +501,6 @@
 &lt;p&gt;&lt;em&gt;&lt;em&gt;在微信平台阅读的同学，由于平台限制无法直接跳转，我把链接直接放在博客中，读完正文后可以通过原文链接获取三篇推荐的原文地址。&lt;/em&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;今天的分享包含架构设计和Java进阶相关主题。这几篇文章的重点不在与分享知识点，而是通过分享工程的经历来带给你思考。工程能力其实就是解决问题的能力。&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="全干工程师的收藏夹" scheme="https://blog.kbiao.me/categories/%E5%85%A8%E5%B9%B2%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E6%94%B6%E8%97%8F%E5%A4%B9/"/>
-    
-    
-    <category term="阅读" scheme="https://blog.kbiao.me/tags/%E9%98%85%E8%AF%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>全干工程师的收藏夹【第一期】</title>
-    <link href="https://blog.kbiao.me/%E5%85%A8%E5%B9%B2%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E6%94%B6%E8%97%8F%E5%A4%B9%E3%80%90%E7%AC%AC%E4%B8%80%E6%9C%9F%E3%80%91-c1d58876ec84/"/>
-    <id>https://blog.kbiao.me/%E5%85%A8%E5%B9%B2%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E6%94%B6%E8%97%8F%E5%A4%B9%E3%80%90%E7%AC%AC%E4%B8%80%E6%9C%9F%E3%80%91-c1d58876ec84/</id>
-    <published>2018-07-24T12:21:41.000Z</published>
-    <updated>2026-02-22T03:20:16.362Z</updated>
-    
-    <content type="html"><![CDATA[<p>我是一个预备役码农，这是我新做的的一个小项目。把每天阅读很多的文章，选出一些值得思考的内容做推荐。针对每篇文章我会写一小段中文简评，督促自己认真阅读的同时也给同为码农的你一些参考。我觉得码农才能知道码农的需要，而我作为被老师誉为“全干工程师”预备役码农，方方面面都会有所涉猎。</p><p>今天是全干工程师阅读分享的第一期，这里会记录我看到的值得分享的文章，期待和你一起进步！阅读本期所有文章需35分钟。</p><p><em><em>在微信平台阅读的同学，由于平台限制无法直接跳转，我把链接直接放在博客中，读完正文后可以通过原文链接获取三篇推荐的原文地址。</em></em></p><blockquote><p>今天的三个文章背后共同的主题是选型和决策。工程师的任务就是在现实的约束下去求解问题，很多时候我们学习的教条式的知识让我们总忍不住去找最佳实践，而忽略了工程师的本职。我以为科学家的要义是在理想条件下寻找极限，工程师的任务是在现实条件下寻求平衡。为什么这个问题对于科学家和工程师来讲一样重要。</p></blockquote><span id="more"></span><hr><h3 id="MySQL在GitHub的高可用性"><a href="#MySQL在GitHub的高可用性" class="headerlink" title="MySQL在GitHub的高可用性"></a><a href="https://githubengineering.com/mysql-high-availability-at-github/">MySQL在GitHub的高可用性</a></h3><p><img data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532446882722&di=7ac3f62eb8fc4a4ce70de14843931ed3&imgtype=jpg&src=http://img4.imgtn.bdimg.com/it/u=1140509074,84803110&fm=214&gp=0.jpg" alt="mysql"></p><p>架构设计的主要目的是为了解决软件系统复杂度带来的问题。复杂度的主要来源包括高性能，高扩展和高可用以及成本安全等方面的考虑。本文阐述了GitHub的MySQL高可用性和主服务发现解决方案，这个方案使得我们能够可靠地进行跨数据中心运维、克服数据中心隔离的影响并实现故障时的短宕机时间。现实的案例的演进过程可以让我们学习到每个决策背后的原因，而不是一味的为了高大上而去设计架构，做到有据可依。</p><blockquote><p>原链：<a href="https://githubengineering.com/mysql-high-availability-at-github/">https://githubengineering.com/mysql-high-availability-at-github/</a>  约15分钟读完</p></blockquote><hr><h3 id="为什么说JSON不是一门好的配置语言"><a href="#为什么说JSON不是一门好的配置语言" class="headerlink" title="为什么说JSON不是一门好的配置语言"></a><a href="https://www.lucidchart.com/techblog/2018/07/16/why-json-isnt-a-good-configuration-language/">为什么说JSON不是一门好的配置语言</a></h3><p><img data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532447581070&di=ac5e7de29f2ca1dcc25edfb7dcb2ee1e&imgtype=jpg&src=http://img2.imgtn.bdimg.com/it/u=3849388262,3599136548&fm=214&gp=0.jpg" alt="json"></p><p>优劣之争总是一个很有意思的话题。本文的角度不是一般的语言框架的问题，而是一个通用的配置文件的组织结构。任何一个方案都要放在一个具体的场景下去讨论才有意义，json作为一种通用数据交换格式无疑是非常有效率的，也几乎成为了restful设计的事实通信标准。但是，在作为配置文件的角度来说它却不是那么完美。作者分析了json的一些缺点后也给出了推荐的解决方案，虽然我们不是每个人都有机会构建自己的框架或者库，但是这些理由在我们日后决策之时必然可以提示一些思考的方向。</p><blockquote><p>原链：<a href="https://www.lucidchart.com/techblog/2018/07/16/why-json-isnt-a-good-configuration-language/">https://www.lucidchart.com/techblog/2018/07/16/why-json-isnt-a-good-configuration-language/</a>  约8分钟读完</p></blockquote><hr><h3 id="Vue和React大比拼"><a href="#Vue和React大比拼" class="headerlink" title="Vue和React大比拼"></a><a href="https://mp.weixin.qq.com/s?__biz=MzUxMzcxMzE5Ng==&mid=2247489220&idx=1&sn=495ed9f9278f92bd671ea54ca30df2ae&chksm=f951a387ce262a91a13328c9420777e90c285078ac1c5a4456ef31e5003df271e682812dc6e3#rd">Vue和React大比拼</a></h3><p><img data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532447876248&di=b3aa83dd2b2ad57365a0bee4595d475e&imgtype=0&src=http://p0.qhimg.com/t016ed168688ebc74f8.jpg" alt="Vue 和React 大比拼"></p><p>前端圈内的争斗从未休止，在做技术选型之时总是一个逃不开的话题。vue的官方文档中也附带了一篇与其他框架对比的文章。这一篇文章相对来说比较客观和全面，集中讨论vue与react的异同（angular已经不在讨论范围了么？？版本更新大家hold不住了吧）。每个框架设计要解决的主要问题不尽相同，解决问题相同时候使用的策略也不相同，这就决定了他们场景的差异，一味支持谁终将变成黑粉。码农到工程师的进化应该主要体现在能结合现实场景去考虑问题吧。</p><blockquote><p>原链：<a href="https://mp.weixin.qq.com/s?__biz=MzUxMzcxMzE5Ng==&mid=2247489220&idx=1&sn=495ed9f9278f92bd671ea54ca30df2ae&chksm=f951a387ce262a91a13328c9420777e90c285078ac1c5a4456ef31e5003df271e682812dc6e3#rd">https://mp.weixin.qq.com/s?__biz=MzUxMzcxMzE5Ng==&amp;mid=2247489220&amp;idx=1&amp;sn=495ed9f9278f92bd671ea54ca30df2ae&amp;chksm=f951a387ce262a91a13328c9420777e90c285078ac1c5a4456ef31e5003df271e682812dc6e3#rd</a>  约10分钟读完</p></blockquote><hr><h3 id="原文链接："><a href="#原文链接：" class="headerlink" title="原文链接："></a>原文链接：</h3><ul><li><a href="https://githubengineering.com/mysql-high-availability-at-github/">（一）MySQL在GitHub的高可用性</a></li><li><a href="https://www.lucidchart.com/techblog/2018/07/16/why-json-isnt-a-good-configuration-language/">（二）为什么说JSON不是一门好的配置语言</a></li><li><a href="https://mp.weixin.qq.com/s?__biz=MzUxMzcxMzE5Ng==&mid=2247489220&idx=1&sn=495ed9f9278f92bd671ea54ca30df2ae&chksm=f951a387ce262a91a13328c9420777e90c285078ac1c5a4456ef31e5003df271e682812dc6e3#rd">（三）Vue和React大比拼</a></li></ul><hr>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;我是一个预备役码农，这是我新做的的一个小项目。把每天阅读很多的文章，选出一些值得思考的内容做推荐。针对每篇文章我会写一小段中文简评，督促自己认真阅读的同时也给同为码农的你一些参考。我觉得码农才能知道码农的需要，而我作为被老师誉为“全干工程师”预备役码农，方方面面都会有所涉猎。&lt;/p&gt;
-&lt;p&gt;今天是全干工程师阅读分享的第一期，这里会记录我看到的值得分享的文章，期待和你一起进步！阅读本期所有文章需35分钟。&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;&lt;em&gt;在微信平台阅读的同学，由于平台限制无法直接跳转，我把链接直接放在博客中，读完正文后可以通过原文链接获取三篇推荐的原文地址。&lt;/em&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;今天的三个文章背后共同的主题是选型和决策。工程师的任务就是在现实的约束下去求解问题，很多时候我们学习的教条式的知识让我们总忍不住去找最佳实践，而忽略了工程师的本职。我以为科学家的要义是在理想条件下寻找极限，工程师的任务是在现实条件下寻求平衡。为什么这个问题对于科学家和工程师来讲一样重要。&lt;/p&gt;
 &lt;/blockquote&gt;</summary>
     
     
