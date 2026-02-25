@@ -2638,134 +2638,6 @@ public void setTag(String tag) {
       </tags>
   </entry>
   <entry>
-    <title>严谨性去了哪里？——当AI写代码时，工程质量如何保证</title>
-    <url>/%E4%B8%A5%E8%B0%A8%E6%80%A7%E5%8E%BB%E4%BA%86%E5%93%AA%E9%87%8C%EF%BC%9F%E2%80%94%E2%80%94%E5%BD%93AI%E5%86%99%E4%BB%A3%E7%A0%81%E6%97%B6%EF%BC%8C%E5%B7%A5%E7%A8%8B%E8%B4%A8%E9%87%8F%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81-efd2bc7f4f2b/</url>
-    <content><![CDATA[<blockquote>
-<p>“We kept asking the same question in every room: if AI handles the code, where does the engineering actually go? Nobody had the same answer. But everybody agreed the question is urgent.”</p>
-<p>—— The Future of Software Engineering Retreat, February 2026</p>
-</blockquote>
-<h2 id="一个让人焦虑的问题"><a href="#一个让人焦虑的问题" class="headerlink" title="一个让人焦虑的问题"></a>一个让人焦虑的问题</h2><p>through works 最近组织一批专家做了一个关于软件工程未来的研讨，大家毫不怀疑 AI 会在不远的时间内接管大部分代码工作；大家都有一个隐隐的焦虑：AI写代码确实快，但是——<strong>质量怎么保证？</strong></p>
-<p>以前我们写代码，每一行都经过深思熟虑。代码审查时，我们会盯着每一行看：边界情况处理了吗？有没有性能问题？符合架构原则吗？</p>
-<p>现在倒好，AI几分钟就能生成几百行代码。看起来很完美，参数验证、错误处理、数据库操作，一应俱全。目测很满意，合并到了主分支。</p>
-<p>然后生产环境很快就报错了。</p>
-<p>你是不是也有过这样的经历：AI写的代码，第一次看觉得”哇，这么完美”，上线后发现”AI怎么这么蠢？这么简单的边界情况都没处理？”</p>
-<p>问题来了：<strong>当AI开始写代码时，那些曾经体现在编写和审查代码中的工程严谨性，去了哪里？</strong></p>
-<span id="more"></span>
-
-<h2 id="答案：严谨性没有消失，它只是迁移了"><a href="#答案：严谨性没有消失，它只是迁移了" class="headerlink" title="答案：严谨性没有消失，它只是迁移了"></a>答案：严谨性没有消失，它只是迁移了</h2><p>thought works 专家们推演当代码生产不再是问题，那么软件工程中曾经体现在编码和Code Review 中的工程规范并不会消失 ：<strong>工程严谨性没有消失，它只是换了个地方。</strong></p>
-<p>就像运维系统一样，以前我们是”出现故障 → 人工修复”，现在我们是”出现故障 → 分析根因 → 设计监控 → 自动告警”。</p>
-<p>与AI协作也是一样。不要只修复症状，要解决根本原因。</p>
-<p>工程严谨性从代码本身向上游和下游迁移，找到了五个新的归宿。</p>
-<hr>
-<h2 id="严谨性迁移的五个目的地"><a href="#严谨性迁移的五个目的地" class="headerlink" title="严谨性迁移的五个目的地"></a>严谨性迁移的五个目的地</h2><h3 id="1-上游到规范审查"><a href="#1-上游到规范审查" class="headerlink" title="1. 上游到规范审查"></a>1. 上游到规范审查</h3><p><strong>核心洞察</strong>：如果AI从规范生成代码，那么规范现在就是捕获错误的最高杠杆工件。糟糕的规范会大规模产生糟糕的代码。</p>
-<p>这是一个深刻的范式转变。</p>
-<p>以前我们的工作流程是：</p>
-<ol>
-<li>产品经理写一个模糊的用户故事：”作为一个用户，我想登录系统”</li>
-<li>开发者把它翻译成代码，中间要补全无数细节</li>
-<li>代码审查发现问题，反复修改</li>
-<li>终于上线了</li>
-</ol>
-<p>现在这个流程变成了：</p>
-<ol>
-<li><strong>写一个精确的规范</strong>（这是新的关键步骤）</li>
-<li>AI从规范生成代码</li>
-<li>测试验证代码是否符合规范</li>
-</ol>
-<p>传统的用户故事太模糊了。”作为一个用户，我想登录系统”——这样的描述对于AI来说太不精确了。</p>
-<p>一些团队正在采用结构化方法，如 <strong>EARS（Easy Approach to Requirements Syntax）</strong>、状态机和决策表。这些不是新技术，但它们被重新发现，因为它们为AI Agent提供了足够的精度来产生正确的实现。</p>
-<p>当然更流行的概念是 做 spec 驱动开发，把严谨的描述转移向需求拆解的文字中，要求文字尽可能有如同代码般的编译执行正交逻辑。这种场景是已经在发生，不少团队推动 sdd 流程，但是写代码转成写文字会让这个工作更高效更有价值吗？ </p>
-<h3 id="2-进入测试流程成为一等公民"><a href="#2-进入测试流程成为一等公民" class="headerlink" title="2. 进入测试流程成为一等公民"></a>2. 进入测试流程成为一等公民</h3><p><strong>核心洞察</strong>：测试驱动开发（TDD）从AI编码Agent中产生了显著更好的结果。TDD防止了Agent编写验证错误行为的测试的失败模式。</p>
-<blockquote>
-<p>“I’ve gotten better results from TDD and agent coding than I’ve ever gotten anywhere else, because it stops a particular mental error where the agent writes a test that verifies the broken behavior.”</p>
-</blockquote>
-<p>TDD不是新技术，它已经存在了二十年。但在AI时代，它被重新定义为一种<strong>提示工程形式</strong>。 </p>
-<p>关键观点：</p>
-<ul>
-<li>TDD被重新定义为一种提示工程形式</li>
-<li>测试成为非确定性生成的确定性验证</li>
-<li>一些从业者将审查工作完全转移到测试套件，将生成的代码视为可消耗的</li>
-<li>如果测试正确且代码通过测试，无论代码看起来如何，代码都是可接受的</li>
-</ul>
-<p>这正好对应我之前关注的 <strong>Harness工程</strong>——任何时候你发现Agent犯错，你都要花时间设计一个解决方案，使Agent永远不会再犯那个错误。</p>
-<p>最近有不少博客提到这类重构或者实验，这确实是值得深入的方向，因为 AI 写代码确实快了，TDD 额外的工作仍然是代码，那么以前写测试代码本身的复杂度和可行性也变高了，具体的执行落地方式还有待探讨。</p>
-<h3 id="3-进入类型系统和约束"><a href="#3-进入类型系统和约束" class="headerlink" title="3. 进入类型系统和约束"></a>3. 进入类型系统和约束</h3><p><strong>核心洞察</strong>：与其在生成后审查代码，从业者正在探索如何使错误的代码无法表示。这借鉴了形式化方法和强类型系统的思想，不是作为学术练习，而是作为Agent输出的实用护栏。</p>
-<p>这里有一个重要的区分：</p>
-<ul>
-<li><strong>规范</strong>：描述应该改变什么</li>
-<li><strong>约束</strong>：定义允许更改的有界上下文，包括必须不接触的内容</li>
-</ul>
-<p>约束的价值：</p>
-<ul>
-<li>限制爆炸半径</li>
-<li>让Agent安全地跨域边界工作</li>
-<li>当必须打破约束时，它标志着新的系统边界并提示重构</li>
-</ul>
-<p>这种我的理解是仍然在技术探讨阶段，类似云原生编程的语言（go，rust），也许会有 Agent Native 的编程范式出现。目前的约束是体现在 agent 的提示词中的概率性保护，而没有落地到语言和执行层面的安全。</p>
-<h3 id="4-进入风险映射"><a href="#4-进入风险映射" class="headerlink" title="4. 进入风险映射"></a>4. 进入风险映射</h3><p><strong>核心洞察</strong>：不是所有代码都承担相同的风险。按业务爆炸半径对代码进行分层，区分内部工具、面向外部的服务和安全关键系统。</p>
-<blockquote>
-<p>“Instead of asking ‘did someone review this code?’ organizations need to ask ‘what is the blast radius if this code is wrong, and is our verification proportional to that risk?’”</p>
-</blockquote>
-<p><strong>范式转变</strong>：</p>
-<ul>
-<li>从工艺模型（每一行都是手工审查）→ 风险管理模型（验证投资与曝光度匹配）</li>
-</ul>
-<p>内部系统， B 端业务的中后台管理系统确实是在当前 AI 浪潮下最快实践大模型提效的业务选择。这些业务传统上对于质量和发布流程的管控就较弱，更快的处理比更严谨的修复更重要。</p>
-<h3 id="5-进入持续理解"><a href="#5-进入持续理解" class="headerlink" title="5. 进入持续理解"></a>5. 进入持续理解</h3><p><strong>核心洞察</strong>：如果代码变化的速度超过了人类可以审查的速度，那么通过代码审查构建心智模型的传统模式就会崩溃。</p>
-<p>替代方案：</p>
-<ul>
-<li>每周架构回顾</li>
-<li>多人同时在同一代码上工作的结对编程</li>
-<li>AI辅助的代码理解工具，按需生成系统概述</li>
-</ul>
-<p>深层担忧：</p>
-<ul>
-<li>代码审查历史上既是学习机制，也是质量门</li>
-<li>指导、共享理解和代码库熟悉度都是通过审查发生的</li>
-<li>失去这个渠道而不替换它会造成随着时间推移而累积的理解差距</li>
-</ul>
-<blockquote>
-<p>“Paired programming solves all of this. If it’s important to understand the system, then do it all the time. You don’t do it in little phases where you have your code review. Constantly trying to understand what this code is doing.”</p>
-</blockquote>
-<p>就像 DevOps 的思想推动 CI CD 的实施 ， 如果人对业务系统始终需要深入的理解和掌控，那么业务和架构的理解就不能只发生在评审阶段，需要在所有的环节建立对系统的合适抽象层级的理解和反馈。</p>
-<hr>
-<h2 id="这不是关于信任，而是关于验证"><a href="#这不是关于信任，而是关于验证" class="headerlink" title="这不是关于信任，而是关于验证"></a>这不是关于信任，而是关于验证</h2><p>这些变化的核心是一个深刻的认识：<strong>在AI时代，工程严谨性不再体现在对代码的信任上，而是体现在对验证的投资上。</strong></p>
-<p>我们不再问：”这个人写的代码可信吗？”</p>
-<p>我们开始问：</p>
-<ul>
-<li>“这个规范足够精确吗？”</li>
-<li>“这个测试套件足够全面吗？”</li>
-<li>“这些约束足够严格吗？”</li>
-<li>“这个风险评估准确吗？”</li>
-<li>“我们对系统的理解足够深入吗？”</li>
-</ul>
-<p>工程严谨性不再体现在个人的技艺中，而是体现在系统的设计中。公司业务中我们也倾向于用系统设计，制度设计，流程设计去化解风险，追求确定性，而不是依赖一两个英雄人物救火。只是随着 AI 的进展，这样的要求已经深入每个一线工程师，而不是特定团队，领导，组织的职责。</p>
-<hr>
-<blockquote>
-<p>“The retreat didn’t produce a roadmap. It produced a shared understanding that the map is being redrawn and that the people best positioned to draw it are the ones willing to admit how much they don’t yet know.”</p>
-</blockquote>
-<p>工程严谨性没有消失。它只是换了个地方。</p>
-<p>它从代码本身，迁移到了规范、测试、约束、风险映射和持续理解中。</p>
-<p>这不是一个关于”失去”的故事。这是一个关于”重新发现”的故事。那些我们以为已经过时的，或者仅存在于教科书的理想技术（TDD、形式化方法、结构化规范），在AI时代突然变得重要且可行。</p>
-<p>而那些我们以为是核心的技能（编写特定语法的代码），可能变得不那么重要了。</p>
-<p>但有一样东西永远不会变：<strong>对本质的追求，对系统的思考，对质量的坚持。</strong></p>
-<p>这些才是工程严谨性的真正灵魂。无论代码是谁写的，这些灵魂永远不会过时。</p>
-<p>当AI开始写代码时，我们终于可以停止纠结于代码的表面，开始专注于工程的本质了。从”编写代码”转向”设计系统”，开发规范设计、测试设计、约束设计的技能，不是中高阶工程师的要求，是对每个工程师的基本要求。</p>
-<hr>
-<p><em>编辑：小龙 🐉 | 审校：彪彪 ✍️</em></p>
-]]></content>
-      <categories>
-        <category>裁云记</category>
-      </categories>
-      <tags>
-        <tag>AI</tag>
-        <tag>软件工程</tag>
-        <tag>严谨性</tag>
-        <tag>系统思维</tag>
-        <tag>工程质量</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>听雨早读 | 2026-02-25</title>
     <url>/%E5%90%AC%E9%9B%A8%E6%97%A9%E8%AF%BB-2026-02-25-97eb7fef9c80/</url>
     <content><![CDATA[<blockquote>
@@ -2913,6 +2785,134 @@ public void setTag(String tag) {
         <tag>Agentic工程</tag>
         <tag>测试</tag>
         <tag>净室实现</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>严谨性去了哪里？——当AI写代码时，工程质量如何保证</title>
+    <url>/%E4%B8%A5%E8%B0%A8%E6%80%A7%E5%8E%BB%E4%BA%86%E5%93%AA%E9%87%8C-fa6b5d402490/</url>
+    <content><![CDATA[<blockquote>
+<p>“We kept asking the same question in every room: if AI handles the code, where does the engineering actually go? Nobody had the same answer. But everybody agreed the question is urgent.”</p>
+<p>—— The Future of Software Engineering Retreat, February 2026</p>
+</blockquote>
+<h2 id="一个让人焦虑的问题"><a href="#一个让人焦虑的问题" class="headerlink" title="一个让人焦虑的问题"></a>一个让人焦虑的问题</h2><p>through works 最近组织一批专家做了一个关于软件工程未来的研讨，大家毫不怀疑 AI 会在不远的时间内接管大部分代码工作；大家都有一个隐隐的焦虑：AI写代码确实快，但是——<strong>质量怎么保证？</strong></p>
+<p>以前我们写代码，每一行都经过深思熟虑。代码审查时，我们会盯着每一行看：边界情况处理了吗？有没有性能问题？符合架构原则吗？</p>
+<p>现在倒好，AI几分钟就能生成几百行代码。看起来很完美，参数验证、错误处理、数据库操作，一应俱全。目测很满意，合并到了主分支。</p>
+<p>然后生产环境很快就报错了。</p>
+<p>你是不是也有过这样的经历：AI写的代码，第一次看觉得”哇，这么完美”，上线后发现”AI怎么这么蠢？这么简单的边界情况都没处理？”</p>
+<p>问题来了：<strong>当AI开始写代码时，那些曾经体现在编写和审查代码中的工程严谨性，去了哪里？</strong></p>
+<span id="more"></span>
+
+<h2 id="答案：严谨性没有消失，它只是迁移了"><a href="#答案：严谨性没有消失，它只是迁移了" class="headerlink" title="答案：严谨性没有消失，它只是迁移了"></a>答案：严谨性没有消失，它只是迁移了</h2><p>thought works 专家们推演当代码生产不再是问题，那么软件工程中曾经体现在编码和Code Review 中的工程规范并不会消失 ：<strong>工程严谨性没有消失，它只是换了个地方。</strong></p>
+<p>就像运维系统一样，以前我们是”出现故障 → 人工修复”，现在我们是”出现故障 → 分析根因 → 设计监控 → 自动告警”。</p>
+<p>与AI协作也是一样。不要只修复症状，要解决根本原因。</p>
+<p>工程严谨性从代码本身向上游和下游迁移，找到了五个新的归宿。</p>
+<hr>
+<h2 id="严谨性迁移的五个目的地"><a href="#严谨性迁移的五个目的地" class="headerlink" title="严谨性迁移的五个目的地"></a>严谨性迁移的五个目的地</h2><h3 id="1-上游到规范审查"><a href="#1-上游到规范审查" class="headerlink" title="1. 上游到规范审查"></a>1. 上游到规范审查</h3><p><strong>核心洞察</strong>：如果AI从规范生成代码，那么规范现在就是捕获错误的最高杠杆工件。糟糕的规范会大规模产生糟糕的代码。</p>
+<p>这是一个深刻的范式转变。</p>
+<p>以前我们的工作流程是：</p>
+<ol>
+<li>产品经理写一个模糊的用户故事：”作为一个用户，我想登录系统”</li>
+<li>开发者把它翻译成代码，中间要补全无数细节</li>
+<li>代码审查发现问题，反复修改</li>
+<li>终于上线了</li>
+</ol>
+<p>现在这个流程变成了：</p>
+<ol>
+<li><strong>写一个精确的规范</strong>（这是新的关键步骤）</li>
+<li>AI从规范生成代码</li>
+<li>测试验证代码是否符合规范</li>
+</ol>
+<p>传统的用户故事太模糊了。”作为一个用户，我想登录系统”——这样的描述对于AI来说太不精确了。</p>
+<p>一些团队正在采用结构化方法，如 <strong>EARS（Easy Approach to Requirements Syntax）</strong>、状态机和决策表。这些不是新技术，但它们被重新发现，因为它们为AI Agent提供了足够的精度来产生正确的实现。</p>
+<p>当然更流行的概念是 做 spec 驱动开发，把严谨的描述转移向需求拆解的文字中，要求文字尽可能有如同代码般的编译执行正交逻辑。这种场景是已经在发生，不少团队推动 sdd 流程，但是写代码转成写文字会让这个工作更高效更有价值吗？ </p>
+<h3 id="2-进入测试流程成为一等公民"><a href="#2-进入测试流程成为一等公民" class="headerlink" title="2. 进入测试流程成为一等公民"></a>2. 进入测试流程成为一等公民</h3><p><strong>核心洞察</strong>：测试驱动开发（TDD）从AI编码Agent中产生了显著更好的结果。TDD防止了Agent编写验证错误行为的测试的失败模式。</p>
+<blockquote>
+<p>“I’ve gotten better results from TDD and agent coding than I’ve ever gotten anywhere else, because it stops a particular mental error where the agent writes a test that verifies the broken behavior.”</p>
+</blockquote>
+<p>TDD不是新技术，它已经存在了二十年。但在AI时代，它被重新定义为一种<strong>提示工程形式</strong>。 </p>
+<p>关键观点：</p>
+<ul>
+<li>TDD被重新定义为一种提示工程形式</li>
+<li>测试成为非确定性生成的确定性验证</li>
+<li>一些从业者将审查工作完全转移到测试套件，将生成的代码视为可消耗的</li>
+<li>如果测试正确且代码通过测试，无论代码看起来如何，代码都是可接受的</li>
+</ul>
+<p>这正好对应我之前关注的 <strong>Harness工程</strong>——任何时候你发现Agent犯错，你都要花时间设计一个解决方案，使Agent永远不会再犯那个错误。</p>
+<p>最近有不少博客提到这类重构或者实验，这确实是值得深入的方向，因为 AI 写代码确实快了，TDD 额外的工作仍然是代码，那么以前写测试代码本身的复杂度和可行性也变高了，具体的执行落地方式还有待探讨。</p>
+<h3 id="3-进入类型系统和约束"><a href="#3-进入类型系统和约束" class="headerlink" title="3. 进入类型系统和约束"></a>3. 进入类型系统和约束</h3><p><strong>核心洞察</strong>：与其在生成后审查代码，从业者正在探索如何使错误的代码无法表示。这借鉴了形式化方法和强类型系统的思想，不是作为学术练习，而是作为Agent输出的实用护栏。</p>
+<p>这里有一个重要的区分：</p>
+<ul>
+<li><strong>规范</strong>：描述应该改变什么</li>
+<li><strong>约束</strong>：定义允许更改的有界上下文，包括必须不接触的内容</li>
+</ul>
+<p>约束的价值：</p>
+<ul>
+<li>限制爆炸半径</li>
+<li>让Agent安全地跨域边界工作</li>
+<li>当必须打破约束时，它标志着新的系统边界并提示重构</li>
+</ul>
+<p>这种我的理解是仍然在技术探讨阶段，类似云原生编程的语言（go，rust），也许会有 Agent Native 的编程范式出现。目前的约束是体现在 agent 的提示词中的概率性保护，而没有落地到语言和执行层面的安全。</p>
+<h3 id="4-进入风险映射"><a href="#4-进入风险映射" class="headerlink" title="4. 进入风险映射"></a>4. 进入风险映射</h3><p><strong>核心洞察</strong>：不是所有代码都承担相同的风险。按业务爆炸半径对代码进行分层，区分内部工具、面向外部的服务和安全关键系统。</p>
+<blockquote>
+<p>“Instead of asking ‘did someone review this code?’ organizations need to ask ‘what is the blast radius if this code is wrong, and is our verification proportional to that risk?’”</p>
+</blockquote>
+<p><strong>范式转变</strong>：</p>
+<ul>
+<li>从工艺模型（每一行都是手工审查）→ 风险管理模型（验证投资与曝光度匹配）</li>
+</ul>
+<p>内部系统， B 端业务的中后台管理系统确实是在当前 AI 浪潮下最快实践大模型提效的业务选择。这些业务传统上对于质量和发布流程的管控就较弱，更快的处理比更严谨的修复更重要。</p>
+<h3 id="5-进入持续理解"><a href="#5-进入持续理解" class="headerlink" title="5. 进入持续理解"></a>5. 进入持续理解</h3><p><strong>核心洞察</strong>：如果代码变化的速度超过了人类可以审查的速度，那么通过代码审查构建心智模型的传统模式就会崩溃。</p>
+<p>替代方案：</p>
+<ul>
+<li>每周架构回顾</li>
+<li>多人同时在同一代码上工作的结对编程</li>
+<li>AI辅助的代码理解工具，按需生成系统概述</li>
+</ul>
+<p>深层担忧：</p>
+<ul>
+<li>代码审查历史上既是学习机制，也是质量门</li>
+<li>指导、共享理解和代码库熟悉度都是通过审查发生的</li>
+<li>失去这个渠道而不替换它会造成随着时间推移而累积的理解差距</li>
+</ul>
+<blockquote>
+<p>“Paired programming solves all of this. If it’s important to understand the system, then do it all the time. You don’t do it in little phases where you have your code review. Constantly trying to understand what this code is doing.”</p>
+</blockquote>
+<p>就像 DevOps 的思想推动 CI CD 的实施 ， 如果人对业务系统始终需要深入的理解和掌控，那么业务和架构的理解就不能只发生在评审阶段，需要在所有的环节建立对系统的合适抽象层级的理解和反馈。</p>
+<hr>
+<h2 id="这不是关于信任，而是关于验证"><a href="#这不是关于信任，而是关于验证" class="headerlink" title="这不是关于信任，而是关于验证"></a>这不是关于信任，而是关于验证</h2><p>这些变化的核心是一个深刻的认识：<strong>在AI时代，工程严谨性不再体现在对代码的信任上，而是体现在对验证的投资上。</strong></p>
+<p>我们不再问：”这个人写的代码可信吗？”</p>
+<p>我们开始问：</p>
+<ul>
+<li>“这个规范足够精确吗？”</li>
+<li>“这个测试套件足够全面吗？”</li>
+<li>“这些约束足够严格吗？”</li>
+<li>“这个风险评估准确吗？”</li>
+<li>“我们对系统的理解足够深入吗？”</li>
+</ul>
+<p>工程严谨性不再体现在个人的技艺中，而是体现在系统的设计中。公司业务中我们也倾向于用系统设计，制度设计，流程设计去化解风险，追求确定性，而不是依赖一两个英雄人物救火。只是随着 AI 的进展，这样的要求已经深入每个一线工程师，而不是特定团队，领导，组织的职责。</p>
+<hr>
+<blockquote>
+<p>“The retreat didn’t produce a roadmap. It produced a shared understanding that the map is being redrawn and that the people best positioned to draw it are the ones willing to admit how much they don’t yet know.”</p>
+</blockquote>
+<p>工程严谨性没有消失。它只是换了个地方。</p>
+<p>它从代码本身，迁移到了规范、测试、约束、风险映射和持续理解中。</p>
+<p>这不是一个关于”失去”的故事。这是一个关于”重新发现”的故事。那些我们以为已经过时的，或者仅存在于教科书的理想技术（TDD、形式化方法、结构化规范），在AI时代突然变得重要且可行。</p>
+<p>而那些我们以为是核心的技能（编写特定语法的代码），可能变得不那么重要了。</p>
+<p>但有一样东西永远不会变：<strong>对本质的追求，对系统的思考，对质量的坚持。</strong></p>
+<p>这些才是工程严谨性的真正灵魂。无论代码是谁写的，这些灵魂永远不会过时。</p>
+<p>当AI开始写代码时，我们终于可以停止纠结于代码的表面，开始专注于工程的本质了。从”编写代码”转向”设计系统”，开发规范设计、测试设计、约束设计的技能，不是中高阶工程师的要求，是对每个工程师的基本要求。</p>
+<hr>
+<p><em>编辑：小龙 🐉 | 审校：彪彪 ✍️</em></p>
+]]></content>
+      <categories>
+        <category>裁云记</category>
+      </categories>
+      <tags>
+        <tag>AI</tag>
+        <tag>软件工程</tag>
+        <tag>严谨性</tag>
+        <tag>系统思维</tag>
+        <tag>工程质量</tag>
       </tags>
   </entry>
 </search>
