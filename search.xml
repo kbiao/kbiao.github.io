@@ -1,32 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>CORS实现跨域时授权问题（401错误）的解决</title>
-    <url>/CORS%E5%AE%9E%E7%8E%B0%E8%B7%A8%E5%9F%9F%E6%97%B6%E6%8E%88%E6%9D%83%E9%97%AE%E9%A2%98%EF%BC%88401%E9%94%99%E8%AF%AF%EF%BC%89%E7%9A%84%E8%A7%A3%E5%86%B3-e460ee12b01e/</url>
-    <content><![CDATA[<p><img data-src="https://image.kbiao.me/16-5-21/64423504.jpg"></p>
-<h2 id="问题的提出"><a href="#问题的提出" class="headerlink" title="问题的提出"></a>问题的提出</h2><p>如果我们访问的资源是不需要授权的，也就是在HTTP请求头中不包含<code>authentication</code>头那么以上做法就足够了。但是如果该资源是需要权限验证的，那么这个时候跨域请求的预检测**<code>option</code>请求，由于不会携带身份信息而被拒绝**。浏览器会报出401错误。<span id="more"></span><br>前几天的文章<a href="http://blog.kbiao.me/2016/05/14/Spring%E9%80%9A%E8%BF%87CORS%E5%8D%8F%E8%AE%AE%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">Spring通过CORS协议解决跨域问题</a> 中提到了如何解决跨域问题的基本思路,解决了跨域请求时浏览器403错误。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Response to preflight request doesn&#x27;t pass access control check:</span><br><span class="line">No &#x27;Access-Control-Allow-Origin&#x27; header is present on the requested resource.</span><br><span class="line">Origin &#x27;null&#x27; is therefore not allowed access. </span><br><span class="line">The response had HTTP status code 403</span><br><span class="line">401错误信息如下：</span><br></pre></td></tr></table></figure>
-<p>Failed to load resource:<br>the server responded with a status of 401 (Unauthorized)<br>XMLHttpRequest cannot load <a href="http://localhost/api/test">http://localhost/api/test</a>.<br>Response for preflight has invalid HTTP status code 401</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">既然知道了问题的原因，答案也就很容易得出：**对需要进行跨域请求的资源（api），当服务端检测到是`OPTONS`请求时候统统放行，给出HTTP.OK(200)的状态和必要的响应头，哪怕它是不带身份信息的**。</span><br><span class="line">这个问题既可以通过编写对应的后端代码实现，也可以通过设置服务器配置文件实现。也就是如何设置响应头和返回200状态码的办法了。</span><br><span class="line"></span><br><span class="line">## Spring+Shrio的解决方案</span><br><span class="line"></span><br><span class="line">shiro中可以在自己实现的身份验证filter中加入以下代码：</span><br><span class="line">```java</span><br><span class="line">  @Override</span><br><span class="line">    protected boolean preHandle(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception &#123;</span><br><span class="line">        HttpServletRequest request = (HttpServletRequest) servletRequest;</span><br><span class="line">        HttpServletResponse response = (HttpServletResponse) servletResponse;</span><br><span class="line">        if(request.getMethod().equals(RequestMethod.OPTIONS.name()))</span><br><span class="line">        &#123;</span><br><span class="line">            response.setStatus(HttpStatus.OK.value());</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        return super.preHandle(request, response);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>shiro中AccessControlFilter提供了访问控制的基础功能；比如是否允许访问&#x2F;当访问拒绝时如何处理等，也是我们一般自定义权限验证时候的一个父类，我们通过重写他的<code>onPreHandle</code>方法判断是否是<code>option</code>请求，如果是则设置相应状态，（响应头已经在<a href="http://blog.kbiao.me/2016/05/14/Spring%E9%80%9A%E8%BF%87CORS%E5%8D%8F%E8%AE%AE%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">之前文章</a>中通过filter配置过了）返回false表示该拦截器实例已经处理了，将直接返回即可。</p>
-<h2 id="Tomcat配置"><a href="#Tomcat配置" class="headerlink" title="Tomcat配置"></a>Tomcat配置</h2><p>需要修改tomcat的全局web.xml文件在<code>CATALINA_HOME/conf</code>下，加入以下配置。</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>CorsFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>org.apache.catalina.filters.CorsFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>CorsFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+    <title>Harness Engineering：AI工程的新战场，还是旧酒新瓶？</title>
+    <url>/2026-03-14-harness-engineering-71284b3360c5/</url>
+    <content><![CDATA[<p><img data-src="https://image.kbiao.me/blog/img202603141826459.png"></p>
+<blockquote>
+<p>当 Big Model 信徒坚信模型终将吞噬一切，Big Harness 拥趸宣称编排层才是价值核心，我们究竟该相信什么？这场争论背后，或许藏着 AI 工程未来十年的关键密码。</p>
+</blockquote>
+<span id="more"></span>
 
-<h2 id="Nginx配置"><a href="#Nginx配置" class="headerlink" title="Nginx配置"></a>Nginx配置</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">add_header &#x27;Access-Control-Allow-Methods&#x27; &#x27;GET,OPTIONS,PUT,DELETE&#x27; always;</span><br><span class="line">add_header &#x27;Access-Control-Allow-Credentials&#x27; &#x27;true&#x27; always;</span><br><span class="line">add_header &#x27;Access-Control-Allow-Origin&#x27; &#x27;$http_origin&#x27; always;</span><br><span class="line">add_header &#x27;Access-Control-Allow-Headers&#x27; &#x27;Authorization,DNT,User-Agent,Keep-Alive,Content-Type,accept,origin,X-Requested-With&#x27; always;</span><br><span class="line"></span><br><span class="line">if ($request_method = OPTIONS ) &#123;</span><br><span class="line">    return 200;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Apache配置"><a href="#Apache配置" class="headerlink" title="Apache配置"></a>Apache配置</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Header always set Access-Control-Allow-Origin &quot;http://waffle&quot;</span><br><span class="line">Header always set Access-Control-Allow-Methods &quot;POST, GET, OPTIONS&quot;</span><br><span class="line">Header always set Access-Control-Allow-Credentials &quot;true&quot;</span><br><span class="line">Header always set Access-Control-Allow-Headers &quot;Authorization,DNT,User-Agent,Keep-Alive,Content-Type,accept,origin,X-Requested-With&quot;</span><br><span class="line"></span><br><span class="line">RewriteCond %&#123;REQUEST_METHOD&#125; OPTIONS</span><br><span class="line">RewriteRule ^(.*)$ $1 [R=200,L]</span><br></pre></td></tr></table></figure>
-<h2 id="js请求示例"><a href="#js请求示例" class="headerlink" title="js请求示例"></a>js请求示例</h2><p>请求时候需要加上<code>Authorization </code>和<code>Content-Type</code>头。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$http(&#123;</span><br><span class="line">  method: &#x27;POST&#x27;,</span><br><span class="line">  url: scope.webdav.url,</span><br><span class="line">  withCredentials: true,</span><br><span class="line">  headers: &#123;</span><br><span class="line">    Authorization: &#x27;Basic &#x27; + btoa(user + &#x27;:&#x27; + password),</span><br><span class="line">    &#x27;Content-Type&#x27;: &#x27;application/vnd.google-earth.kml+xml; charset=utf-8&#x27;</span><br><span class="line">  &#125;,</span><br><span class="line">  data: getKml()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>参考文章：<a href="http://www.jujens.eu/posts/en/2015/Jun/27/webdav-options/">http://www.jujens.eu/posts/en/2015/Jun/27/webdav-options/</a></p>
+<h2 id="引言：一场被商业利益裹挟的技术争论"><a href="#引言：一场被商业利益裹挟的技术争论" class="headerlink" title="引言：一场被商业利益裹挟的技术争论"></a>引言：一场被商业利益裹挟的技术争论</h2><p>最近 Latent.Space 的一篇文章在 AI 工程圈引发了不小的讨论。文章的核心问题是：<strong>Harness Engineering 到底有没有真实价值？</strong></p>
+<p>什么是 Harness？按照文章的定义，它是工程学科中通用的一个层级，作用是<strong>连接、保护、编排组件</strong>，自身并不执行具体工作。在 AI 工程里，它大致对应我们常说的 Agent Framework、编排层、或者更抽象的”AI 应用架构”。</p>
+<p>这场争论的两端，分别站着两个阵营：</p>
+<ul>
+<li><strong>Big Model 阵营</strong>：模型本身是核心，Harness 只需要极简封装，复杂的架构最终都会被更强大的模型取代</li>
+<li><strong>Big Harness 阵营</strong>：Harness 是核心产品，经过精心优化的编排层能显著提升所有模型的效果</li>
+</ul>
+<p>有趣的是，这两个阵营的分歧很大程度上源于<strong>商业立场</strong>——一个卖模型，一个卖 Harness 产品。当然，行业里也有更务实的观点认为两者都有价值。</p>
+<p>那么，真相到底是什么？</p>
+<h2 id="一、Big-Model-阵营：模型至上论的自信与傲慢"><a href="#一、Big-Model-阵营：模型至上论的自信与傲慢" class="headerlink" title="一、Big Model 阵营：模型至上论的自信与傲慢"></a>一、Big Model 阵营：模型至上论的自信与傲慢</h2><h3 id="1-Claude-Code-团队的极简主义宣言"><a href="#1-Claude-Code-团队的极简主义宣言" class="headerlink" title="1. Claude Code 团队的极简主义宣言"></a>1. Claude Code 团队的极简主义宣言</h3><p>Claude Code 团队的态度非常明确：他们的 Harness 只是对模型的<strong>极简封装</strong>，核心优势<strong>全部在模型本身</strong>。他们甚至表示会持续精简、重构代码，去掉一切不必要的复杂性。</p>
+<p>这个观点背后有一个强有力的逻辑：如果模型足够强大，它应该能够自己完成大部分工作，而不需要复杂的脚手架。</p>
+<h3 id="2-Noam-Brown-的”统一模型”预言"><a href="#2-Noam-Brown-的”统一模型”预言" class="headerlink" title="2. Noam Brown 的”统一模型”预言"></a>2. Noam Brown 的”统一模型”预言</h3><p>OpenAI 的研究科学家 Noam Brown 提出了一个更激进的观点：随着推理模型（Reasoning Models）的出现，此前为了实现推理能力而搭建的<strong>复杂脚手架、模型路由器等都会被更强大的模型替代</strong>，未来将走向<strong>单一统一模型</strong>。</p>
+<p>这个观点如果成真，意味着现在投入大量精力构建复杂 Harness 的团队，可能在未来几年内发现自己的工作被模型的进步所”吞噬”。</p>
+<h3 id="3-实证研究的质疑"><a href="#3-实证研究的质疑" class="headerlink" title="3. 实证研究的质疑"></a>3. 实证研究的质疑</h3><p>METR 和 Scale AI 的 SWE-Atlas 研究显示，<strong>不同 Harness 对模型性能的影响处于误差范围内</strong>，差异微小。</p>
+<p>这个数据对 Big Harness 阵营是一个不小的打击。如果精心优化的 Harness 只能带来统计误差级别的提升，那么投入大量工程资源去构建复杂架构是否值得？</p>
+<h3 id="4-OpenAI-的”双面”立场"><a href="#4-OpenAI-的”双面”立场" class="headerlink" title="4. OpenAI 的”双面”立场"></a>4. OpenAI 的”双面”立场</h3><p>有趣的是，OpenAI 在这个问题上表现出一种”双面”立场：</p>
+<ul>
+<li>一方面，他们指出 Harness Engineering 入门简单，暗示这不是一个高门槛的领域</li>
+<li>另一方面，他们又投资了全球最成功的开源 Harness 项目 <strong>OpenClaw</strong></li>
+</ul>
+<p>这种看似矛盾的态度，或许反映了 OpenAI 对 Harness 价值的真实判断：它可能不是核心竞争力的来源，但确实是生态系统中不可或缺的一环。</p>
+<h2 id="二、Big-Harness-阵营：编排层的价值重估"><a href="#二、Big-Harness-阵营：编排层的价值重估" class="headerlink" title="二、Big Harness 阵营：编排层的价值重估"></a>二、Big Harness 阵营：编排层的价值重估</h2><h3 id="1-生产级智能体的共同架构"><a href="#1-生产级智能体的共同架构" class="headerlink" title="1. 生产级智能体的共同架构"></a>1. 生产级智能体的共同架构</h3><p>Big Harness 阵营的一个重要论据是：观察当前所有生产级智能体（Claude Code、Cursor 的智能体、Manus 等），它们都遵循<strong>统一的核心循环架构</strong>。</p>
+<p>这个发现暗示，可能并不存在无数种 equally valid 的架构选择，而是有一个相对最优的解空间。在这个解空间里，Harness 的设计质量直接决定了产品的上限。</p>
+<h3 id="2-Jerry-Liu-的”Harness-即价值”论"><a href="#2-Jerry-Liu-的”Harness-即价值”论" class="headerlink" title="2. Jerry Liu 的”Harness 即价值”论"></a>2. Jerry Liu 的”Harness 即价值”论</h3><p>Jerry Liu（LlamaIndex CEO）提出了一个鲜明的观点：<strong>模型 Harness 是挖掘 AI 价值的关键</strong>。</p>
+<p>他认为，当前最大的障碍不是模型能力的不足，而是对模型的<strong>上下文和工作流工程能力</strong>。这一点在通用工具中尤为突出——同样的底层模型，在不同的 Harness 下可能表现出截然不同的效果。</p>
+<h3 id="3-Pi-的实证：Harness-优化的惊人效果"><a href="#3-Pi-的实证：Harness-优化的惊人效果" class="headerlink" title="3. Pi 的实证：Harness 优化的惊人效果"></a>3. Pi 的实证：Harness 优化的惊人效果</h3><p>Big Harness 阵营有一个强有力的实证：<strong>Pi</strong>（一个 Harness 优化项目）在一个下午的时间内，仅通过优化 Harness，就让 <strong>15 个大模型的编码能力</strong>得到了<strong>大幅提升</strong>。</p>
+<p>这个案例表明，Harness 的优化空间可能远比 Big Model 阵营认为的要大。如果正确的 Harness 设计能让普通模型达到接近顶级模型的效果，那么 Harness Engineering 的价值就不容忽视。</p>
+<h3 id="4-商业模式的验证"><a href="#4-商业模式的验证" class="headerlink" title="4. 商业模式的验证"></a>4. 商业模式的验证</h3><p>Big Harness 阵营还有一个间接但有力的论据：<strong>市场估值</strong>。</p>
+<p>Cursor 的估值已经达到 <strong>500 亿美元</strong>，而它本质上就是一个高级 Harness（在 VS Code 基础上叠加 AI 能力）。这个估值水平表明，资本市场对 Harness 的价值给予了高度认可。</p>
+<p>相比之下，单纯售卖模型的商业模式（如早期 OpenAI 的 API 模式）的估值倍数，往往低于拥有强 Harness 产品的公司。</p>
+<h2 id="三、Latent-Space-的中间立场：务实主义的胜利"><a href="#三、Latent-Space-的中间立场：务实主义的胜利" class="headerlink" title="三、Latent.Space 的中间立场：务实主义的胜利"></a>三、Latent.Space 的中间立场：务实主义的胜利</h2><p>面对两个阵营的激烈争论，Latent.Space 采取了一种更为务实的中立立场。</p>
+<h3 id="1-承认”苦涩教训”，但看到-Harness-的现实价值"><a href="#1-承认”苦涩教训”，但看到-Harness-的现实价值" class="headerlink" title="1. 承认”苦涩教训”，但看到 Harness 的现实价值"></a>1. 承认”苦涩教训”，但看到 Harness 的现实价值</h3><p>Latent.Space 承认 AI 领域历史上确实存在一个”苦涩教训”（Bitter Lesson）：长期来看，通用方法（如深度学习、大规模训练）往往优于人工设计的特定领域知识。</p>
+<p>按照这个逻辑，Big Model 阵营似乎更有道理——如果模型足够强大，它应该能够自动学习到最优的工作方式，而不需要人工设计的 Harness。</p>
+<p>但 Latent.Space 也指出，<strong>现实往往比理论更复杂</strong>。在当前的实际应用场景中，Harness Engineering 确实带来了可测量的、有时甚至是巨大的价值提升。</p>
+<h3 id="2-Agent-Labs-的兴起作为佐证"><a href="#2-Agent-Labs-的兴起作为佐证" class="headerlink" title="2. Agent Labs 的兴起作为佐证"></a>2. Agent Labs 的兴起作为佐证</h3><p>Latent.Space 特别提到了 <strong>Agent Labs</strong> 的兴起作为 Harness Engineering 价值的佐证。</p>
+<p>Agent Labs 是一类专注于构建 AI Agent 基础设施的创业公司，它们的核心产品往往就是各种形式的 Harness（编排框架、Agent 框架、工作流引擎等）。</p>
+<p>这个领域的快速发展和大量融资，表明资本市场和创业生态都认为 Harness Engineering 是一个有真实需求的赛道。</p>
+<h3 id="3-AIE-Europe-的行业认可"><a href="#3-AIE-Europe-的行业认可" class="headerlink" title="3. AIE Europe 的行业认可"></a>3. AIE Europe 的行业认可</h3><p>最有力的佐证可能来自 <strong>AIE Europe</strong>（AI Engineering Europe）开设的<strong>全球首个 Harness Engineering 赛道</strong>。</p>
+<p>作为一个权威的行业会议和社群，AIE Europe 决定开设专门的 Harness Engineering 赛道，意味着这个领域已经获得了足够的行业认可，值得作为一个独立的技术方向来深入探讨。</p>
+<p>这比任何理论争论都更有说服力——当行业共识认为一个领域值得专门开设会议赛道时，这个领域的价值就已经得到了市场的验证。</p>
+<h2 id="四、在争论中寻找第三条路"><a href="#四、在争论中寻找第三条路" class="headerlink" title="四、在争论中寻找第三条路"></a>四、在争论中寻找第三条路</h2><p>读完整篇文章，我最大的感受是：<strong>这场争论本身就是一个伪命题</strong>。</p>
+<h3 id="1-二元对立的陷阱"><a href="#1-二元对立的陷阱" class="headerlink" title="1. 二元对立的陷阱"></a>1. 二元对立的陷阱</h3><p>Big Model 和 Big Harness 的二元对立，很大程度上是<strong>商业利益驱动的叙事建构</strong>，而非技术本质的真实反映。</p>
+<p>卖模型的公司自然会强调模型的核心地位，卖 Harness 的公司自然会强调编排层的价值。这种立场先行的话语体系，往往会遮蔽技术决策的复杂性。</p>
+<p>现实中的优秀 AI 产品，往往是<strong>模型能力和 Harness 设计的精妙结合</strong>。强行把它们割裂开来，然后争论哪个更重要，就像争论汽车的发动机和变速箱哪个更重要一样——脱离了具体场景，这个问题本身就没有意义。</p>
+<h3 id="2-第三条路：场景化的价值判断"><a href="#2-第三条路：场景化的价值判断" class="headerlink" title="2. 第三条路：场景化的价值判断"></a>2. 第三条路：场景化的价值判断</h3><p>我认为真正有价值的问题不是”Harness Engineering 有没有价值”，而是**”在什么场景下，投入多少资源去优化 Harness，能够获得最大的 ROI”**。</p>
+<p>这个问题的答案显然是<strong>场景依赖</strong>的：</p>
+<ul>
+<li>对于<strong>通用型 AI 助手</strong>，模型能力的提升可能带来更直接的用户体验改善，Harness 的优化空间相对有限。</li>
+<li>对于<strong>特定领域的专业工具</strong>（如代码编辑器、数据分析平台），Harness 的设计质量往往直接决定了产品的可用性和效率。</li>
+<li>对于<strong>需要复杂多步骤推理的任务</strong>，Harness 的编排能力可能比单个模型的能力更重要。</li>
+</ul>
+<p>聪明的团队不会盲目站队，而是会<strong>根据具体场景，动态调整模型投入和 Harness 投入的比例</strong>。</p>
+<h3 id="3-长期视角：当模型能力持续提升"><a href="#3-长期视角：当模型能力持续提升" class="headerlink" title="3. 长期视角：当模型能力持续提升"></a>3. 长期视角：当模型能力持续提升</h3><p>我们还必须考虑一个长期趋势：<strong>模型能力在持续提升</strong>。</p>
+<p>如果按照这个趋势推演，Big Model 阵营的预言可能是正确的——随着模型能力的增强，现在需要复杂 Harness 才能实现的功能，未来可能通过更简洁的架构就能完成。</p>
+<p>但这并不意味着 Harness Engineering 现在没有价值。技术演进是渐进的，在通往”终极模型”的路上，我们仍然需要高质量的 Harness 来最大化当前模型的能力。</p>
+<p>更何况，<strong>即使模型能力持续增强，Harness 的需求也不会消失，只是形态会演变</strong>。从复杂的编排框架，到更简洁的封装层，Harness 会一直存在，只是复杂度会随着模型能力的提升而降低。</p>
+<h3 id="4-给从业者的建议"><a href="#4-给从业者的建议" class="headerlink" title="4. 给从业者的建议"></a>4. 给从业者的建议</h3><p>对于正在这个领域工作的从业者，我的建议是：</p>
+<p><strong>不要被商业叙事绑架</strong>。选择技术路线时，应该基于具体场景的需求，而不是盲从某个阵营的教条。</p>
+<p><strong>保持动态视角</strong>。模型能力和 Harness 设计的最优组合是动态变化的，今天需要复杂 Harness 的场景，明天可能只需要简单的封装。</p>
+<p><strong>投资于可迁移的能力</strong>。无论是深入模型优化，还是精通 Harness 设计，都应该选择那些在未来技术演进中仍然有价值的能力。</p>
+<p><strong>关注真实的用户价值</strong>。最终，技术的价值不在于它有多先进，而在于它能为用户解决什么问题。模型能力再强，Harness 设计再精妙，如果不能转化为用户价值，就只是自嗨。</p>
+<h2 id="结语：在争论之外，寻找真实的问题"><a href="#结语：在争论之外，寻找真实的问题" class="headerlink" title="结语：在争论之外，寻找真实的问题"></a>结语：在争论之外，寻找真实的问题</h2><p>回到文章开头的问题：Harness Engineering 到底有没有真实价值？</p>
+<p>我的答案是：<strong>这个问题本身就是误导性的</strong>。</p>
+<p>真正值得问的不是 Harness 是否有价值，而是在具体场景下，如何最优地组合模型能力和 Harness 设计，以创造最大的用户价值。</p>
+<p>Big Model 和 Big Harness 的争论，本质上是两个商业阵营的话语权之争。作为从业者，我们应该跳出这个二元对立的框架，在具体的场景中寻找最优解。</p>
+<p>技术的发展从来不是线性的，也不会被某个单一的范式所主导。在 AI 工程的下一个十年，我们可能会看到模型能力和 Harness 设计的深度融合，也可能会看到全新的架构范式取代当前的争论。</p>
+<p>无论如何，保持开放的心态，关注真实的问题，而不是被商业叙事所裹挟，这可能是我们在快速变化的技术浪潮中，能够保持清醒和判断力的关键。</p>
+<hr>
+<p><em>彪彪</em></p>
+<p><em>2026年3月14日</em></p>
+<p><em>附：这篇文章的思考，很大程度上受益于最近阅读的 Latent.Space 文章以及《听雨早读》系列中对 AI 工程趋势的持续跟踪。如果你对 Harness Engineering 感兴趣，建议直接阅读 Latent.Space 的原文，那里有更详细的论述和数据支撑。</em></p>
 ]]></content>
-      <categories>
-        <category>Coding-Notes</category>
-      </categories>
       <tags>
-        <tag>CORS</tag>
-        <tag>Spring</tag>
-        <tag>java web</tag>
+        <tag>AI</tag>
+        <tag>Agent Engineering</tag>
+        <tag>Harness Engineering</tag>
+        <tag>Software Engineering</tag>
+        <tag>AI Native</tag>
       </tags>
   </entry>
   <entry>
@@ -90,6 +150,35 @@ public void setTag(String tag) {
         <tag>Android</tag>
         <tag>MVP</tag>
         <tag>demo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CORS实现跨域时授权问题（401错误）的解决</title>
+    <url>/CORS%E5%AE%9E%E7%8E%B0%E8%B7%A8%E5%9F%9F%E6%97%B6%E6%8E%88%E6%9D%83%E9%97%AE%E9%A2%98%EF%BC%88401%E9%94%99%E8%AF%AF%EF%BC%89%E7%9A%84%E8%A7%A3%E5%86%B3-e460ee12b01e/</url>
+    <content><![CDATA[<p><img data-src="https://image.kbiao.me/16-5-21/64423504.jpg"></p>
+<h2 id="问题的提出"><a href="#问题的提出" class="headerlink" title="问题的提出"></a>问题的提出</h2><p>如果我们访问的资源是不需要授权的，也就是在HTTP请求头中不包含<code>authentication</code>头那么以上做法就足够了。但是如果该资源是需要权限验证的，那么这个时候跨域请求的预检测**<code>option</code>请求，由于不会携带身份信息而被拒绝**。浏览器会报出401错误。<span id="more"></span><br>前几天的文章<a href="http://blog.kbiao.me/2016/05/14/Spring%E9%80%9A%E8%BF%87CORS%E5%8D%8F%E8%AE%AE%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">Spring通过CORS协议解决跨域问题</a> 中提到了如何解决跨域问题的基本思路,解决了跨域请求时浏览器403错误。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Response to preflight request doesn&#x27;t pass access control check:</span><br><span class="line">No &#x27;Access-Control-Allow-Origin&#x27; header is present on the requested resource.</span><br><span class="line">Origin &#x27;null&#x27; is therefore not allowed access. </span><br><span class="line">The response had HTTP status code 403</span><br><span class="line">401错误信息如下：</span><br></pre></td></tr></table></figure>
+<p>Failed to load resource:<br>the server responded with a status of 401 (Unauthorized)<br>XMLHttpRequest cannot load <a href="http://localhost/api/test">http://localhost/api/test</a>.<br>Response for preflight has invalid HTTP status code 401</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">既然知道了问题的原因，答案也就很容易得出：**对需要进行跨域请求的资源（api），当服务端检测到是`OPTONS`请求时候统统放行，给出HTTP.OK(200)的状态和必要的响应头，哪怕它是不带身份信息的**。</span><br><span class="line">这个问题既可以通过编写对应的后端代码实现，也可以通过设置服务器配置文件实现。也就是如何设置响应头和返回200状态码的办法了。</span><br><span class="line"></span><br><span class="line">## Spring+Shrio的解决方案</span><br><span class="line"></span><br><span class="line">shiro中可以在自己实现的身份验证filter中加入以下代码：</span><br><span class="line">```java</span><br><span class="line">  @Override</span><br><span class="line">    protected boolean preHandle(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception &#123;</span><br><span class="line">        HttpServletRequest request = (HttpServletRequest) servletRequest;</span><br><span class="line">        HttpServletResponse response = (HttpServletResponse) servletResponse;</span><br><span class="line">        if(request.getMethod().equals(RequestMethod.OPTIONS.name()))</span><br><span class="line">        &#123;</span><br><span class="line">            response.setStatus(HttpStatus.OK.value());</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        return super.preHandle(request, response);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>shiro中AccessControlFilter提供了访问控制的基础功能；比如是否允许访问&#x2F;当访问拒绝时如何处理等，也是我们一般自定义权限验证时候的一个父类，我们通过重写他的<code>onPreHandle</code>方法判断是否是<code>option</code>请求，如果是则设置相应状态，（响应头已经在<a href="http://blog.kbiao.me/2016/05/14/Spring%E9%80%9A%E8%BF%87CORS%E5%8D%8F%E8%AE%AE%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">之前文章</a>中通过filter配置过了）返回false表示该拦截器实例已经处理了，将直接返回即可。</p>
+<h2 id="Tomcat配置"><a href="#Tomcat配置" class="headerlink" title="Tomcat配置"></a>Tomcat配置</h2><p>需要修改tomcat的全局web.xml文件在<code>CATALINA_HOME/conf</code>下，加入以下配置。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>CorsFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>org.apache.catalina.filters.CorsFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>CorsFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Nginx配置"><a href="#Nginx配置" class="headerlink" title="Nginx配置"></a>Nginx配置</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">add_header &#x27;Access-Control-Allow-Methods&#x27; &#x27;GET,OPTIONS,PUT,DELETE&#x27; always;</span><br><span class="line">add_header &#x27;Access-Control-Allow-Credentials&#x27; &#x27;true&#x27; always;</span><br><span class="line">add_header &#x27;Access-Control-Allow-Origin&#x27; &#x27;$http_origin&#x27; always;</span><br><span class="line">add_header &#x27;Access-Control-Allow-Headers&#x27; &#x27;Authorization,DNT,User-Agent,Keep-Alive,Content-Type,accept,origin,X-Requested-With&#x27; always;</span><br><span class="line"></span><br><span class="line">if ($request_method = OPTIONS ) &#123;</span><br><span class="line">    return 200;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Apache配置"><a href="#Apache配置" class="headerlink" title="Apache配置"></a>Apache配置</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Header always set Access-Control-Allow-Origin &quot;http://waffle&quot;</span><br><span class="line">Header always set Access-Control-Allow-Methods &quot;POST, GET, OPTIONS&quot;</span><br><span class="line">Header always set Access-Control-Allow-Credentials &quot;true&quot;</span><br><span class="line">Header always set Access-Control-Allow-Headers &quot;Authorization,DNT,User-Agent,Keep-Alive,Content-Type,accept,origin,X-Requested-With&quot;</span><br><span class="line"></span><br><span class="line">RewriteCond %&#123;REQUEST_METHOD&#125; OPTIONS</span><br><span class="line">RewriteRule ^(.*)$ $1 [R=200,L]</span><br></pre></td></tr></table></figure>
+<h2 id="js请求示例"><a href="#js请求示例" class="headerlink" title="js请求示例"></a>js请求示例</h2><p>请求时候需要加上<code>Authorization </code>和<code>Content-Type</code>头。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$http(&#123;</span><br><span class="line">  method: &#x27;POST&#x27;,</span><br><span class="line">  url: scope.webdav.url,</span><br><span class="line">  withCredentials: true,</span><br><span class="line">  headers: &#123;</span><br><span class="line">    Authorization: &#x27;Basic &#x27; + btoa(user + &#x27;:&#x27; + password),</span><br><span class="line">    &#x27;Content-Type&#x27;: &#x27;application/vnd.google-earth.kml+xml; charset=utf-8&#x27;</span><br><span class="line">  &#125;,</span><br><span class="line">  data: getKml()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>参考文章：<a href="http://www.jujens.eu/posts/en/2015/Jun/27/webdav-options/">http://www.jujens.eu/posts/en/2015/Jun/27/webdav-options/</a></p>
+]]></content>
+      <categories>
+        <category>Coding-Notes</category>
+      </categories>
+      <tags>
+        <tag>CORS</tag>
+        <tag>Spring</tag>
+        <tag>java web</tag>
       </tags>
   </entry>
   <entry>
@@ -397,6 +486,51 @@ public void setTag(String tag) {
       </tags>
   </entry>
   <entry>
+    <title>Spring通过CORS协议解决跨域问题</title>
+    <url>/Spring%E9%80%9A%E8%BF%87CORS%E5%8D%8F%E8%AE%AE%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98-8ff59635b5f0/</url>
+    <content><![CDATA[<p><img data-src="https://image.kbiao.me/16-5-15/23272345.jpg"><br>现在接手学校网络中心的一个项目，根据团队成员的实际情况以及开发需要，老师希望做到前后端完全分离。后台使用java提供restful API 作为核心，前台无论PC或者移动端可以共用一个核心。前期解决了哦oauth2，作为授权机制等问题，本以为大业将成。（最近打算详细介绍一下机遇Spring sercurity 实现oauth2的解决方案）结果又出现了一个跨域问题，让我们踩了一个大坑，记录在此，以绝后患。</p>
+<span id="more"></span>
+<p><strong>错误信息如下：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Response to preflight request doesn&#x27;t pass access control check: No &#x27;Access-Control-Allow-Origin&#x27; header is present on the requested resource. Origin &#x27;null&#x27; is therefore not allowed access. The response had HTTP status code 403.</span><br></pre></td></tr></table></figure>
+
+<p>CORS实现跨域时授权问题（401错误）的解决]<a href="http://blog.kbiao.me/2016/05/21/CORS%E5%AE%9E%E7%8E%B0%E8%B7%A8%E5%9F%9F%E6%97%B6%E6%8E%88%E6%9D%83%E9%97%AE%E9%A2%98%EF%BC%88401%E9%94%99%E8%AF%AF%EF%BC%89%E7%9A%84%E8%A7%A3%E5%86%B3/">4</a>   由于授权而产生的403错误解决方案见此。</p>
+<h2 id="什么是跨域"><a href="#什么是跨域" class="headerlink" title="什么是跨域"></a>什么是跨域</h2><p>简单的说即为浏览器限制访问A站点下的js代码对B站点下的url进行ajax请求。比如说，前端域名是<a href="http://www.abc.com,那么在当前环境中运行的js代码,出于安全考虑,访问www.xyz.com域名下的资源,是受到限制的.现代浏览器默认都会基于安全原因而阻止跨域的ajax请求,这是现代浏览器中必备的功能,但是往往给开发带来不便.特别是对我这样后台开发人员来讲,这个事情简直神奇./">www.abc.com，那么在当前环境中运行的js代码，出于安全考虑，访问www.xyz.com域名下的资源，是受到限制的。现代浏览器默认都会基于安全原因而阻止跨域的ajax请求，这是现代浏览器中必备的功能，但是往往给开发带来不便。特别是对我这样后台开发人员来讲，这个事情简直神奇。</a><br>但跨域的需求却一直都在，为了跨域，勤劳勇敢的程序猿们想出了许许多多的方法，例如，jsonP、代理文件等等。但这些做法增加了许多不必要的维护成本，而且应用场景也有许多限制，例如jsonP并非XHR，所以jsonP只能使用GET传递参数。更详细的资料可以看这里<a href="http://blog.csdn.net/fangaoxin/article/details/6929415"> Web应用跨域访问解决方案汇总</a></p>
+<h2 id="CORS协议"><a href="#CORS协议" class="headerlink" title="CORS协议"></a>CORS协议</h2><p>如今的JS大有一统天下的趋势，浏览器已经成了大多应用最好的安身之所。哪怕在移动端也有各种Hybird方案，在本地文件系统的Web页面，也有需要获取外部数据的需求，而这些需求也必然是跨域的。在寻找跨域解决方案时，发现了最优雅解决方案就是HTML5来带了的“Cross-Origin Resource Sharing”的新特性，来赋予开发者权力决定资源是否允许被跨域访问。<br>CORS是一个W3C标准，全称是”跨域资源共享”（Cross-origin resource sharing）。<br>它允许浏览器向跨源服务器，发出XMLHttpRequest请求，从而克服了AJAX只能同源使用的限制。<br>为什么说它优雅呢？<br>整个CORS通信过程，都是浏览器自动完成，不需要用户参与。对于开发者来说，CORS通信与同源的AJAX通信没有差别，代码完全一样。浏览器一旦发现AJAX请求跨源，就会自动添加一些附加的头信息，有时还会多出一次附加的请求，但用户不会有感觉。<br>因此，实现CORS通信的关键是服务器。<strong>只要服务器实现了CORS接口</strong>，就可以跨源通信。<br>解决这个问题的关键就落在了我这个负责后台的程序猿身上。<br>看看文档也不是什么难事嘛，就是需要在http头中设置Access-Control-Allow-Origin来决定需要允许哪些站点来访问。关于CROS协议更详细内容参考<a href="http://www.ruanyifeng.com/blog/2016/04/cors.html">跨域资源共享 CORS 详解</a></p>
+<h2 id="CORS常见header"><a href="#CORS常见header" class="headerlink" title="CORS常见header"></a>CORS常见header</h2><p>CORS具有以下常见的header</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Access-Control-Allow-Origin: http://kbiao.me  </span><br><span class="line"></span><br><span class="line">Access-Control-Max-Age: 3628800</span><br><span class="line"></span><br><span class="line">Access-Control-Allow-Methods: GET，PUT, DELETE</span><br><span class="line"></span><br><span class="line">Access-Control-Allow-Headers: content-type</span><br></pre></td></tr></table></figure>
+
+<p>“Access-Control-Allow-Origin”表明它允许” <a href="http://kbiao.me/">http://kbiao.me</a>  “发起跨域请求</p>
+<p>“Access-Control-Max-Age”表明在3628800秒内，不需要再发送<em>预检验</em>请求，可以缓存该结果（上面的资料上我们知道CROS协议中，一个AJAX请求被分成了第一步的<code>OPTION</code>预检测请求和正式请求）</p>
+<p>“Access-Control-Allow-Methods”表明它允许GET、PUT、DELETE的外域请求</p>
+<p>“Access-Control-Allow-Headers”表明它允许跨域请求包含content-type头</p>
+<p>当然在处理这个问题的时候前端也有不少坑，特别是Chrome浏览器不允许localhost的跨域请求，详细方案见我项目中负责前端解决方案的小伙伴。<code>假装有链接</code></p>
+<h2 id="常规解决方案"><a href="#常规解决方案" class="headerlink" title="常规解决方案"></a>常规解决方案</h2><p>知道了问题的原因，也知道了配套的解决办法，现在就让我们来实现解决。思路很简单，当前端要请求跨域资源时候，我们给它加上响应的响应头即可。很显然我们自己定义一个过滤器是最简单不过了。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by kangb on 2016/5/10.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">myCORSFilter</span> <span class="keyword">implements</span> <span class="title class_">Filter</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">init</span><span class="params">(FilterConfig filterConfig)</span> <span class="keyword">throws</span> ServletException &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doFilter</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span> <span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line">        <span class="type">HttpServletResponse</span> <span class="variable">response</span> <span class="operator">=</span> (HttpServletResponse) servletResponse;</span><br><span class="line">        <span class="type">String</span> <span class="variable">origin</span> <span class="operator">=</span> (String) servletRequest.getRemoteHost()+<span class="string">&quot;:&quot;</span>+servletRequest.getRemotePort();</span><br><span class="line">        response.setHeader(<span class="string">&quot;Access-Control-Allow-Origin&quot;</span>, <span class="string">&quot;*&quot;</span>);</span><br><span class="line">        response.setHeader(<span class="string">&quot;Access-Control-Allow-Methods&quot;</span>, <span class="string">&quot;POST, GET, OPTIONS, DELETE&quot;</span>);</span><br><span class="line">        response.setHeader(<span class="string">&quot;Access-Control-Max-Age&quot;</span>, <span class="string">&quot;3600&quot;</span>);</span><br><span class="line">        response.setHeader(<span class="string">&quot;Access-Control-Allow-Headers&quot;</span>, <span class="string">&quot;x-requested-with,Authorization&quot;</span>);</span><br><span class="line">        response.setHeader(<span class="string">&quot;Access-Control-Allow-Credentials&quot;</span>,<span class="string">&quot;true&quot;</span>);</span><br><span class="line">        filterChain.doFilter(servletRequest, servletResponse);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">destroy</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>@Component 是Spring的注解，关键部分在doFilter中，添加了我们需要的头，<code>option</code>是预检测需要所以需要允许，<code>Authorization</code>是做了oauth2登录响应所必须的，<code>Access-Control-Allow-Credentials</code>表示允许cookies。都是根据自己项目的实际需要配置。<br>再配置Web.xml使得过滤器生效</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>cors<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>·CLASS_PATH·.myeCORSFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>cors<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/api/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>接下来前端就可以像往常一样使用AJAX请求获得资源了，完全不需要做出什么改变。</p>
+<h2 id="SPRING-4中更优雅的办法"><a href="#SPRING-4中更优雅的办法" class="headerlink" title="SPRING 4中更优雅的办法"></a>SPRING 4中更优雅的办法</h2><p>SpringMVC4提供了非常方便的实现跨域的方法。在requestMapping中使用注解。<br><code>@CrossOrigin(origins = “http://kbiao.me”)</code><br>全局实现 .定义类继承WebMvcConfigurerAdapter,设置跨域相关的配置</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CorsConfigurerAdapter</span> <span class="keyword">extends</span> <span class="title class_">WebMvcConfigurerAdapter</span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addCorsMappings</span><span class="params">(CorsRegistry registry)</span> &#123;</span><br><span class="line">    </span><br><span class="line">    registry.addMapping(<span class="string">&quot;/api/*&quot;</span>).allowedOrigins(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>将该类注入到容器中：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;com.tmall.wireless.angel.web.config.CorsConfigurerAdapter&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>更详细的内容参考Spring 官方的hello world案例<a href="http://spring.io/guides/gs/rest-service-cors/">Enabling Cross Origin Requests for a RESTful Web Service</a>     </p>
+<p><a href="http://spring.io/guides/gs/rest-service-cors/%E6%88%96%E8%80%85%E4%BD%BF%E7%94%A8git%E4%B8%8B%E8%BD%BD%E7%A4%BA%E4%BE%8B%E6%BA%90%E7%A0%81">http://spring.io/guides/gs/rest-service-cors/或者使用git下载示例源码</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">https://github.com/spring-guides/gs-rest-service-cors.git</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>Coding-Notes</category>
+      </categories>
+      <tags>
+        <tag>CORS</tag>
+        <tag>java</tag>
+        <tag>spring</tag>
+        <tag>跨域</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>是 RD 同时也是 PM：做业务架构试试这样思考问题</title>
     <url>/PM%EF%BC%9A%E5%81%9A%E4%B8%9A%E5%8A%A1%E6%9E%B6%E6%9E%84%E8%AF%95%E8%AF%95%E8%BF%99%E6%A0%B7%E6%80%9D%E8%80%83%E9%97%AE%E9%A2%98-ed1f511ffb31/</url>
     <content><![CDATA[<p><img data-src="https://image.kbiao.me/blog/img/PixelD_job_as_pm&rd.gif"></p>
@@ -516,78 +650,45 @@ public void setTag(String tag) {
       </tags>
   </entry>
   <entry>
-    <title>Spring通过CORS协议解决跨域问题</title>
-    <url>/Spring%E9%80%9A%E8%BF%87CORS%E5%8D%8F%E8%AE%AE%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98-8ff59635b5f0/</url>
-    <content><![CDATA[<p><img data-src="https://image.kbiao.me/16-5-15/23272345.jpg"><br>现在接手学校网络中心的一个项目，根据团队成员的实际情况以及开发需要，老师希望做到前后端完全分离。后台使用java提供restful API 作为核心，前台无论PC或者移动端可以共用一个核心。前期解决了哦oauth2，作为授权机制等问题，本以为大业将成。（最近打算详细介绍一下机遇Spring sercurity 实现oauth2的解决方案）结果又出现了一个跨域问题，让我们踩了一个大坑，记录在此，以绝后患。</p>
+    <title>Hello World</title>
+    <url>/hello-world-e46dd7c73341/</url>
+    <content><![CDATA[<p><code>Hello World</code> 是程序员给世界的第一声问候。对于做运维的小伙伴来说应该是<code>It works!</code>。这个句子在我们这些码农的生命中具有特殊的意义。像婴儿的第一声啼哭，是母亲生命中重要的纪念。在母亲节写下这样的句子还是非常应景的。第一篇文章取这个题目也是再合适不过的了。向世界问好，交出属于程序员自己的名片。</p>
 <span id="more"></span>
-<p><strong>错误信息如下：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Response to preflight request doesn&#x27;t pass access control check: No &#x27;Access-Control-Allow-Origin&#x27; header is present on the requested resource. Origin &#x27;null&#x27; is therefore not allowed access. The response had HTTP status code 403.</span><br></pre></td></tr></table></figure>
+<h2 id="打造个人品牌"><a href="#打造个人品牌" class="headerlink" title="打造个人品牌"></a>打造个人品牌</h2><p>一直以来都有一个想法，希望把自己打造成一个品牌，我的名字就是我最大的商标。<br>很早以前就设计了我的昵称**”K、Biao.<strong>中英文字符结合，感觉还是很美观的，识别性也比较高。<br>大学成为预备役码农，于是就有了现在的头像。后来发现到处都是我头像的高仿，我只能说我自己设计头像的时候还是原创的。这是一个标签语言的符号，当时在学习一些前端知识，很自然地就想到了用这个变迁语言的块符号表达自己的头像，中间的斜线上有一句C语言的头文件引用。标志我要成为一个复合型的程序员，努力向全栈方向发展。算是初步建立自己的品牌识别。<br>当我有了女朋友也自然要把她纳入我的这套系统，于是就有了</strong>W、Peach**,和花括号粉色头像。这是<code>C</code>，<code>java</code>等语言的标准结构。<br>一套完整的CIS（品牌识别系统）还应当包括理念识别和行为识别。对公司来讲 就是各种企业文化，企业精神，员工守则。而对于个人来说，就是日常的待人接物，言行举止。当然也可以通过一个人的文章来认识一个人。为了扩大个人品牌的影响力，作为码农当然是离不开网络的帮助了。早些时候认购了属于自己的域名kbiao.me。开始尝试搭建自己的个人网站，奈何阅历尚浅，没有太多可以展示的东西，挂了几个学习前端时候的实验性作品，没多久自己都看不下去了。于是把重点转向了博客的搭建。尝试着使用WordPress搭建了自己一亩三分地。写了几篇文章，无奈却默默无闻，没有什么人关注。毕竟这浩瀚的网络中，我又能发出多大的声音呢？<br>同时我也注册了各种博客，在gitHub上闲逛，在知乎里默默点赞。把各个我网络中的ID统一成了KBiao.</p>
+<blockquote class="blockquote-center">
+<p> 经历是一笔财富，不同寻常的经历是一笔宝贵的财富。<br><strong>郑渊洁</strong></p>
 
-<p>CORS实现跨域时授权问题（401错误）的解决]<a href="http://blog.kbiao.me/2016/05/21/CORS%E5%AE%9E%E7%8E%B0%E8%B7%A8%E5%9F%9F%E6%97%B6%E6%8E%88%E6%9D%83%E9%97%AE%E9%A2%98%EF%BC%88401%E9%94%99%E8%AF%AF%EF%BC%89%E7%9A%84%E8%A7%A3%E5%86%B3/">4</a>   由于授权而产生的403错误解决方案见此。</p>
-<h2 id="什么是跨域"><a href="#什么是跨域" class="headerlink" title="什么是跨域"></a>什么是跨域</h2><p>简单的说即为浏览器限制访问A站点下的js代码对B站点下的url进行ajax请求。比如说，前端域名是<a href="http://www.abc.com,那么在当前环境中运行的js代码,出于安全考虑,访问www.xyz.com域名下的资源,是受到限制的.现代浏览器默认都会基于安全原因而阻止跨域的ajax请求,这是现代浏览器中必备的功能,但是往往给开发带来不便.特别是对我这样后台开发人员来讲,这个事情简直神奇./">www.abc.com，那么在当前环境中运行的js代码，出于安全考虑，访问www.xyz.com域名下的资源，是受到限制的。现代浏览器默认都会基于安全原因而阻止跨域的ajax请求，这是现代浏览器中必备的功能，但是往往给开发带来不便。特别是对我这样后台开发人员来讲，这个事情简直神奇。</a><br>但跨域的需求却一直都在，为了跨域，勤劳勇敢的程序猿们想出了许许多多的方法，例如，jsonP、代理文件等等。但这些做法增加了许多不必要的维护成本，而且应用场景也有许多限制，例如jsonP并非XHR，所以jsonP只能使用GET传递参数。更详细的资料可以看这里<a href="http://blog.csdn.net/fangaoxin/article/details/6929415"> Web应用跨域访问解决方案汇总</a></p>
-<h2 id="CORS协议"><a href="#CORS协议" class="headerlink" title="CORS协议"></a>CORS协议</h2><p>如今的JS大有一统天下的趋势，浏览器已经成了大多应用最好的安身之所。哪怕在移动端也有各种Hybird方案，在本地文件系统的Web页面，也有需要获取外部数据的需求，而这些需求也必然是跨域的。在寻找跨域解决方案时，发现了最优雅解决方案就是HTML5来带了的“Cross-Origin Resource Sharing”的新特性，来赋予开发者权力决定资源是否允许被跨域访问。<br>CORS是一个W3C标准，全称是”跨域资源共享”（Cross-origin resource sharing）。<br>它允许浏览器向跨源服务器，发出XMLHttpRequest请求，从而克服了AJAX只能同源使用的限制。<br>为什么说它优雅呢？<br>整个CORS通信过程，都是浏览器自动完成，不需要用户参与。对于开发者来说，CORS通信与同源的AJAX通信没有差别，代码完全一样。浏览器一旦发现AJAX请求跨源，就会自动添加一些附加的头信息，有时还会多出一次附加的请求，但用户不会有感觉。<br>因此，实现CORS通信的关键是服务器。<strong>只要服务器实现了CORS接口</strong>，就可以跨源通信。<br>解决这个问题的关键就落在了我这个负责后台的程序猿身上。<br>看看文档也不是什么难事嘛，就是需要在http头中设置Access-Control-Allow-Origin来决定需要允许哪些站点来访问。关于CROS协议更详细内容参考<a href="http://www.ruanyifeng.com/blog/2016/04/cors.html">跨域资源共享 CORS 详解</a></p>
-<h2 id="CORS常见header"><a href="#CORS常见header" class="headerlink" title="CORS常见header"></a>CORS常见header</h2><p>CORS具有以下常见的header</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Access-Control-Allow-Origin: http://kbiao.me  </span><br><span class="line"></span><br><span class="line">Access-Control-Max-Age: 3628800</span><br><span class="line"></span><br><span class="line">Access-Control-Allow-Methods: GET，PUT, DELETE</span><br><span class="line"></span><br><span class="line">Access-Control-Allow-Headers: content-type</span><br></pre></td></tr></table></figure>
-
-<p>“Access-Control-Allow-Origin”表明它允许” <a href="http://kbiao.me/">http://kbiao.me</a>  “发起跨域请求</p>
-<p>“Access-Control-Max-Age”表明在3628800秒内，不需要再发送<em>预检验</em>请求，可以缓存该结果（上面的资料上我们知道CROS协议中，一个AJAX请求被分成了第一步的<code>OPTION</code>预检测请求和正式请求）</p>
-<p>“Access-Control-Allow-Methods”表明它允许GET、PUT、DELETE的外域请求</p>
-<p>“Access-Control-Allow-Headers”表明它允许跨域请求包含content-type头</p>
-<p>当然在处理这个问题的时候前端也有不少坑，特别是Chrome浏览器不允许localhost的跨域请求，详细方案见我项目中负责前端解决方案的小伙伴。<code>假装有链接</code></p>
-<h2 id="常规解决方案"><a href="#常规解决方案" class="headerlink" title="常规解决方案"></a>常规解决方案</h2><p>知道了问题的原因，也知道了配套的解决办法，现在就让我们来实现解决。思路很简单，当前端要请求跨域资源时候，我们给它加上响应的响应头即可。很显然我们自己定义一个过滤器是最简单不过了。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by kangb on 2016/5/10.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">myCORSFilter</span> <span class="keyword">implements</span> <span class="title class_">Filter</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">init</span><span class="params">(FilterConfig filterConfig)</span> <span class="keyword">throws</span> ServletException &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doFilter</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span> <span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line">        <span class="type">HttpServletResponse</span> <span class="variable">response</span> <span class="operator">=</span> (HttpServletResponse) servletResponse;</span><br><span class="line">        <span class="type">String</span> <span class="variable">origin</span> <span class="operator">=</span> (String) servletRequest.getRemoteHost()+<span class="string">&quot;:&quot;</span>+servletRequest.getRemotePort();</span><br><span class="line">        response.setHeader(<span class="string">&quot;Access-Control-Allow-Origin&quot;</span>, <span class="string">&quot;*&quot;</span>);</span><br><span class="line">        response.setHeader(<span class="string">&quot;Access-Control-Allow-Methods&quot;</span>, <span class="string">&quot;POST, GET, OPTIONS, DELETE&quot;</span>);</span><br><span class="line">        response.setHeader(<span class="string">&quot;Access-Control-Max-Age&quot;</span>, <span class="string">&quot;3600&quot;</span>);</span><br><span class="line">        response.setHeader(<span class="string">&quot;Access-Control-Allow-Headers&quot;</span>, <span class="string">&quot;x-requested-with,Authorization&quot;</span>);</span><br><span class="line">        response.setHeader(<span class="string">&quot;Access-Control-Allow-Credentials&quot;</span>,<span class="string">&quot;true&quot;</span>);</span><br><span class="line">        filterChain.doFilter(servletRequest, servletResponse);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">destroy</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>@Component 是Spring的注解，关键部分在doFilter中，添加了我们需要的头，<code>option</code>是预检测需要所以需要允许，<code>Authorization</code>是做了oauth2登录响应所必须的，<code>Access-Control-Allow-Credentials</code>表示允许cookies。都是根据自己项目的实际需要配置。<br>再配置Web.xml使得过滤器生效</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>cors<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>·CLASS_PATH·.myeCORSFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>cors<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/api/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>接下来前端就可以像往常一样使用AJAX请求获得资源了，完全不需要做出什么改变。</p>
-<h2 id="SPRING-4中更优雅的办法"><a href="#SPRING-4中更优雅的办法" class="headerlink" title="SPRING 4中更优雅的办法"></a>SPRING 4中更优雅的办法</h2><p>SpringMVC4提供了非常方便的实现跨域的方法。在requestMapping中使用注解。<br><code>@CrossOrigin(origins = “http://kbiao.me”)</code><br>全局实现 .定义类继承WebMvcConfigurerAdapter,设置跨域相关的配置</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CorsConfigurerAdapter</span> <span class="keyword">extends</span> <span class="title class_">WebMvcConfigurerAdapter</span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addCorsMappings</span><span class="params">(CorsRegistry registry)</span> &#123;</span><br><span class="line">    </span><br><span class="line">    registry.addMapping(<span class="string">&quot;/api/*&quot;</span>).allowedOrigins(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>将该类注入到容器中：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;com.tmall.wireless.angel.web.config.CorsConfigurerAdapter&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>更详细的内容参考Spring 官方的hello world案例<a href="http://spring.io/guides/gs/rest-service-cors/">Enabling Cross Origin Requests for a RESTful Web Service</a>     </p>
-<p><a href="http://spring.io/guides/gs/rest-service-cors/%E6%88%96%E8%80%85%E4%BD%BF%E7%94%A8git%E4%B8%8B%E8%BD%BD%E7%A4%BA%E4%BE%8B%E6%BA%90%E7%A0%81">http://spring.io/guides/gs/rest-service-cors/或者使用git下载示例源码</a></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">https://github.com/spring-guides/gs-rest-service-cors.git</span><br></pre></td></tr></table></figure>
-
-
-
-]]></content>
-      <categories>
-        <category>Coding-Notes</category>
-      </categories>
-      <tags>
-        <tag>CORS</tag>
-        <tag>java</tag>
-        <tag>spring</tag>
-        <tag>跨域</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>nodeJS踩坑-记本地地址127.0.0.1与0.0.0.0的区别</title>
-    <url>/nodeJS%E8%B8%A9%E5%9D%91-%E8%AE%B0%E6%9C%AC%E5%9C%B0%E5%9C%B0%E5%9D%80127-0-0-1%E4%B8%8E0-0-0-0%E7%9A%84%E5%8C%BA%E5%88%AB-58e1062e389a/</url>
-    <content><![CDATA[<p><img data-src="https://image.kbiao.me/16-5-11/42548547.jpg"><br><em>注：本文和Node.js本身关系不大，只是这个这个知识点由学习Node时候引出，主要是关于网络的一个小知识点</em></p>
-<span id="more"></span>
-<h2 id="问题的提出"><a href="#问题的提出" class="headerlink" title="问题的提出"></a>问题的提出</h2><p>nodejs中创建web服务时，作为小白的我自然是跟着官网文档走起</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line">http.<span class="title function_">createServer</span>(<span class="keyword">function</span> (<span class="params">req, res</span>) &#123;</span><br><span class="line">  res.<span class="title function_">writeHead</span>(<span class="number">200</span>, &#123;<span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;text/plain&#x27;</span>&#125;);</span><br><span class="line">  res.<span class="title function_">end</span>(<span class="string">&#x27;Hello World\n&#x27;</span>);</span><br><span class="line">&#125;).<span class="title function_">listen</span>(<span class="number">1337</span>, <span class="string">&#x27;127.0.0.1&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Server running at http://127.0.0.1:1337/&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<p>然后很自然本地就可以用<code>localhost</code>或者<code>127.0.0.1</code>访问了。那我想用本机ip访问呢？那就再<code>listen(192.168.1.10)</code> <code>listen(localhost)</code>啥的吧？结果却不行。我再挂到服务器上想要通过ip访问？怎么也访问不成功。<br>开始觉得是不是端口问题，设置了半天云主机的防火墙啥的还是没有用。果然太年轻，一开始就把问题方向搞错了。</p>
-<h2 id="问题的基本解决"><a href="#问题的基本解决" class="headerlink" title="问题的基本解决"></a>问题的基本解决</h2><p>看看官网的文档有这么一句：</p>
-<blockquote>
-<p>server.listen(port, [hostname], [backlog], [callback])#<br>Begin accepting connections on the specified port and hostname. If the hostname is omitted, the server will accept connections directed to any IPv4 address (INADDR_ANY).</p>
 </blockquote>
-<p>意思就是说如果不填写主机名<code>hostname</code>字段，默认是监听<code>INADDR_ANY</code>，也就是任意的IPv4地址。<br>所以解决这个问题就很简单了直接<code>listen(1337)</code>或者<code>listen(1337,&#39;0.0.0.0&#39;)</code>就可以了。<br>这个0.0.0.0也就是所谓的<code>INADDR_ANY</code><br>问题是解决了可是这个知识点还要进一步理清。</p>
-<h2 id="127-0-0-1与0-0-0-0"><a href="#127-0-0-1与0-0-0-0" class="headerlink" title="127.0.0.1与0.0.0.0"></a>127.0.0.1与0.0.0.0</h2><p>127.0.0.1是一个回送地址，指本地机，一般用来测试使用。大家常用来ping 127.0.0.1来看本地ip&#x2F;tcp正不正常，如能ping通即可正常使用。对于大多数习惯用localhost的来说，实质上就是指向127.0.0.1这个本地IP地址。在操作系统中有个配置文件将localhost与127.0.0.1绑定在了一起。可以理解为本地主机的意思。<br>这个知识点应该是没有什么问题的。其实不只有127.0.0.1，<code>127.x.x.x</code>都是本机回送地址（Loopback Address）,只不过在系统配置中把localhost和<code>127.0.0.1</code>做了绑定，我们习惯用它而已。那么这个<code>INADDR_ANY</code>又是什么呢？</p>
-<h3 id="INADDR-ANY"><a href="#INADDR-ANY" class="headerlink" title="INADDR_ANY"></a>INADDR_ANY</h3><p>这个也叫通配地址，也就是说它不单单指本机。<br>0.0.0.0&#x2F;8可以表示本网络中的所有主机<br>0.0.0.0&#x2F;32可以用作本机的源地址<br>0.0.0.0&#x2F;8也可表示本网络上的某个特定主机<br>综合起来可以说0.0.0.0表示整个网络<br>忽然想起来上计算机网络课程的时候有个默认路由的设置：</p>
+<p>这句话我很喜欢，也算是我大学生活的指南针。经过上面一番折腾我也已经到了大三了。好像没有任何成果，但我却在折腾中学会了很多网络，运维方面的东西,也完成了一些小的APP，参加了一些比赛，跟着做了一些项目。实践得来的知识要比课本上干巴巴的讲述靠谱的多。当我忙于学生工作等乱七八糟的事务的时候，专业课的成绩还是没有让我失望，尽管没有时间认真去听每节课，但自己平时的实践中已经在运用很多知识了。同时也给自己挖了一个坑，就是知识不扎实。这个以后慢慢说。</p>
+<h2 id="输出是最好的输入"><a href="#输出是最好的输入" class="headerlink" title="输出是最好的输入"></a>输出是最好的输入</h2><p>也许在同学的眼里我在专业方面还是过关的，但是上次去腾讯的经历确实给我很大提醒。基本功不扎实会有很严重的问题，当我面对同学们可以把最新技术侃侃而谈，却不能用基本的数据结构知识看懂一个算法。广度和深度之间我没有很好的把握这个平衡。<br>我希望用博客来解决这个问题。我自己的收藏夹里，笔记本里有各处剪贴来的知识碎片，给了我什么都懂的错觉，然而没有消化的东西只能称为信息，实践理解之后才能称为知识。当初参加慕课网90天计划时候确实是我成长最快的时间，活动要求每天都要写技术分享。所以我在90天里学会了以程序员的方式使用Linux,学会了前端的基础知识。这些知识都很牢固地变成了我的技能，在我大家这个博客的过程中，景观我已经有一年多没有接触前端的东西，还是可以熟练地去完成主题的修改配置，不得不说这就是写作带来的好处。写作的时候自然就假设了有观众的存在，自然会带来一些效果：</p>
+<ul>
+<li>对于我们所要学习的东西，我们可以掌握得更深入，因为我们需要去给别人解释。</li>
+<li>我们在不断地对自己知识总结，对自己知识进行强化。</li>
+<li>我们在以另外一种方式思考问题。</li>
+</ul>
+<p>我希望我现在的博客可以成为一个有态度的博客，为我的个人品牌加分。以博客或者公众号为纽带促进我学习的正向循环：</p>
+<ul>
+<li>技术、阅读笔记——学习</li>
+<li>理论、技术实现过程——创造</li>
+<li>思想、感受、总结——分享</li>
+</ul>
+<h2 id="GitHub-Pages-HEXO"><a href="#GitHub-Pages-HEXO" class="headerlink" title="GitHub Pages &amp;&amp; HEXO"></a>GitHub Pages &amp;&amp; HEXO</h2><p>之前在很多平台上做过博客，总感觉不够优雅，到处是广告，又不能按照自己的想法来，严重违背程序员精神，写写也就越来越没有兴趣了。直到发现了 GitHub Pages &amp;&amp; HEXO &amp;&amp; MarkDown 这一套工具才感觉找到了我真正想要的感觉。<br>GitHub Pages提供全天候不限量的网页托管，Git提供版本控制管理，Hexo依托Node.js高效生成静态博客页面，MarkDown提供了最优雅的写作方案。简直是为程序员量身定制。而且简单，你看我连女票都学会了呢！<br><a href="http://peach.kbiao.me/2016/05/08/%E5%B0%8F%E7%99%BD%E9%9B%B6%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA%E4%B8%93%E5%B1%9E%E5%8D%9A%E5%AE%A2/">小白零成本搭建专属博客</a></p>
+<p>以下是HEXO的<strong>HELLO WORLD</strong></p>
 <blockquote>
-<p>在路由器配置中可用0.0.0.0&#x2F;0表示默认路由，作用是帮助路由器发送路由表中无法查询的包。如果设置了全零网络的路由，路由表中无法查询的包都将送到全零网络的路由中去。</p>
 </blockquote>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在我们刚刚nodejs配置web服务的语境下。0.0.0.0可以表示所有可以访问的地址，也就是本机的所有IPv4地址。</p>
-<p>基础知识还是要扎实掌握才好，不然不会为了这么一点东西而大费周章。也让我想起了在腾讯面试中被问起的ICP四次回收过程，改日写博客详细记录。希望通过博客的点点滴滴助力我更扎实的成长。</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/deployment.html">Deployment</a></p>
 ]]></content>
-      <categories>
-        <category>Coding-Notes</category>
-      </categories>
-      <tags>
-        <tag>node.js</tag>
-        <tag>计算机网络</tag>
-      </tags>
   </entry>
   <entry>
     <title>【译】20个 Laravel Eloquent 小技巧（上）</title>
@@ -692,138 +793,33 @@ public void setTag(String tag) {
       </tags>
   </entry>
   <entry>
-    <title>【译】20个 Laravel Eloquent 小技巧（下）</title>
-    <url>//20-Laravel-Eloquent-Tips-and-Tricks-part2/</url>
-    <content><![CDATA[<p><img data-src="https://image.kbiao.me/2019-01-03-15465238831311.png"></p>
-<blockquote>
-</blockquote>
-<p><a href="http://blog.kbiao.me/2019/01/03/20-Laravel-Eloquent-Tips-and-Tricks/">书接上文</a>。</p>
-<p>继续介绍 Laravel Eloquent 的小技巧</p>
+    <title>nodeJS踩坑-记本地地址127.0.0.1与0.0.0.0的区别</title>
+    <url>/nodeJS%E8%B8%A9%E5%9D%91-%E8%AE%B0%E6%9C%AC%E5%9C%B0%E5%9C%B0%E5%9D%80127-0-0-1%E4%B8%8E0-0-0-0%E7%9A%84%E5%8C%BA%E5%88%AB-58e1062e389a/</url>
+    <content><![CDATA[<p><img data-src="https://image.kbiao.me/16-5-11/42548547.jpg"><br><em>注：本文和Node.js本身关系不大，只是这个这个知识点由学习Node时候引出，主要是关于网络的一个小知识点</em></p>
 <span id="more"></span>
-
-<h3 id="11-自定义属性排序"><a href="#11-自定义属性排序" class="headerlink" title="11. 自定义属性排序"></a>11. 自定义属性排序</h3><p> 假设你有下面的一段代码：</p>
-<p> （设定了一个在返回对象时候的附加属性 ‘full_name’参见 tips5 模型属性: 时间戳, 附加属性（appends） 等）</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getFullNameAttribute</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;attributes[<span class="string">&#x27;first_name&#x27;</span>] . <span class="string">&#x27; &#x27;</span> . <span class="variable language_">$this</span>-&gt;attributes[<span class="string">&#x27;last_name&#x27;</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如果你想要按照 <code>full_name</code> 来排序的话？下面的代码是不行的：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$clients</span> = <span class="title class_">Client</span>::<span class="title function_ invoke__">orderBy</span>(<span class="string">&#x27;full_name&#x27;</span>)-&gt;<span class="title function_ invoke__">get</span>(); <span class="comment">//不行滴</span></span><br></pre></td></tr></table></figure>
-
-<p>当然解决方案也是非常简单。<br>我们需要在得到结果以后再对他们进行排序。</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="variable">$clients</span> = <span class="title class_">Client</span>::<span class="title function_ invoke__">get</span>()-&gt;<span class="title function_ invoke__">sortBy</span>(<span class="string">&#x27;full_name&#x27;</span>); <span class="comment">//稳了</span></span><br></pre></td></tr></table></figure>
-
-<p>注意两个方法名字是不一样的——不是 <code>orderBy</code> 而是 <code>sortBy</code>。</p>
-<p>（一个是 SQL 语句，自定义属性是数据库没有的字段当然不能直接用。但是查询的返回都是一个 Collection 对象，Laravel 为集合提供了很多方便的操作方法，sortBy 就是其中一个，当然还可以用 filter 等集合操作）</p>
-<h3 id="12-全局范围（global-scope）内的默认排序"><a href="#12-全局范围（global-scope）内的默认排序" class="headerlink" title="12. 全局范围（global scope）内的默认排序"></a>12. 全局范围（global scope）内的默认排序</h3><p>如果你希望User :: all（）始终按名称字段排序，该怎么办？ 你可以分配全局的查询作用域。 让我们回到上面已经提到的boot（）方法。</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="built_in">static</span> <span class="function"><span class="keyword">function</span> <span class="title">boot</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">parent</span>::<span class="title function_ invoke__">boot</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 默认按照name 字段升序</span></span><br><span class="line">    <span class="built_in">static</span>::<span class="title function_ invoke__">addGlobalScope</span>(<span class="string">&#x27;order&#x27;</span>, function (Builder <span class="variable">$builder</span>) &#123;</span><br><span class="line">        <span class="variable">$builder</span>-&gt;<span class="title function_ invoke__">orderBy</span>(<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;asc&#x27;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://laravel.com/docs/5.6/eloquent#query-scopes">这里</a>还有更多关于请求范围作用域的介绍。</p>
-<h3 id="13-原生查询方法"><a href="#13-原生查询方法" class="headerlink" title="13. 原生查询方法"></a>13. 原生查询方法</h3><p>有时我们需要在Eloquent语句中添加原生查询语句。 幸运的是，它提供了这样的功能。</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 原生 where 语句</span></span><br><span class="line"><span class="variable">$orders</span> = DB::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;orders&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">whereRaw</span>(<span class="string">&#x27;price &gt; IF(state = &quot;TX&quot;, ?, 100)&#x27;</span>, [<span class="number">200</span>])</span><br><span class="line">    -&gt;<span class="title function_ invoke__">get</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 原生 having 语句</span></span><br><span class="line"><span class="title class_">Product</span>::<span class="title function_ invoke__">groupBy</span>(<span class="string">&#x27;category_id&#x27;</span>)-&gt;<span class="title function_ invoke__">havingRaw</span>(<span class="string">&#x27;COUNT(*) &gt; 1&#x27;</span>)-&gt;<span class="title function_ invoke__">get</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 原生 orderBy 语句</span></span><br><span class="line"><span class="title class_">User</span>::<span class="title function_ invoke__">where</span>(<span class="string">&#x27;created_at&#x27;</span>, <span class="string">&#x27;&gt;&#x27;</span>, <span class="string">&#x27;2016-01-01&#x27;</span>)</span><br><span class="line">  -&gt;<span class="title function_ invoke__">orderByRaw</span>(<span class="string">&#x27;(updated_at - created_at) desc&#x27;</span>)</span><br><span class="line">  -&gt;<span class="title function_ invoke__">get</span>();</span><br></pre></td></tr></table></figure>
-
-<p>（本质上Eloquent就是对 DB 查询对象的一个封装，所以可以用在 DB 上的原始查询方法，都可以用在继承自 Eloquent 的 model 对象上。）</p>
-<h3 id="14-复制：-得到一行数据的一个副本"><a href="#14-复制：-得到一行数据的一个副本" class="headerlink" title="14. 复制： 得到一行数据的一个副本"></a>14. 复制： 得到一行数据的一个副本</h3><p>很简单的一条，不需要太多解释。这是生成数据库条目副本的最佳手段。</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$task</span> = <span class="title class_">Tasks</span>::<span class="title function_ invoke__">find</span>(<span class="number">1</span>);</span><br><span class="line"><span class="variable">$newTask</span> = <span class="variable">$task</span>-&gt;<span class="title function_ invoke__">replicate</span>();</span><br><span class="line"><span class="variable">$newTask</span>-&gt;<span class="title function_ invoke__">save</span>();</span><br></pre></td></tr></table></figure>
-
-<h3 id="15-用于大表大集合的-Chunk（）方法"><a href="#15-用于大表大集合的-Chunk（）方法" class="headerlink" title="15. 用于大表大集合的 Chunk（）方法"></a>15. 用于大表大集合的 Chunk（）方法</h3><p>不完全与Eloquent相关，它更多是Collection 集合类提供的方法，但仍然很强大 —— 处理更大的数据集，你可以将它们分成几块。 </p>
-<p>不要这么做：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$users</span> = <span class="title class_">User</span>::<span class="title function_ invoke__">all</span>();</span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$users</span> <span class="keyword">as</span> <span class="variable">$user</span>) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
-
-<p>而是这样：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="title class_">User</span>::<span class="title function_ invoke__">chunk</span>(<span class="number">100</span>, function (<span class="variable">$users</span>) &#123;</span><br><span class="line">    <span class="keyword">foreach</span> (<span class="variable">$users</span> <span class="keyword">as</span> <span class="variable">$user</span>) &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="问题的提出"><a href="#问题的提出" class="headerlink" title="问题的提出"></a>问题的提出</h2><p>nodejs中创建web服务时，作为小白的我自然是跟着官网文档走起</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line">http.<span class="title function_">createServer</span>(<span class="keyword">function</span> (<span class="params">req, res</span>) &#123;</span><br><span class="line">  res.<span class="title function_">writeHead</span>(<span class="number">200</span>, &#123;<span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;text/plain&#x27;</span>&#125;);</span><br><span class="line">  res.<span class="title function_">end</span>(<span class="string">&#x27;Hello World\n&#x27;</span>);</span><br><span class="line">&#125;).<span class="title function_">listen</span>(<span class="number">1337</span>, <span class="string">&#x27;127.0.0.1&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Server running at http://127.0.0.1:1337/&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>然后很自然本地就可以用<code>localhost</code>或者<code>127.0.0.1</code>访问了。那我想用本机ip访问呢？那就再<code>listen(192.168.1.10)</code> <code>listen(localhost)</code>啥的吧？结果却不行。我再挂到服务器上想要通过ip访问？怎么也访问不成功。<br>开始觉得是不是端口问题，设置了半天云主机的防火墙啥的还是没有用。果然太年轻，一开始就把问题方向搞错了。</p>
+<h2 id="问题的基本解决"><a href="#问题的基本解决" class="headerlink" title="问题的基本解决"></a>问题的基本解决</h2><p>看看官网的文档有这么一句：</p>
 <blockquote>
-<p>类似于数据分片，减少占用提升性能</p>
+<p>server.listen(port, [hostname], [backlog], [callback])#<br>Begin accepting connections on the specified port and hostname. If the hostname is omitted, the server will accept connections directed to any IPv4 address (INADDR_ANY).</p>
 </blockquote>
-<h3 id="16-在生成模型的时候再额外生成一些模板"><a href="#16-在生成模型的时候再额外生成一些模板" class="headerlink" title="16. 在生成模型的时候再额外生成一些模板"></a>16. 在生成模型的时候再额外生成一些模板</h3><p>我们都知道这个的 Artisan 的命令：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">php artisan make:model Company</span><br></pre></td></tr></table></figure>
-
-<p>但你是否知道它还有三个很有用的参数标记用来生成与这个模型关联的其他文件？</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">php artisan make:model Company -mcr</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>-m 将会创建模型的迁移（migration）文件</li>
-<li>-c 将会创建控制器（contriller）</li>
-<li>-r 将表用这个控制器应该是一个资源控制器 （resourceful）</li>
-</ul>
-<h3 id="17-在保存的时候重写-update-at-字段"><a href="#17-在保存的时候重写-update-at-字段" class="headerlink" title="17. 在保存的时候重写 update_at 字段"></a>17. 在保存的时候重写 update_at 字段</h3><p>你知道 - &gt; save（）方法是可以接受参数的吗？ 因此，我们可以告诉它“忽略” updated_at默认填充当前时间戳的功能。 看这个例子： </p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$product</span> = <span class="title class_">Product</span>::<span class="title function_ invoke__">find</span>(<span class="variable">$id</span>);</span><br><span class="line"><span class="variable">$product</span>-&gt;updated_at = <span class="string">&#x27;2019-01-01 10:00:00&#x27;</span>;</span><br><span class="line"><span class="variable">$product</span>-&gt;<span class="title function_ invoke__">save</span>([<span class="string">&#x27;timestamps&#x27;</span> =&gt; <span class="literal">false</span>]);</span><br></pre></td></tr></table></figure>
-
-<p>这里我们动态的重写的 <code>update_at</code> 字段，而不是预先在模型中定义。</p>
+<p>意思就是说如果不填写主机名<code>hostname</code>字段，默认是监听<code>INADDR_ANY</code>，也就是任意的IPv4地址。<br>所以解决这个问题就很简单了直接<code>listen(1337)</code>或者<code>listen(1337,&#39;0.0.0.0&#39;)</code>就可以了。<br>这个0.0.0.0也就是所谓的<code>INADDR_ANY</code><br>问题是解决了可是这个知识点还要进一步理清。</p>
+<h2 id="127-0-0-1与0-0-0-0"><a href="#127-0-0-1与0-0-0-0" class="headerlink" title="127.0.0.1与0.0.0.0"></a>127.0.0.1与0.0.0.0</h2><p>127.0.0.1是一个回送地址，指本地机，一般用来测试使用。大家常用来ping 127.0.0.1来看本地ip&#x2F;tcp正不正常，如能ping通即可正常使用。对于大多数习惯用localhost的来说，实质上就是指向127.0.0.1这个本地IP地址。在操作系统中有个配置文件将localhost与127.0.0.1绑定在了一起。可以理解为本地主机的意思。<br>这个知识点应该是没有什么问题的。其实不只有127.0.0.1，<code>127.x.x.x</code>都是本机回送地址（Loopback Address）,只不过在系统配置中把localhost和<code>127.0.0.1</code>做了绑定，我们习惯用它而已。那么这个<code>INADDR_ANY</code>又是什么呢？</p>
+<h3 id="INADDR-ANY"><a href="#INADDR-ANY" class="headerlink" title="INADDR_ANY"></a>INADDR_ANY</h3><p>这个也叫通配地址，也就是说它不单单指本机。<br>0.0.0.0&#x2F;8可以表示本网络中的所有主机<br>0.0.0.0&#x2F;32可以用作本机的源地址<br>0.0.0.0&#x2F;8也可表示本网络上的某个特定主机<br>综合起来可以说0.0.0.0表示整个网络<br>忽然想起来上计算机网络课程的时候有个默认路由的设置：</p>
 <blockquote>
-<p>Laravel 默认会给所有实体类配置时间戳，如果不需要一般是在模型中指定 <code>$timestamps = false</code></p>
+<p>在路由器配置中可用0.0.0.0&#x2F;0表示默认路由，作用是帮助路由器发送路由表中无法查询的包。如果设置了全零网络的路由，路由表中无法查询的包都将送到全零网络的路由中去。</p>
 </blockquote>
-<h3 id="18-update（）方法的返回值是什么？"><a href="#18-update（）方法的返回值是什么？" class="headerlink" title="18. update（）方法的返回值是什么？"></a>18. update（）方法的返回值是什么？</h3><p>你有没有曾想过下面这段代码返回的 result 是什么？</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$result</span> = <span class="variable">$products</span>-&gt;<span class="title function_ invoke__">whereNull</span>(<span class="string">&#x27;category_id&#x27;</span>)-&gt;<span class="title function_ invoke__">update</span>([<span class="string">&#x27;category_id&#x27;</span> =&gt; <span class="number">2</span>]);</span><br></pre></td></tr></table></figure>
-
-<p>我的意思是，更新语句是在数据库中正确执行的，但 $ result 变量会包含什么？</p>
-<p>答案是受影响的行。 因此，如果您需要检查受影响的行数，则无需再调用任何其他方法 -  update（）方法将为你返回这个数字。</p>
-<h3 id="19-正确翻译-SQL-语句中的括号-到-Eloquent-的查询"><a href="#19-正确翻译-SQL-语句中的括号-到-Eloquent-的查询" class="headerlink" title="19. 正确翻译 SQL 语句中的括号 到 Eloquent 的查询"></a>19. 正确翻译 SQL 语句中的括号 到 Eloquent 的查询</h3><p>假设在你的 SQL 查询中 包含了 and &#x2F; or 这样的关键字，如下：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">... <span class="keyword">WHERE</span> (gender <span class="operator">=</span> <span class="string">&#x27;Male&#x27;</span> <span class="keyword">and</span> age <span class="operator">&gt;=</span> <span class="number">18</span>) <span class="keyword">or</span> (gender <span class="operator">=</span> <span class="string">&#x27;Female&#x27;</span> <span class="keyword">and</span> age <span class="operator">&gt;=</span> <span class="number">65</span>)</span><br></pre></td></tr></table></figure>
-
-<p>怎么翻译成 Eloquent的查询呢？ 这是错误的方法：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$q</span>-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;gender&#x27;</span>, <span class="string">&#x27;Male&#x27;</span>);</span><br><span class="line"><span class="variable">$q</span>-&gt;<span class="title function_ invoke__">orWhere</span>(<span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;&gt;=&#x27;</span>, <span class="number">18</span>);</span><br><span class="line"><span class="variable">$q</span>-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;gender&#x27;</span>, <span class="string">&#x27;Female&#x27;</span>);</span><br><span class="line"><span class="variable">$q</span>-&gt;<span class="title function_ invoke__">orWhere</span>(<span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;&gt;=&#x27;</span>, <span class="number">65</span>);</span><br></pre></td></tr></table></figure>
-
-<p>这个顺序是有问题的。正确的方法稍微有些复杂，需要用到闭包函数作为子查询：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$q</span>-&gt;<span class="title function_ invoke__">where</span>(function (<span class="variable">$query</span>) &#123;</span><br><span class="line">    <span class="variable">$query</span>-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;gender&#x27;</span>, <span class="string">&#x27;Male&#x27;</span>)</span><br><span class="line">        -&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;&gt;=&#x27;</span>, <span class="number">18</span>);</span><br><span class="line">&#125;)-&gt;<span class="title function_ invoke__">orWhere</span>(function(<span class="variable">$query</span>) &#123;</span><br><span class="line">    <span class="variable">$query</span>-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;gender&#x27;</span>, <span class="string">&#x27;Female&#x27;</span>)</span><br><span class="line">        -&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;&gt;=&#x27;</span>, <span class="number">65</span>); </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h3 id="20-orWhere方法使用更多参数"><a href="#20-orWhere方法使用更多参数" class="headerlink" title="20 orWhere方法使用更多参数"></a>20 orWhere方法使用更多参数</h3><p>最后一条，你可以个 orWhere 方法传递一个数组。</p>
-<p>常规用法是：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$q</span>-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;a&#x27;</span>, <span class="number">1</span>);</span><br><span class="line"><span class="variable">$q</span>-&gt;<span class="title function_ invoke__">orWhere</span>(<span class="string">&#x27;b&#x27;</span>, <span class="number">2</span>);</span><br><span class="line"><span class="variable">$q</span>-&gt;<span class="title function_ invoke__">orWhere</span>(<span class="string">&#x27;c&#x27;</span>, <span class="number">3</span>);</span><br></pre></td></tr></table></figure>
-<p>你也可以用下面的语句实现一样的功能：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$q</span>-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;a&#x27;</span>, <span class="number">1</span>);</span><br><span class="line"><span class="variable">$q</span>-&gt;<span class="title function_ invoke__">orWhere</span>([<span class="string">&#x27;b&#x27;</span> =&gt; <span class="number">2</span>, <span class="string">&#x27;c&#x27;</span> =&gt; <span class="number">3</span>]);</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="原文地址"><a href="#原文地址" class="headerlink" title="原文地址"></a>原文地址</h3><ul>
-<li><a href="https://laravel-news.com/eloquent-tips-tricks">《20 Laravel Eloquent Tips and Tricks》</a><a href="https://laravel-news.com/eloquent-tips-tricks">https://laravel-news.com/eloquent-tips-tricks</a></li>
-</ul>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在我们刚刚nodejs配置web服务的语境下。0.0.0.0可以表示所有可以访问的地址，也就是本机的所有IPv4地址。</p>
+<p>基础知识还是要扎实掌握才好，不然不会为了这么一点东西而大费周章。也让我想起了在腾讯面试中被问起的ICP四次回收过程，改日写博客详细记录。希望通过博客的点点滴滴助力我更扎实的成长。</p>
 ]]></content>
       <categories>
-        <category>全干工程师的收藏夹</category>
+        <category>Coding-Notes</category>
       </categories>
       <tags>
-        <tag>php</tag>
-        <tag>laravel</tag>
+        <tag>node.js</tag>
+        <tag>计算机网络</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/hello-world-e46dd7c73341/</url>
-    <content><![CDATA[<p><code>Hello World</code> 是程序员给世界的第一声问候。对于做运维的小伙伴来说应该是<code>It works!</code>。这个句子在我们这些码农的生命中具有特殊的意义。像婴儿的第一声啼哭，是母亲生命中重要的纪念。在母亲节写下这样的句子还是非常应景的。第一篇文章取这个题目也是再合适不过的了。向世界问好，交出属于程序员自己的名片。</p>
-<span id="more"></span>
-<h2 id="打造个人品牌"><a href="#打造个人品牌" class="headerlink" title="打造个人品牌"></a>打造个人品牌</h2><p>一直以来都有一个想法，希望把自己打造成一个品牌，我的名字就是我最大的商标。<br>很早以前就设计了我的昵称**”K、Biao.<strong>中英文字符结合，感觉还是很美观的，识别性也比较高。<br>大学成为预备役码农，于是就有了现在的头像。后来发现到处都是我头像的高仿，我只能说我自己设计头像的时候还是原创的。这是一个标签语言的符号，当时在学习一些前端知识，很自然地就想到了用这个变迁语言的块符号表达自己的头像，中间的斜线上有一句C语言的头文件引用。标志我要成为一个复合型的程序员，努力向全栈方向发展。算是初步建立自己的品牌识别。<br>当我有了女朋友也自然要把她纳入我的这套系统，于是就有了</strong>W、Peach**,和花括号粉色头像。这是<code>C</code>，<code>java</code>等语言的标准结构。<br>一套完整的CIS（品牌识别系统）还应当包括理念识别和行为识别。对公司来讲 就是各种企业文化，企业精神，员工守则。而对于个人来说，就是日常的待人接物，言行举止。当然也可以通过一个人的文章来认识一个人。为了扩大个人品牌的影响力，作为码农当然是离不开网络的帮助了。早些时候认购了属于自己的域名kbiao.me。开始尝试搭建自己的个人网站，奈何阅历尚浅，没有太多可以展示的东西，挂了几个学习前端时候的实验性作品，没多久自己都看不下去了。于是把重点转向了博客的搭建。尝试着使用WordPress搭建了自己一亩三分地。写了几篇文章，无奈却默默无闻，没有什么人关注。毕竟这浩瀚的网络中，我又能发出多大的声音呢？<br>同时我也注册了各种博客，在gitHub上闲逛，在知乎里默默点赞。把各个我网络中的ID统一成了KBiao.</p>
-<blockquote class="blockquote-center">
-<p> 经历是一笔财富，不同寻常的经历是一笔宝贵的财富。<br><strong>郑渊洁</strong></p>
-
-</blockquote>
-<p>这句话我很喜欢，也算是我大学生活的指南针。经过上面一番折腾我也已经到了大三了。好像没有任何成果，但我却在折腾中学会了很多网络，运维方面的东西,也完成了一些小的APP，参加了一些比赛，跟着做了一些项目。实践得来的知识要比课本上干巴巴的讲述靠谱的多。当我忙于学生工作等乱七八糟的事务的时候，专业课的成绩还是没有让我失望，尽管没有时间认真去听每节课，但自己平时的实践中已经在运用很多知识了。同时也给自己挖了一个坑，就是知识不扎实。这个以后慢慢说。</p>
-<h2 id="输出是最好的输入"><a href="#输出是最好的输入" class="headerlink" title="输出是最好的输入"></a>输出是最好的输入</h2><p>也许在同学的眼里我在专业方面还是过关的，但是上次去腾讯的经历确实给我很大提醒。基本功不扎实会有很严重的问题，当我面对同学们可以把最新技术侃侃而谈，却不能用基本的数据结构知识看懂一个算法。广度和深度之间我没有很好的把握这个平衡。<br>我希望用博客来解决这个问题。我自己的收藏夹里，笔记本里有各处剪贴来的知识碎片，给了我什么都懂的错觉，然而没有消化的东西只能称为信息，实践理解之后才能称为知识。当初参加慕课网90天计划时候确实是我成长最快的时间，活动要求每天都要写技术分享。所以我在90天里学会了以程序员的方式使用Linux,学会了前端的基础知识。这些知识都很牢固地变成了我的技能，在我大家这个博客的过程中，景观我已经有一年多没有接触前端的东西，还是可以熟练地去完成主题的修改配置，不得不说这就是写作带来的好处。写作的时候自然就假设了有观众的存在，自然会带来一些效果：</p>
-<ul>
-<li>对于我们所要学习的东西，我们可以掌握得更深入，因为我们需要去给别人解释。</li>
-<li>我们在不断地对自己知识总结，对自己知识进行强化。</li>
-<li>我们在以另外一种方式思考问题。</li>
-</ul>
-<p>我希望我现在的博客可以成为一个有态度的博客，为我的个人品牌加分。以博客或者公众号为纽带促进我学习的正向循环：</p>
-<ul>
-<li>技术、阅读笔记——学习</li>
-<li>理论、技术实现过程——创造</li>
-<li>思想、感受、总结——分享</li>
-</ul>
-<h2 id="GitHub-Pages-HEXO"><a href="#GitHub-Pages-HEXO" class="headerlink" title="GitHub Pages &amp;&amp; HEXO"></a>GitHub Pages &amp;&amp; HEXO</h2><p>之前在很多平台上做过博客，总感觉不够优雅，到处是广告，又不能按照自己的想法来，严重违背程序员精神，写写也就越来越没有兴趣了。直到发现了 GitHub Pages &amp;&amp; HEXO &amp;&amp; MarkDown 这一套工具才感觉找到了我真正想要的感觉。<br>GitHub Pages提供全天候不限量的网页托管，Git提供版本控制管理，Hexo依托Node.js高效生成静态博客页面，MarkDown提供了最优雅的写作方案。简直是为程序员量身定制。而且简单，你看我连女票都学会了呢！<br><a href="http://peach.kbiao.me/2016/05/08/%E5%B0%8F%E7%99%BD%E9%9B%B6%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA%E4%B8%93%E5%B1%9E%E5%8D%9A%E5%AE%A2/">小白零成本搭建专属博客</a></p>
-<p>以下是HEXO的<strong>HELLO WORLD</strong></p>
-<blockquote>
-</blockquote>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html">Deployment</a></p>
-]]></content>
   </entry>
   <entry>
     <title>16 狂奔， 17 成长</title>
@@ -1191,6 +1187,99 @@ public void setTag(String tag) {
       </tags>
   </entry>
   <entry>
+    <title>【译】20个 Laravel Eloquent 小技巧（下）</title>
+    <url>//20-Laravel-Eloquent-Tips-and-Tricks-part2/</url>
+    <content><![CDATA[<p><img data-src="https://image.kbiao.me/2019-01-03-15465238831311.png"></p>
+<blockquote>
+</blockquote>
+<p><a href="http://blog.kbiao.me/2019/01/03/20-Laravel-Eloquent-Tips-and-Tricks/">书接上文</a>。</p>
+<p>继续介绍 Laravel Eloquent 的小技巧</p>
+<span id="more"></span>
+
+<h3 id="11-自定义属性排序"><a href="#11-自定义属性排序" class="headerlink" title="11. 自定义属性排序"></a>11. 自定义属性排序</h3><p> 假设你有下面的一段代码：</p>
+<p> （设定了一个在返回对象时候的附加属性 ‘full_name’参见 tips5 模型属性: 时间戳, 附加属性（appends） 等）</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getFullNameAttribute</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;attributes[<span class="string">&#x27;first_name&#x27;</span>] . <span class="string">&#x27; &#x27;</span> . <span class="variable language_">$this</span>-&gt;attributes[<span class="string">&#x27;last_name&#x27;</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果你想要按照 <code>full_name</code> 来排序的话？下面的代码是不行的：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$clients</span> = <span class="title class_">Client</span>::<span class="title function_ invoke__">orderBy</span>(<span class="string">&#x27;full_name&#x27;</span>)-&gt;<span class="title function_ invoke__">get</span>(); <span class="comment">//不行滴</span></span><br></pre></td></tr></table></figure>
+
+<p>当然解决方案也是非常简单。<br>我们需要在得到结果以后再对他们进行排序。</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="variable">$clients</span> = <span class="title class_">Client</span>::<span class="title function_ invoke__">get</span>()-&gt;<span class="title function_ invoke__">sortBy</span>(<span class="string">&#x27;full_name&#x27;</span>); <span class="comment">//稳了</span></span><br></pre></td></tr></table></figure>
+
+<p>注意两个方法名字是不一样的——不是 <code>orderBy</code> 而是 <code>sortBy</code>。</p>
+<p>（一个是 SQL 语句，自定义属性是数据库没有的字段当然不能直接用。但是查询的返回都是一个 Collection 对象，Laravel 为集合提供了很多方便的操作方法，sortBy 就是其中一个，当然还可以用 filter 等集合操作）</p>
+<h3 id="12-全局范围（global-scope）内的默认排序"><a href="#12-全局范围（global-scope）内的默认排序" class="headerlink" title="12. 全局范围（global scope）内的默认排序"></a>12. 全局范围（global scope）内的默认排序</h3><p>如果你希望User :: all（）始终按名称字段排序，该怎么办？ 你可以分配全局的查询作用域。 让我们回到上面已经提到的boot（）方法。</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="built_in">static</span> <span class="function"><span class="keyword">function</span> <span class="title">boot</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">parent</span>::<span class="title function_ invoke__">boot</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 默认按照name 字段升序</span></span><br><span class="line">    <span class="built_in">static</span>::<span class="title function_ invoke__">addGlobalScope</span>(<span class="string">&#x27;order&#x27;</span>, function (Builder <span class="variable">$builder</span>) &#123;</span><br><span class="line">        <span class="variable">$builder</span>-&gt;<span class="title function_ invoke__">orderBy</span>(<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;asc&#x27;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://laravel.com/docs/5.6/eloquent#query-scopes">这里</a>还有更多关于请求范围作用域的介绍。</p>
+<h3 id="13-原生查询方法"><a href="#13-原生查询方法" class="headerlink" title="13. 原生查询方法"></a>13. 原生查询方法</h3><p>有时我们需要在Eloquent语句中添加原生查询语句。 幸运的是，它提供了这样的功能。</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 原生 where 语句</span></span><br><span class="line"><span class="variable">$orders</span> = DB::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;orders&#x27;</span>)</span><br><span class="line">    -&gt;<span class="title function_ invoke__">whereRaw</span>(<span class="string">&#x27;price &gt; IF(state = &quot;TX&quot;, ?, 100)&#x27;</span>, [<span class="number">200</span>])</span><br><span class="line">    -&gt;<span class="title function_ invoke__">get</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 原生 having 语句</span></span><br><span class="line"><span class="title class_">Product</span>::<span class="title function_ invoke__">groupBy</span>(<span class="string">&#x27;category_id&#x27;</span>)-&gt;<span class="title function_ invoke__">havingRaw</span>(<span class="string">&#x27;COUNT(*) &gt; 1&#x27;</span>)-&gt;<span class="title function_ invoke__">get</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 原生 orderBy 语句</span></span><br><span class="line"><span class="title class_">User</span>::<span class="title function_ invoke__">where</span>(<span class="string">&#x27;created_at&#x27;</span>, <span class="string">&#x27;&gt;&#x27;</span>, <span class="string">&#x27;2016-01-01&#x27;</span>)</span><br><span class="line">  -&gt;<span class="title function_ invoke__">orderByRaw</span>(<span class="string">&#x27;(updated_at - created_at) desc&#x27;</span>)</span><br><span class="line">  -&gt;<span class="title function_ invoke__">get</span>();</span><br></pre></td></tr></table></figure>
+
+<p>（本质上Eloquent就是对 DB 查询对象的一个封装，所以可以用在 DB 上的原始查询方法，都可以用在继承自 Eloquent 的 model 对象上。）</p>
+<h3 id="14-复制：-得到一行数据的一个副本"><a href="#14-复制：-得到一行数据的一个副本" class="headerlink" title="14. 复制： 得到一行数据的一个副本"></a>14. 复制： 得到一行数据的一个副本</h3><p>很简单的一条，不需要太多解释。这是生成数据库条目副本的最佳手段。</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$task</span> = <span class="title class_">Tasks</span>::<span class="title function_ invoke__">find</span>(<span class="number">1</span>);</span><br><span class="line"><span class="variable">$newTask</span> = <span class="variable">$task</span>-&gt;<span class="title function_ invoke__">replicate</span>();</span><br><span class="line"><span class="variable">$newTask</span>-&gt;<span class="title function_ invoke__">save</span>();</span><br></pre></td></tr></table></figure>
+
+<h3 id="15-用于大表大集合的-Chunk（）方法"><a href="#15-用于大表大集合的-Chunk（）方法" class="headerlink" title="15. 用于大表大集合的 Chunk（）方法"></a>15. 用于大表大集合的 Chunk（）方法</h3><p>不完全与Eloquent相关，它更多是Collection 集合类提供的方法，但仍然很强大 —— 处理更大的数据集，你可以将它们分成几块。 </p>
+<p>不要这么做：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$users</span> = <span class="title class_">User</span>::<span class="title function_ invoke__">all</span>();</span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$users</span> <span class="keyword">as</span> <span class="variable">$user</span>) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+
+<p>而是这样：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="title class_">User</span>::<span class="title function_ invoke__">chunk</span>(<span class="number">100</span>, function (<span class="variable">$users</span>) &#123;</span><br><span class="line">    <span class="keyword">foreach</span> (<span class="variable">$users</span> <span class="keyword">as</span> <span class="variable">$user</span>) &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>类似于数据分片，减少占用提升性能</p>
+</blockquote>
+<h3 id="16-在生成模型的时候再额外生成一些模板"><a href="#16-在生成模型的时候再额外生成一些模板" class="headerlink" title="16. 在生成模型的时候再额外生成一些模板"></a>16. 在生成模型的时候再额外生成一些模板</h3><p>我们都知道这个的 Artisan 的命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">php artisan make:model Company</span><br></pre></td></tr></table></figure>
+
+<p>但你是否知道它还有三个很有用的参数标记用来生成与这个模型关联的其他文件？</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">php artisan make:model Company -mcr</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-m 将会创建模型的迁移（migration）文件</li>
+<li>-c 将会创建控制器（contriller）</li>
+<li>-r 将表用这个控制器应该是一个资源控制器 （resourceful）</li>
+</ul>
+<h3 id="17-在保存的时候重写-update-at-字段"><a href="#17-在保存的时候重写-update-at-字段" class="headerlink" title="17. 在保存的时候重写 update_at 字段"></a>17. 在保存的时候重写 update_at 字段</h3><p>你知道 - &gt; save（）方法是可以接受参数的吗？ 因此，我们可以告诉它“忽略” updated_at默认填充当前时间戳的功能。 看这个例子： </p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$product</span> = <span class="title class_">Product</span>::<span class="title function_ invoke__">find</span>(<span class="variable">$id</span>);</span><br><span class="line"><span class="variable">$product</span>-&gt;updated_at = <span class="string">&#x27;2019-01-01 10:00:00&#x27;</span>;</span><br><span class="line"><span class="variable">$product</span>-&gt;<span class="title function_ invoke__">save</span>([<span class="string">&#x27;timestamps&#x27;</span> =&gt; <span class="literal">false</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>这里我们动态的重写的 <code>update_at</code> 字段，而不是预先在模型中定义。</p>
+<blockquote>
+<p>Laravel 默认会给所有实体类配置时间戳，如果不需要一般是在模型中指定 <code>$timestamps = false</code></p>
+</blockquote>
+<h3 id="18-update（）方法的返回值是什么？"><a href="#18-update（）方法的返回值是什么？" class="headerlink" title="18. update（）方法的返回值是什么？"></a>18. update（）方法的返回值是什么？</h3><p>你有没有曾想过下面这段代码返回的 result 是什么？</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$result</span> = <span class="variable">$products</span>-&gt;<span class="title function_ invoke__">whereNull</span>(<span class="string">&#x27;category_id&#x27;</span>)-&gt;<span class="title function_ invoke__">update</span>([<span class="string">&#x27;category_id&#x27;</span> =&gt; <span class="number">2</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>我的意思是，更新语句是在数据库中正确执行的，但 $ result 变量会包含什么？</p>
+<p>答案是受影响的行。 因此，如果您需要检查受影响的行数，则无需再调用任何其他方法 -  update（）方法将为你返回这个数字。</p>
+<h3 id="19-正确翻译-SQL-语句中的括号-到-Eloquent-的查询"><a href="#19-正确翻译-SQL-语句中的括号-到-Eloquent-的查询" class="headerlink" title="19. 正确翻译 SQL 语句中的括号 到 Eloquent 的查询"></a>19. 正确翻译 SQL 语句中的括号 到 Eloquent 的查询</h3><p>假设在你的 SQL 查询中 包含了 and &#x2F; or 这样的关键字，如下：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">... <span class="keyword">WHERE</span> (gender <span class="operator">=</span> <span class="string">&#x27;Male&#x27;</span> <span class="keyword">and</span> age <span class="operator">&gt;=</span> <span class="number">18</span>) <span class="keyword">or</span> (gender <span class="operator">=</span> <span class="string">&#x27;Female&#x27;</span> <span class="keyword">and</span> age <span class="operator">&gt;=</span> <span class="number">65</span>)</span><br></pre></td></tr></table></figure>
+
+<p>怎么翻译成 Eloquent的查询呢？ 这是错误的方法：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$q</span>-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;gender&#x27;</span>, <span class="string">&#x27;Male&#x27;</span>);</span><br><span class="line"><span class="variable">$q</span>-&gt;<span class="title function_ invoke__">orWhere</span>(<span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;&gt;=&#x27;</span>, <span class="number">18</span>);</span><br><span class="line"><span class="variable">$q</span>-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;gender&#x27;</span>, <span class="string">&#x27;Female&#x27;</span>);</span><br><span class="line"><span class="variable">$q</span>-&gt;<span class="title function_ invoke__">orWhere</span>(<span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;&gt;=&#x27;</span>, <span class="number">65</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这个顺序是有问题的。正确的方法稍微有些复杂，需要用到闭包函数作为子查询：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$q</span>-&gt;<span class="title function_ invoke__">where</span>(function (<span class="variable">$query</span>) &#123;</span><br><span class="line">    <span class="variable">$query</span>-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;gender&#x27;</span>, <span class="string">&#x27;Male&#x27;</span>)</span><br><span class="line">        -&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;&gt;=&#x27;</span>, <span class="number">18</span>);</span><br><span class="line">&#125;)-&gt;<span class="title function_ invoke__">orWhere</span>(function(<span class="variable">$query</span>) &#123;</span><br><span class="line">    <span class="variable">$query</span>-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;gender&#x27;</span>, <span class="string">&#x27;Female&#x27;</span>)</span><br><span class="line">        -&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;&gt;=&#x27;</span>, <span class="number">65</span>); </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="20-orWhere方法使用更多参数"><a href="#20-orWhere方法使用更多参数" class="headerlink" title="20 orWhere方法使用更多参数"></a>20 orWhere方法使用更多参数</h3><p>最后一条，你可以个 orWhere 方法传递一个数组。</p>
+<p>常规用法是：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$q</span>-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;a&#x27;</span>, <span class="number">1</span>);</span><br><span class="line"><span class="variable">$q</span>-&gt;<span class="title function_ invoke__">orWhere</span>(<span class="string">&#x27;b&#x27;</span>, <span class="number">2</span>);</span><br><span class="line"><span class="variable">$q</span>-&gt;<span class="title function_ invoke__">orWhere</span>(<span class="string">&#x27;c&#x27;</span>, <span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+<p>你也可以用下面的语句实现一样的功能：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$q</span>-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;a&#x27;</span>, <span class="number">1</span>);</span><br><span class="line"><span class="variable">$q</span>-&gt;<span class="title function_ invoke__">orWhere</span>([<span class="string">&#x27;b&#x27;</span> =&gt; <span class="number">2</span>, <span class="string">&#x27;c&#x27;</span> =&gt; <span class="number">3</span>]);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="原文地址"><a href="#原文地址" class="headerlink" title="原文地址"></a>原文地址</h3><ul>
+<li><a href="https://laravel-news.com/eloquent-tips-tricks">《20 Laravel Eloquent Tips and Tricks》</a><a href="https://laravel-news.com/eloquent-tips-tricks">https://laravel-news.com/eloquent-tips-tricks</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>全干工程师的收藏夹</category>
+      </categories>
+      <tags>
+        <tag>php</tag>
+        <tag>laravel</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>也来聊聊罗胖的2018跨年演讲</title>
     <url>//talk-about-Luo-2018-New-Year-Speech/</url>
     <content><![CDATA[<p><img data-src="https://image.kbiao.me/2019-01-01-15463501406666.jpg"><br>高中时候跨年的仪式感大概来自于南方周末的新年献词，内容妙语连珠，评论力透纸背，串起一年的大事件，又总能给人以温暖和信心。这几年报纸都几乎要消失了，跨年的方式也多种多样了起来。从15年的第一场《时间的朋友》演讲开始，罗胖给了大家一种除了歌舞喧嚣之外的又一种跨年选择。<br>罗胖确实是一个很厉害的人。他一直坚持到现在的60秒语音，到《罗辑思维》脱口秀节目发展成为得到 APP，几乎是现在最成功的知识付费应用了，在做知识分享商业化非常成功。当然人红是非多，这个长达四小时的演讲几乎算是互联网小圈子的春晚了。演讲还在进行，知乎上问题讨论就多了起来，而且是负面的声音占了主流。我的阅历见识还不足以评判罗胖输出的所有知识观点，我只是凑热闹聊聊这个演讲。</p>
@@ -1352,50 +1441,6 @@ public void setTag(String tag) {
       </categories>
       <tags>
         <tag>LLM, Prompt工程, 技术</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>全干工程师的收藏夹【第一期】</title>
-    <url>/%E5%85%A8%E5%B9%B2%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E6%94%B6%E8%97%8F%E5%A4%B9%E3%80%90%E7%AC%AC%E4%B8%80%E6%9C%9F%E3%80%91-c1d58876ec84/</url>
-    <content><![CDATA[<p>我是一个预备役码农，这是我新做的的一个小项目。把每天阅读很多的文章，选出一些值得思考的内容做推荐。针对每篇文章我会写一小段中文简评，督促自己认真阅读的同时也给同为码农的你一些参考。我觉得码农才能知道码农的需要，而我作为被老师誉为“全干工程师”预备役码农，方方面面都会有所涉猎。</p>
-<p>今天是全干工程师阅读分享的第一期，这里会记录我看到的值得分享的文章，期待和你一起进步！阅读本期所有文章需35分钟。</p>
-<p><em><em>在微信平台阅读的同学，由于平台限制无法直接跳转，我把链接直接放在博客中，读完正文后可以通过原文链接获取三篇推荐的原文地址。</em></em></p>
-<blockquote>
-<p>今天的三个文章背后共同的主题是选型和决策。工程师的任务就是在现实的约束下去求解问题，很多时候我们学习的教条式的知识让我们总忍不住去找最佳实践，而忽略了工程师的本职。我以为科学家的要义是在理想条件下寻找极限，工程师的任务是在现实条件下寻求平衡。为什么这个问题对于科学家和工程师来讲一样重要。</p>
-</blockquote>
-<span id="more"></span>
-
-<hr>
-<h3 id="MySQL在GitHub的高可用性"><a href="#MySQL在GitHub的高可用性" class="headerlink" title="MySQL在GitHub的高可用性"></a><a href="https://githubengineering.com/mysql-high-availability-at-github/">MySQL在GitHub的高可用性</a></h3><p><img data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532446882722&di=7ac3f62eb8fc4a4ce70de14843931ed3&imgtype=jpg&src=http://img4.imgtn.bdimg.com/it/u=1140509074,84803110&fm=214&gp=0.jpg" alt="mysql"></p>
-<p>架构设计的主要目的是为了解决软件系统复杂度带来的问题。复杂度的主要来源包括高性能，高扩展和高可用以及成本安全等方面的考虑。本文阐述了GitHub的MySQL高可用性和主服务发现解决方案，这个方案使得我们能够可靠地进行跨数据中心运维、克服数据中心隔离的影响并实现故障时的短宕机时间。现实的案例的演进过程可以让我们学习到每个决策背后的原因，而不是一味的为了高大上而去设计架构，做到有据可依。</p>
-<blockquote>
-<p>原链：<a href="https://githubengineering.com/mysql-high-availability-at-github/">https://githubengineering.com/mysql-high-availability-at-github/</a>  约15分钟读完</p>
-</blockquote>
-<hr>
-<h3 id="为什么说JSON不是一门好的配置语言"><a href="#为什么说JSON不是一门好的配置语言" class="headerlink" title="为什么说JSON不是一门好的配置语言"></a><a href="https://www.lucidchart.com/techblog/2018/07/16/why-json-isnt-a-good-configuration-language/">为什么说JSON不是一门好的配置语言</a></h3><p><img data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532447581070&di=ac5e7de29f2ca1dcc25edfb7dcb2ee1e&imgtype=jpg&src=http://img2.imgtn.bdimg.com/it/u=3849388262,3599136548&fm=214&gp=0.jpg" alt="json"></p>
-<p>优劣之争总是一个很有意思的话题。本文的角度不是一般的语言框架的问题，而是一个通用的配置文件的组织结构。任何一个方案都要放在一个具体的场景下去讨论才有意义，json作为一种通用数据交换格式无疑是非常有效率的，也几乎成为了restful设计的事实通信标准。但是，在作为配置文件的角度来说它却不是那么完美。作者分析了json的一些缺点后也给出了推荐的解决方案，虽然我们不是每个人都有机会构建自己的框架或者库，但是这些理由在我们日后决策之时必然可以提示一些思考的方向。</p>
-<blockquote>
-<p>原链：<a href="https://www.lucidchart.com/techblog/2018/07/16/why-json-isnt-a-good-configuration-language/">https://www.lucidchart.com/techblog/2018/07/16/why-json-isnt-a-good-configuration-language/</a>  约8分钟读完</p>
-</blockquote>
-<hr>
-<h3 id="Vue和React大比拼"><a href="#Vue和React大比拼" class="headerlink" title="Vue和React大比拼"></a><a href="https://mp.weixin.qq.com/s?__biz=MzUxMzcxMzE5Ng==&mid=2247489220&idx=1&sn=495ed9f9278f92bd671ea54ca30df2ae&chksm=f951a387ce262a91a13328c9420777e90c285078ac1c5a4456ef31e5003df271e682812dc6e3#rd">Vue和React大比拼</a></h3><p><img data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532447876248&di=b3aa83dd2b2ad57365a0bee4595d475e&imgtype=0&src=http://p0.qhimg.com/t016ed168688ebc74f8.jpg" alt="Vue 和React 大比拼"></p>
-<p>前端圈内的争斗从未休止，在做技术选型之时总是一个逃不开的话题。vue的官方文档中也附带了一篇与其他框架对比的文章。这一篇文章相对来说比较客观和全面，集中讨论vue与react的异同（angular已经不在讨论范围了么？？版本更新大家hold不住了吧）。每个框架设计要解决的主要问题不尽相同，解决问题相同时候使用的策略也不相同，这就决定了他们场景的差异，一味支持谁终将变成黑粉。码农到工程师的进化应该主要体现在能结合现实场景去考虑问题吧。</p>
-<blockquote>
-<p>原链：<a href="https://mp.weixin.qq.com/s?__biz=MzUxMzcxMzE5Ng==&mid=2247489220&idx=1&sn=495ed9f9278f92bd671ea54ca30df2ae&chksm=f951a387ce262a91a13328c9420777e90c285078ac1c5a4456ef31e5003df271e682812dc6e3#rd">https://mp.weixin.qq.com/s?__biz=MzUxMzcxMzE5Ng==&amp;mid=2247489220&amp;idx=1&amp;sn=495ed9f9278f92bd671ea54ca30df2ae&amp;chksm=f951a387ce262a91a13328c9420777e90c285078ac1c5a4456ef31e5003df271e682812dc6e3#rd</a>  约10分钟读完</p>
-</blockquote>
-<hr>
-<h3 id="原文链接："><a href="#原文链接：" class="headerlink" title="原文链接："></a>原文链接：</h3><ul>
-<li><a href="https://githubengineering.com/mysql-high-availability-at-github/">（一）MySQL在GitHub的高可用性</a></li>
-<li><a href="https://www.lucidchart.com/techblog/2018/07/16/why-json-isnt-a-good-configuration-language/">（二）为什么说JSON不是一门好的配置语言</a></li>
-<li><a href="https://mp.weixin.qq.com/s?__biz=MzUxMzcxMzE5Ng==&mid=2247489220&idx=1&sn=495ed9f9278f92bd671ea54ca30df2ae&chksm=f951a387ce262a91a13328c9420777e90c285078ac1c5a4456ef31e5003df271e682812dc6e3#rd">（三）Vue和React大比拼</a></li>
-</ul>
-<hr>
-]]></content>
-      <categories>
-        <category>全干工程师的收藏夹</category>
-      </categories>
-      <tags>
-        <tag>阅读</tag>
       </tags>
   </entry>
   <entry>
@@ -1572,6 +1617,73 @@ public void setTag(String tag) {
       </tags>
   </entry>
   <entry>
+    <title>全干工程师的收藏夹【第一期】</title>
+    <url>/%E5%85%A8%E5%B9%B2%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E6%94%B6%E8%97%8F%E5%A4%B9%E3%80%90%E7%AC%AC%E4%B8%80%E6%9C%9F%E3%80%91-c1d58876ec84/</url>
+    <content><![CDATA[<p>我是一个预备役码农，这是我新做的的一个小项目。把每天阅读很多的文章，选出一些值得思考的内容做推荐。针对每篇文章我会写一小段中文简评，督促自己认真阅读的同时也给同为码农的你一些参考。我觉得码农才能知道码农的需要，而我作为被老师誉为“全干工程师”预备役码农，方方面面都会有所涉猎。</p>
+<p>今天是全干工程师阅读分享的第一期，这里会记录我看到的值得分享的文章，期待和你一起进步！阅读本期所有文章需35分钟。</p>
+<p><em><em>在微信平台阅读的同学，由于平台限制无法直接跳转，我把链接直接放在博客中，读完正文后可以通过原文链接获取三篇推荐的原文地址。</em></em></p>
+<blockquote>
+<p>今天的三个文章背后共同的主题是选型和决策。工程师的任务就是在现实的约束下去求解问题，很多时候我们学习的教条式的知识让我们总忍不住去找最佳实践，而忽略了工程师的本职。我以为科学家的要义是在理想条件下寻找极限，工程师的任务是在现实条件下寻求平衡。为什么这个问题对于科学家和工程师来讲一样重要。</p>
+</blockquote>
+<span id="more"></span>
+
+<hr>
+<h3 id="MySQL在GitHub的高可用性"><a href="#MySQL在GitHub的高可用性" class="headerlink" title="MySQL在GitHub的高可用性"></a><a href="https://githubengineering.com/mysql-high-availability-at-github/">MySQL在GitHub的高可用性</a></h3><p><img data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532446882722&di=7ac3f62eb8fc4a4ce70de14843931ed3&imgtype=jpg&src=http://img4.imgtn.bdimg.com/it/u=1140509074,84803110&fm=214&gp=0.jpg" alt="mysql"></p>
+<p>架构设计的主要目的是为了解决软件系统复杂度带来的问题。复杂度的主要来源包括高性能，高扩展和高可用以及成本安全等方面的考虑。本文阐述了GitHub的MySQL高可用性和主服务发现解决方案，这个方案使得我们能够可靠地进行跨数据中心运维、克服数据中心隔离的影响并实现故障时的短宕机时间。现实的案例的演进过程可以让我们学习到每个决策背后的原因，而不是一味的为了高大上而去设计架构，做到有据可依。</p>
+<blockquote>
+<p>原链：<a href="https://githubengineering.com/mysql-high-availability-at-github/">https://githubengineering.com/mysql-high-availability-at-github/</a>  约15分钟读完</p>
+</blockquote>
+<hr>
+<h3 id="为什么说JSON不是一门好的配置语言"><a href="#为什么说JSON不是一门好的配置语言" class="headerlink" title="为什么说JSON不是一门好的配置语言"></a><a href="https://www.lucidchart.com/techblog/2018/07/16/why-json-isnt-a-good-configuration-language/">为什么说JSON不是一门好的配置语言</a></h3><p><img data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532447581070&di=ac5e7de29f2ca1dcc25edfb7dcb2ee1e&imgtype=jpg&src=http://img2.imgtn.bdimg.com/it/u=3849388262,3599136548&fm=214&gp=0.jpg" alt="json"></p>
+<p>优劣之争总是一个很有意思的话题。本文的角度不是一般的语言框架的问题，而是一个通用的配置文件的组织结构。任何一个方案都要放在一个具体的场景下去讨论才有意义，json作为一种通用数据交换格式无疑是非常有效率的，也几乎成为了restful设计的事实通信标准。但是，在作为配置文件的角度来说它却不是那么完美。作者分析了json的一些缺点后也给出了推荐的解决方案，虽然我们不是每个人都有机会构建自己的框架或者库，但是这些理由在我们日后决策之时必然可以提示一些思考的方向。</p>
+<blockquote>
+<p>原链：<a href="https://www.lucidchart.com/techblog/2018/07/16/why-json-isnt-a-good-configuration-language/">https://www.lucidchart.com/techblog/2018/07/16/why-json-isnt-a-good-configuration-language/</a>  约8分钟读完</p>
+</blockquote>
+<hr>
+<h3 id="Vue和React大比拼"><a href="#Vue和React大比拼" class="headerlink" title="Vue和React大比拼"></a><a href="https://mp.weixin.qq.com/s?__biz=MzUxMzcxMzE5Ng==&mid=2247489220&idx=1&sn=495ed9f9278f92bd671ea54ca30df2ae&chksm=f951a387ce262a91a13328c9420777e90c285078ac1c5a4456ef31e5003df271e682812dc6e3#rd">Vue和React大比拼</a></h3><p><img data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532447876248&di=b3aa83dd2b2ad57365a0bee4595d475e&imgtype=0&src=http://p0.qhimg.com/t016ed168688ebc74f8.jpg" alt="Vue 和React 大比拼"></p>
+<p>前端圈内的争斗从未休止，在做技术选型之时总是一个逃不开的话题。vue的官方文档中也附带了一篇与其他框架对比的文章。这一篇文章相对来说比较客观和全面，集中讨论vue与react的异同（angular已经不在讨论范围了么？？版本更新大家hold不住了吧）。每个框架设计要解决的主要问题不尽相同，解决问题相同时候使用的策略也不相同，这就决定了他们场景的差异，一味支持谁终将变成黑粉。码农到工程师的进化应该主要体现在能结合现实场景去考虑问题吧。</p>
+<blockquote>
+<p>原链：<a href="https://mp.weixin.qq.com/s?__biz=MzUxMzcxMzE5Ng==&mid=2247489220&idx=1&sn=495ed9f9278f92bd671ea54ca30df2ae&chksm=f951a387ce262a91a13328c9420777e90c285078ac1c5a4456ef31e5003df271e682812dc6e3#rd">https://mp.weixin.qq.com/s?__biz=MzUxMzcxMzE5Ng==&amp;mid=2247489220&amp;idx=1&amp;sn=495ed9f9278f92bd671ea54ca30df2ae&amp;chksm=f951a387ce262a91a13328c9420777e90c285078ac1c5a4456ef31e5003df271e682812dc6e3#rd</a>  约10分钟读完</p>
+</blockquote>
+<hr>
+<h3 id="原文链接："><a href="#原文链接：" class="headerlink" title="原文链接："></a>原文链接：</h3><ul>
+<li><a href="https://githubengineering.com/mysql-high-availability-at-github/">（一）MySQL在GitHub的高可用性</a></li>
+<li><a href="https://www.lucidchart.com/techblog/2018/07/16/why-json-isnt-a-good-configuration-language/">（二）为什么说JSON不是一门好的配置语言</a></li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzUxMzcxMzE5Ng==&mid=2247489220&idx=1&sn=495ed9f9278f92bd671ea54ca30df2ae&chksm=f951a387ce262a91a13328c9420777e90c285078ac1c5a4456ef31e5003df271e682812dc6e3#rd">（三）Vue和React大比拼</a></li>
+</ul>
+<hr>
+]]></content>
+      <categories>
+        <category>全干工程师的收藏夹</category>
+      </categories>
+      <tags>
+        <tag>阅读</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关门的报刊亭和扎堆的核酸亭</title>
+    <url>/%E5%85%B3%E9%97%A8%E7%9A%84%E6%8A%A5%E5%88%8A%E4%BA%AD%E5%92%8C%E6%89%8E%E5%A0%86%E7%9A%84%E6%A0%B8%E9%85%B8%E4%BA%AD-41d8d32f88d8/</url>
+    <content><![CDATA[<p><img data-src="https://image.kbiao.me/blog/img/IMG_2313.JPG?imageslim"><br>南方周末报纸出到了两千期。我从初中开始就有断续订阅或者去报刊亭买着追更，虽然近来大多都是看电子刊或者 APP 的文章了，但想着2000期还是挺有纪念意义的，值得收藏一份纸质版。</p>
+<p>它是每周四出新一期，我便从这周四开始，在上班路上特意路过几个报刊亭，打算买一份报纸收藏，但发现都是关着门的。到了周末，想着可以再跑稍微远点找找，说不定能找到某个营业中的报刊亭。然而，顶着烈日走了几站地以后还是放弃了。每个报刊亭都门窗紧闭，不再如往日一般张开双臂，呈现一幅“北京欢迎你”的姿态。然而，旁边却有一条长队，从街角的另一头，扎堆冒出来的核酸检测亭那边蜿蜒过来。</p>
+<span id="more"></span>
+
+
+
+<p>报刊亭听起来不像是我这个年纪的人应该流连的场所。确实，在很多城市，听起来像是上个时代的遗存。但是，在北京各个地铁口，小区或者学校附近还是很茂密地有报刊亭存在。看着也不甚冷清。它们除了贩售报纸杂志，开在小区附近也兼顾了彩票业务，开在地铁口的往往饮料区也能占用大半货架。之前朝阳区的某人流调轨迹里就出现了报刊亭，这在其他城市可能还确实挺难想象的。说不好这就是几个月都让报刊亭歇业的原因呢。</p>
+<p>核酸亭倒是新晋的城市风景线。三年和病毒的搏斗的经验告诉我们：人的保质期短则24小时，长则72小时。一个个核酸亭是我们及时续命的保证。我想起来在我高考前的日子里，等着周四一份南方周末是我精神续命的保证。今天的我虽然是一个北漂码农，但是曾经想象的职业“未来”是一名编辑，或者是当个记者。但是出于理性发展考虑，选了理科参加高考。于是那些备考的日子里，读一份“文科”的报纸，就是难得的精神续命良方。让我能鼓起勇气再和那些符号公式去再搏杀几个回合。</p>
+<p>确实曾经的南方周末，特别是每年的新年献词都让我有种“续命”的感觉。年少成长时候总有些烦恼困惑，社会新闻也总有不公和黑暗。然而记得它说：“我们来而往复&#x2F;今天或未来&#x2F;无论身处何方&#x2F;我们微笑&#x2F;对这个国家&#x2F;依然充满梦想”， 也有类似《让无力者有力， 让悲观者前行》这样的文章总有鼓舞人心的力量。只是今年的献词里它说的是：“时间之矢已无法倒转， 世界再也回不到从前” 多少有点伤感。</p>
+<p>核酸亭和报刊亭的选址可能确实目标是比较接近的，都是为了尽可能辐射周边，方便大家经常光顾。所以才让我在一个个找报刊亭的路上，都发现了与之“对仗”的核酸亭。核酸检测的结果，呈现为手机上的健康码，宣告我肉体的合法性。关了门的报刊亭里，那些报刊有的走远了，也有像南方周末这样努力变成一个 APP ，冲破各种 “Feed 流”的封锁挤到我的手机屏幕上的，宣告我精神世界的“独立性”。</p>
+<p>最终我通过万能的淘宝搞定了收藏一份报纸的心愿。在回不到从前的 “新常态” 下， 还是得勇敢面对前方呀，多读读书，多逛逛城市，给精神和肉体都续上一命。</p>
+<p><img data-src="https://image.kbiao.me/blog/img/IMG_2314.JPG?imageslim"></p>
+<p>​</p>
+<p><img data-src="https://image.kbiao.me/blog/img/EDCAA84D-7BD6-4B4E-A94A-F6FAB94DFABA_1_102_o.jpeg"></p>
+]]></content>
+      <tags>
+        <tag>读书</tag>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>全干工程师的收藏夹【第二期】</title>
     <url>/%E5%85%A8%E5%B9%B2%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E6%94%B6%E8%97%8F%E5%A4%B9%E3%80%90%E7%AC%AC%E4%BA%8C%E6%9C%9F%E3%80%91-1b4307a47e60/</url>
     <content><![CDATA[<p>我是一个预备役码农，这是我新做的的一个小项目。把每天阅读很多的文章，选出一些值得思考的内容做推荐。针对每篇文章我会写一小段中文简评，督促自己认真阅读的同时也给同为码农的你一些参考。我觉得码农才能知道码农的需要，而我作为被老师誉为“全干工程师”预备役码农，方方面面都会有所涉猎。</p>
@@ -1617,29 +1729,6 @@ public void setTag(String tag) {
       </categories>
       <tags>
         <tag>阅读</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关门的报刊亭和扎堆的核酸亭</title>
-    <url>/%E5%85%B3%E9%97%A8%E7%9A%84%E6%8A%A5%E5%88%8A%E4%BA%AD%E5%92%8C%E6%89%8E%E5%A0%86%E7%9A%84%E6%A0%B8%E9%85%B8%E4%BA%AD-41d8d32f88d8/</url>
-    <content><![CDATA[<p><img data-src="https://image.kbiao.me/blog/img/IMG_2313.JPG?imageslim"><br>南方周末报纸出到了两千期。我从初中开始就有断续订阅或者去报刊亭买着追更，虽然近来大多都是看电子刊或者 APP 的文章了，但想着2000期还是挺有纪念意义的，值得收藏一份纸质版。</p>
-<p>它是每周四出新一期，我便从这周四开始，在上班路上特意路过几个报刊亭，打算买一份报纸收藏，但发现都是关着门的。到了周末，想着可以再跑稍微远点找找，说不定能找到某个营业中的报刊亭。然而，顶着烈日走了几站地以后还是放弃了。每个报刊亭都门窗紧闭，不再如往日一般张开双臂，呈现一幅“北京欢迎你”的姿态。然而，旁边却有一条长队，从街角的另一头，扎堆冒出来的核酸检测亭那边蜿蜒过来。</p>
-<span id="more"></span>
-
-
-
-<p>报刊亭听起来不像是我这个年纪的人应该流连的场所。确实，在很多城市，听起来像是上个时代的遗存。但是，在北京各个地铁口，小区或者学校附近还是很茂密地有报刊亭存在。看着也不甚冷清。它们除了贩售报纸杂志，开在小区附近也兼顾了彩票业务，开在地铁口的往往饮料区也能占用大半货架。之前朝阳区的某人流调轨迹里就出现了报刊亭，这在其他城市可能还确实挺难想象的。说不好这就是几个月都让报刊亭歇业的原因呢。</p>
-<p>核酸亭倒是新晋的城市风景线。三年和病毒的搏斗的经验告诉我们：人的保质期短则24小时，长则72小时。一个个核酸亭是我们及时续命的保证。我想起来在我高考前的日子里，等着周四一份南方周末是我精神续命的保证。今天的我虽然是一个北漂码农，但是曾经想象的职业“未来”是一名编辑，或者是当个记者。但是出于理性发展考虑，选了理科参加高考。于是那些备考的日子里，读一份“文科”的报纸，就是难得的精神续命良方。让我能鼓起勇气再和那些符号公式去再搏杀几个回合。</p>
-<p>确实曾经的南方周末，特别是每年的新年献词都让我有种“续命”的感觉。年少成长时候总有些烦恼困惑，社会新闻也总有不公和黑暗。然而记得它说：“我们来而往复&#x2F;今天或未来&#x2F;无论身处何方&#x2F;我们微笑&#x2F;对这个国家&#x2F;依然充满梦想”， 也有类似《让无力者有力， 让悲观者前行》这样的文章总有鼓舞人心的力量。只是今年的献词里它说的是：“时间之矢已无法倒转， 世界再也回不到从前” 多少有点伤感。</p>
-<p>核酸亭和报刊亭的选址可能确实目标是比较接近的，都是为了尽可能辐射周边，方便大家经常光顾。所以才让我在一个个找报刊亭的路上，都发现了与之“对仗”的核酸亭。核酸检测的结果，呈现为手机上的健康码，宣告我肉体的合法性。关了门的报刊亭里，那些报刊有的走远了，也有像南方周末这样努力变成一个 APP ，冲破各种 “Feed 流”的封锁挤到我的手机屏幕上的，宣告我精神世界的“独立性”。</p>
-<p>最终我通过万能的淘宝搞定了收藏一份报纸的心愿。在回不到从前的 “新常态” 下， 还是得勇敢面对前方呀，多读读书，多逛逛城市，给精神和肉体都续上一命。</p>
-<p><img data-src="https://image.kbiao.me/blog/img/IMG_2314.JPG?imageslim"></p>
-<p>​</p>
-<p><img data-src="https://image.kbiao.me/blog/img/EDCAA84D-7BD6-4B4E-A94A-F6FAB94DFABA_1_102_o.jpeg"></p>
-]]></content>
-      <tags>
-        <tag>读书</tag>
-        <tag>生活</tag>
       </tags>
   </entry>
   <entry>
@@ -1689,6 +1778,153 @@ public void setTag(String tag) {
       </categories>
       <tags>
         <tag>碎碎念</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>听雨早读 | 2026-02-20</title>
+    <url>/%E5%90%AC%E9%9B%A8%E6%97%A9%E8%AF%BB-2026-02-20-d39db55579be/</url>
+    <content><![CDATA[<blockquote>
+<p>由小龙 🐉 协助整理，彪彪 ✍️ 深度解读</p>
+</blockquote>
+<h2 id="🌟-本期亮点"><a href="#🌟-本期亮点" class="headerlink" title="🌟 本期亮点"></a>🌟 本期亮点</h2><p>今天的早报信息量很大：Gemini 3.1 Pro发布、SWE-bench排行榜更新、Paul Ford谈AI颠覆、Martin Fowler谈LLM与专家通才。最让我思考的是Simon Willison的那句话——“AI 编程工具从’有用但笨拙’变成了’能连续运行一小时创建完整网站和应用’”。这个转变，可能比很多模型发布都更重要。</p>
+<span id="more"></span>
+
+<h2 id="📰-🔴必读"><a href="#📰-🔴必读" class="headerlink" title="📰 🔴必读"></a>📰 🔴必读</h2><h3 id="1-Gemini-3-1-Pro-发布"><a href="#1-Gemini-3-1-Pro-发布" class="headerlink" title="1. Gemini 3.1 Pro 发布"></a>1. Gemini 3.1 Pro 发布</h3><p><strong>🏷️ 中文标题</strong>：Gemini 3.1 Pro 发布——Google 新一代旗舰模型，价格仅为 Claude Opus 的一半</p>
+<p><strong>📌 核心观点</strong>：Google 发布 Gemini 3.1 系列首个版本，性能接近 Claude Opus 4.6，但价格只有其一半。</p>
+<p><strong>💡 为什么值得关注</strong>：<br>这是 Google 在大模型领域的重要更新，标志着价格战的进一步升级。对于开发者来说，这意味着可以用更低的成本获得顶级性能的模型。</p>
+<p><strong>📋 关键要点</strong>：</p>
+<ul>
+<li><strong>价格体系</strong>：与 Gemini 3 Pro 相同，200K token 以下为 $2&#x2F;百万输入、$12&#x2F;百万输出；200K-1M token 为 $4&#x2F;百万输入、$18&#x2F;百万输出</li>
+<li><strong>性能对比</strong>：基准测试成绩与 Claude Opus 4.6 非常接近，但价格不到后者的一半</li>
+<li><strong>特色功能</strong>：重点宣传了相比 Gemini 3 Pro 改进的 SVG 动画性能</li>
+<li><strong>实测体验</strong>：Simon 测试了”生成鹈鹕骑自行车的 SVG”，模型思考了 323.9 秒后生成了不错的结果，包括鹈鹕双腿、篮子里的鱼等细节</li>
+<li><strong>目前问题</strong>：发布首日模型响应非常慢，简单的”hi”需要 104 秒，部分测试遇到”高需求”或”超时”错误</li>
+<li><strong>模型标识</strong>：已添加到 llm-gemini 插件：gemini-3.1-pro-preview 和 gemini-3.1-pro-preview-customtools</li>
+<li><strong>与 Deep Think 的关系</strong>：上周发布的 Gemini 3 Deep Think 是我们首次接触 3.1 系列</li>
+</ul>
+<p><strong>⭐ 推荐</strong>：值得精读</p>
+<p><strong>🔗 原文链接</strong>：<a href="https://simonwillison.net/2026/Feb/19/gemini-31-pro/">https://simonwillison.net/2026/Feb/19/gemini-31-pro/</a></p>
+<hr>
+<h3 id="2-SWE-bench-2026年2月排行榜更新"><a href="#2-SWE-bench-2026年2月排行榜更新" class="headerlink" title="2. SWE-bench 2026年2月排行榜更新"></a>2. SWE-bench 2026年2月排行榜更新</h3><p><strong>🏷️ 中文标题</strong>：SWE-bench 2026年2月排行榜发布——Claude Opus 4.5 小幅领先 4.6，中国模型表现亮眼</p>
+<p><strong>📌 核心观点</strong>：非实验室自报的 SWE-bench 基准测试更新，Claude Opus 4.5 意外领先 4.6，多款中国模型进入前十。</p>
+<p><strong>💡 为什么值得关注</strong>：<br>这是少有的非实验室自报的基准测试结果，更具参考价值。中国模型在编程基准测试中的表现值得关注。</p>
+<p><strong>📋 关键要点</strong>：</p>
+<ul>
+<li><strong>测试背景</strong>：SWE-bench 是实验室喜欢在模型发布时引用的基准测试之一，官方排行榜更新不频繁，但这次对当前一代模型进行了完整运行</li>
+<li><strong>测试设置</strong>：使用”Bash Only”基准测试，运行 mini-swe-bench agent（约9000行Python）对抗 SWE-bench 数据集</li>
+<li><strong>数据集规模</strong>：2294个真实世界例子，来自12个开源仓库：django&#x2F;django(850)、sympy&#x2F;sympy(386)、scikit-learn(229)等</li>
+<li><strong>重要修正</strong>：Bash only 基准测试运行的是 SWE-bench Verified，不是原始 SWE-bench。Verified 是人工精选的500个样本子集</li>
+<li><strong>前十排名亮点</strong>：<ul>
+<li>Claude Opus 4.5 击败 Opus 4.6（仅领先约1个百分点）</li>
+<li>第二名：Gemini 3 Flash</li>
+<li>第三名：MiniMax M2.5（中国实验室 MiniMax 上周发布的 229B 模型）</li>
+<li>其他中国模型：GLM-5、Kimi K2.5、DeepSeek V3.2 也进入前十</li>
+</ul>
+</li>
+<li><strong>OpenAI 表现</strong>：GPT-5.2 排名第6，但值得注意的是他们最好的编程模型 GPT-5.3-Codex 未参与（可能因为尚未在 API 中可用）</li>
+<li><strong>测试限制</strong>：该基准测试对每个模型使用相同的系统提示，这对公平比较很重要，但也意味着不同 harness 或优化提示的质量未被测量</li>
+</ul>
+<p><strong>⭐ 推荐</strong>：值得精读</p>
+<p><strong>🔗 原文链接</strong>：<a href="https://simonwillison.net/2026/Feb/19/swe-bench/">https://simonwillison.net/2026/Feb/19/swe-bench/</a></p>
+<hr>
+<h3 id="3-AI-颠覆已至"><a href="#3-AI-颠覆已至" class="headerlink" title="3. AI 颠覆已至"></a>3. AI 颠覆已至</h3><p><strong>🏷️ 中文标题</strong>：《我们等待已久的 AI 颠覆已至》——Paul Ford 纽约时报深度观点文章</p>
+<p><strong>📌 核心观点</strong>：2025年11月是一个转折点，AI 编程工具从”有用但笨拙”变成了”能连续运行一小时创建完整网站和应用”。</p>
+<p><strong>💡 为什么值得关注</strong>：<br>Paul Ford 作为前咨询公司 CEO，对软件成本和商业影响有独特的视角。这篇文章充满了值得引用的金句。</p>
+<p><strong>📋 关键要点</strong>：</p>
+<ul>
+<li><strong>转折点描述</strong>：Paul 描述了许多程序员都观察到的”11月时刻”</li>
+<li><strong>个人体验</strong>：<ul>
+<li>Claude Code 以前是一个有用的编程助手，但在11月突然变得好多了</li>
+<li>从那以后，Simon 一直在完成那些在文件夹里搁置了十年或更久的副业项目</li>
+<li>每天大约花半小时自己的时间，加上一小时 Claude 的时间</li>
+</ul>
+</li>
+<li><strong>能力跃升</strong>：<ul>
+<li>之前：AI 编程工具通常有用，但断断续续、笨拙</li>
+<li>现在：机器人可以连续运行一整小时，创建完整的、设计好的网站和应用，可能有缺陷，但可信</li>
+</ul>
+</li>
+<li><strong>商业影响</strong>（作为前咨询公司 CEO 的视角）：<ul>
+<li>当你看到一个大语言模型轻松解决一些可怕的、昂贵的问题时，你会感觉到地球在移动</li>
+<li>例子1：重启自己混乱的个人网站——换以前会花25,000美元请别人做</li>
+<li>例子2：朋友请他转换一个大的、棘手的数据集——下载、清理、美化、让它易于探索，换以前会收350,000美元</li>
+</ul>
+</li>
+<li><strong>成本对比</strong>：<ul>
+<li>以前：定制软件贵得惊人</li>
+<li>现在：当星星对齐、提示词工作时，可以在周末和晚上做数十万美元的工作（对 Simon 来说是有趣的），只需 Claude 200美元&#x2F;月的计划</li>
+</ul>
+</li>
+</ul>
+<p><strong>⭐ 推荐</strong>：值得精读</p>
+<p><strong>🔗 原文链接</strong>：<a href="https://simonwillison.net/2026/Feb/18/the-ai-disruption/">https://simonwillison.net/2026/Feb/18/the-ai-disruption/</a></p>
+<hr>
+<h3 id="4-Martin-Fowler-谈-LLM-与专家通才"><a href="#4-Martin-Fowler-谈-LLM-与专家通才" class="headerlink" title="4. Martin Fowler 谈 LLM 与专家通才"></a>4. Martin Fowler 谈 LLM 与专家通才</h3><p><strong>🏷️ 中文标题</strong>：Martin Fowler：LLM 正在吞噬专业技能——专家通才的角色将更受重视？</p>
+<p><strong>📌 核心观点</strong>：LLM 正在减少对专业前端和后端开发者的需求，LLM 驱动技能比平台使用细节更重要。</p>
+<p><strong>💡 为什么值得关注</strong>：<br>Martin Fowler 是软件开发领域的思想领袖，他的观点值得认真思考。这涉及到未来软件开发团队的组织方式。</p>
+<p><strong>📋 关键要点</strong>：</p>
+<ul>
+<li><strong>核心论断</strong>：LLMs are eating specialty skills（LLM 正在吞噬专业技能）</li>
+<li><strong>具体影响</strong>：<ul>
+<li>对专业前端和后端开发者的需求将减少</li>
+<li>LLM 驱动技能变得比平台使用细节更重要</li>
+</ul>
+</li>
+<li><strong>两个开放性问题</strong>：<ul>
+<li>这会导致专家通才（Expert Generalists）的角色更受重视吗？</li>
+<li>还是说 LLM 编写大量代码的能力意味着它们会绕过竖井而不是消除它们？</li>
+</ul>
+</li>
+</ul>
+<p><strong>⭐ 推荐</strong>：建议浏览</p>
+<p><strong>🔗 原文链接</strong>：<a href="https://simonwillison.net/2026/Feb/18/martin-fowler/">https://simonwillison.net/2026/Feb/18/martin-fowler/</a></p>
+<hr>
+<h2 id="📰-🟠重点"><a href="#📰-🟠重点" class="headerlink" title="📰 🟠重点"></a>📰 🟠重点</h2><h3 id="5-博客赞助模式实验"><a href="#5-博客赞助模式实验" class="headerlink" title="5. 博客赞助模式实验"></a>5. 博客赞助模式实验</h3><p><strong>🏷️ 中文标题</strong>：Simon Willison 首次尝试博客和 Newsletter 赞助模式</p>
+<p><strong>📌 核心观点</strong>：长期抵制赞助的 Simon 终于决定尝试 Troy Hunt 的极简赞助模式，以平衡独立性和运营成本。</p>
+<p><strong>💡 为什么值得关注</strong>：<br>这是技术博主变现的一个重要案例。Simon 一直非常重视自己的独立声音，这次选择的赞助模式值得其他独立博主参考。</p>
+<p><strong>📋 关键要点</strong>：</p>
+<ul>
+<li><strong>历史态度</strong>：长期以来一直抵制接受赞助，非常珍视自己作为独立声音的可信度</li>
+<li><strong>转变契机</strong>：了解到 Troy Hunt 的赞助方式——简单的文字横幅，无 JavaScript、无 Cookie、不显眼但能为赞助商提供价值</li>
+<li><strong>模式特点</strong>：按周出售赞助，赞助商获得博客顶部的不显眼横幅和 Newsletter 顶部的赞助信息</li>
+<li><strong>核心原则</strong>：不会为了赞助而写内容，相信赞助商会理解，独立声音的可信度是拥有受众的关键原因</li>
+</ul>
+<p><strong>⭐ 推荐</strong>：建议浏览</p>
+<p><strong>🔗 原文链接</strong>：<a href="https://simonwillison.net/2026/Feb/19/sponsorship/">https://simonwillison.net/2026/Feb/19/sponsorship/</a></p>
+<hr>
+<h3 id="6-25年后终于接受强类型"><a href="#6-25年后终于接受强类型" class="headerlink" title="6. 25年后终于接受强类型"></a>6. 25年后终于接受强类型</h3><p><strong>🏷️ 中文标题</strong>：25年编程生涯后，Simon Willison 终于开始接受类型提示甚至强类型</p>
+<p><strong>📌 核心观点</strong>：AI 编程助手改变了类型系统的成本收益比——以前需要人工打字的负担，现在由 AI 承担。</p>
+<p><strong>💡 为什么值得关注</strong>：<br>这是一个非常个人化但具有普遍意义的观察。AI 不仅改变了我们写代码的方式，也改变了我们对编程语言特性的态度。</p>
+<p><strong>📋 关键要点</strong>：</p>
+<ul>
+<li><strong>历史态度</strong>：25年以上的编程生涯中，一直抵制类型提示或强类型</li>
+<li><strong>抵制原因</strong>：类型系统会减慢代码迭代速度，特别是在对生产力至关重要的 REPL 环境中</li>
+<li><strong>态度转变</strong>：如果由编程代理来完成所有打字工作，明确定义所有类型的好处突然变得更有吸引力</li>
+</ul>
+<p><strong>⭐ 推荐</strong>：建议浏览</p>
+<p><strong>🔗 原文链接</strong>：<a href="https://simonwillison.net/2026/Feb/18/typing/">https://simonwillison.net/2026/Feb/18/typing/</a></p>
+<hr>
+<h2 id="💭-彪彪思语"><a href="#💭-彪彪思语" class="headerlink" title="💭 彪彪思语"></a>💭 彪彪思语</h2><p>今天的早报里，Paul Ford的那段话特别让我有共鸣：”2025年11月是一个转折点，AI编程工具从’有用但笨拙’变成了’能连续运行一小时创建完整网站和应用’”。</p>
+<p>我想起最近自己也有类似的体验——之前Claude Code虽然有用，但总觉得断断续续的；但最近，它真的能连续运行很长时间，完成一些以前想都不敢想的任务。</p>
+<p>这个转变，可能比很多模型发布都更重要。因为模型再聪明，如果用起来太笨拙，也很难产生实际价值。但当工具真的”能用”了——甚至能”连续用一小时”——那整个游戏规则就变了。</p>
+<p>Paul Ford作为前咨询公司CEO，他算的那笔账特别有意思：以前要花25,000美元请人做的网站，现在自己周末就能搞定；以前要收350,000美元的咨询项目，现在用Claude 200美元&#x2F;月的计划就能完成。</p>
+<p>这种成本结构的变化，可能比任何技术突破都更有颠覆性。</p>
+<p>Martin Fowler提出的那个问题也值得思考：LLM正在吞噬专业技能，那专家通才（Expert Generalists）的角色会不会更受重视？</p>
+<p>我觉得可能会。因为当LLM能帮你搞定很多专业细节时，真正值钱的就变成了：知道该做什么、知道如何把事情组合起来、知道如何判断好坏——这些能力，恰恰是专家通才的核心价值。</p>
+<p>这让我想起之前写的那篇Agent工程时代的文章——我们这些工程师的价值，可能不在于掌握某个特定框架的细节，而在于系统设计能力、品味判断力、工程化思维。</p>
+<p>这些东西，LLM替代不了。</p>
+<hr>
+<p><em>编辑：小龙 🐉 | 审校：彪彪 ✍️</em></p>
+]]></content>
+      <categories>
+        <category>技术人生</category>
+      </categories>
+      <tags>
+        <tag>AI</tag>
+        <tag>RSS</tag>
+        <tag>早报</tag>
+        <tag>技术</tag>
+        <tag>基准测试</tag>
       </tags>
   </entry>
   <entry>
@@ -2236,191 +2472,6 @@ public void setTag(String tag) {
       </tags>
   </entry>
   <entry>
-    <title>听雨早读 | 2026-02-20</title>
-    <url>/%E5%90%AC%E9%9B%A8%E6%97%A9%E8%AF%BB-2026-02-20-d39db55579be/</url>
-    <content><![CDATA[<blockquote>
-<p>由小龙 🐉 协助整理，彪彪 ✍️ 深度解读</p>
-</blockquote>
-<h2 id="🌟-本期亮点"><a href="#🌟-本期亮点" class="headerlink" title="🌟 本期亮点"></a>🌟 本期亮点</h2><p>今天的早报信息量很大：Gemini 3.1 Pro发布、SWE-bench排行榜更新、Paul Ford谈AI颠覆、Martin Fowler谈LLM与专家通才。最让我思考的是Simon Willison的那句话——“AI 编程工具从’有用但笨拙’变成了’能连续运行一小时创建完整网站和应用’”。这个转变，可能比很多模型发布都更重要。</p>
-<span id="more"></span>
-
-<h2 id="📰-🔴必读"><a href="#📰-🔴必读" class="headerlink" title="📰 🔴必读"></a>📰 🔴必读</h2><h3 id="1-Gemini-3-1-Pro-发布"><a href="#1-Gemini-3-1-Pro-发布" class="headerlink" title="1. Gemini 3.1 Pro 发布"></a>1. Gemini 3.1 Pro 发布</h3><p><strong>🏷️ 中文标题</strong>：Gemini 3.1 Pro 发布——Google 新一代旗舰模型，价格仅为 Claude Opus 的一半</p>
-<p><strong>📌 核心观点</strong>：Google 发布 Gemini 3.1 系列首个版本，性能接近 Claude Opus 4.6，但价格只有其一半。</p>
-<p><strong>💡 为什么值得关注</strong>：<br>这是 Google 在大模型领域的重要更新，标志着价格战的进一步升级。对于开发者来说，这意味着可以用更低的成本获得顶级性能的模型。</p>
-<p><strong>📋 关键要点</strong>：</p>
-<ul>
-<li><strong>价格体系</strong>：与 Gemini 3 Pro 相同，200K token 以下为 $2&#x2F;百万输入、$12&#x2F;百万输出；200K-1M token 为 $4&#x2F;百万输入、$18&#x2F;百万输出</li>
-<li><strong>性能对比</strong>：基准测试成绩与 Claude Opus 4.6 非常接近，但价格不到后者的一半</li>
-<li><strong>特色功能</strong>：重点宣传了相比 Gemini 3 Pro 改进的 SVG 动画性能</li>
-<li><strong>实测体验</strong>：Simon 测试了”生成鹈鹕骑自行车的 SVG”，模型思考了 323.9 秒后生成了不错的结果，包括鹈鹕双腿、篮子里的鱼等细节</li>
-<li><strong>目前问题</strong>：发布首日模型响应非常慢，简单的”hi”需要 104 秒，部分测试遇到”高需求”或”超时”错误</li>
-<li><strong>模型标识</strong>：已添加到 llm-gemini 插件：gemini-3.1-pro-preview 和 gemini-3.1-pro-preview-customtools</li>
-<li><strong>与 Deep Think 的关系</strong>：上周发布的 Gemini 3 Deep Think 是我们首次接触 3.1 系列</li>
-</ul>
-<p><strong>⭐ 推荐</strong>：值得精读</p>
-<p><strong>🔗 原文链接</strong>：<a href="https://simonwillison.net/2026/Feb/19/gemini-31-pro/">https://simonwillison.net/2026/Feb/19/gemini-31-pro/</a></p>
-<hr>
-<h3 id="2-SWE-bench-2026年2月排行榜更新"><a href="#2-SWE-bench-2026年2月排行榜更新" class="headerlink" title="2. SWE-bench 2026年2月排行榜更新"></a>2. SWE-bench 2026年2月排行榜更新</h3><p><strong>🏷️ 中文标题</strong>：SWE-bench 2026年2月排行榜发布——Claude Opus 4.5 小幅领先 4.6，中国模型表现亮眼</p>
-<p><strong>📌 核心观点</strong>：非实验室自报的 SWE-bench 基准测试更新，Claude Opus 4.5 意外领先 4.6，多款中国模型进入前十。</p>
-<p><strong>💡 为什么值得关注</strong>：<br>这是少有的非实验室自报的基准测试结果，更具参考价值。中国模型在编程基准测试中的表现值得关注。</p>
-<p><strong>📋 关键要点</strong>：</p>
-<ul>
-<li><strong>测试背景</strong>：SWE-bench 是实验室喜欢在模型发布时引用的基准测试之一，官方排行榜更新不频繁，但这次对当前一代模型进行了完整运行</li>
-<li><strong>测试设置</strong>：使用”Bash Only”基准测试，运行 mini-swe-bench agent（约9000行Python）对抗 SWE-bench 数据集</li>
-<li><strong>数据集规模</strong>：2294个真实世界例子，来自12个开源仓库：django&#x2F;django(850)、sympy&#x2F;sympy(386)、scikit-learn(229)等</li>
-<li><strong>重要修正</strong>：Bash only 基准测试运行的是 SWE-bench Verified，不是原始 SWE-bench。Verified 是人工精选的500个样本子集</li>
-<li><strong>前十排名亮点</strong>：<ul>
-<li>Claude Opus 4.5 击败 Opus 4.6（仅领先约1个百分点）</li>
-<li>第二名：Gemini 3 Flash</li>
-<li>第三名：MiniMax M2.5（中国实验室 MiniMax 上周发布的 229B 模型）</li>
-<li>其他中国模型：GLM-5、Kimi K2.5、DeepSeek V3.2 也进入前十</li>
-</ul>
-</li>
-<li><strong>OpenAI 表现</strong>：GPT-5.2 排名第6，但值得注意的是他们最好的编程模型 GPT-5.3-Codex 未参与（可能因为尚未在 API 中可用）</li>
-<li><strong>测试限制</strong>：该基准测试对每个模型使用相同的系统提示，这对公平比较很重要，但也意味着不同 harness 或优化提示的质量未被测量</li>
-</ul>
-<p><strong>⭐ 推荐</strong>：值得精读</p>
-<p><strong>🔗 原文链接</strong>：<a href="https://simonwillison.net/2026/Feb/19/swe-bench/">https://simonwillison.net/2026/Feb/19/swe-bench/</a></p>
-<hr>
-<h3 id="3-AI-颠覆已至"><a href="#3-AI-颠覆已至" class="headerlink" title="3. AI 颠覆已至"></a>3. AI 颠覆已至</h3><p><strong>🏷️ 中文标题</strong>：《我们等待已久的 AI 颠覆已至》——Paul Ford 纽约时报深度观点文章</p>
-<p><strong>📌 核心观点</strong>：2025年11月是一个转折点，AI 编程工具从”有用但笨拙”变成了”能连续运行一小时创建完整网站和应用”。</p>
-<p><strong>💡 为什么值得关注</strong>：<br>Paul Ford 作为前咨询公司 CEO，对软件成本和商业影响有独特的视角。这篇文章充满了值得引用的金句。</p>
-<p><strong>📋 关键要点</strong>：</p>
-<ul>
-<li><strong>转折点描述</strong>：Paul 描述了许多程序员都观察到的”11月时刻”</li>
-<li><strong>个人体验</strong>：<ul>
-<li>Claude Code 以前是一个有用的编程助手，但在11月突然变得好多了</li>
-<li>从那以后，Simon 一直在完成那些在文件夹里搁置了十年或更久的副业项目</li>
-<li>每天大约花半小时自己的时间，加上一小时 Claude 的时间</li>
-</ul>
-</li>
-<li><strong>能力跃升</strong>：<ul>
-<li>之前：AI 编程工具通常有用，但断断续续、笨拙</li>
-<li>现在：机器人可以连续运行一整小时，创建完整的、设计好的网站和应用，可能有缺陷，但可信</li>
-</ul>
-</li>
-<li><strong>商业影响</strong>（作为前咨询公司 CEO 的视角）：<ul>
-<li>当你看到一个大语言模型轻松解决一些可怕的、昂贵的问题时，你会感觉到地球在移动</li>
-<li>例子1：重启自己混乱的个人网站——换以前会花25,000美元请别人做</li>
-<li>例子2：朋友请他转换一个大的、棘手的数据集——下载、清理、美化、让它易于探索，换以前会收350,000美元</li>
-</ul>
-</li>
-<li><strong>成本对比</strong>：<ul>
-<li>以前：定制软件贵得惊人</li>
-<li>现在：当星星对齐、提示词工作时，可以在周末和晚上做数十万美元的工作（对 Simon 来说是有趣的），只需 Claude 200美元&#x2F;月的计划</li>
-</ul>
-</li>
-</ul>
-<p><strong>⭐ 推荐</strong>：值得精读</p>
-<p><strong>🔗 原文链接</strong>：<a href="https://simonwillison.net/2026/Feb/18/the-ai-disruption/">https://simonwillison.net/2026/Feb/18/the-ai-disruption/</a></p>
-<hr>
-<h3 id="4-Martin-Fowler-谈-LLM-与专家通才"><a href="#4-Martin-Fowler-谈-LLM-与专家通才" class="headerlink" title="4. Martin Fowler 谈 LLM 与专家通才"></a>4. Martin Fowler 谈 LLM 与专家通才</h3><p><strong>🏷️ 中文标题</strong>：Martin Fowler：LLM 正在吞噬专业技能——专家通才的角色将更受重视？</p>
-<p><strong>📌 核心观点</strong>：LLM 正在减少对专业前端和后端开发者的需求，LLM 驱动技能比平台使用细节更重要。</p>
-<p><strong>💡 为什么值得关注</strong>：<br>Martin Fowler 是软件开发领域的思想领袖，他的观点值得认真思考。这涉及到未来软件开发团队的组织方式。</p>
-<p><strong>📋 关键要点</strong>：</p>
-<ul>
-<li><strong>核心论断</strong>：LLMs are eating specialty skills（LLM 正在吞噬专业技能）</li>
-<li><strong>具体影响</strong>：<ul>
-<li>对专业前端和后端开发者的需求将减少</li>
-<li>LLM 驱动技能变得比平台使用细节更重要</li>
-</ul>
-</li>
-<li><strong>两个开放性问题</strong>：<ul>
-<li>这会导致专家通才（Expert Generalists）的角色更受重视吗？</li>
-<li>还是说 LLM 编写大量代码的能力意味着它们会绕过竖井而不是消除它们？</li>
-</ul>
-</li>
-</ul>
-<p><strong>⭐ 推荐</strong>：建议浏览</p>
-<p><strong>🔗 原文链接</strong>：<a href="https://simonwillison.net/2026/Feb/18/martin-fowler/">https://simonwillison.net/2026/Feb/18/martin-fowler/</a></p>
-<hr>
-<h2 id="📰-🟠重点"><a href="#📰-🟠重点" class="headerlink" title="📰 🟠重点"></a>📰 🟠重点</h2><h3 id="5-博客赞助模式实验"><a href="#5-博客赞助模式实验" class="headerlink" title="5. 博客赞助模式实验"></a>5. 博客赞助模式实验</h3><p><strong>🏷️ 中文标题</strong>：Simon Willison 首次尝试博客和 Newsletter 赞助模式</p>
-<p><strong>📌 核心观点</strong>：长期抵制赞助的 Simon 终于决定尝试 Troy Hunt 的极简赞助模式，以平衡独立性和运营成本。</p>
-<p><strong>💡 为什么值得关注</strong>：<br>这是技术博主变现的一个重要案例。Simon 一直非常重视自己的独立声音，这次选择的赞助模式值得其他独立博主参考。</p>
-<p><strong>📋 关键要点</strong>：</p>
-<ul>
-<li><strong>历史态度</strong>：长期以来一直抵制接受赞助，非常珍视自己作为独立声音的可信度</li>
-<li><strong>转变契机</strong>：了解到 Troy Hunt 的赞助方式——简单的文字横幅，无 JavaScript、无 Cookie、不显眼但能为赞助商提供价值</li>
-<li><strong>模式特点</strong>：按周出售赞助，赞助商获得博客顶部的不显眼横幅和 Newsletter 顶部的赞助信息</li>
-<li><strong>核心原则</strong>：不会为了赞助而写内容，相信赞助商会理解，独立声音的可信度是拥有受众的关键原因</li>
-</ul>
-<p><strong>⭐ 推荐</strong>：建议浏览</p>
-<p><strong>🔗 原文链接</strong>：<a href="https://simonwillison.net/2026/Feb/19/sponsorship/">https://simonwillison.net/2026/Feb/19/sponsorship/</a></p>
-<hr>
-<h3 id="6-25年后终于接受强类型"><a href="#6-25年后终于接受强类型" class="headerlink" title="6. 25年后终于接受强类型"></a>6. 25年后终于接受强类型</h3><p><strong>🏷️ 中文标题</strong>：25年编程生涯后，Simon Willison 终于开始接受类型提示甚至强类型</p>
-<p><strong>📌 核心观点</strong>：AI 编程助手改变了类型系统的成本收益比——以前需要人工打字的负担，现在由 AI 承担。</p>
-<p><strong>💡 为什么值得关注</strong>：<br>这是一个非常个人化但具有普遍意义的观察。AI 不仅改变了我们写代码的方式，也改变了我们对编程语言特性的态度。</p>
-<p><strong>📋 关键要点</strong>：</p>
-<ul>
-<li><strong>历史态度</strong>：25年以上的编程生涯中，一直抵制类型提示或强类型</li>
-<li><strong>抵制原因</strong>：类型系统会减慢代码迭代速度，特别是在对生产力至关重要的 REPL 环境中</li>
-<li><strong>态度转变</strong>：如果由编程代理来完成所有打字工作，明确定义所有类型的好处突然变得更有吸引力</li>
-</ul>
-<p><strong>⭐ 推荐</strong>：建议浏览</p>
-<p><strong>🔗 原文链接</strong>：<a href="https://simonwillison.net/2026/Feb/18/typing/">https://simonwillison.net/2026/Feb/18/typing/</a></p>
-<hr>
-<h2 id="💭-彪彪思语"><a href="#💭-彪彪思语" class="headerlink" title="💭 彪彪思语"></a>💭 彪彪思语</h2><p>今天的早报里，Paul Ford的那段话特别让我有共鸣：”2025年11月是一个转折点，AI编程工具从’有用但笨拙’变成了’能连续运行一小时创建完整网站和应用’”。</p>
-<p>我想起最近自己也有类似的体验——之前Claude Code虽然有用，但总觉得断断续续的；但最近，它真的能连续运行很长时间，完成一些以前想都不敢想的任务。</p>
-<p>这个转变，可能比很多模型发布都更重要。因为模型再聪明，如果用起来太笨拙，也很难产生实际价值。但当工具真的”能用”了——甚至能”连续用一小时”——那整个游戏规则就变了。</p>
-<p>Paul Ford作为前咨询公司CEO，他算的那笔账特别有意思：以前要花25,000美元请人做的网站，现在自己周末就能搞定；以前要收350,000美元的咨询项目，现在用Claude 200美元&#x2F;月的计划就能完成。</p>
-<p>这种成本结构的变化，可能比任何技术突破都更有颠覆性。</p>
-<p>Martin Fowler提出的那个问题也值得思考：LLM正在吞噬专业技能，那专家通才（Expert Generalists）的角色会不会更受重视？</p>
-<p>我觉得可能会。因为当LLM能帮你搞定很多专业细节时，真正值钱的就变成了：知道该做什么、知道如何把事情组合起来、知道如何判断好坏——这些能力，恰恰是专家通才的核心价值。</p>
-<p>这让我想起之前写的那篇Agent工程时代的文章——我们这些工程师的价值，可能不在于掌握某个特定框架的细节，而在于系统设计能力、品味判断力、工程化思维。</p>
-<p>这些东西，LLM替代不了。</p>
-<hr>
-<p><em>编辑：小龙 🐉 | 审校：彪彪 ✍️</em></p>
-]]></content>
-      <categories>
-        <category>技术人生</category>
-      </categories>
-      <tags>
-        <tag>AI</tag>
-        <tag>RSS</tag>
-        <tag>早报</tag>
-        <tag>技术</tag>
-        <tag>基准测试</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>回望1999年的手机上网预言：从寻呼机到LLM的历史启示</title>
-    <url>/%E5%9B%9E%E6%9C%9B1999%E5%B9%B4%E7%9A%84%E6%89%8B%E6%9C%BA%E4%B8%8A%E7%BD%91%E9%A2%84%E8%A8%80-%E4%BB%8E%E5%AF%BB%E5%91%BC%E6%9C%BA%E5%88%B0LLM%E7%9A%84%E5%8E%86%E5%8F%B2%E5%90%AF%E7%A4%BA-9dbb59041c94/</url>
-    <content><![CDATA[<blockquote>
-<p>由小龙 🐉 协助整理创作</p>
-</blockquote>
-<p><img data-src="https://image.kbiao.me/blog/img/1999-old-newspaper-header.gif"></p>
-<p>今天翻到一张1999年的旧报纸，看得我乐了半天——1999年就有人在喊“手机上网将成为时尚”，还有人信誓旦旦地说“手机亦不会取代寻呼机”。</p>
-<p>现在回头看，真是历史轮回。</p>
-<span id="more"></span>
-
-<h2 id="1999年的预言与现实"><a href="#1999年的预言与现实" class="headerlink" title="1999年的预言与现实"></a>1999年的预言与现实</h2><p>旧报纸里有两篇文章，特别有意思：</p>
-<p>第一篇是诺基亚的预言：“随着手机上网日益成为时尚，媒体电话7110的销售量将在明年超过世界便携式电脑的总量。”<br>第二篇是广东国讯总经理的观点：“手机与寻呼机是两种系统，寻呼机的阅读信息、留言、秘书功能等是手机不能代替的。”</p>
-<p>现在回头看，诺基亚的预言成了现实（手机不仅超过了便携电脑，还成了我们的身体器官），而“手机不会取代寻呼机”的观点——现在谁还见过寻呼机？</p>
-<p>这让我想起了后来的很多次技术争论：</p>
-<ul>
-<li>3G时代，有人说5G只是网速快一点，没什么用</li>
-<li>智能手机刚出来时，有人说“打电话发短信而已，要那么多功能干嘛”</li>
-<li>现在，我们又在争论：大模型会不会取代程序员？</li>
-</ul>
-<h2 id="技术取代的祛魅：从来都不是“替代”，而是“重构”"><a href="#技术取代的祛魅：从来都不是“替代”，而是“重构”" class="headerlink" title="技术取代的祛魅：从来都不是“替代”，而是“重构”"></a>技术取代的祛魅：从来都不是“替代”，而是“重构”</h2><p>翻完这张旧报纸，我最大的感受是：技术从来都不是简单的“替代”，而是“重构”。</p>
-<p>寻呼机没有被手机“替代”——它的功能被重构进了手机里（短信、通知、提醒）。<br>3G到5G也不是“只是网速快”——它重构了很多应用场景（直播、短视频、IoT）。<br>同样，大模型也不会“取代”程序员——它会重构我们的工作方式。</p>
-<p>就像1999年的国讯总经理说的：“寻呼机向手机助理过渡，与手机配套使用将是今后的发展方向。”<br>现在看，这句话其实很有道理——只是他没料到，这个“配套使用”最后变成了“完全融合”。</p>
-<h2 id="从寻呼机到LLM：我们能学到什么？"><a href="#从寻呼机到LLM：我们能学到什么？" class="headerlink" title="从寻呼机到LLM：我们能学到什么？"></a>从寻呼机到LLM：我们能学到什么？</h2><p>回望这二十多年的技术演进，有三个洞察：</p>
-<h3 id="1-不要低估技术的“重构”能力"><a href="#1-不要低估技术的“重构”能力" class="headerlink" title="1. 不要低估技术的“重构”能力"></a>1. 不要低估技术的“重构”能力</h3><p>1999年的人很难想象手机会变成今天这样——它不仅取代了寻呼机，还取代了相机、MP3、钱包、钥匙……<br>同样，今天我们也很难想象大模型会把软件工程重构到什么程度——但可以肯定的是，它不会只是“帮我们写代码”。</p>
-<h3 id="2-功能会被融合，但“人”的部分不会消失"><a href="#2-功能会被融合，但“人”的部分不会消失" class="headerlink" title="2. 功能会被融合，但“人”的部分不会消失"></a>2. 功能会被融合，但“人”的部分不会消失</h3><p>寻呼机的功能被融合进了手机，但“人”的部分——沟通、表达、创造——不仅没有消失，反而更重要了。<br>同样，大模型会帮我们写代码、查bug、优化性能，但“人”的部分——产品思维、架构设计、业务理解——只会更有价值。</p>
-<h3 id="3-与其恐惧“被取代”，不如思考“如何重构”"><a href="#3-与其恐惧“被取代”，不如思考“如何重构”" class="headerlink" title="3. 与其恐惧“被取代”，不如思考“如何重构”"></a>3. 与其恐惧“被取代”，不如思考“如何重构”</h3><p>1999年的寻呼业如果只想着“如何保住寻呼机”，而不是“如何用新技术重构信息服务”，肯定会死得更快。<br>同样，今天的我们与其恐惧“大模型会不会取代我”，不如思考“如何用大模型重构我的工作方式”。</p>
-<h2 id="结语：历史不会重复，但会押韵"><a href="#结语：历史不会重复，但会押韵" class="headerlink" title="结语：历史不会重复，但会押韵"></a>结语：历史不会重复，但会押韵</h2><p>翻完这张旧报纸，我想起了马克·吐温的那句话：“历史不会重复，但会押韵。”</p>
-<p>1999年的手机上网预言，2010年的移动互联网，2020年的大模型——每一次技术变革，我们都在重复同样的争论：“它会不会取代我？”<br>但每一次，答案都是：“它不会取代你，但它会重构你的工作和生活。”</p>
-<p>下周，下个月，也许到明年，我们应该还会讨论大模型的话题。毕竟，技术的发展不会停止，而我们能做的，就是像1999年的那些人一样——保持好奇，保持开放，然后勇敢地拥抱变化。</p>
-]]></content>
-      <categories>
-        <category>技术人生</category>
-      </categories>
-      <tags>
-        <tag>历史, LLM, 技术</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>四月二十三日风雨大作</title>
     <url>//2024/05/23/birth-in-storm/</url>
     <content><![CDATA[<p><img data-src="https://image.kbiao.me/blog/img202509062154449.jpeg" alt="新生儿第一张照片"></p>
@@ -2470,6 +2521,44 @@ public void setTag(String tag) {
         <tag>生活</tag>
         <tag>成长</tag>
         <tag>父亲</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>回望1999年的手机上网预言：从寻呼机到LLM的历史启示</title>
+    <url>/%E5%9B%9E%E6%9C%9B1999%E5%B9%B4%E7%9A%84%E6%89%8B%E6%9C%BA%E4%B8%8A%E7%BD%91%E9%A2%84%E8%A8%80-%E4%BB%8E%E5%AF%BB%E5%91%BC%E6%9C%BA%E5%88%B0LLM%E7%9A%84%E5%8E%86%E5%8F%B2%E5%90%AF%E7%A4%BA-9dbb59041c94/</url>
+    <content><![CDATA[<blockquote>
+<p>由小龙 🐉 协助整理创作</p>
+</blockquote>
+<p><img data-src="https://image.kbiao.me/blog/img/1999-old-newspaper-header.gif"></p>
+<p>今天翻到一张1999年的旧报纸，看得我乐了半天——1999年就有人在喊“手机上网将成为时尚”，还有人信誓旦旦地说“手机亦不会取代寻呼机”。</p>
+<p>现在回头看，真是历史轮回。</p>
+<span id="more"></span>
+
+<h2 id="1999年的预言与现实"><a href="#1999年的预言与现实" class="headerlink" title="1999年的预言与现实"></a>1999年的预言与现实</h2><p>旧报纸里有两篇文章，特别有意思：</p>
+<p>第一篇是诺基亚的预言：“随着手机上网日益成为时尚，媒体电话7110的销售量将在明年超过世界便携式电脑的总量。”<br>第二篇是广东国讯总经理的观点：“手机与寻呼机是两种系统，寻呼机的阅读信息、留言、秘书功能等是手机不能代替的。”</p>
+<p>现在回头看，诺基亚的预言成了现实（手机不仅超过了便携电脑，还成了我们的身体器官），而“手机不会取代寻呼机”的观点——现在谁还见过寻呼机？</p>
+<p>这让我想起了后来的很多次技术争论：</p>
+<ul>
+<li>3G时代，有人说5G只是网速快一点，没什么用</li>
+<li>智能手机刚出来时，有人说“打电话发短信而已，要那么多功能干嘛”</li>
+<li>现在，我们又在争论：大模型会不会取代程序员？</li>
+</ul>
+<h2 id="技术取代的祛魅：从来都不是“替代”，而是“重构”"><a href="#技术取代的祛魅：从来都不是“替代”，而是“重构”" class="headerlink" title="技术取代的祛魅：从来都不是“替代”，而是“重构”"></a>技术取代的祛魅：从来都不是“替代”，而是“重构”</h2><p>翻完这张旧报纸，我最大的感受是：技术从来都不是简单的“替代”，而是“重构”。</p>
+<p>寻呼机没有被手机“替代”——它的功能被重构进了手机里（短信、通知、提醒）。<br>3G到5G也不是“只是网速快”——它重构了很多应用场景（直播、短视频、IoT）。<br>同样，大模型也不会“取代”程序员——它会重构我们的工作方式。</p>
+<p>就像1999年的国讯总经理说的：“寻呼机向手机助理过渡，与手机配套使用将是今后的发展方向。”<br>现在看，这句话其实很有道理——只是他没料到，这个“配套使用”最后变成了“完全融合”。</p>
+<h2 id="从寻呼机到LLM：我们能学到什么？"><a href="#从寻呼机到LLM：我们能学到什么？" class="headerlink" title="从寻呼机到LLM：我们能学到什么？"></a>从寻呼机到LLM：我们能学到什么？</h2><p>回望这二十多年的技术演进，有三个洞察：</p>
+<h3 id="1-不要低估技术的“重构”能力"><a href="#1-不要低估技术的“重构”能力" class="headerlink" title="1. 不要低估技术的“重构”能力"></a>1. 不要低估技术的“重构”能力</h3><p>1999年的人很难想象手机会变成今天这样——它不仅取代了寻呼机，还取代了相机、MP3、钱包、钥匙……<br>同样，今天我们也很难想象大模型会把软件工程重构到什么程度——但可以肯定的是，它不会只是“帮我们写代码”。</p>
+<h3 id="2-功能会被融合，但“人”的部分不会消失"><a href="#2-功能会被融合，但“人”的部分不会消失" class="headerlink" title="2. 功能会被融合，但“人”的部分不会消失"></a>2. 功能会被融合，但“人”的部分不会消失</h3><p>寻呼机的功能被融合进了手机，但“人”的部分——沟通、表达、创造——不仅没有消失，反而更重要了。<br>同样，大模型会帮我们写代码、查bug、优化性能，但“人”的部分——产品思维、架构设计、业务理解——只会更有价值。</p>
+<h3 id="3-与其恐惧“被取代”，不如思考“如何重构”"><a href="#3-与其恐惧“被取代”，不如思考“如何重构”" class="headerlink" title="3. 与其恐惧“被取代”，不如思考“如何重构”"></a>3. 与其恐惧“被取代”，不如思考“如何重构”</h3><p>1999年的寻呼业如果只想着“如何保住寻呼机”，而不是“如何用新技术重构信息服务”，肯定会死得更快。<br>同样，今天的我们与其恐惧“大模型会不会取代我”，不如思考“如何用大模型重构我的工作方式”。</p>
+<h2 id="结语：历史不会重复，但会押韵"><a href="#结语：历史不会重复，但会押韵" class="headerlink" title="结语：历史不会重复，但会押韵"></a>结语：历史不会重复，但会押韵</h2><p>翻完这张旧报纸，我想起了马克·吐温的那句话：“历史不会重复，但会押韵。”</p>
+<p>1999年的手机上网预言，2010年的移动互联网，2020年的大模型——每一次技术变革，我们都在重复同样的争论：“它会不会取代我？”<br>但每一次，答案都是：“它不会取代你，但它会重构你的工作和生活。”</p>
+<p>下周，下个月，也许到明年，我们应该还会讨论大模型的话题。毕竟，技术的发展不会停止，而我们能做的，就是像1999年的那些人一样——保持好奇，保持开放，然后勇敢地拥抱变化。</p>
+]]></content>
+      <categories>
+        <category>技术人生</category>
+      </categories>
+      <tags>
+        <tag>历史, LLM, 技术</tag>
       </tags>
   </entry>
   <entry>
@@ -2669,6 +2758,29 @@ public void setTag(String tag) {
       </tags>
   </entry>
   <entry>
+    <title>工作日登山_礼拜天结网</title>
+    <url>/%E5%B7%A5%E4%BD%9C%E6%97%A5%E7%99%BB%E5%B1%B1-%E7%A4%BC%E6%8B%9C%E5%A4%A9%E7%BB%93%E7%BD%91-e378de6552f5/</url>
+    <content><![CDATA[<p><img data-src="https://image.kbiao.me/blog/img/20220703174848.png"></p>
+<p>22年倏忽一下就过去了一半，最近的几周里我一个职场菜鸡也学着前辈的模样，开始做半年的技术规划。虽说只是照猫画虎，毕竟功力不够，也是压力颇大。最大的问题可能是我思维太过发散，始终无法收敛出一条清晰主线，说明白从哪来到哪去和如何去的问题（当然这终极三问可能确实复杂，但能给到我的话题和上下文还是比较小的）。然而在自己的生活中，思维发散却不常是一件坏事，往往还是生活中一些小确幸时刻的来源。</p>
+<span id="more"></span>
+
+
+<p>最近我买了一本书《创作的基因：我和我所爱着的MEME们》， 作者是小岛秀夫，是一名游戏制作人。这本书不是单独买的，是作为游戏同名小说《死亡搁浅》的套装一起。<br>《死亡搁浅》是一部气质非常独特的游戏，讲述了“死亡搁浅”后世界濒临毁灭，快递员山姆用一次次送货之旅，徒步穿越美国让世界重新连接，让人们获得新世界的希望。游戏中的配乐全部都是如电影一般，制作人精选的专辑音乐，而不是特地为游戏制作的音乐。气质上却融合得来。而且音乐本身能作为一种奖励机制。大战完 BT 的紧张中，从躲过时间雨后的压力中，从翻山越岭的疲惫中，突然响起悠扬的歌声告诉你苦难过去了，生活还是美好的，沉浸感是如此强烈。游戏一开头提出的棍棒与绳索的隐喻在一次次“快递”送货之旅中让玩家能有非常深刻的体会。但是也由于游戏过于“文青”的气质和非主流的玩法，在一段时间内也收获了褒贬不一的评价。</p>
+<p>不过这个气质却很对我的脑电波，新书发售自然要买一本作为粉丝的收藏。《创作的基因：我和我所爱着的MEME们》是小岛的书评，影评集。作为一个游戏人，他的阅读涉猎之多之广确实让人叹服，强大的输出果然离不开更为强大的输入做支撑。更厉害的在于，对于读过的作品，拥有的经历能有非常充分的个人风格的思考，消化，将其中的精髓和带给自己的心灵的触动转化为持续创作的灵感和动力。要说预期能把“创作的基因”通过这本书传递给我，那就预期太高了。它本质仅是一份书单，影单的合集，还得阅读品味，兴趣方向能和作者对上才会觉得满意。不必说我买它的初衷也仅仅是带着粉丝滤镜的冲动购物。</p>
+<p>书的标题提到了一个叫MEME 的概念，是仿着 GENE 造的一个词。 可以拆成 ME + ME ，解释为人与人的经历的连结。生物学上的基因🧬（GENE）传递的是肉体生命， 而MEME 是指传递文化，习惯，价值观。这种精神思想是用读书，看电影，玩游戏连结起来的人们，通过话语，文字，文化不停地进行着传承。小岛的游戏本身就是这种理念的呈现。这个概念确实新奇，而我在阅读了几篇以后立马有了现实的体会。<br>在其中读到一篇《山月记》的读后感，引用了一段原文：</p>
+<blockquote>
+<p>“我深怕自己本非美玉，故而不敢加以刻苦琢磨，却又半信自己是块美玉，故又不肯庸庸碌碌，与瓦砾为伍。于是我渐渐地脱离凡尘，疏远世人，结果便是一任愤懑与羞恨日益助长内心那怯弱的自尊心”</p>
+</blockquote>
+<p>这段话写的是真的好，把这种纠结，拧巴的心态描绘的栩栩如生，而又能立马映射到自己曾经多少次也拥有过这样的心态。就像我现在在努力尝试做的技术规划，为了自己的成长，想要驯服心中欲望的野兽，却也同时质疑自己能否驾驭，于是有了各种坐立不安纠结痛苦的时刻。共鸣之强我立马摘录并发了一条朋友圈。<br>《山月记》其实是一位日本作者中岛敦改编自中国唐代李景亮所著的《人虎传》的变身奇谭，抑或说是个寓言故事。这一篇改编的文章还被收录到了日本高中语文的教科书里。然后我又去翻了《山月记》原书，除了这个人变虎的故事，也还有“纪昌学射”这样我们熟悉故事的改编。日本的学者改编的中国故事，读起来确实又熟悉又陌生，别有一番意味。游戏到读书，日本到中国，这一个又一个的MEME 把我和那些我素未谋面的人和时空异位的事联系起来，成了我最近生活中突然觉得有点小惊喜和小确幸的时刻。<br>游戏我也没通关，这本影评集我也没读完，生涩的古文我过了这个新鲜劲头便也不会再啃下去了，但是我的快乐已经获得了。这据说可以被唤作“陶渊明派”读书法 —— 好读书，不求甚解。</p>
+<p>工作的世界里，一条条的待办，一次次的 OKR 是一座座山，要攻坚克难，要勇攀高峰，要追求极致。需要目标，需要手段，需要衡量。周末生活里读书、游戏的闲情像一张张网，连结起生活本身的意义。我在这张网里游曳，从一个点愉快跳向另一个点。这些没有什么特别目的的事物组成了生活的意义之网。</p>
+<p>山有高低次序，而网处处相通。工作日登山， 礼拜天结网，生命的节奏在两种模式里延展开来。</p>
+<p><img data-src="https://image.kbiao.me/blog/img/20220703174920.png"></p>
+]]></content>
+      <tags>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>我的大学成长手册</title>
     <url>/%E6%88%91%E7%9A%84%E5%A4%A7%E5%AD%A6%E6%88%90%E9%95%BF%E6%89%8B%E5%86%8C-de5fa12e6bfb/</url>
     <content><![CDATA[<p><img data-src="https://image.kbiao.me/myUni.jpg?imageView2/2/w/600/interlace/1/" alt="此处输入图片的描述"><br>今年的新生群我成了群主，即将第三次参与迎新工作。大学四年，三次迎新，也算是圆满了吧。暑期的实训也刚刚结束，基本是大学里的最后一门课程了。接下来就是保研，实习，就业，毕设……大学的收尾工作即将开始。新生群里的人越拉越多，他们憧憬着，也迷茫着即将到来的大学生活，正如三年前的我一样。这个转折点上，我也想回顾一下过去三年的生活，顺便给学弟学妹一份大学漫游指南吧。我觉得我的大学也算精彩。但是，这不是大学的唯一答案。以下仅供参考。<br>分为两部分，第一部分说说我的成长经历，第二部分回答一些被学弟学妹反复问到的问题。</p>
@@ -2832,89 +2944,6 @@ public void setTag(String tag) {
       </tags>
   </entry>
   <entry>
-    <title>当我跑步时我在想什么</title>
-    <url>/%E5%BD%93%E6%88%91%E8%B7%91%E6%AD%A5%E6%97%B6%E6%88%91%E5%9C%A8%E6%83%B3%E4%BB%80%E4%B9%88-a177e6765feb/</url>
-    <content><![CDATA[<p>每天 30 分钟跑步，是我去年新养成的习惯。一年下来打卡一百三十多次。一开始三公里都跑完一次就要歇一一天，到现在能稳定拿下 5 公里，偶尔挑战一下六公里，虽不甚专业，也算不得什么健身计划，但是坚持下来还是有点成就感的。</p>
-<span id="more"></span>
-
-<p>说是坚持，也不全对。细想下来需要坚持的事情，一般是坚持不下去的。坚持必须用力，吃力的事情必难持久。所以可以说是养成了新的习惯，或者说跑步是工作日常的一部分了。第一次进入健身房跑步只是在同事的带领下的尝试，当时仅是觉得公司的福利，得尝试着物尽其用。但到这周还在跑的理由，倒不是健康、健身的想法激励。而是我发现，工作日的时间，就是需要有跑步这样一项活动参与。每天的跑步是我对抗不确定性的一种仪式感。<br>跑步属于一种看得见的进步。对于我这种业余的选手来说，跑完第一周和跑完一个月以后能明显看到，平均配速就是一点点稳定提高的。在周会，OKR 到半年规划一个赶一个推着我往前走的互联网工作节奏中，难得发现有一件事情是我完全可控的。投入了就有进步，努力和收获成正比的事情好像在离开校园以后就没那么多了。连续坚持三天和休息两天再来上跑步机的感觉是不一样的，不进则退。如果耽搁多几天，加个放肆的周末，那么下一周哪怕多跑一天也最多恢复到上一周的基准线。为了多保持点进步的确定感，一般是不愿意荒废的，这反而也成了“坚持”的一种动力。<br>这甚至是一种无法大力出奇迹的进步。人在互联网总容易带入一种大力出奇迹的叙事中，但我很确信跑步不行。今天跑一小时也取代不了明天的三十分钟，更有可能导致明天跑不了十分钟。跟着大神选装备，吃健身餐也取代不了每天来三十分钟，学习很多技巧跑法以后也得一次次三十分钟的积累熟悉。跑了几周就意识到，我需要接受自己只能慢慢地进步，勉强的努力除了感动自己，并无实际收益。<br>这种进步在充满不确定性的工作中是一剂提神良方。虽然我不知道我今天做完了什么工作，这周达成了什么结果，这月推动了哪个指标。但我很确信今天跑完了三十分钟，这个 ToDo 是我想完成一定可以完成的，而且指标上一般还比昨天完成的漂亮些。所以哪怕在一个一事无成的工作日，相信我的身子还是比昨天健康了些的，晚上的睡眠也会好一些。<br>开始跑步以后读了村上春树的一本书《当我谈跑步时，我谈些什么》， 他谈的是如何训练自己的身体与意志，如何增加生活的趣味，如何与磨难相处。我跑了仅仅一年还是只跑步机上的慢跑，着实谈不了什么大道理。但是可以谈谈我在想什么，也许可以对也想试着用健身房提神的工友们一些启发。<br>前半年我在想的是怎么跑完。一开始，跑步机上的半个小时还是挺漫长的，比数学老师讲课还漫长，脑子里想着要达成半小时目标，然后只盯着时间看的话很容易就气馁了。为了避免大脑无聊，开始在脑子里做数学题，去计算配速。新手上路进步空间是有的，跑步也不是匀速全程，一般会缓慢提速热身，然后尽可能在最高配速坚持更久的时间。比如现在以 8 km 的配速跑了 5 分钟，那么距离完成 5km 的目标是快多少慢了多少，下一分钟如果我配速加到 9 又会拉回来多少的目标完成度呢。小学应用题级别的难度，但是在跑步缺氧的状态下感觉还是有点难度，且成功转移了对身体抗拒的注意力。计算几个轮次以后，发现我马上就要跑完三十分钟了，血清素的分泌又让我期待起了明天的运动时光。还有一个小技巧是可以切换跑步机显示模式是按操场跑圈的模式，一圈 400 ，这个值比里程增长的快些，也是个加快反馈循环的方式，跑起来时候感觉大脑还是很容易被骗的。<br>现在我会任由思绪散佚，看会不会有什么惊喜。现在跑满半个小时或者跑满五公里已经不是一个挑战了，不再需要一些技巧让自己坚持下来，空下来的脑袋便开始听播客，听小说，虽说只有半个小时，累积下来也听完成了四五本书。平时读的书多是纪实的或者理论的，虚构的总觉得是无用的。但跑步时候不同，跑步本身就很有用，无需再多些用。一些小说还会加入丰富的环境音和切换不同角色的配音，在跑步机上时候大脑显卡功率是可以开满的，对小说的代入感就极强，也是一种很特别的体验。<br>形成了习惯之后，日历上固定给占上时间，工友们便知道这个点人不在岗。这半个小时是难得的无人打扰的时光，让我不断超频的大脑切换另一种模式，往往对接下来的工作和思考能提供意外的灵感。在跑步机上，不需要特别集中注意力，又实际上在非常努力协调全身肌肉。这种状态下，脑袋里后台运行的线程说不定就有了意外的产出，可能是它跳出了之前陷入的某个死循环，在更大的范围内找到了新的可能性。于是跑步这个习惯就形成了正向的循环，也就不需要坚持的坚持下来了。<br>下周，下个月，也许到明年，我应该还会继续跑的。毕竟写了一篇文章来说自己跑的挺开心，那就不能被看到这篇文章的同事抓包说偷懒，这不体面。而且健身房打卡的次数都记着呢，突然断了觉得有些可惜，有些沉默成本在里头，这也算是一种套牢吧。</p>
-<blockquote>
-<p>题图来自 pixel dance<br>portrait of a chinese young man running towards the camera, photography</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>谁说这些东西只有程序员才能玩</title>
-    <url>/%E8%B0%81%E8%AF%B4%E8%BF%99%E4%BA%9B%E4%B8%9C%E8%A5%BF%E5%8F%AA%E6%9C%89%E7%A8%8B%E5%BA%8F%E5%91%98%E6%89%8D%E8%83%BD%E7%8E%A9-27b1d0104012/</url>
-    <content><![CDATA[<hr>
-<p>其实程序员都是一帮懒人，于是他们创造了各种懒人神器。<br>刚刚开始写博客，发了些文章让家人亲戚看到了，本着对我的关心和支持都转发关注点赞了。然而我知道，他们大部人都不知道我在说什么。所以想写一点，大家都可以看懂又不失逼格的。</p>
-<!--  more-->
-
-<p>我决定介绍下我使用的工具。一个叫GitHub，一个叫MarkDown。写代码可能不是每个人都需要，但是写点东西每个用电脑的人都或多或少有点需求。这两个东西，都可以用来帮助我们更高效的写作。<br>你说你不写作？作业你总有需要交电子稿的时候吧？！给领导汇报材料总得折腾下Word吧？！<br>这两个工具的使用可以达到<code>文理工医并重，产学用研结合</code>的神奇效果。（我的南大，我骄傲）</p>
-<h2 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h2><p>一张图说明gitHub是什么？全球最大的同性交友网站。<br><img data-src="https://image.kbiao.me/16-5-10/14771996.jpg" alt="github"></p>
-<p>不会真的信了吧？其实它确实是一帮程序员日常搞基的天堂。可以理解为程序员的微博或者朋友圈，他们不晒自拍晒代码。<br>那然后呢？不写代码的用它来干啥？一般人可以用它来干嘛？<br><img data-src="https://image.kbiao.me/16-5-10/84260051.jpg"><br>GitHub背后其实有个叫Git的东西，他是用来做版本控制的工具。写论文，一稿、二稿地改，每次改了啥，电脑里备份了一堆文件，找的时候是不是很头大。git就是一个时光机可以随时把文件带回历史的某个版本。程序员用来让代码服服帖帖，普通人当然也可以用它来管理各种文档啦。</p>
-<h3 id="注册安装"><a href="#注册安装" class="headerlink" title="注册安装"></a>注册安装</h3><p>这要讲么？ <a href="http://github.com/">http://github.com</a>  像注册QQ号一样注册一个账号。<br>然后命令行看的头大的话还可以装一个桌面客户端嘛。程序员哥哥们想的还是很周全的。</p>
-<h3 id="创建笔记本"><a href="#创建笔记本" class="headerlink" title="创建笔记本"></a>创建笔记本</h3><p>注册以后登录，你可以看到一个大大的首页</p>
-<dl><dt><img data-src="https://image.kbiao.me/16-5-10/446648.jpg"><br>人家说的很清楚嘛，学习使用gitHub是不需要你懂代码的。有个按钮叫<code>New respository</code>  可以把它理解成新建文件夹，创建笔记本。<br>进入自己的笔记本以后有这么几个地方要看看：<br><img data-src="https://image.kbiao.me/16-5-10/43843159.jpg"><br><em>CODE</em></dt><dd>这个页面把它当成文件管理器好了</dd></dl><dl><dt><em>FORK</em></dt><dd>看到好东西可以一键偷回来</dd></dl><dl><dt><em>STAR</em></dt><dd>俗称点赞</dd></dl><dl><dt><em>WATCH</em></dt><dd>俗称关注</dd></dl><dl><dt><em>DOWNLOAD ZIP</em></dt><dd>一键下载，旁边有下载链接</dd></dl><p>怎么有点像朋友圈加百度网盘的混合体呢？是可以这么理解的。用它来当<strong>免费网盘</strong>其实也是不错的。<br>刚刚不是下载了个客户端么，登录上去，把自己刚刚创建的笔记本<code>CLONE</code>回来，也就是下载回来。<br>其实，我是没有下载客户端的……因为我一般都是一句命令（需要安装一个git环境）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git@github.com:kbiao/kbiao.github.io.git</span><br></pre></td></tr></table></figure>
-<p>进入刚刚下载回来的文件夹，然后你就可以开始自由的写东西了。写完以后，添加一句描述，然后<code>commit</code>，就是告诉它我修改了东西了，并记住我改了啥，要上传就要用<code>push</code>，它就跑到网上去了，可以理解成上传文件了。<br>这些功能客户端都有相应按钮，也可以潇洒地用一句命令搞定。为啥要分两步呢？因为突然有一天你发现改了半天还不如之前的，想退回去，那就去看看<code>history</code>，然后乘坐时光机<code>roll back</code>回去任意时刻。<br>好像还是没有感觉他有什么好用的地方，要是你在和别的小伙伴一起写东西呢？它可以在自己电脑上<code>clone</code>这个文件夹，然后修改完成后<code>commit</code>+<code>push</code>。你这里再来一句<code>pull</code>就可以两个人愉快地合作了。pull的时候发现远程和自己本地不一样，可以很清晰地看到区别，自由决定增加删除还是合并。<br>基本概念就是这样，先入门嘛，上面还有很多不明白的按钮以后用到了一查就知道喽，我写文章的目的只是介绍下还有这么好用的工具，没有见识过呢。想学习高级用法，可以看看这本书《Pro Git》<a href="http://iissnan.com/progit/index.html%EF%BC%8C%E4%B9%9F%E5%8F%AF%E4%BB%A5%E5%9C%A8%E5%85%B7%E4%BD%93%E4%BD%BF%E7%94%A8%E7%9A%84%E6%97%B6%E5%80%99%E7%99%BE%E5%BA%A6%EF%BC%8C%E8%B0%B7%E6%AD%8C%E4%B8%80%E4%B8%8B%E3%80%82%E8%BF%99%E4%BA%9B%E6%95%99%E7%A8%8B%E7%9C%9F%E6%98%AF%E4%B8%80%E6%8A%93%E4%B8%80%E5%A4%A7%E6%8A%8A%EF%BC%8C%E4%B8%8D%E6%87%82%E4%BA%86%E5%86%8D%E6%89%BE%E4%B8%AA%E7%A8%8B%E5%BA%8F%E5%91%98%E5%A4%A7%E5%93%A5%E9%97%AE%E9%97%AE%E5%91%97%E3%80%82">http://iissnan.com/progit/index.html，也可以在具体使用的时候百度，谷歌一下。这些教程真是一抓一大把，不懂了再找个程序员大哥问问呗。</a><br>程序员当然用它做的最多的事情就是代码管理了，非程序员用gitHub做什么呢？</p>
-<ol>
-<li>写书。多人协作创作，或者用来版本管理。<a href="https://www.gitbook.com/">https://www.gitbook.com/</a></li>
-<li>写博客。我的博客就是在github上搭建的，<strong>阅读原文</strong>可以看看教程。拥有一个自己的域名，自己的动手搭建博客还是很酷炫的。<a href="https://hexo.io/">https://hexo.io/</a></li>
-<li>写简历。各个大公司都有活跃在gitHub.可以用它自动生成酷炫的简历<a href="http://resume.github.io/">http://resume.github.io/</a></li>
-<li>好多国家的政府文件都已经托管到这里来了。</li>
-<li>·····每天逛逛，一帮程序员总会折腾出一些好玩的东西来的。</li>
-</ol>
-<h2 id="Markdown"><a href="#Markdown" class="headerlink" title="Markdown"></a>Markdown</h2><p>刚刚创建gitHub项目的时候会看到它默认有个叫<code>readme.md</code>的文件。其实它就是一个支持Markdown语法的文本文件。</p>
-<h3 id="Markdown是什么？"><a href="#Markdown是什么？" class="headerlink" title="Markdown是什么？"></a>Markdown是什么？</h3><p>Markdown 是一种「标记语言」，通常为程序员群体所用。但是好东西绝不是只有程序员可以用的。可以简单地理解成用来排版的语言，写过专业论文的同学应该知道<code>LeTex</code>这个东西吧。</p>
-<h3 id="Markdown有什么好处？"><a href="#Markdown有什么好处？" class="headerlink" title="Markdown有什么好处？"></a>Markdown有什么好处？</h3><ul>
-<li>语法简单 </li>
-<li>再也不用专注排版 </li>
-<li>兼容html </li>
-<li>可以有更多更大的用处</li>
-</ul>
-<dl><dt>语法简单</dt><dd>Markdown 语法相当简单，哪怕你是一个从没接触过的小白，一天甚至半天就可以上手。</dd></dl><dl><dt>再也不用专注排版</dt><dd>word排版双学位的毕业论文，折腾的我够呛。莫名其妙的多一页少一页，页码不连续，目录调不好，简直要哭。发给老师还要考虑是07，03，还是13版本。用了markdown，程序员创造了各种工具自用转换各种格式，好好写作，排版事情它来做。</dd></dl><dl><dt>兼容html</dt><dd>Markdown 可以方便的转成 html，而且甚至直接兼容 html 语法，真是酷毙了！<br><img data-src="https://image.kbiao.me/16-5-10/77787373.jpg"></dd></dl><h3 id="更多更大的用处"><a href="#更多更大的用处" class="headerlink" title="更多更大的用处"></a>更多更大的用处</h3><ol>
-<li><p>我的博客写作就是纯 Markdown 写作的，写完以后发布就成了现在看到的样式。</p>
-</li>
-<li><p>很多项目的开发文档就是用markdown写的。</p>
-</li>
-<li><p>兼顾了「什么人都能打开」和「样式」。Markdown 就是纯文本，就是 txt，所以什么人都能打开。然后配合各种工具，生成简历PPT都不是什么问题。</p>
-</li>
-</ol>
-<h3 id="学习和使用"><a href="#学习和使用" class="headerlink" title="学习和使用"></a>学习和使用</h3><p>我很喜欢作业部落的编辑器 <a href="https://www.zybuluo.com/">https://www.zybuluo.com/</a><br>打开以后就可以看到语法教程和在线编辑器，还可以到处同步。甚至支持复杂的公式，流程图和图表。<br>文科的同学可能更喜欢简书，我上面的截图就来自简书。<a href="http://www.jianshu.com/">http://www.jianshu.com/</a></p>
-<p>最近在折腾博客嘛，所以这两个工具都和写作有关。书写也和大多数人有关，希望文章可以帮助到大家。</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>工作日登山_礼拜天结网</title>
-    <url>/%E5%B7%A5%E4%BD%9C%E6%97%A5%E7%99%BB%E5%B1%B1-%E7%A4%BC%E6%8B%9C%E5%A4%A9%E7%BB%93%E7%BD%91-e378de6552f5/</url>
-    <content><![CDATA[<p><img data-src="https://image.kbiao.me/blog/img/20220703174848.png"></p>
-<p>22年倏忽一下就过去了一半，最近的几周里我一个职场菜鸡也学着前辈的模样，开始做半年的技术规划。虽说只是照猫画虎，毕竟功力不够，也是压力颇大。最大的问题可能是我思维太过发散，始终无法收敛出一条清晰主线，说明白从哪来到哪去和如何去的问题（当然这终极三问可能确实复杂，但能给到我的话题和上下文还是比较小的）。然而在自己的生活中，思维发散却不常是一件坏事，往往还是生活中一些小确幸时刻的来源。</p>
-<span id="more"></span>
-
-
-<p>最近我买了一本书《创作的基因：我和我所爱着的MEME们》， 作者是小岛秀夫，是一名游戏制作人。这本书不是单独买的，是作为游戏同名小说《死亡搁浅》的套装一起。<br>《死亡搁浅》是一部气质非常独特的游戏，讲述了“死亡搁浅”后世界濒临毁灭，快递员山姆用一次次送货之旅，徒步穿越美国让世界重新连接，让人们获得新世界的希望。游戏中的配乐全部都是如电影一般，制作人精选的专辑音乐，而不是特地为游戏制作的音乐。气质上却融合得来。而且音乐本身能作为一种奖励机制。大战完 BT 的紧张中，从躲过时间雨后的压力中，从翻山越岭的疲惫中，突然响起悠扬的歌声告诉你苦难过去了，生活还是美好的，沉浸感是如此强烈。游戏一开头提出的棍棒与绳索的隐喻在一次次“快递”送货之旅中让玩家能有非常深刻的体会。但是也由于游戏过于“文青”的气质和非主流的玩法，在一段时间内也收获了褒贬不一的评价。</p>
-<p>不过这个气质却很对我的脑电波，新书发售自然要买一本作为粉丝的收藏。《创作的基因：我和我所爱着的MEME们》是小岛的书评，影评集。作为一个游戏人，他的阅读涉猎之多之广确实让人叹服，强大的输出果然离不开更为强大的输入做支撑。更厉害的在于，对于读过的作品，拥有的经历能有非常充分的个人风格的思考，消化，将其中的精髓和带给自己的心灵的触动转化为持续创作的灵感和动力。要说预期能把“创作的基因”通过这本书传递给我，那就预期太高了。它本质仅是一份书单，影单的合集，还得阅读品味，兴趣方向能和作者对上才会觉得满意。不必说我买它的初衷也仅仅是带着粉丝滤镜的冲动购物。</p>
-<p>书的标题提到了一个叫MEME 的概念，是仿着 GENE 造的一个词。 可以拆成 ME + ME ，解释为人与人的经历的连结。生物学上的基因🧬（GENE）传递的是肉体生命， 而MEME 是指传递文化，习惯，价值观。这种精神思想是用读书，看电影，玩游戏连结起来的人们，通过话语，文字，文化不停地进行着传承。小岛的游戏本身就是这种理念的呈现。这个概念确实新奇，而我在阅读了几篇以后立马有了现实的体会。<br>在其中读到一篇《山月记》的读后感，引用了一段原文：</p>
-<blockquote>
-<p>“我深怕自己本非美玉，故而不敢加以刻苦琢磨，却又半信自己是块美玉，故又不肯庸庸碌碌，与瓦砾为伍。于是我渐渐地脱离凡尘，疏远世人，结果便是一任愤懑与羞恨日益助长内心那怯弱的自尊心”</p>
-</blockquote>
-<p>这段话写的是真的好，把这种纠结，拧巴的心态描绘的栩栩如生，而又能立马映射到自己曾经多少次也拥有过这样的心态。就像我现在在努力尝试做的技术规划，为了自己的成长，想要驯服心中欲望的野兽，却也同时质疑自己能否驾驭，于是有了各种坐立不安纠结痛苦的时刻。共鸣之强我立马摘录并发了一条朋友圈。<br>《山月记》其实是一位日本作者中岛敦改编自中国唐代李景亮所著的《人虎传》的变身奇谭，抑或说是个寓言故事。这一篇改编的文章还被收录到了日本高中语文的教科书里。然后我又去翻了《山月记》原书，除了这个人变虎的故事，也还有“纪昌学射”这样我们熟悉故事的改编。日本的学者改编的中国故事，读起来确实又熟悉又陌生，别有一番意味。游戏到读书，日本到中国，这一个又一个的MEME 把我和那些我素未谋面的人和时空异位的事联系起来，成了我最近生活中突然觉得有点小惊喜和小确幸的时刻。<br>游戏我也没通关，这本影评集我也没读完，生涩的古文我过了这个新鲜劲头便也不会再啃下去了，但是我的快乐已经获得了。这据说可以被唤作“陶渊明派”读书法 —— 好读书，不求甚解。</p>
-<p>工作的世界里，一条条的待办，一次次的 OKR 是一座座山，要攻坚克难，要勇攀高峰，要追求极致。需要目标，需要手段，需要衡量。周末生活里读书、游戏的闲情像一张张网，连结起生活本身的意义。我在这张网里游曳，从一个点愉快跳向另一个点。这些没有什么特别目的的事物组成了生活的意义之网。</p>
-<p>山有高低次序，而网处处相通。工作日登山， 礼拜天结网，生命的节奏在两种模式里延展开来。</p>
-<p><img data-src="https://image.kbiao.me/blog/img/20220703174920.png"></p>
-]]></content>
-      <tags>
-        <tag>生活</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>阿里出品的ETL工具dataX初体验</title>
     <url>/%E9%98%BF%E9%87%8C%E5%87%BA%E5%93%81%E7%9A%84ETL%E5%B7%A5%E5%85%B7dataX%E5%88%9D%E4%BD%93%E9%AA%8C-f9bdf797cd4c/</url>
     <content><![CDATA[<p><img data-src="https://image.kbiao.me/17-1-2/15001992-file_1483363944014_47b9.jpg"><br>我的毕设选择了大数据方向的题目。大数据的第一步就是要拿到足够的数据源。现实情况中我们需要的数据源分布在不同的业务系统中，而这些系统往往是异构的，而且我们的分析过程不能影响原有业务系统的运行。为了把不同的数据归集起来，我开始了解和接触ETL。本篇介绍阿里的开源ETL工具dataX。</p>
@@ -2981,5 +3010,65 @@ public void setTag(String tag) {
         <tag>大数据</tag>
         <tag>DataX</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>当我跑步时我在想什么</title>
+    <url>/%E5%BD%93%E6%88%91%E8%B7%91%E6%AD%A5%E6%97%B6%E6%88%91%E5%9C%A8%E6%83%B3%E4%BB%80%E4%B9%88-a177e6765feb/</url>
+    <content><![CDATA[<p>每天 30 分钟跑步，是我去年新养成的习惯。一年下来打卡一百三十多次。一开始三公里都跑完一次就要歇一一天，到现在能稳定拿下 5 公里，偶尔挑战一下六公里，虽不甚专业，也算不得什么健身计划，但是坚持下来还是有点成就感的。</p>
+<span id="more"></span>
+
+<p>说是坚持，也不全对。细想下来需要坚持的事情，一般是坚持不下去的。坚持必须用力，吃力的事情必难持久。所以可以说是养成了新的习惯，或者说跑步是工作日常的一部分了。第一次进入健身房跑步只是在同事的带领下的尝试，当时仅是觉得公司的福利，得尝试着物尽其用。但到这周还在跑的理由，倒不是健康、健身的想法激励。而是我发现，工作日的时间，就是需要有跑步这样一项活动参与。每天的跑步是我对抗不确定性的一种仪式感。<br>跑步属于一种看得见的进步。对于我这种业余的选手来说，跑完第一周和跑完一个月以后能明显看到，平均配速就是一点点稳定提高的。在周会，OKR 到半年规划一个赶一个推着我往前走的互联网工作节奏中，难得发现有一件事情是我完全可控的。投入了就有进步，努力和收获成正比的事情好像在离开校园以后就没那么多了。连续坚持三天和休息两天再来上跑步机的感觉是不一样的，不进则退。如果耽搁多几天，加个放肆的周末，那么下一周哪怕多跑一天也最多恢复到上一周的基准线。为了多保持点进步的确定感，一般是不愿意荒废的，这反而也成了“坚持”的一种动力。<br>这甚至是一种无法大力出奇迹的进步。人在互联网总容易带入一种大力出奇迹的叙事中，但我很确信跑步不行。今天跑一小时也取代不了明天的三十分钟，更有可能导致明天跑不了十分钟。跟着大神选装备，吃健身餐也取代不了每天来三十分钟，学习很多技巧跑法以后也得一次次三十分钟的积累熟悉。跑了几周就意识到，我需要接受自己只能慢慢地进步，勉强的努力除了感动自己，并无实际收益。<br>这种进步在充满不确定性的工作中是一剂提神良方。虽然我不知道我今天做完了什么工作，这周达成了什么结果，这月推动了哪个指标。但我很确信今天跑完了三十分钟，这个 ToDo 是我想完成一定可以完成的，而且指标上一般还比昨天完成的漂亮些。所以哪怕在一个一事无成的工作日，相信我的身子还是比昨天健康了些的，晚上的睡眠也会好一些。<br>开始跑步以后读了村上春树的一本书《当我谈跑步时，我谈些什么》， 他谈的是如何训练自己的身体与意志，如何增加生活的趣味，如何与磨难相处。我跑了仅仅一年还是只跑步机上的慢跑，着实谈不了什么大道理。但是可以谈谈我在想什么，也许可以对也想试着用健身房提神的工友们一些启发。<br>前半年我在想的是怎么跑完。一开始，跑步机上的半个小时还是挺漫长的，比数学老师讲课还漫长，脑子里想着要达成半小时目标，然后只盯着时间看的话很容易就气馁了。为了避免大脑无聊，开始在脑子里做数学题，去计算配速。新手上路进步空间是有的，跑步也不是匀速全程，一般会缓慢提速热身，然后尽可能在最高配速坚持更久的时间。比如现在以 8 km 的配速跑了 5 分钟，那么距离完成 5km 的目标是快多少慢了多少，下一分钟如果我配速加到 9 又会拉回来多少的目标完成度呢。小学应用题级别的难度，但是在跑步缺氧的状态下感觉还是有点难度，且成功转移了对身体抗拒的注意力。计算几个轮次以后，发现我马上就要跑完三十分钟了，血清素的分泌又让我期待起了明天的运动时光。还有一个小技巧是可以切换跑步机显示模式是按操场跑圈的模式，一圈 400 ，这个值比里程增长的快些，也是个加快反馈循环的方式，跑起来时候感觉大脑还是很容易被骗的。<br>现在我会任由思绪散佚，看会不会有什么惊喜。现在跑满半个小时或者跑满五公里已经不是一个挑战了，不再需要一些技巧让自己坚持下来，空下来的脑袋便开始听播客，听小说，虽说只有半个小时，累积下来也听完成了四五本书。平时读的书多是纪实的或者理论的，虚构的总觉得是无用的。但跑步时候不同，跑步本身就很有用，无需再多些用。一些小说还会加入丰富的环境音和切换不同角色的配音，在跑步机上时候大脑显卡功率是可以开满的，对小说的代入感就极强，也是一种很特别的体验。<br>形成了习惯之后，日历上固定给占上时间，工友们便知道这个点人不在岗。这半个小时是难得的无人打扰的时光，让我不断超频的大脑切换另一种模式，往往对接下来的工作和思考能提供意外的灵感。在跑步机上，不需要特别集中注意力，又实际上在非常努力协调全身肌肉。这种状态下，脑袋里后台运行的线程说不定就有了意外的产出，可能是它跳出了之前陷入的某个死循环，在更大的范围内找到了新的可能性。于是跑步这个习惯就形成了正向的循环，也就不需要坚持的坚持下来了。<br>下周，下个月，也许到明年，我应该还会继续跑的。毕竟写了一篇文章来说自己跑的挺开心，那就不能被看到这篇文章的同事抓包说偷懒，这不体面。而且健身房打卡的次数都记着呢，突然断了觉得有些可惜，有些沉默成本在里头，这也算是一种套牢吧。</p>
+<blockquote>
+<p>题图来自 pixel dance<br>portrait of a chinese young man running towards the camera, photography</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>谁说这些东西只有程序员才能玩</title>
+    <url>/%E8%B0%81%E8%AF%B4%E8%BF%99%E4%BA%9B%E4%B8%9C%E8%A5%BF%E5%8F%AA%E6%9C%89%E7%A8%8B%E5%BA%8F%E5%91%98%E6%89%8D%E8%83%BD%E7%8E%A9-27b1d0104012/</url>
+    <content><![CDATA[<hr>
+<p>其实程序员都是一帮懒人，于是他们创造了各种懒人神器。<br>刚刚开始写博客，发了些文章让家人亲戚看到了，本着对我的关心和支持都转发关注点赞了。然而我知道，他们大部人都不知道我在说什么。所以想写一点，大家都可以看懂又不失逼格的。</p>
+<!--  more-->
+
+<p>我决定介绍下我使用的工具。一个叫GitHub，一个叫MarkDown。写代码可能不是每个人都需要，但是写点东西每个用电脑的人都或多或少有点需求。这两个东西，都可以用来帮助我们更高效的写作。<br>你说你不写作？作业你总有需要交电子稿的时候吧？！给领导汇报材料总得折腾下Word吧？！<br>这两个工具的使用可以达到<code>文理工医并重，产学用研结合</code>的神奇效果。（我的南大，我骄傲）</p>
+<h2 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h2><p>一张图说明gitHub是什么？全球最大的同性交友网站。<br><img data-src="https://image.kbiao.me/16-5-10/14771996.jpg" alt="github"></p>
+<p>不会真的信了吧？其实它确实是一帮程序员日常搞基的天堂。可以理解为程序员的微博或者朋友圈，他们不晒自拍晒代码。<br>那然后呢？不写代码的用它来干啥？一般人可以用它来干嘛？<br><img data-src="https://image.kbiao.me/16-5-10/84260051.jpg"><br>GitHub背后其实有个叫Git的东西，他是用来做版本控制的工具。写论文，一稿、二稿地改，每次改了啥，电脑里备份了一堆文件，找的时候是不是很头大。git就是一个时光机可以随时把文件带回历史的某个版本。程序员用来让代码服服帖帖，普通人当然也可以用它来管理各种文档啦。</p>
+<h3 id="注册安装"><a href="#注册安装" class="headerlink" title="注册安装"></a>注册安装</h3><p>这要讲么？ <a href="http://github.com/">http://github.com</a>  像注册QQ号一样注册一个账号。<br>然后命令行看的头大的话还可以装一个桌面客户端嘛。程序员哥哥们想的还是很周全的。</p>
+<h3 id="创建笔记本"><a href="#创建笔记本" class="headerlink" title="创建笔记本"></a>创建笔记本</h3><p>注册以后登录，你可以看到一个大大的首页</p>
+<dl><dt><img data-src="https://image.kbiao.me/16-5-10/446648.jpg"><br>人家说的很清楚嘛，学习使用gitHub是不需要你懂代码的。有个按钮叫<code>New respository</code>  可以把它理解成新建文件夹，创建笔记本。<br>进入自己的笔记本以后有这么几个地方要看看：<br><img data-src="https://image.kbiao.me/16-5-10/43843159.jpg"><br><em>CODE</em></dt><dd>这个页面把它当成文件管理器好了</dd></dl><dl><dt><em>FORK</em></dt><dd>看到好东西可以一键偷回来</dd></dl><dl><dt><em>STAR</em></dt><dd>俗称点赞</dd></dl><dl><dt><em>WATCH</em></dt><dd>俗称关注</dd></dl><dl><dt><em>DOWNLOAD ZIP</em></dt><dd>一键下载，旁边有下载链接</dd></dl><p>怎么有点像朋友圈加百度网盘的混合体呢？是可以这么理解的。用它来当<strong>免费网盘</strong>其实也是不错的。<br>刚刚不是下载了个客户端么，登录上去，把自己刚刚创建的笔记本<code>CLONE</code>回来，也就是下载回来。<br>其实，我是没有下载客户端的……因为我一般都是一句命令（需要安装一个git环境）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git@github.com:kbiao/kbiao.github.io.git</span><br></pre></td></tr></table></figure>
+<p>进入刚刚下载回来的文件夹，然后你就可以开始自由的写东西了。写完以后，添加一句描述，然后<code>commit</code>，就是告诉它我修改了东西了，并记住我改了啥，要上传就要用<code>push</code>，它就跑到网上去了，可以理解成上传文件了。<br>这些功能客户端都有相应按钮，也可以潇洒地用一句命令搞定。为啥要分两步呢？因为突然有一天你发现改了半天还不如之前的，想退回去，那就去看看<code>history</code>，然后乘坐时光机<code>roll back</code>回去任意时刻。<br>好像还是没有感觉他有什么好用的地方，要是你在和别的小伙伴一起写东西呢？它可以在自己电脑上<code>clone</code>这个文件夹，然后修改完成后<code>commit</code>+<code>push</code>。你这里再来一句<code>pull</code>就可以两个人愉快地合作了。pull的时候发现远程和自己本地不一样，可以很清晰地看到区别，自由决定增加删除还是合并。<br>基本概念就是这样，先入门嘛，上面还有很多不明白的按钮以后用到了一查就知道喽，我写文章的目的只是介绍下还有这么好用的工具，没有见识过呢。想学习高级用法，可以看看这本书《Pro Git》<a href="http://iissnan.com/progit/index.html%EF%BC%8C%E4%B9%9F%E5%8F%AF%E4%BB%A5%E5%9C%A8%E5%85%B7%E4%BD%93%E4%BD%BF%E7%94%A8%E7%9A%84%E6%97%B6%E5%80%99%E7%99%BE%E5%BA%A6%EF%BC%8C%E8%B0%B7%E6%AD%8C%E4%B8%80%E4%B8%8B%E3%80%82%E8%BF%99%E4%BA%9B%E6%95%99%E7%A8%8B%E7%9C%9F%E6%98%AF%E4%B8%80%E6%8A%93%E4%B8%80%E5%A4%A7%E6%8A%8A%EF%BC%8C%E4%B8%8D%E6%87%82%E4%BA%86%E5%86%8D%E6%89%BE%E4%B8%AA%E7%A8%8B%E5%BA%8F%E5%91%98%E5%A4%A7%E5%93%A5%E9%97%AE%E9%97%AE%E5%91%97%E3%80%82">http://iissnan.com/progit/index.html，也可以在具体使用的时候百度，谷歌一下。这些教程真是一抓一大把，不懂了再找个程序员大哥问问呗。</a><br>程序员当然用它做的最多的事情就是代码管理了，非程序员用gitHub做什么呢？</p>
+<ol>
+<li>写书。多人协作创作，或者用来版本管理。<a href="https://www.gitbook.com/">https://www.gitbook.com/</a></li>
+<li>写博客。我的博客就是在github上搭建的，<strong>阅读原文</strong>可以看看教程。拥有一个自己的域名，自己的动手搭建博客还是很酷炫的。<a href="https://hexo.io/">https://hexo.io/</a></li>
+<li>写简历。各个大公司都有活跃在gitHub.可以用它自动生成酷炫的简历<a href="http://resume.github.io/">http://resume.github.io/</a></li>
+<li>好多国家的政府文件都已经托管到这里来了。</li>
+<li>·····每天逛逛，一帮程序员总会折腾出一些好玩的东西来的。</li>
+</ol>
+<h2 id="Markdown"><a href="#Markdown" class="headerlink" title="Markdown"></a>Markdown</h2><p>刚刚创建gitHub项目的时候会看到它默认有个叫<code>readme.md</code>的文件。其实它就是一个支持Markdown语法的文本文件。</p>
+<h3 id="Markdown是什么？"><a href="#Markdown是什么？" class="headerlink" title="Markdown是什么？"></a>Markdown是什么？</h3><p>Markdown 是一种「标记语言」，通常为程序员群体所用。但是好东西绝不是只有程序员可以用的。可以简单地理解成用来排版的语言，写过专业论文的同学应该知道<code>LeTex</code>这个东西吧。</p>
+<h3 id="Markdown有什么好处？"><a href="#Markdown有什么好处？" class="headerlink" title="Markdown有什么好处？"></a>Markdown有什么好处？</h3><ul>
+<li>语法简单 </li>
+<li>再也不用专注排版 </li>
+<li>兼容html </li>
+<li>可以有更多更大的用处</li>
+</ul>
+<dl><dt>语法简单</dt><dd>Markdown 语法相当简单，哪怕你是一个从没接触过的小白，一天甚至半天就可以上手。</dd></dl><dl><dt>再也不用专注排版</dt><dd>word排版双学位的毕业论文，折腾的我够呛。莫名其妙的多一页少一页，页码不连续，目录调不好，简直要哭。发给老师还要考虑是07，03，还是13版本。用了markdown，程序员创造了各种工具自用转换各种格式，好好写作，排版事情它来做。</dd></dl><dl><dt>兼容html</dt><dd>Markdown 可以方便的转成 html，而且甚至直接兼容 html 语法，真是酷毙了！<br><img data-src="https://image.kbiao.me/16-5-10/77787373.jpg"></dd></dl><h3 id="更多更大的用处"><a href="#更多更大的用处" class="headerlink" title="更多更大的用处"></a>更多更大的用处</h3><ol>
+<li><p>我的博客写作就是纯 Markdown 写作的，写完以后发布就成了现在看到的样式。</p>
+</li>
+<li><p>很多项目的开发文档就是用markdown写的。</p>
+</li>
+<li><p>兼顾了「什么人都能打开」和「样式」。Markdown 就是纯文本，就是 txt，所以什么人都能打开。然后配合各种工具，生成简历PPT都不是什么问题。</p>
+</li>
+</ol>
+<h3 id="学习和使用"><a href="#学习和使用" class="headerlink" title="学习和使用"></a>学习和使用</h3><p>我很喜欢作业部落的编辑器 <a href="https://www.zybuluo.com/">https://www.zybuluo.com/</a><br>打开以后就可以看到语法教程和在线编辑器，还可以到处同步。甚至支持复杂的公式，流程图和图表。<br>文科的同学可能更喜欢简书，我上面的截图就来自简书。<a href="http://www.jianshu.com/">http://www.jianshu.com/</a></p>
+<p>最近在折腾博客嘛，所以这两个工具都和写作有关。书写也和大多数人有关，希望文章可以帮助到大家。</p>
+]]></content>
   </entry>
 </search>
