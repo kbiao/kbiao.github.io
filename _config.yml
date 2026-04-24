@@ -126,21 +126,21 @@ sitemap:
 # Qiniu Image Sync
 # 七牛云图床配置
 # 获取配置信息：https://portal.qiniu.com/
-qiniu:
-  offline: false  # 离线模式：false=使用七牛云，true=使用本地
-  sync: true     # 启用同步
-  bucket: image        # 七牛云bucket名称
-  access_key: Fd9eTHCaz4rB9UC2k3ksIEHiGMhtAuNq     # 七牛云AccessKey
-  secret_key: jDQO-rzfoAxn8AmXskRCdFZBpHLqWyqbp_YvGPs0     # 七牛云SecretKey
-  up_host: https://upload.qiniup.com  # 上传服务器：华东区域
-  dirPrefix: blog/img/                  # 七牛云存储路径
-  urlPrefix: https://image.kbiao.me/blog/img/  # 图片访问URL前缀
-  local_dir: source/uploads/             # 本地图片目录
-  update_exist: true                    # 是否更新已存在的图片
-  image:
-    folder: images
-    extend:
-  js:
-    folder: js
-  css:
-    folder: css
+# qiniu:
+#   offline: false  # 离线模式：false=使用七牛云，true=使用本地
+#   sync: true     # 启用同步
+#   bucket: image        # 七牛云bucket名称
+#   access_key: Fd9eTHCaz4rB9UC2k3ksIEHiGMhtAuNq     # 七牛云AccessKey
+#   secret_key: jDQO-rzfoAxn8AmXskRCdFZBpHLqWyqbp_YvGPs0     # 七牛云SecretKey
+#   up_host: https://upload.qiniup.com  # 上传服务器：华东区域
+#   dirPrefix: blog/img/                  # 七牛云存储路径
+#   urlPrefix: https://image.kbiao.me/blog/img/  # 图片访问URL前缀
+#   local_dir: source/assets/             # 本地图片目录
+#   update_exist: true                    # 是否更新已存在的图片
+#   image:
+#     folder: images
+#     extend:
+#   js:
+#     folder: js
+#   css:
+#     folder: css
