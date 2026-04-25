@@ -7,4 +7,11 @@ public/
 .deploy*/
 .vscode
 .MWebMetaData
+
+# 敏感配置文件（包含密钥）
 _config.yml
+_config.next.yml
+
+# 配置示例文件（不含密钥，可提交）
+!_config.example.yml
+!_config.next.example.yml

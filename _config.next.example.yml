@@ -702,7 +702,7 @@ clarity_analytics: # <project_id>
 leancloud_visitors:
   enable: true
   app_id: 7OTu25XcWOiqFHBrfOA46xsT-gzGzoHsz # <your app id>
-  app_key: bigXFjf3hf5a9TEukm9xO7uT #<your app key>
+  app_key: YOUR_LEANCLOUD_APP_KEY
   # Required for apps from CN region
   server_url: https://blog-api.kbiao.me # <your server url>
   # Dependencies: https://github.com/theme-next/hexo-leancloud-counter-security

@@ -130,8 +130,8 @@ qiniu:
   offline: false  # 离线模式：false=使用七牛云，true=使用本地
   sync: true     # 启用同步
   bucket: image        # 七牛云bucket名称
-  access_key: Fd9eTHCaz4rB9UC2k3ksIEHiGMhtAuNq     # 七牛云AccessKey
-  secret_key: jDQO-rzfoAxn8AmXskRCdFZBpHLqWyqbp_YvGPs0     # 七牛云SecretKey
+  access_key: YOUR_QINIU_ACCESS_KEY
+  secret_key: YOUR_QINIU_SECRET_KEY
   up_host: https://upload.qiniup.com  # 上传服务器：华东区域
   dirPrefix: blog/img/                  # 七牛云存储路径
   urlPrefix: https://image.kbiao.me/blog/img/  # 图片访问URL前缀
