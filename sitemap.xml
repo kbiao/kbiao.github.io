@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://blog.kbiao.me/%E7%99%BB%E5%91%B3%E7%B3%BB%E7%BB%9F-81ad9e436b60/</loc>
+    <loc>https://blog.kbiao.me/Dengwei-System-An-Internal-System-And-Its-Midlife/</loc>
     
     <lastmod>2026-06-21</lastmod>
     
@@ -155,7 +155,7 @@
   </url>
   
   <url>
-    <loc>https://blog.kbiao.me/about/index.html</loc>
+    <loc>https://blog.kbiao.me/categories/index.html</loc>
     
     <lastmod>2026-02-22</lastmod>
     
@@ -164,7 +164,7 @@
   </url>
   
   <url>
-    <loc>https://blog.kbiao.me/categories/index.html</loc>
+    <loc>https://blog.kbiao.me/about/index.html</loc>
     
     <lastmod>2026-02-22</lastmod>
     
@@ -182,7 +182,7 @@
   </url>
   
   <url>
-    <loc>https://blog.kbiao.me/%E5%9F%BA%E4%BA%8EOAUTH2%E7%9A%84%E7%BB%9F%E4%B8%80%E8%AE%A4%E8%AF%81%E7%9A%84%E5%AE%9E%E4%BE%8B%E8%A7%A3%E6%9E%90-4ab6a797b7a1/</loc>
+    <loc>https://blog.kbiao.me/%E5%B7%A5%E4%BD%9C%E6%97%A5%E7%99%BB%E5%B1%B1-%E7%A4%BC%E6%8B%9C%E5%A4%A9%E7%BB%93%E7%BD%91-e378de6552f5/</loc>
     
     <lastmod>2026-02-22</lastmod>
     
@@ -200,15 +200,6 @@
   </url>
   
   <url>
-    <loc>https://blog.kbiao.me/%E6%88%91%E7%9A%84%E5%A4%A7%E5%AD%A6%E6%88%90%E9%95%BF%E6%89%8B%E5%86%8C-de5fa12e6bfb/</loc>
-    
-    <lastmod>2026-02-22</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.kbiao.me/%E5%BD%93%E6%88%91%E8%B7%91%E6%AD%A5%E6%97%B6%E6%88%91%E5%9C%A8%E6%83%B3%E4%BB%80%E4%B9%88-a177e6765feb/</loc>
     
     <lastmod>2026-02-22</lastmod>
@@ -218,7 +209,25 @@
   </url>
   
   <url>
-    <loc>https://blog.kbiao.me/%E5%B7%A5%E4%BD%9C%E6%97%A5%E7%99%BB%E5%B1%B1-%E7%A4%BC%E6%8B%9C%E5%A4%A9%E7%BB%93%E7%BD%91-e378de6552f5/</loc>
+    <loc>https://blog.kbiao.me/%E5%9F%BA%E4%BA%8EOAUTH2%E7%9A%84%E7%BB%9F%E4%B8%80%E8%AE%A4%E8%AF%81%E7%9A%84%E5%AE%9E%E4%BE%8B%E8%A7%A3%E6%9E%90-4ab6a797b7a1/</loc>
+    
+    <lastmod>2026-02-22</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kbiao.me/%E6%88%91%E7%9A%84%E5%A4%A7%E5%AD%A6%E6%88%90%E9%95%BF%E6%89%8B%E5%86%8C-de5fa12e6bfb/</loc>
+    
+    <lastmod>2026-02-22</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kbiao.me/My-life-with-some-awesome-apps/</loc>
     
     <lastmod>2026-02-22</lastmod>
     
@@ -237,15 +246,6 @@
   
   <url>
     <loc>https://blog.kbiao.me/%E9%98%BF%E9%87%8C%E5%87%BA%E5%93%81%E7%9A%84ETL%E5%B7%A5%E5%85%B7dataX%E5%88%9D%E4%BD%93%E9%AA%8C-f9bdf797cd4c/</loc>
-    
-    <lastmod>2026-02-22</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kbiao.me/My-life-with-some-awesome-apps/</loc>
     
     <lastmod>2026-02-22</lastmod>
     
@@ -326,7 +326,7 @@
   </url>
   
   <url>
-    <loc>https://blog.kbiao.me/lucky-2019/</loc>
+    <loc>https://blog.kbiao.me/%E5%85%BB%E4%B8%8E%E7%94%A8-%E4%B8%AD%E8%A5%BF%E7%BB%93%E5%90%88%E7%9A%84%E7%B2%BE%E5%8A%9B%E7%AE%A1%E7%90%86-68135419e308/</loc>
     
     <lastmod>2026-02-22</lastmod>
     
@@ -335,7 +335,7 @@
   </url>
   
   <url>
-    <loc>https://blog.kbiao.me/%E5%85%BB%E4%B8%8E%E7%94%A8-%E4%B8%AD%E8%A5%BF%E7%BB%93%E5%90%88%E7%9A%84%E7%B2%BE%E5%8A%9B%E7%AE%A1%E7%90%86-68135419e308/</loc>
+    <loc>https://blog.kbiao.me/lucky-2019/</loc>
     
     <lastmod>2026-02-22</lastmod>
     
@@ -353,7 +353,7 @@
   </url>
   
   <url>
-    <loc>https://blog.kbiao.me/CORS%E5%AE%9E%E7%8E%B0%E8%B7%A8%E5%9F%9F%E6%97%B6%E6%8E%88%E6%9D%83%E9%97%AE%E9%A2%98%EF%BC%88401%E9%94%99%E8%AF%AF%EF%BC%89%E7%9A%84%E8%A7%A3%E5%86%B3-e460ee12b01e/</loc>
+    <loc>https://blog.kbiao.me/Android-MVP-Demo-be303a8bb542/</loc>
     
     <lastmod>2026-02-22</lastmod>
     
@@ -362,7 +362,7 @@
   </url>
   
   <url>
-    <loc>https://blog.kbiao.me/Android-MVP-Demo-be303a8bb542/</loc>
+    <loc>https://blog.kbiao.me/CORS%E5%AE%9E%E7%8E%B0%E8%B7%A8%E5%9F%9F%E6%97%B6%E6%8E%88%E6%9D%83%E9%97%AE%E9%A2%98%EF%BC%88401%E9%94%99%E8%AF%AF%EF%BC%89%E7%9A%84%E8%A7%A3%E5%86%B3-e460ee12b01e/</loc>
     
     <lastmod>2026-02-22</lastmod>
     
@@ -380,6 +380,15 @@
   </url>
   
   <url>
+    <loc>https://blog.kbiao.me/Docker-Learning-Notes-Get-Start/</loc>
+    
+    <lastmod>2026-02-22</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.kbiao.me/Java-Convert-List-To-Array-24935f750060/</loc>
     
     <lastmod>2026-02-22</lastmod>
@@ -389,7 +398,7 @@
   </url>
   
   <url>
-    <loc>https://blog.kbiao.me/Docker-Learning-Notes-Get-Start/</loc>
+    <loc>https://blog.kbiao.me/PM%EF%BC%9A%E5%81%9A%E4%B8%9A%E5%8A%A1%E6%9E%B6%E6%9E%84%E8%AF%95%E8%AF%95%E8%BF%99%E6%A0%B7%E6%80%9D%E8%80%83%E9%97%AE%E9%A2%98-ed1f511ffb31/</loc>
     
     <lastmod>2026-02-22</lastmod>
     
@@ -416,6 +425,15 @@
   </url>
   
   <url>
+    <loc>https://blog.kbiao.me/20-Laravel-Eloquent-Tips-and-Tricks-part2/</loc>
+    
+    <lastmod>2026-02-22</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.kbiao.me/nodeJS%E8%B8%A9%E5%9D%91-%E8%AE%B0%E6%9C%AC%E5%9C%B0%E5%9C%B0%E5%9D%80127-0-0-1%E4%B8%8E0-0-0-0%E7%9A%84%E5%8C%BA%E5%88%AB-58e1062e389a/</loc>
     
     <lastmod>2026-02-22</lastmod>
@@ -426,24 +444,6 @@
   
   <url>
     <loc>https://blog.kbiao.me/20-Laravel-Eloquent-Tips-and-Tricks/</loc>
-    
-    <lastmod>2026-02-22</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kbiao.me/PM%EF%BC%9A%E5%81%9A%E4%B8%9A%E5%8A%A1%E6%9E%B6%E6%9E%84%E8%AF%95%E8%AF%95%E8%BF%99%E6%A0%B7%E6%80%9D%E8%80%83%E9%97%AE%E9%A2%98-ed1f511ffb31/</loc>
-    
-    <lastmod>2026-02-22</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kbiao.me/20-Laravel-Eloquent-Tips-and-Tricks-part2/</loc>
     
     <lastmod>2026-02-22</lastmod>
     
@@ -468,6 +468,48 @@
     <priority>1.0</priority>
   </url>
 
+  
+  <url>
+    <loc>https://blog.kbiao.me/tags/Android/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kbiao.me/tags/MVP/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kbiao.me/tags/demo/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kbiao.me/tags/CORS/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kbiao.me/tags/Spring/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kbiao.me/tags/java-web/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
   
   <url>
     <loc>https://blog.kbiao.me/tags/AI/</loc>
@@ -505,69 +547,6 @@
   </url>
   
   <url>
-    <loc>https://blog.kbiao.me/tags/CORS/</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kbiao.me/tags/Spring/</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kbiao.me/tags/java-web/</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kbiao.me/tags/Android/</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kbiao.me/tags/MVP/</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kbiao.me/tags/demo/</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kbiao.me/tags/git/</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kbiao.me/tags/java/</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kbiao.me/tags/list/</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.kbiao.me/tags/Harness%E5%B7%A5%E7%A8%8B/</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -589,7 +568,35 @@
   </url>
   
   <url>
+    <loc>https://blog.kbiao.me/tags/git/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.kbiao.me/tags/Docker/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kbiao.me/tags/java/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kbiao.me/tags/list/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kbiao.me/tags/%E6%8A%80%E6%9C%AF%E4%BA%BA%E7%94%9F/</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -610,20 +617,6 @@
   </url>
   
   <url>
-    <loc>https://blog.kbiao.me/tags/node-js/</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kbiao.me/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.kbiao.me/tags/php/</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -638,7 +631,21 @@
   </url>
   
   <url>
-    <loc>https://blog.kbiao.me/tags/%E6%8A%80%E6%9C%AF%E4%BA%BA%E7%94%9F/</loc>
+    <loc>https://blog.kbiao.me/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kbiao.me/tags/node-js/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kbiao.me/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -646,27 +653,6 @@
   
   <url>
     <loc>https://blog.kbiao.me/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kbiao.me/tags/%E8%81%8C%E4%B8%9A%E8%BD%AC%E5%9E%8B/</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kbiao.me/tags/%E4%B8%AD%E9%97%B4%E5%BE%AA%E7%8E%AF/</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kbiao.me/tags/%E8%BA%AB%E4%BB%BD%E8%BD%AC%E5%8F%98/</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -694,13 +680,6 @@
   </url>
   
   <url>
-    <loc>https://blog.kbiao.me/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.kbiao.me/tags/%E7%94%9F%E6%B4%BB-%E8%AF%BB%E4%B9%A6/</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -708,7 +687,56 @@
   </url>
   
   <url>
+    <loc>https://blog.kbiao.me/tags/%E8%81%8C%E4%B8%9A%E8%BD%AC%E5%9E%8B/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kbiao.me/tags/%E4%B8%AD%E9%97%B4%E5%BE%AA%E7%8E%AF/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kbiao.me/tags/%E8%BA%AB%E4%BB%BD%E8%BD%AC%E5%8F%98/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.kbiao.me/tags/LLM-Prompt%E5%B7%A5%E7%A8%8B-%E6%8A%80%E6%9C%AF/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kbiao.me/tags/LLM/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kbiao.me/tags/Agent/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kbiao.me/tags/%E5%B7%A5%E7%A8%8B/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kbiao.me/tags/%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95/</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -744,34 +772,6 @@
   
   <url>
     <loc>https://blog.kbiao.me/tags/%E9%98%85%E8%AF%BB/</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kbiao.me/tags/LLM/</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kbiao.me/tags/Agent/</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kbiao.me/tags/%E5%B7%A5%E7%A8%8B/</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kbiao.me/tags/%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95/</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -820,6 +820,20 @@
   </url>
   
   <url>
+    <loc>https://blog.kbiao.me/tags/%E7%A1%AC%E4%BB%B6/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kbiao.me/tags/%E5%AE%89%E5%85%A8/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.kbiao.me/tags/Agentic%E5%B7%A5%E7%A8%8B/</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -828,20 +842,6 @@
   
   <url>
     <loc>https://blog.kbiao.me/tags/%E4%BB%A3%E7%A0%81%E8%BF%81%E7%A7%BB/</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kbiao.me/tags/%E7%A1%AC%E4%BB%B6/</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kbiao.me/tags/%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -862,6 +862,13 @@
   </url>
   
   <url>
+    <loc>https://blog.kbiao.me/tags/%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.kbiao.me/tags/%E6%88%90%E9%95%BF/</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -870,6 +877,34 @@
   
   <url>
     <loc>https://blog.kbiao.me/tags/%E5%8E%86%E5%8F%B2-LLM-%E6%8A%80%E6%9C%AF/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kbiao.me/tags/SimonWillison/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kbiao.me/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kbiao.me/tags/%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kbiao.me/tags/tips/</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -891,41 +926,6 @@
   
   <url>
     <loc>https://blog.kbiao.me/tags/%E7%BB%9F%E4%B8%80%E8%AE%A4%E8%AF%81/</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kbiao.me/tags/%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kbiao.me/tags/tips/</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kbiao.me/tags/%E5%AE%89%E5%85%A8/</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kbiao.me/tags/SimonWillison/</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kbiao.me/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -983,14 +983,14 @@
 
   
   <url>
-    <loc>https://blog.kbiao.me/categories/Coding-Notes/</loc>
+    <loc>https://blog.kbiao.me/categories/Android/</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.kbiao.me/categories/Android/</loc>
+    <loc>https://blog.kbiao.me/categories/Coding-Notes/</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1032,7 +1032,7 @@
   </url>
   
   <url>
-    <loc>https://blog.kbiao.me/categories/java/</loc>
+    <loc>https://blog.kbiao.me/categories/AI%E7%BC%96%E7%A8%8B/</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1046,21 +1046,21 @@
   </url>
   
   <url>
-    <loc>https://blog.kbiao.me/categories/%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%B4%BB/%E6%96%B0%E7%94%9F/</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kbiao.me/categories/AI%E7%BC%96%E7%A8%8B/</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.kbiao.me/categories/AI%E7%BC%96%E7%A8%8B/Agentic%E5%B7%A5%E7%A8%8B/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kbiao.me/categories/java/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kbiao.me/categories/%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%B4%BB/%E6%96%B0%E7%94%9F/</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
