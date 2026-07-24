@@ -19,5 +19,12 @@
     "hexo-renderer-stylus": "^3.0.0",
     "hexo-server": "^3.0.0",
     "hexo-theme-next": "^8.17.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.114.0"
+  },
+  "scripts": {
+    "deploy": "npx hexo generate && wrangler deploy",
+    "preview": "npx hexo generate && wrangler dev"
   }
 }
