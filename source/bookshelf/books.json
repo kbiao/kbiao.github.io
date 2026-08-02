@@ -1,3303 +1,3315 @@
 [
-  {
-    "title": "共产党宣言",
-    "author": "马克思、恩格斯",
-    "publisher": "版本不详",
-    "category": "政治理论",
-    "tags": [
-      "马克思主义",
-      "经典"
-    ],
-    "confidence": "high",
-    "note": "书脊清晰",
-    "douban_id": "36586444",
-    "douban_url": "https://book.douban.com/subject/36586444/",
-    "cover": "covers/36586444.jpg",
-    "color": "#c0bb59"
-  },
-  {
-    "title": "毛泽东选集 第一卷",
-    "author": "毛泽东",
-    "publisher": "人民出版社",
-    "category": "政治理论",
-    "tags": [
-      "毛泽东著作"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "2008436",
-    "douban_url": "https://book.douban.com/subject/2008436/",
-    "cover": "covers/2008436.jpg",
-    "color": "#c08759"
-  },
-  {
-    "title": "毛泽东选集 第二卷",
-    "author": "毛泽东",
-    "publisher": "人民出版社",
-    "category": "政治理论",
-    "tags": [
-      "毛泽东著作"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "1252183",
-    "douban_url": "https://book.douban.com/subject/1252183/",
-    "cover": "covers/1252183.jpg",
-    "color": "#c09759"
-  },
-  {
-    "title": "毛泽东选集 第三卷",
-    "author": "毛泽东",
-    "publisher": "人民出版社",
-    "category": "政治理论",
-    "tags": [
-      "毛泽东著作"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "1077621",
-    "douban_url": "https://book.douban.com/subject/1077621/",
-    "cover": "covers/1077621.jpg",
-    "color": "#c09459"
-  },
-  {
-    "title": "毛泽东选集 第四卷",
-    "author": "毛泽东",
-    "publisher": "人民出版社",
-    "category": "政治理论",
-    "tags": [
-      "毛泽东著作"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "1139359",
-    "douban_url": "https://book.douban.com/subject/1139359/",
-    "cover": "covers/1139359.jpg",
-    "color": "#c09b59"
-  },
-  {
-    "title": "中共党史十二讲",
-    "author": "作者不详",
-    "publisher": "版本不详",
-    "category": "政治理论",
-    "tags": [
-      "党史"
-    ],
-    "confidence": "mid",
-    "note": "书名清晰，作者看不清",
-    "douban_id": "35451036",
-    "douban_url": "https://book.douban.com/subject/35451036/",
-    "cover": "covers/35451036.jpg",
-    "color": "#c08059"
-  },
-  {
-    "title": "他改变了中国：江泽民传",
-    "author": "[美] 罗伯特·劳伦斯·库恩",
-    "publisher": "世纪文景/上海译文出版社（推测）",
-    "category": "传记",
-    "tags": [
-      "政治人物",
-      "传记"
-    ],
-    "confidence": "mid",
-    "note": "书脊仅见“他改变了”+人物头像，据此推断",
-    "douban_id": "1023322",
-    "douban_url": "https://book.douban.com/subject/1023322/",
-    "cover": "covers/1023322.jpg",
-    "color": "#b04c43"
-  },
-  {
-    "title": "埃隆·马斯克传",
-    "author": "[美] 沃尔特·艾萨克森",
-    "publisher": "中信出版集团",
-    "category": "传记",
-    "tags": [
-      "商业",
-      "科技人物"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "36518892",
-    "douban_url": "https://book.douban.com/subject/36518892/",
-    "cover": "covers/36518892.jpg",
-    "color": "#7e726d"
-  },
-  {
-    "title": "Steve Jobs（史蒂夫·乔布斯传 英文原版）",
-    "author": "Walter Isaacson",
-    "publisher": "Simon & Schuster",
-    "category": "传记",
-    "tags": [
-      "商业",
-      "科技人物",
-      "英文原版"
-    ],
-    "confidence": "high",
-    "note": "与中文版为不同版本，单独计条",
-    "douban_id": "6512188",
-    "douban_url": "https://book.douban.com/subject/6512188/",
-    "cover": "covers/6512188.jpg",
-    "color": "#858186"
-  },
-  {
-    "title": "史蒂夫·乔布斯传",
-    "author": "[美] 沃尔特·艾萨克森",
-    "publisher": "中信出版社",
-    "category": "传记",
-    "tags": [
-      "商业",
-      "科技人物"
-    ],
-    "confidence": "high",
-    "note": "中文版，与英文原版分计",
-    "douban_id": "6798611",
-    "douban_url": "https://book.douban.com/subject/6798611/",
-    "cover": "covers/6798611.jpg",
-    "color": "#7c7b79"
-  },
-  {
-    "title": "列奥纳多·达·芬奇传：从凡人到天才的创造力密码",
-    "author": "[美] 沃尔特·艾萨克森",
-    "publisher": "中信出版集团",
-    "category": "传记",
-    "tags": [
-      "艺术",
-      "天才传记"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "30236304",
-    "douban_url": "https://book.douban.com/subject/30236304/",
-    "cover": "covers/30236304.jpg",
-    "color": "#958d83"
-  },
-  {
-    "title": "拉法耶特",
-    "author": "冯翔",
-    "publisher": "读库·新星出版社",
-    "category": "传记",
-    "tags": [
-      "历史人物",
-      "读库"
-    ],
-    "confidence": "high",
-    "note": "2025年读库新书，已核实",
-    "douban_id": "37432300",
-    "douban_url": "https://book.douban.com/subject/37432300/",
-    "cover": "covers/37432300.jpg",
-    "color": "#494648"
-  },
-  {
-    "title": "洞中人：王羲之传",
-    "author": "周文翰",
-    "publisher": "新星出版社（“文人视觉传记”系列）",
-    "category": "传记",
-    "tags": [
-      "艺术家传记",
-      "书法"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "37015110",
-    "douban_url": "https://book.douban.com/subject/37015110/",
-    "cover": "covers/37015110.jpg",
-    "color": "#7a797b"
-  },
-  {
-    "title": "孤星之旅：苏东坡传",
-    "author": "周文翰",
-    "publisher": "新星出版社",
-    "category": "传记",
-    "tags": [
-      "文学家传记",
-      "宋代"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "36247474",
-    "douban_url": "https://book.douban.com/subject/36247474/",
-    "cover": "covers/36247474.jpg",
-    "color": "#345d88"
-  },
-  {
-    "title": "腾讯传：中国互联网公司进化论 1998-2016",
-    "author": "吴晓波",
-    "publisher": "浙江大学出版社/蓝狮子图书",
-    "category": "商业科技与互联网",
-    "tags": [
-      "互联网",
-      "企业史"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "26929955",
-    "douban_url": "https://book.douban.com/subject/26929955/",
-    "cover": "covers/26929955.jpg",
-    "color": "#979181"
-  },
-  {
-    "title": "浪潮之巅（第四版·上册）",
-    "author": "吴军",
-    "publisher": "人民邮电出版社",
-    "category": "商业科技与互联网",
-    "tags": [
-      "科技史",
-      "互联网"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "33474750",
-    "douban_url": "https://book.douban.com/subject/33474750/",
-    "cover": "covers/33474750.jpg",
-    "color": "#31465e"
-  },
-  {
-    "title": "浪潮之巅（第四版·下册）",
-    "author": "吴军",
-    "publisher": "人民邮电出版社",
-    "category": "商业科技与互联网",
-    "tags": [
-      "科技史",
-      "互联网"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "33474750",
-    "douban_url": "https://book.douban.com/subject/33474750/",
-    "cover": "covers/33474750.jpg",
-    "color": "#31465e"
-  },
-  {
-    "title": "梦想机器",
-    "author": "[美] M.米切尔·沃尔德罗普 著、刘崇岭 译",
-    "publisher": "读库·新星出版社",
-    "category": "商业科技与互联网",
-    "tags": [
-      "计算机史",
-      "传记",
-      "读库"
-    ],
-    "confidence": "high",
-    "note": "利克莱德传记，2026-1出版，已核实",
-    "douban_id": "38373965",
-    "douban_url": "https://book.douban.com/subject/38373965/",
-    "cover": "covers/38373965.jpg",
-    "color": "#474748"
-  },
-  {
-    "title": "深度思考：不断逼近问题的本质（Beyond the Label）",
-    "author": "[美] 莫琳·希凯 著、孔锐才 译",
-    "publisher": "版本不详",
-    "category": "商业科技与互联网",
-    "tags": [
-      "管理",
-      "商业"
-    ],
-    "confidence": "mid",
-    "note": "出版社未见",
-    "douban_id": "30312510",
-    "douban_url": "https://book.douban.com/subject/30312510/",
-    "cover": "covers/30312510.jpg",
-    "color": "#978d81"
-  },
-  {
-    "title": "详谈：芦苇",
-    "author": "李翔",
-    "publisher": "得到图书·新星出版社",
-    "category": "商业科技与互联网",
-    "tags": [
-      "商业访谈"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "36216309",
-    "douban_url": "https://book.douban.com/subject/36216309/",
-    "cover": "covers/36216309.jpg",
-    "color": "#b49264"
-  },
-  {
-    "title": "详谈：左晖",
-    "author": "李翔",
-    "publisher": "得到图书·新星出版社",
-    "category": "商业科技与互联网",
-    "tags": [
-      "商业访谈"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "35254632",
-    "douban_url": "https://book.douban.com/subject/35254632/",
-    "cover": "covers/35254632.jpg",
-    "color": "#8c8c8d"
-  },
-  {
-    "title": "详谈：沈鹏",
-    "author": "李翔",
-    "publisher": "得到图书·新星出版社",
-    "category": "商业科技与互联网",
-    "tags": [
-      "商业访谈"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "35407207",
-    "douban_url": "https://book.douban.com/subject/35407207/",
-    "cover": "covers/35407207.jpg",
-    "color": "#7b9d97"
-  },
-  {
-    "title": "详谈：赵鹏",
-    "author": "李翔",
-    "publisher": "得到图书·新星出版社",
-    "category": "商业科技与互联网",
-    "tags": [
-      "商业访谈"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "35523118",
-    "douban_url": "https://book.douban.com/subject/35523118/",
-    "cover": "covers/35523118.jpg",
-    "color": "#829782"
-  },
-  {
-    "title": "修改代码的艺术",
-    "author": "[美] Michael C. Feathers",
-    "publisher": "人民邮电出版社·图灵",
-    "category": "商业科技与互联网",
-    "tags": [
-      "软件工程",
-      "编程"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "2248759",
-    "douban_url": "https://book.douban.com/subject/2248759/",
-    "cover": "covers/2248759.jpg",
-    "color": "#967e9b"
-  },
-  {
-    "title": "经济学原理（疑为宏观经济学分册）",
-    "author": "[美] 曼昆（推断）",
-    "publisher": "北京大学出版社（推断）",
-    "category": "经济理财",
-    "tags": [
-      "经济学",
-      "教材"
-    ],
-    "confidence": "low",
-    "note": "大部分被遮挡，据相邻微观分册推断",
-    "douban_id": "30297210",
-    "douban_url": "https://book.douban.com/subject/30297210/",
-    "cover": "covers/30297210.jpg",
-    "color": "#7599a4"
-  },
-  {
-    "title": "经济学原理：微观经济学分册",
-    "author": "[美] 曼昆",
-    "publisher": "北京大学出版社",
-    "category": "经济理财",
-    "tags": [
-      "经济学",
-      "教材"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "3719533",
-    "douban_url": "https://book.douban.com/subject/3719533/",
-    "cover": "covers/3719533.jpg",
-    "color": "#838c75"
-  },
-  {
-    "title": "薛兆丰经济学讲义",
-    "author": "薛兆丰",
-    "publisher": "中信出版集团",
-    "category": "经济理财",
-    "tags": [
-      "经济学"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "30280804",
-    "douban_url": "https://book.douban.com/subject/30280804/",
-    "cover": "covers/30280804.jpg",
-    "color": "#b98e47"
-  },
-  {
-    "title": "财富自由之路",
-    "author": "李笑来",
-    "publisher": "版本不详",
-    "category": "经济理财",
-    "tags": [
-      "理财",
-      "自我提升"
-    ],
-    "confidence": "mid",
-    "note": "书脊仅见 FINANCIAL FREEDOM，作者据检索补全",
-    "douban_id": "27094706",
-    "douban_url": "https://book.douban.com/subject/27094706/",
-    "cover": "covers/27094706.jpg",
-    "color": "#a64c3f"
-  },
-  {
-    "title": "投资第1课",
-    "author": "孟岩",
-    "publisher": "新星出版社",
-    "category": "经济理财",
-    "tags": [
-      "投资",
-      "理财"
-    ],
-    "confidence": "high",
-    "note": "已检索核实",
-    "douban_id": "36295222",
-    "douban_url": "https://book.douban.com/subject/36295222/",
-    "cover": "covers/36295222.jpg",
-    "color": "#c05a59"
-  },
-  {
-    "title": "决策困境：医疗现场的行为经济学",
-    "author": "[日] 大竹文雄 等 编著",
-    "publisher": "新星出版社·读库",
-    "category": "经济理财",
-    "tags": [
-      "行为经济学",
-      "医疗"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "36546340",
-    "douban_url": "https://book.douban.com/subject/36546340/",
-    "cover": "covers/36546340.jpg",
-    "color": "#547b62"
-  },
-  {
-    "title": "主机战争（CONSOLE WARS）",
-    "author": "[美] 布莱克·J. 哈里斯",
-    "publisher": "读库",
-    "category": "游戏与流行文化",
-    "tags": [
-      "游戏史",
-      "商业"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "37036877",
-    "douban_url": "https://book.douban.com/subject/37036877/",
-    "cover": "covers/37036877.jpg",
-    "color": "#5873a4"
-  },
-  {
-    "title": "游戏结束：任天堂全球征服史（GAME OVER）",
-    "author": "[美] 戴维·谢弗 著、吕敏 译",
-    "publisher": "新星出版社·御宅学/读库",
-    "category": "游戏与流行文化",
-    "tags": [
-      "游戏史",
-      "任天堂"
-    ],
-    "confidence": "high",
-    "note": "A图2平放/C图3平放，同一条合并，以C为准",
-    "douban_id": "34983702",
-    "douban_url": "https://book.douban.com/subject/34983702/",
-    "cover": "covers/34983702.jpg",
-    "color": "#505265"
-  },
-  {
-    "title": "像素工厂：游戏开发背后的成功与混乱",
-    "author": "[美] 贾森·施赖埃尔 著、吕敏 译",
-    "publisher": "四川美术出版社·御宅学/读库",
-    "category": "游戏与流行文化",
-    "tags": [
-      "游戏产业",
-      "非虚构"
-    ],
-    "confidence": "high",
-    "note": "A/C重复，以C出版社信息为准",
-    "douban_id": "36102420",
-    "douban_url": "https://book.douban.com/subject/36102420/",
-    "cover": "covers/36102420.jpg",
-    "color": "#55575b"
-  },
-  {
-    "title": "创作的基因：我所爱着的MEME们",
-    "author": "[日] 小岛秀夫",
-    "publisher": "天闻角川·新星出版社",
-    "category": "游戏与流行文化",
-    "tags": [
-      "游戏",
-      "创作随笔"
-    ],
-    "confidence": "high",
-    "note": "A/C重复，以C出版社信息为准",
-    "douban_id": "35873664",
-    "douban_url": "https://book.douban.com/subject/35873664/",
-    "cover": "covers/35873664.jpg",
-    "color": "#c0bc59"
-  },
-  {
-    "title": "死亡搁浅（上）",
-    "author": "[日] 野岛一人 著（小岛秀夫原作/监修）",
-    "publisher": "新星出版社",
-    "category": "游戏与流行文化",
-    "tags": [
-      "科幻",
-      "游戏衍生小说"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "35406144",
-    "douban_url": "https://book.douban.com/subject/35406144/",
-    "cover": "covers/35406144.jpg",
-    "color": "#444775"
-  },
-  {
-    "title": "死亡搁浅（下）",
-    "author": "[日] 野岛一人 著（小岛秀夫原作/监修）",
-    "publisher": "新星出版社",
-    "category": "游戏与流行文化",
-    "tags": [
-      "科幻",
-      "游戏衍生小说"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "35406145",
-    "douban_url": "https://book.douban.com/subject/35406145/",
-    "cover": "covers/35406145.jpg",
-    "color": "#543f6a"
-  },
-  {
-    "title": "刺客信条：王朝 卷一",
-    "author": "许先哲 作、张肖 绘",
-    "publisher": "中信出版集团",
-    "category": "游戏与流行文化",
-    "tags": [
-      "漫画",
-      "游戏衍生"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "35447182",
-    "douban_url": "https://book.douban.com/subject/35447182/",
-    "cover": "covers/35447182.jpg",
-    "color": "#876055"
-  },
-  {
-    "title": "刺客信条：王朝 卷二",
-    "author": "许先哲 作、张肖 绘",
-    "publisher": "中信出版集团",
-    "category": "游戏与流行文化",
-    "tags": [
-      "漫画",
-      "游戏衍生"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "35510551",
-    "douban_url": "https://book.douban.com/subject/35510551/",
-    "cover": "covers/35510551.jpg",
-    "color": "#5c3237"
-  },
-  {
-    "title": "笔记的方法",
-    "author": "刘少楠、刘白光",
-    "publisher": "得到图书",
-    "category": "写作与自我提升",
-    "tags": [
-      "学习方法",
-      "笔记"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "36615020",
-    "douban_url": "https://book.douban.com/subject/36615020/",
-    "cover": "covers/36615020.jpg",
-    "color": "#3a9868"
-  },
-  {
-    "title": "暗时间：思维改变生活（第2版）",
-    "author": "刘未鹏",
-    "publisher": "电子工业出版社",
-    "category": "写作与自我提升",
-    "tags": [
-      "思维",
-      "时间管理"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "6709809",
-    "douban_url": "https://book.douban.com/subject/6709809/",
-    "cover": "covers/6709809.jpg",
-    "color": "#835244"
-  },
-  {
-    "title": "数字时代的效率手册",
-    "author": "少数派",
-    "publisher": "电子工业出版社",
-    "category": "写作与自我提升",
-    "tags": [
-      "效率",
-      "工具"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "35573401",
-    "douban_url": "https://book.douban.com/subject/35573401/",
-    "cover": "covers/35573401.jpg",
-    "color": "#8d8c8c"
-  },
-  {
-    "title": "非暴力沟通",
-    "author": "金圣荣",
-    "publisher": "江苏人民出版社",
-    "category": "写作与自我提升",
-    "tags": [
-      "沟通",
-      "心理"
-    ],
-    "confidence": "high",
-    "note": "注：金圣荣同名著作，非卢森堡博士译本",
-    "douban_id": "3533221",
-    "douban_url": "https://book.douban.com/subject/3533221/",
-    "cover": "covers/3533221.jpg",
-    "color": "#a25b5f"
-  },
-  {
-    "title": "职场晋升101",
-    "author": "崔璀",
-    "publisher": "读客（出版社未见）",
-    "category": "写作与自我提升",
-    "tags": [
-      "职场"
-    ],
-    "confidence": "mid",
-    "note": "",
-    "douban_id": "35799634",
-    "douban_url": "https://book.douban.com/subject/35799634/",
-    "cover": "covers/35799634.jpg",
-    "color": "#c0a659"
-  },
-  {
-    "title": "不上班咖啡馆：打工人的觉醒",
-    "author": "古典",
-    "publisher": "果麦·四川文艺出版社",
-    "category": "写作与自我提升",
-    "tags": [
-      "职业规划"
-    ],
-    "confidence": "high",
-    "note": "已检索核实（2024）",
-    "douban_id": "36946567",
-    "douban_url": "https://book.douban.com/subject/36946567/",
-    "cover": "covers/36946567.jpg",
-    "color": "#556e76"
-  },
-  {
-    "title": "人的全景：弹簧人、思维体操与进步",
-    "author": "池宇峰",
-    "publisher": "中译出版社",
-    "category": "写作与自我提升",
-    "tags": [
-      "思维"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "36458024",
-    "douban_url": "https://book.douban.com/subject/36458024/",
-    "cover": "covers/36458024.jpg",
-    "color": "#9d9b7c"
-  },
-  {
-    "title": "学习之道",
-    "author": "[美] 芭芭拉·奥克利",
-    "publisher": "机械工业出版社",
-    "category": "写作与自我提升",
-    "tags": [
-      "学习方法"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "26895988",
-    "douban_url": "https://book.douban.com/subject/26895988/",
-    "cover": "covers/26895988.jpg",
-    "color": "#bfbe59"
-  },
-  {
-    "title": "南方周末写作课",
-    "author": "南方周末 编著",
-    "publisher": "中信出版集团",
-    "category": "写作与自我提升",
-    "tags": [
-      "写作",
-      "新闻"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "35436205",
-    "douban_url": "https://book.douban.com/subject/35436205/",
-    "cover": "covers/35436205.jpg",
-    "color": "#ba5f69"
-  },
-  {
-    "title": "非虚构写作指南",
-    "author": "李梓新 主编",
-    "publisher": "中信出版集团",
-    "category": "写作与自我提升",
-    "tags": [
-      "写作",
-      "非虚构"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "34445366",
-    "douban_url": "https://book.douban.com/subject/34445366/",
-    "cover": "covers/34445366.jpg",
-    "color": "#b6af45"
-  },
-  {
-    "title": "卡片笔记写作法：如何实现从阅读到写作",
-    "author": "[德] 申克·阿伦斯 著、陈琳 译",
-    "publisher": "人民邮电出版社",
-    "category": "写作与自我提升",
-    "tags": [
-      "写作",
-      "知识管理"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "35503571",
-    "douban_url": "https://book.douban.com/subject/35503571/",
-    "cover": "covers/35503571.jpg",
-    "color": "#949e7a"
-  },
-  {
-    "title": "英语科技写作",
-    "author": "[英] Hilary Glasman-Deal",
-    "publisher": "机械工业出版社（华章）",
-    "category": "写作与自我提升",
-    "tags": [
-      "学术写作",
-      "英语"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "36437925",
-    "douban_url": "https://book.douban.com/subject/36437925/",
-    "cover": "covers/36437925.jpg",
-    "color": "#989081"
-  },
-  {
-    "title": "猫和狗的生活哲学",
-    "author": "简单心理",
-    "publisher": "浦睿文化（版式推测）",
-    "category": "写作与自我提升",
-    "tags": [
-      "心理",
-      "漫画"
-    ],
-    "confidence": "mid",
-    "note": "出版社小字未辨",
-    "douban_id": "35639086",
-    "douban_url": "https://book.douban.com/subject/35639086/",
-    "cover": "covers/35639086.jpg",
-    "color": "#829795"
-  },
-  {
-    "title": "枪炮、病菌与钢铁：人类社会的命运",
-    "author": "[美] 贾雷德·戴蒙德",
-    "publisher": "中信出版集团",
-    "category": "社会科学",
-    "tags": [
-      "人类史",
-      "社会学"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "1813841",
-    "douban_url": "https://book.douban.com/subject/1813841/",
-    "cover": "covers/1813841.jpg",
-    "color": "#958053"
-  },
-  {
-    "title": "人类简史：从动物到上帝",
-    "author": "[以色列] 尤瓦尔·赫拉利 著、林俊宏 译",
-    "publisher": "中信出版集团",
-    "category": "社会科学",
-    "tags": [
-      "人类史"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "25985021",
-    "douban_url": "https://book.douban.com/subject/25985021/",
-    "cover": "covers/25985021.jpg",
-    "color": "#938f85"
-  },
-  {
-    "title": "小镇喧嚣：一个乡镇政治运作的演绎与阐释",
-    "author": "吴毅",
-    "publisher": "生活·读书·新知三联书店（“中国社会学经典文库”）",
-    "category": "社会科学",
-    "tags": [
-      "社会学",
-      "田野调查"
-    ],
-    "confidence": "high",
-    "note": "A/C重复，以C为准",
-    "douban_id": "30122152",
-    "douban_url": "https://book.douban.com/subject/30122152/",
-    "cover": "covers/30122152.jpg",
-    "color": "#928986"
-  },
-  {
-    "title": "以利为利：财政关系与地方政府行为",
-    "author": "周飞舟",
-    "publisher": "上海三联书店",
-    "category": "社会科学",
-    "tags": [
-      "社会学",
-      "财政"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "10587755",
-    "douban_url": "https://book.douban.com/subject/10587755/",
-    "cover": "covers/10587755.jpg",
-    "color": "#805d57"
-  },
-  {
-    "title": "工作、消费主义和新穷人",
-    "author": "[英] 齐格蒙特·鲍曼 著、郭楠 译",
-    "publisher": "上海社会科学院出版社·燧石",
-    "category": "社会科学",
-    "tags": [
-      "社会学",
-      "消费主义"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "35593780",
-    "douban_url": "https://book.douban.com/subject/35593780/",
-    "cover": "covers/35593780.jpg",
-    "color": "#908989"
-  },
-  {
-    "title": "事实（FACTFULNESS）",
-    "author": "[瑞典] 汉斯·罗斯林 等",
-    "publisher": "读客·文汇出版社",
-    "category": "社会科学",
-    "tags": [
-      "认知",
-      "数据思维"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "33385402",
-    "douban_url": "https://book.douban.com/subject/33385402/",
-    "cover": "covers/33385402.jpg",
-    "color": "#ba7c49"
-  },
-  {
-    "title": "超级城市是如何运转的",
-    "author": "[美] 凯特·阿歇尔",
-    "publisher": "后浪（推测）",
-    "category": "社会科学",
-    "tags": [
-      "城市",
-      "科普"
-    ],
-    "confidence": "mid",
-    "note": "出版社待确认",
-    "douban_id": "27622170",
-    "douban_url": "https://book.douban.com/subject/27622170/",
-    "cover": "covers/27622170.jpg",
-    "color": "#46556a"
-  },
-  {
-    "title": "何谓大学",
-    "author": "[日] 吉见俊哉 著、王敏 译",
-    "publisher": "版本不详",
-    "category": "社会科学",
-    "tags": [
-      "教育"
-    ],
-    "confidence": "mid",
-    "note": "出版社未见",
-    "douban_id": "37050074",
-    "douban_url": "https://book.douban.com/subject/37050074/",
-    "cover": "covers/37050074.jpg",
-    "color": "#a88570"
-  },
-  {
-    "title": "被设想的未来",
-    "author": "[印] 普立梵、[英] 安德鲁·瓦特 著、王焙尧 译",
-    "publisher": "上海三联书店",
-    "category": "社会科学",
-    "tags": [
-      "未来学"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "36177045",
-    "douban_url": "https://book.douban.com/subject/36177045/",
-    "cover": "covers/36177045.jpg",
-    "color": "#9d956c"
-  },
-  {
-    "title": "跟不内耗的森林居民一起生活",
-    "author": "[日] 奥野克巳 著、张威 译",
-    "publisher": "新星出版社·读库",
-    "category": "社会科学",
-    "tags": [
-      "人类学",
-      "民族志"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "37522069",
-    "douban_url": "https://book.douban.com/subject/37522069/",
-    "cover": "covers/37522069.jpg",
-    "color": "#71ac6c"
-  },
-  {
-    "title": "博弈论入门的入门",
-    "author": "[日] 镰田雄一郎 著、朱悦玮 译",
-    "publisher": "新星出版社·读库",
-    "category": "社会科学",
-    "tags": [
-      "博弈论",
-      "科普"
-    ],
-    "confidence": "high",
-    "note": "A“博弈论入门…”对应此书，以C为准",
-    "douban_id": "36610325",
-    "douban_url": "https://book.douban.com/subject/36610325/",
-    "cover": "covers/36610325.jpg",
-    "color": "#a29e77"
-  },
-  {
-    "title": "重燃文学之火：在阅读课上思考自我与社会",
-    "author": "[美] 大卫·丹比 著、汪畅 译",
-    "publisher": "读库·新星出版社",
-    "category": "社会科学",
-    "tags": [
-      "教育",
-      "阅读"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "36910974",
-    "douban_url": "https://book.douban.com/subject/36910974/",
-    "cover": "covers/36910974.jpg",
-    "color": "#9b3b48"
-  },
-  {
-    "title": "中学语文60年老课本精选",
-    "author": "上海教育出版社 编",
-    "publisher": "上海教育出版社",
-    "category": "社会科学",
-    "tags": [
-      "教育",
-      "教材文献"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "4293370",
-    "douban_url": "https://book.douban.com/subject/4293370/",
-    "cover": "covers/4293370.jpg",
-    "color": "#b89a61"
-  },
-  {
-    "title": "东言西语：在语言中重新发现中国",
-    "author": "郑子宁",
-    "publisher": "后浪·敦煌文艺出版社",
-    "category": "社会科学",
-    "tags": [
-      "语言学",
-      "文化"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "34945889",
-    "douban_url": "https://book.douban.com/subject/34945889/",
-    "cover": "covers/34945889.jpg",
-    "color": "#8e8b8b"
-  },
-  {
-    "title": "历史的运用与滥用（The Uses and Abuses of History）",
-    "author": "[加] 玛格丽特·麦克米伦",
-    "publisher": "一頁folio·广西师范大学出版社",
-    "category": "社会科学",
-    "tags": [
-      "历史学",
-      "公共历史"
-    ],
-    "confidence": "high",
-    "note": "A/C重复，以C为准",
-    "douban_id": "35324419",
-    "douban_url": "https://book.douban.com/subject/35324419/",
-    "cover": "covers/35324419.jpg",
-    "color": "#b4494a"
-  },
-  {
-    "title": "从一到无穷大：科学中的事实和臆测",
-    "author": "[美] 乔治·伽莫夫",
-    "publisher": "中读天下",
-    "category": "科普博物",
-    "tags": [
-      "科学经典"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "1102715",
-    "douban_url": "https://book.douban.com/subject/1102715/",
-    "cover": "covers/1102715.jpg",
-    "color": "#9b7d81"
-  },
-  {
-    "title": "简单统计学",
-    "author": "[美] 加里·史密斯",
-    "publisher": "后浪·江西人民出版社",
-    "category": "科普博物",
-    "tags": [
-      "统计学"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "37528384",
-    "douban_url": "https://book.douban.com/subject/37528384/",
-    "cover": "covers/37528384.jpg",
-    "color": "#a79772"
-  },
-  {
-    "title": "贪婪的多巴胺",
-    "author": "[美] 丹尼尔·利伯曼、迈克尔·E.朗 著、郑李垚 译",
-    "publisher": "中信出版集团",
-    "category": "科普博物",
-    "tags": [
-      "神经科学"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "35545272",
-    "douban_url": "https://book.douban.com/subject/35545272/",
-    "cover": "covers/35545272.jpg",
-    "color": "#888891"
-  },
-  {
-    "title": "海错图笔记",
-    "author": "张辰亮",
-    "publisher": "中信出版社",
-    "category": "科普博物",
-    "tags": [
-      "博物",
-      "海洋生物"
-    ],
-    "confidence": "high",
-    "note": "卷次书脊未标",
-    "douban_id": "26905274",
-    "douban_url": "https://book.douban.com/subject/26905274/",
-    "cover": "covers/26905274.jpg",
-    "color": "#888a7c"
-  },
-  {
-    "title": "舍象与秋水变焦",
-    "author": "刘华杰",
-    "publisher": "北京时代华文书局（“AI时代趣味博物学”系列）",
-    "category": "科普博物",
-    "tags": [
-      "博物学",
-      "科学文化"
-    ],
-    "confidence": "high",
-    "note": "已检索核实",
-    "douban_id": "37523035",
-    "douban_url": "https://book.douban.com/subject/37523035/",
-    "cover": "covers/37523035.jpg",
-    "color": "#899286"
-  },
-  {
-    "title": "它们没有脚，但足迹遍天下",
-    "author": "[意] 斯特凡诺·曼库索",
-    "publisher": "读库·新星出版社",
-    "category": "科普博物",
-    "tags": [
-      "植物",
-      "科普"
-    ],
-    "confidence": "high",
-    "note": "已核实",
-    "douban_id": "36659509",
-    "douban_url": "https://book.douban.com/subject/36659509/",
-    "cover": "covers/36659509.jpg",
-    "color": "#6e86aa"
-  },
-  {
-    "title": "不可思议的人体",
-    "author": "[日] 茨木保 著、周岩蕾 译",
-    "publisher": "后浪·北京联合出版公司",
-    "category": "科普博物",
-    "tags": [
-      "医学",
-      "漫画科普"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "35649768",
-    "douban_url": "https://book.douban.com/subject/35649768/",
-    "cover": "covers/35649768.jpg",
-    "color": "#9d967c"
-  },
-  {
-    "title": "小猎犬号航海记（插图全译本）",
-    "author": "[英] 查尔斯·达尔文 著、陈红 译",
-    "publisher": "译林出版社",
-    "category": "科普博物",
-    "tags": [
-      "博物",
-      "科学旅行"
-    ],
-    "confidence": "mid",
-    "note": "译者按书脊辨认",
-    "douban_id": "34933366",
-    "douban_url": "https://book.douban.com/subject/34933366/",
-    "cover": "covers/34933366.jpg",
-    "color": "#b29966"
-  },
-  {
-    "title": "冷与冰（Ice & Cold）",
-    "author": "李恪",
-    "publisher": "读库·新星出版社",
-    "category": "科普博物",
-    "tags": [
-      "技术史",
-      "制冷"
-    ],
-    "confidence": "high",
-    "note": "人类取冰与制冷史，已核实",
-    "douban_id": "37469982",
-    "douban_url": "https://book.douban.com/subject/37469982/",
-    "cover": "covers/37469982.jpg",
-    "color": "#658cb3"
-  },
-  {
-    "title": "海洋诱惑",
-    "author": "袁越",
-    "publisher": "三联生活书店（推测）",
-    "category": "科普博物",
-    "tags": [
-      "海洋",
-      "科学"
-    ],
-    "confidence": "mid",
-    "note": "出版社待确认",
-    "douban_id": "36895318",
-    "douban_url": "https://book.douban.com/subject/36895318/",
-    "cover": "covers/36895318.jpg",
-    "color": "#2b596d"
-  },
-  {
-    "title": "哥德尔、艾舍尔、巴赫：集异璧之大成（GEB）",
-    "author": "[美] 侯世达",
-    "publisher": "商务印书馆",
-    "category": "哲学与思想",
-    "tags": [
-      "认知科学",
-      "哲学",
-      "经典"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "1291204",
-    "douban_url": "https://book.douban.com/subject/1291204/",
-    "cover": "covers/1291204.jpg",
-    "color": "#7b7c7f"
-  },
-  {
-    "title": "逃出瓶子的精灵：一部关于“我”的哲学史",
-    "author": "[荷] 戈尔·格罗特",
-    "publisher": "读库·新星出版社",
-    "category": "哲学与思想",
-    "tags": [
-      "哲学史",
-      "自我"
-    ],
-    "confidence": "high",
-    "note": "已核实",
-    "douban_id": "36492396",
-    "douban_url": "https://book.douban.com/subject/36492396/",
-    "cover": "covers/36492396.jpg",
-    "color": "#8f8c8a"
-  },
-  {
-    "title": "电车难题有答案",
-    "author": "作者不详",
-    "publisher": "读库出品",
-    "category": "哲学与思想",
-    "tags": [
-      "伦理学",
-      "思想实验"
-    ],
-    "confidence": "mid",
-    "note": "书脊被遮挡一半；经搜索确为读库L套餐书目",
-    "douban_id": "37892476",
-    "douban_url": "https://book.douban.com/subject/37892476/",
-    "cover": "covers/37892476.jpg",
-    "color": "#474747"
-  },
-  {
-    "title": "谈美",
-    "author": "朱光潜",
-    "publisher": "版本不详",
-    "category": "哲学与思想",
-    "tags": [
-      "美学",
-      "文艺理论"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "26838438",
-    "douban_url": "https://book.douban.com/subject/26838438/",
-    "cover": "covers/26838438.jpg",
-    "color": "#8c8c8c"
-  },
-  {
-    "title": "活法（珍藏版）",
-    "author": "[日] 稻盛和夫 著、曹岫云 译",
-    "publisher": "东方出版社",
-    "category": "哲学与思想",
-    "tags": [
-      "人生哲学",
-      "经营"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "25817726",
-    "douban_url": "https://book.douban.com/subject/25817726/",
-    "cover": "covers/25817726.jpg",
-    "color": "#c0595c"
-  },
-  {
-    "title": "万历十五年（增订本）",
-    "author": "[美] 黄仁宇",
-    "publisher": "中华书局",
-    "category": "中国历史与近代史",
-    "tags": [
-      "明史",
-      "经典"
-    ],
-    "confidence": "high",
-    "note": "A/C重复，以C版本信息为准",
-    "douban_id": "1981042",
-    "douban_url": "https://book.douban.com/subject/1981042/",
-    "cover": "covers/1981042.jpg",
-    "color": "#bf9559"
-  },
-  {
-    "title": "中国大历史",
-    "author": "[美] 黄仁宇",
-    "publisher": "生活·读书·新知三联书店",
-    "category": "中国历史与近代史",
-    "tags": [
-      "通史"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "1015699",
-    "douban_url": "https://book.douban.com/subject/1015699/",
-    "cover": "covers/1015699.jpg",
-    "color": "#c09259"
-  },
-  {
-    "title": "中国通史",
-    "author": "吕思勉",
-    "publisher": "斯坦威图书（具体出版社不明）",
-    "category": "中国历史与近代史",
-    "tags": [
-      "通史"
-    ],
-    "confidence": "mid",
-    "note": "书脊标“斯坦威 K047”",
-    "douban_id": "3707886",
-    "douban_url": "https://book.douban.com/subject/3707886/",
-    "cover": "covers/3707886.jpg",
-    "color": "#a39176"
-  },
-  {
-    "title": "中国历代政治得失",
-    "author": "钱穆",
-    "publisher": "生活·读书·新知三联书店（钱穆作品精选）",
-    "category": "中国历史与近代史",
-    "tags": [
-      "制度史"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "1003479",
-    "douban_url": "https://book.douban.com/subject/1003479/",
-    "cover": "covers/1003479.jpg",
-    "color": "#c09d59"
-  },
-  {
-    "title": "清末民初的思想与人物",
-    "author": "杨琥",
-    "publisher": "壹卷YeBook·四川人民出版社",
-    "category": "中国历史与近代史",
-    "tags": [
-      "近代史",
-      "思想史"
-    ],
-    "confidence": "high",
-    "note": "A“清末民…”对应此书，以C为准",
-    "douban_id": "35582656",
-    "douban_url": "https://book.douban.com/subject/35582656/",
-    "cover": "covers/35582656.jpg",
-    "color": "#869093"
-  },
-  {
-    "title": "枢纽：3000年的中国",
-    "author": "施展",
-    "publisher": "广西师范大学出版社",
-    "category": "中国历史与近代史",
-    "tags": [
-      "通史",
-      "文明史"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "27602003",
-    "douban_url": "https://book.douban.com/subject/27602003/",
-    "cover": "covers/27602003.jpg",
-    "color": "#7b413d"
-  },
-  {
-    "title": "叫魂：1768年中国妖术大恐慌",
-    "author": "[美] 孔飞力 著、陈兼、刘昶 译",
-    "publisher": "上海三联书店",
-    "category": "中国历史与近代史",
-    "tags": [
-      "清史",
-      "社会史"
-    ],
-    "confidence": "high",
-    "note": "A/C重复",
-    "douban_id": "25912076",
-    "douban_url": "https://book.douban.com/subject/25912076/",
-    "cover": "covers/25912076.jpg",
-    "color": "#505f70"
-  },
-  {
-    "title": "漫长的余生：一个北魏宫女和她的时代",
-    "author": "罗新",
-    "publisher": "理想国·北京日报出版社",
-    "category": "中国历史与近代史",
-    "tags": [
-      "北魏",
-      "微观史"
-    ],
-    "confidence": "high",
-    "note": "A/C重复",
-    "douban_id": "35909188",
-    "douban_url": "https://book.douban.com/subject/35909188/",
-    "cover": "covers/35909188.jpg",
-    "color": "#ac8d6d"
-  },
-  {
-    "title": "大明最后的使臣",
-    "author": "苗子兮",
-    "publisher": "新星出版社·读库",
-    "category": "中国历史与近代史",
-    "tags": [
-      "明史",
-      "外交"
-    ],
-    "confidence": "high",
-    "note": "A/C重复，以C为准（2025）",
-    "douban_id": "37109442",
-    "douban_url": "https://book.douban.com/subject/37109442/",
-    "cover": "covers/37109442.jpg",
-    "color": "#9c8c7c"
-  },
-  {
-    "title": "大宋病人",
-    "author": "韩福东",
-    "publisher": "新星出版社·读库",
-    "category": "中国历史与近代史",
-    "tags": [
-      "宋史"
-    ],
-    "confidence": "high",
-    "note": "A/C重复，以C为准（写宋英宗赵曙）",
-    "douban_id": "36640421",
-    "douban_url": "https://book.douban.com/subject/36640421/",
-    "cover": "covers/36640421.jpg",
-    "color": "#9c9f77"
-  },
-  {
-    "title": "司马迁的记忆之野",
-    "author": "刘勃",
-    "publisher": "读库·新星出版社",
-    "category": "中国历史与近代史",
-    "tags": [
-      "汉史",
-      "史记"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "35230273",
-    "douban_url": "https://book.douban.com/subject/35230273/",
-    "cover": "covers/35230273.jpg",
-    "color": "#5a7bbe"
-  },
-  {
-    "title": "清代旅蒙商述略",
-    "author": "秋原",
-    "publisher": "读库·新星出版社",
-    "category": "中国历史与近代史",
-    "tags": [
-      "清史",
-      "商业史"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "26419408",
-    "douban_url": "https://book.douban.com/subject/26419408/",
-    "cover": "covers/26419408.jpg",
-    "color": "#8c9980"
-  },
-  {
-    "title": "碌碌有为：微观历史视野下的中国社会与民众（上卷·人、日常和文化）",
-    "author": "王笛",
-    "publisher": "中信出版集团",
-    "category": "中国历史与近代史",
-    "tags": [
-      "社会史",
-      "微观史"
-    ],
-    "confidence": "high",
-    "note": "A/C重复，以C为准",
-    "douban_id": "36110430",
-    "douban_url": "https://book.douban.com/subject/36110430/",
-    "cover": "covers/36110430.jpg",
-    "color": "#a79371"
-  },
-  {
-    "title": "碌碌有为：微观历史视野下的中国社会与民众（下卷·家、群体和法律）",
-    "author": "王笛",
-    "publisher": "中信出版集团",
-    "category": "中国历史与近代史",
-    "tags": [
-      "社会史",
-      "微观史"
-    ],
-    "confidence": "high",
-    "note": "A/C重复，以C为准",
-    "douban_id": "36110430",
-    "douban_url": "https://book.douban.com/subject/36110430/",
-    "cover": "covers/36110430.jpg",
-    "color": "#a79371"
-  },
-  {
-    "title": "马伯庸笑翻中国简史",
-    "author": "马伯庸",
-    "publisher": "版本未详",
-    "category": "中国历史与近代史",
-    "tags": [
-      "通俗历史"
-    ],
-    "confidence": "mid",
-    "note": "",
-    "douban_id": "25978734",
-    "douban_url": "https://book.douban.com/subject/25978734/",
-    "cover": "covers/25978734.jpg",
-    "color": "#c0a759"
-  },
-  {
-    "title": "历史中的大与小",
-    "author": "马伯庸",
-    "publisher": "湖南文艺出版社·博集天卷",
-    "category": "中国历史与近代史",
-    "tags": [
-      "历史随笔"
-    ],
-    "confidence": "high",
-    "note": "A/C重复（2025），已核实",
-    "douban_id": "37869944",
-    "douban_url": "https://book.douban.com/subject/37869944/",
-    "cover": "covers/37869944.jpg",
-    "color": "#c06759"
-  },
-  {
-    "title": "说三分：三国故事的三重叙事",
-    "author": "刘勃",
-    "publisher": "新星出版社·读库",
-    "category": "中国历史与近代史",
-    "tags": [
-      "三国",
-      "叙事学"
-    ],
-    "confidence": "high",
-    "note": "A“三国…黄色书脊”对应此书，以C为准",
-    "douban_id": "36964205",
-    "douban_url": "https://book.douban.com/subject/36964205/",
-    "cover": "covers/36964205.jpg",
-    "color": "#c0b859"
-  },
-  {
-    "title": "重走：在公路、河流和驿道上寻找西南联大",
-    "author": "杨潇",
-    "publisher": "单读·铸刻文化/上海文艺出版社",
-    "category": "中国历史与近代史",
-    "tags": [
-      "西南联大",
-      "旅行非虚构"
-    ],
-    "confidence": "high",
-    "note": "A/C重复，以C为准",
-    "douban_id": "35436901",
-    "douban_url": "https://book.douban.com/subject/35436901/",
-    "cover": "covers/35436901.jpg",
-    "color": "#978581"
-  },
-  {
-    "title": "红星照耀中国（Red Star over China）",
-    "author": "[美] 埃德加·斯诺 著、董乐山 译",
-    "publisher": "人民文学出版社",
-    "category": "中国历史与近代史",
-    "tags": [
-      "纪实",
-      "革命史"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "26820347",
-    "douban_url": "https://book.douban.com/subject/26820347/",
-    "cover": "covers/26820347.jpg",
-    "color": "#c0595d"
-  },
-  {
-    "title": "暗斗：一个书生的文化抗战",
-    "author": "吴真",
-    "publisher": "生活·读书·新知三联书店",
-    "category": "中国历史与近代史",
-    "tags": [
-      "抗战",
-      "书籍史"
-    ],
-    "confidence": "high",
-    "note": "2025年出版",
-    "douban_id": "37383501",
-    "douban_url": "https://book.douban.com/subject/37383501/",
-    "cover": "covers/37383501.jpg",
-    "color": "#c07559"
-  },
-  {
-    "title": "清明上河图：北宋繁华记忆",
-    "author": "薛凤旋",
-    "publisher": "中华书局",
-    "category": "中国历史与近代史",
-    "tags": [
-      "宋史",
-      "艺术史"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "27075116",
-    "douban_url": "https://book.douban.com/subject/27075116/",
-    "cover": "covers/27075116.jpg",
-    "color": "#afa66a"
-  },
-  {
-    "title": "街角的老北京",
-    "author": "卢文龙（阿龙）",
-    "publisher": "正阳书局/北京联合出版公司（“正阳文库”）",
-    "category": "中国历史与近代史",
-    "tags": [
-      "北京",
-      "城市文化"
-    ],
-    "confidence": "high",
-    "note": "A/C重复，以C为准",
-    "douban_id": "26579735",
-    "douban_url": "https://book.douban.com/subject/26579735/",
-    "cover": "covers/26579735.jpg",
-    "color": "#779aa2"
-  },
-  {
-    "title": "北京老画报",
-    "author": "周利成",
-    "publisher": "天津古籍出版社（“中国老画报丛书”，推测）",
-    "category": "中国历史与近代史",
-    "tags": [
-      "北京",
-      "图像文化"
-    ],
-    "confidence": "mid",
-    "note": "出版社按同类丛书推测",
-    "douban_id": "36312727",
-    "douban_url": "https://book.douban.com/subject/36312727/",
-    "cover": "covers/36312727.jpg",
-    "color": "#b7a362"
-  },
-  {
-    "title": "奔袭",
-    "author": "冯翔",
-    "publisher": "读库·新星出版社",
-    "category": "中国历史与近代史",
-    "tags": [
-      "纪实",
-      "历史"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "36580720",
-    "douban_url": "https://book.douban.com/subject/36580720/",
-    "cover": "covers/36580720.jpg",
-    "color": "#b19e67"
-  },
-  {
-    "title": "东京梦华录",
-    "author": "[宋] 孟元老 撰",
-    "publisher": "中华书局（“都城风物”系列）",
-    "category": "古典文学与传统文化",
-    "tags": [
-      "宋代笔记",
-      "都城"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "35436867",
-    "douban_url": "https://book.douban.com/subject/35436867/",
-    "cover": "covers/35436867.jpg",
-    "color": "#c0595f"
-  },
-  {
-    "title": "武林旧事",
-    "author": "[宋] 周密 撰",
-    "publisher": "中华书局（“都城风物”系列）",
-    "category": "古典文学与传统文化",
-    "tags": [
-      "宋代笔记",
-      "都城"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "2280983",
-    "douban_url": "https://book.douban.com/subject/2280983/",
-    "cover": "covers/2280983.jpg",
-    "color": "#b8b461"
-  },
-  {
-    "title": "类编长安志",
-    "author": "[元] 骆天骧 撰",
-    "publisher": "中华书局（“都城风物”系列）",
-    "category": "古典文学与传统文化",
-    "tags": [
-      "地方志",
-      "长安"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "1823700",
-    "douban_url": "https://book.douban.com/subject/1823700/",
-    "cover": "covers/1823700.jpg",
-    "color": "#a18d78"
-  },
-  {
-    "title": "洛阳伽蓝记",
-    "author": "[北魏] 杨衒之 撰",
-    "publisher": "中华书局（“都城风物”系列）",
-    "category": "古典文学与传统文化",
-    "tags": [
-      "北朝笔记"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "10488582",
-    "douban_url": "https://book.douban.com/subject/10488582/",
-    "cover": "covers/10488582.jpg",
-    "color": "#c07959"
-  },
-  {
-    "title": "清嘉录：中国人的节日之书",
-    "author": "[清] 顾禄 著、王密林/韩育生 译、王弘力 插图",
-    "publisher": "汉语经典文库",
-    "category": "古典文学与传统文化",
-    "tags": [
-      "民俗",
-      "节日"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "34482000",
-    "douban_url": "https://book.douban.com/subject/34482000/",
-    "cover": "covers/34482000.jpg",
-    "color": "#a09279"
-  },
-  {
-    "title": "神仙传",
-    "author": "[晋] 葛洪 撰",
-    "publisher": "中华书局（中华经典名著全本全注全译丛书）",
-    "category": "古典文学与传统文化",
-    "tags": [
-      "道教",
-      "志怪"
-    ],
-    "confidence": "high",
-    "note": "A/C重复",
-    "douban_id": "27589913",
-    "douban_url": "https://book.douban.com/subject/27589913/",
-    "cover": "covers/27589913.jpg",
-    "color": "#b46044"
-  },
-  {
-    "title": "《古文观止》化读",
-    "author": "王鼎钧",
-    "publisher": "生活·读书·新知三联书店",
-    "category": "古典文学与传统文化",
-    "tags": [
-      "古文",
-      "散文"
-    ],
-    "confidence": "high",
-    "note": "A“古文…”对应此书，以C为准",
-    "douban_id": "33455190",
-    "douban_url": "https://book.douban.com/subject/33455190/",
-    "cover": "covers/33455190.jpg",
-    "color": "#a36755"
-  },
-  {
-    "title": "浮生六记（阅读无障碍本）",
-    "author": "[清] 沈复",
-    "publisher": "岳麓书社（“古典名著·阅读无障碍本”系列，版式推断）",
-    "category": "古典文学与传统文化",
-    "tags": [
-      "古典散文"
-    ],
-    "confidence": "mid",
-    "note": "版本之一：阅读无障碍本",
-    "douban_id": "1088581",
-    "douban_url": "https://book.douban.com/subject/1088581/",
-    "cover": "covers/1088581.jpg",
-    "color": "#b29767"
-  },
-  {
-    "title": "浮生六记（苗怀明评注本）",
-    "author": "[清] 沈复 著、苗怀明 评注",
-    "publisher": "中华书局",
-    "category": "古典文学与传统文化",
-    "tags": [
-      "古典散文",
-      "评注"
-    ],
-    "confidence": "high",
-    "note": "版本之二：中华书局白色精装烫金本",
-    "douban_id": "1088581",
-    "douban_url": "https://book.douban.com/subject/1088581/",
-    "cover": "covers/1088581.jpg",
-    "color": "#b29767"
-  },
-  {
-    "title": "脂砚斋评石头记（红色多卷本，约3-4册）",
-    "author": "曹雪芹 著、脂砚斋 评",
-    "publisher": "版本不详",
-    "category": "古典文学与传统文化",
-    "tags": [
-      "红楼梦",
-      "评点"
-    ],
-    "confidence": "mid",
-    "note": "可见“叁”“肆”卷次标识，按套计1条",
-    "douban_id": "6712512",
-    "douban_url": "https://book.douban.com/subject/6712512/",
-    "cover": "covers/6712512.jpg",
-    "color": "#bc6051"
-  },
-  {
-    "title": "三国演义（红色多卷本，3册）",
-    "author": "罗贯中",
-    "publisher": "版本不详",
-    "category": "古典文学与传统文化",
-    "tags": [
-      "古典小说"
-    ],
-    "confidence": "mid",
-    "note": "与脂评本同系列装帧，按套计1条",
-    "douban_id": "1483894",
-    "douban_url": "https://book.douban.com/subject/1483894/",
-    "cover": "covers/1483894.jpg",
-    "color": "#c0ba59"
-  },
-  {
-    "title": "中国小说史略",
-    "author": "鲁迅",
-    "publisher": "中国和平出版社（“民国大师文库”006）",
-    "category": "古典文学与传统文化",
-    "tags": [
-      "文学史",
-      "学术"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "1974044",
-    "douban_url": "https://book.douban.com/subject/1974044/",
-    "cover": "covers/1974044.jpg",
-    "color": "#c0a559"
-  },
-  {
-    "title": "见鬼：中国古代志怪小说阅读笔记",
-    "author": "有鬼君",
-    "publisher": "东方出版社",
-    "category": "古典文学与传统文化",
-    "tags": [
-      "志怪",
-      "阅读笔记"
-    ],
-    "confidence": "high",
-    "note": "A/C重复，以C出版社信息为准",
-    "douban_id": "34879052",
-    "douban_url": "https://book.douban.com/subject/34879052/",
-    "cover": "covers/34879052.jpg",
-    "color": "#c06b59"
-  },
-  {
-    "title": "红楼夜话",
-    "author": "郝永勃",
-    "publisher": "生活书店出版有限公司",
-    "category": "古典文学与传统文化",
-    "tags": [
-      "红学",
-      "随笔"
-    ],
-    "confidence": "high",
-    "note": "A/C重复，以C为准",
-    "douban_id": "30223416",
-    "douban_url": "https://book.douban.com/subject/30223416/",
-    "cover": "covers/30223416.jpg",
-    "color": "#aab068"
-  },
-  {
-    "title": "汉字树5：汉字中的建筑与器皿",
-    "author": "廖文豪",
-    "publisher": "北京联合出版公司·紫图",
-    "category": "古典文学与传统文化",
-    "tags": [
-      "汉字",
-      "文化"
-    ],
-    "confidence": "high",
-    "note": "A/C重复，以C为准（A误记为汉字树6）",
-    "douban_id": "33437743",
-    "douban_url": "https://book.douban.com/subject/33437743/",
-    "cover": "covers/33437743.jpg",
-    "color": "#8c8c8c"
-  },
-  {
-    "title": "思无邪：诗经名物图解（植物卷）",
-    "author": "[日] 细井徇 绘",
-    "publisher": "版本未详（常见为浙江人民美术出版社）",
-    "category": "古典文学与传统文化",
-    "tags": [
-      "诗经",
-      "博物"
-    ],
-    "confidence": "mid",
-    "note": "出版社按推测标注",
-    "douban_id": "27071894",
-    "douban_url": "https://book.douban.com/subject/27071894/",
-    "cover": "covers/27071894.jpg",
-    "color": "#a0aa61"
-  },
-  {
-    "title": "长安诗选",
-    "author": "追光动画、韩潇",
-    "publisher": "中信出版集团",
-    "category": "古典文学与传统文化",
-    "tags": [
-      "诗歌",
-      "动画衍生"
-    ],
-    "confidence": "high",
-    "note": "电影《长安三万里》配套诗集",
-    "douban_id": "36463197",
-    "douban_url": "https://book.douban.com/subject/36463197/",
-    "cover": "covers/36463197.jpg",
-    "color": "#c08f59"
-  },
-  {
-    "title": "古籍原来这么好看",
-    "author": "熊建",
-    "publisher": "人民日报出版社",
-    "category": "古典文学与传统文化",
-    "tags": [
-      "古籍普及",
-      "文化"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "36392406",
-    "douban_url": "https://book.douban.com/subject/36392406/",
-    "cover": "covers/36392406.jpg",
-    "color": "#b69762"
-  },
-  {
-    "title": "呐喊",
-    "author": "鲁迅",
-    "publisher": "果麦",
-    "category": "现当代文学",
-    "tags": [
-      "鲁迅",
-      "小说"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "1449351",
-    "douban_url": "https://book.douban.com/subject/1449351/",
-    "cover": "covers/1449351.jpg",
-    "color": "#b49a65"
-  },
-  {
-    "title": "野草",
-    "author": "鲁迅",
-    "publisher": "果麦",
-    "category": "现当代文学",
-    "tags": [
-      "鲁迅",
-      "散文诗"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "1915958",
-    "douban_url": "https://book.douban.com/subject/1915958/",
-    "cover": "covers/1915958.jpg",
-    "color": "#b49b65"
-  },
-  {
-    "title": "故事新编",
-    "author": "鲁迅",
-    "publisher": "果麦",
-    "category": "现当代文学",
-    "tags": [
-      "鲁迅",
-      "小说"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "2046909",
-    "douban_url": "https://book.douban.com/subject/2046909/",
-    "cover": "covers/2046909.jpg",
-    "color": "#b39b65"
-  },
-  {
-    "title": "鲁迅杂文集",
-    "author": "鲁迅",
-    "publisher": "果麦",
-    "category": "现当代文学",
-    "tags": [
-      "鲁迅",
-      "杂文"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "26697791",
-    "douban_url": "https://book.douban.com/subject/26697791/",
-    "cover": "covers/26697791.jpg",
-    "color": "#c07459"
-  },
-  {
-    "title": "鲁迅作品礼盒套装（约5册）",
-    "author": "鲁迅",
-    "publisher": "版本不详（与果麦鲁迅系列装帧一致）",
-    "category": "现当代文学",
-    "tags": [
-      "鲁迅",
-      "作品集"
-    ],
-    "confidence": "mid",
-    "note": "盒内含《呐喊》《彷徨》《朝花夕拾》《野草》等，按套装计1条"
-  },
-  {
-    "title": "人间草木",
-    "author": "汪曾祺",
-    "publisher": "时代华语国际",
-    "category": "现当代文学",
-    "tags": [
-      "散文"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "1253310",
-    "douban_url": "https://book.douban.com/subject/1253310/",
-    "cover": "covers/1253310.jpg",
-    "color": "#c09559"
-  },
-  {
-    "title": "把日子过得有趣",
-    "author": "老舍",
-    "publisher": "版本不详",
-    "category": "现当代文学",
-    "tags": [
-      "散文"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "30262387",
-    "douban_url": "https://book.douban.com/subject/30262387/",
-    "cover": "covers/30262387.jpg",
-    "color": "#8d8b8b"
-  },
-  {
-    "title": "北平旧事",
-    "author": "梁实秋 等",
-    "publisher": "江苏凤凰文艺出版社（“大师经典·珍藏版”）",
-    "category": "现当代文学",
-    "tags": [
-      "散文",
-      "北京"
-    ],
-    "confidence": "high",
-    "note": "A/C重复，以C为准",
-    "douban_id": "35109258",
-    "douban_url": "https://book.douban.com/subject/35109258/",
-    "cover": "covers/35109258.jpg",
-    "color": "#918887"
-  },
-  {
-    "title": "夜晚的潜水艇",
-    "author": "陈春成",
-    "publisher": "理想国·上海三联书店",
-    "category": "现当代文学",
-    "tags": [
-      "短篇小说"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "35005045",
-    "douban_url": "https://book.douban.com/subject/35005045/",
-    "cover": "covers/35005045.jpg",
-    "color": "#2c5473"
-  },
-  {
-    "title": "咸的玩笑（SALTY JOKES）",
-    "author": "刘震云",
-    "publisher": "人民文学出版社",
-    "category": "现当代文学",
-    "tags": [
-      "长篇小说"
-    ],
-    "confidence": "high",
-    "note": "2025年12月新书，已核实",
-    "douban_id": "37833272",
-    "douban_url": "https://book.douban.com/subject/37833272/",
-    "cover": "covers/37833272.jpg",
-    "color": "#275268"
-  },
-  {
-    "title": "莫言的奇奇怪怪故事集",
-    "author": "莫言",
-    "publisher": "读客·江苏凤凰文艺出版社",
-    "category": "现当代文学",
-    "tags": [
-      "故事集"
-    ],
-    "confidence": "high",
-    "note": "A/C重复",
-    "douban_id": "35792990",
-    "douban_url": "https://book.douban.com/subject/35792990/",
-    "cover": "covers/35792990.jpg",
-    "color": "#809f60"
-  },
-  {
-    "title": "桃花源没事儿",
-    "author": "马伯庸",
-    "publisher": "湖南文艺出版社·博集天卷",
-    "category": "现当代文学",
-    "tags": [
-      "小说"
-    ],
-    "confidence": "high",
-    "note": "2025年出版",
-    "douban_id": "37339619",
-    "douban_url": "https://book.douban.com/subject/37339619/",
-    "cover": "covers/37339619.jpg",
-    "color": "#aa886f"
-  },
-  {
-    "title": "许渊冲英译毛泽东诗词",
-    "author": "毛泽东 著、许渊冲 英译",
-    "publisher": "版本不详",
-    "category": "现当代文学",
-    "tags": [
-      "诗词",
-      "翻译"
-    ],
-    "confidence": "mid",
-    "note": "出版社未见",
-    "douban_id": "26654587",
-    "douban_url": "https://book.douban.com/subject/26654587/",
-    "cover": "covers/26654587.jpg",
-    "color": "#a9a06f"
-  },
-  {
-    "title": "夜雨藏笺",
-    "author": "吴夜雨（辑）",
-    "publisher": "不详（疑自印/线装本）",
-    "category": "现当代文学",
-    "tags": [
-      "诗文"
-    ],
-    "confidence": "low",
-    "note": "疑为个人辑印本",
-    "douban_id": "36347479",
-    "douban_url": "https://book.douban.com/subject/36347479/",
-    "cover": "covers/36347479.jpg",
-    "color": "#66adb3"
-  },
-  {
-    "title": "夜读十记（上）",
-    "author": "疑为计文君",
-    "publisher": "版本不详",
-    "category": "现当代文学",
-    "tags": [
-      "随笔"
-    ],
-    "confidence": "low",
-    "note": "书名/作者均不确定，检索无结果"
-  },
-  {
-    "title": "读书与藏书：27位文化名家的私人阅读史",
-    "author": "绿茶 著绘",
-    "publisher": "未读·文艺家/北京联合出版公司",
-    "category": "现当代文学",
-    "tags": [
-      "书话",
-      "阅读文化"
-    ],
-    "confidence": "high",
-    "note": "A/C重复，以C为准",
-    "douban_id": "36352643",
-    "douban_url": "https://book.douban.com/subject/36352643/",
-    "cover": "covers/36352643.jpg",
-    "color": "#6e6969"
-  },
-  {
-    "title": "书事：近现代版本杂谈",
-    "author": "薛冰",
-    "publisher": "天津人民出版社",
-    "category": "现当代文学",
-    "tags": [
-      "版本学",
-      "书话"
-    ],
-    "confidence": "high",
-    "note": "A/C重复，以C为准",
-    "douban_id": "35099251",
-    "douban_url": "https://book.douban.com/subject/35099251/",
-    "cover": "covers/35099251.jpg",
-    "color": "#989180"
-  },
-  {
-    "title": "错误、边缘、野马（读库文存·他说）",
-    "author": "读库 编选",
-    "publisher": "新星出版社·读库",
-    "category": "现当代文学",
-    "tags": [
-      "访谈",
-      "随笔"
-    ],
-    "confidence": "high",
-    "note": "书脊文字经检索确认",
-    "douban_id": "36820858",
-    "douban_url": "https://book.douban.com/subject/36820858/",
-    "cover": "covers/36820858.jpg",
-    "color": "#9a837e"
-  },
-  {
-    "title": "白鲸（MOBY DICK）",
-    "author": "[美] 赫尔曼·麦尔维尔",
-    "publisher": "后浪文学",
-    "category": "外国文学",
-    "tags": [
-      "美国文学",
-      "经典"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "37333462",
-    "douban_url": "https://book.douban.com/subject/37333462/",
-    "cover": "covers/37333462.jpg",
-    "color": "#4e5c61"
-  },
-  {
-    "title": "我是猫（吾輩は猫である）",
-    "author": "[日] 夏目漱石 著、尤炳圻、胡雪 译",
-    "publisher": "人民文学出版社（名著名译插图本）",
-    "category": "外国文学",
-    "tags": [
-      "日本文学",
-      "经典"
-    ],
-    "confidence": "high",
-    "note": "A/C重复，以C为准",
-    "douban_id": "34852934",
-    "douban_url": "https://book.douban.com/subject/34852934/",
-    "cover": "covers/34852934.jpg",
-    "color": "#9f7748"
-  },
-  {
-    "title": "地下室手记",
-    "author": "[俄] 陀思妥耶夫斯基 著、臧仲伦 译",
-    "publisher": "读库经典/新星出版社（推测）",
-    "category": "外国文学",
-    "tags": [
-      "俄国文学",
-      "经典"
-    ],
-    "confidence": "mid",
-    "note": "出版社按推测标注",
-    "douban_id": "34990839",
-    "douban_url": "https://book.douban.com/subject/34990839/",
-    "cover": "covers/34990839.jpg",
-    "color": "#8f847a"
-  },
-  {
-    "title": "金阁寺",
-    "author": "[日] 三岛由纪夫 著、陈德文 译",
-    "publisher": "中信出版集团（文库本）",
-    "category": "外国文学",
-    "tags": [
-      "日本文学"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "3391248",
-    "douban_url": "https://book.douban.com/subject/3391248/",
-    "cover": "covers/3391248.jpg",
-    "color": "#898e8f"
-  },
-  {
-    "title": "巨人的陨落 I（世纪三部曲第一部）",
-    "author": "[英] 肯·福莱特 著、于大卫 译",
-    "publisher": "读客·江苏凤凰文艺出版社",
-    "category": "外国文学",
-    "tags": [
-      "历史小说",
-      "三部曲"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "26698660",
-    "douban_url": "https://book.douban.com/subject/26698660/",
-    "cover": "covers/26698660.jpg",
-    "color": "#913f37"
-  },
-  {
-    "title": "巨人的陨落 II",
-    "author": "[英] 肯·福莱特 著、于大卫 译",
-    "publisher": "读客·江苏凤凰文艺出版社",
-    "category": "外国文学",
-    "tags": [
-      "历史小说",
-      "三部曲"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "26698660",
-    "douban_url": "https://book.douban.com/subject/26698660/",
-    "cover": "covers/26698660.jpg",
-    "color": "#913f37"
-  },
-  {
-    "title": "巨人的陨落 III",
-    "author": "[英] 肯·福莱特 著、于大卫 译",
-    "publisher": "读客·江苏凤凰文艺出版社",
-    "category": "外国文学",
-    "tags": [
-      "历史小说",
-      "三部曲"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "26698660",
-    "douban_url": "https://book.douban.com/subject/26698660/",
-    "cover": "covers/26698660.jpg",
-    "color": "#913f37"
-  },
-  {
-    "title": "生如夏花：泰戈尔经典诗选（泰戈尔诞辰150周年纪念版）",
-    "author": "[印] 泰戈尔 著、郑振铎 译",
-    "publisher": "江苏凤凰文艺出版社·时代华语",
-    "category": "外国文学",
-    "tags": [
-      "诗歌"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "6558446",
-    "douban_url": "https://book.douban.com/subject/6558446/",
-    "cover": "covers/6558446.jpg",
-    "color": "#a79572"
-  },
-  {
-    "title": "S.（忒修斯之船）",
-    "author": "[美] J.J.艾布拉姆斯、道格·道斯特",
-    "publisher": "中信出版社",
-    "category": "外国文学",
-    "tags": [
-      "实验小说",
-      "悬疑"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "26356515",
-    "douban_url": "https://book.douban.com/subject/26356515/",
-    "cover": "covers/26356515.jpg",
-    "color": "#4d4742"
-  },
-  {
-    "title": "头号书迷（上？）",
-    "author": "疑为 [美] 斯蒂芬·金",
-    "publisher": "人民文学出版社·99读书人（推测）",
-    "category": "外国文学",
-    "tags": [
-      "惊悚小说"
-    ],
-    "confidence": "low",
-    "note": "书脊残字，作者/出版社均为推测",
-    "douban_id": "25728473",
-    "douban_url": "https://book.douban.com/subject/25728473/",
-    "cover": "covers/25728473.jpg",
-    "color": "#66292c"
-  },
-  {
-    "title": "胡斯战争 卷一：愚人之塔（Narrenturm）",
-    "author": "[波] 安杰伊·萨普科夫斯基",
-    "publisher": "重庆出版社",
-    "category": "外国文学",
-    "tags": [
-      "奇幻",
-      "历史小说"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "36532325",
-    "douban_url": "https://book.douban.com/subject/36532325/",
-    "cover": "covers/36532325.jpg",
-    "color": "#6a6a60"
-  },
-  {
-    "title": "TOLKIEN（托尔金英文书，具体分册不明）",
-    "author": "J.R.R. Tolkien",
-    "publisher": "英文原版",
-    "category": "外国文学",
-    "tags": [
-      "奇幻",
-      "英文原版"
-    ],
-    "confidence": "mid",
-    "note": "仅见书脊“TOLKIEN”"
-  },
-  {
-    "title": "两京十五日",
-    "author": "马伯庸",
-    "publisher": "湖南文艺出版社·博集天卷",
-    "category": "历史小说与悬疑",
-    "tags": [
-      "明史",
-      "历史小说"
-    ],
-    "confidence": "high",
-    "note": "A/C重复",
-    "douban_id": "35080870",
-    "douban_url": "https://book.douban.com/subject/35080870/",
-    "cover": "covers/35080870.jpg",
-    "color": "#9c443b"
-  },
-  {
-    "title": "北洋夜行记",
-    "author": "金醉·魔宙",
-    "publisher": "中国友谊出版公司·魔宙",
-    "category": "历史小说与悬疑",
-    "tags": [
-      "悬疑",
-      "都市传说"
-    ],
-    "confidence": "high",
-    "note": "A/C重复，以C出版社信息为准",
-    "douban_id": "27166426",
-    "douban_url": "https://book.douban.com/subject/27166426/",
-    "cover": "covers/27166426.jpg",
-    "color": "#8f6242"
-  },
-  {
-    "title": "西游八十一案：大唐泥犁狱",
-    "author": "陈渐",
-    "publisher": "重庆出版社·紫焰传媒",
-    "category": "历史小说与悬疑",
-    "tags": [
-      "悬疑",
-      "西游"
-    ],
-    "confidence": "high",
-    "note": "A/C重复",
-    "douban_id": "27609563",
-    "douban_url": "https://book.douban.com/subject/27609563/",
-    "cover": "covers/27609563.jpg",
-    "color": "#63523e"
-  },
-  {
-    "title": "认识电影（全彩插图第12版）",
-    "author": "[美] 路易斯·贾内梯",
-    "publisher": "后浪电影学院/Pearson",
-    "category": "艺术与电影",
-    "tags": [
-      "电影",
-      "教材"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "26848740",
-    "douban_url": "https://book.douban.com/subject/26848740/",
-    "cover": "covers/26848740.jpg",
-    "color": "#6b6667"
-  },
-  {
-    "title": "鸟瞰古文明：130幅城市复原图重现古地中海文明",
-    "author": "[法] 让-克劳德·戈尔万",
-    "publisher": "后浪",
-    "category": "艺术与电影",
-    "tags": [
-      "古文明",
-      "复原图"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "34617780",
-    "douban_url": "https://book.douban.com/subject/34617780/",
-    "cover": "covers/34617780.jpg",
-    "color": "#b09769"
-  },
-  {
-    "title": "盐香风色：扬州八怪传",
-    "author": "周文翰",
-    "publisher": "新星出版社·读库（“文人视觉传记”系列）",
-    "category": "艺术与电影",
-    "tags": [
-      "艺术史",
-      "扬州八怪"
-    ],
-    "confidence": "high",
-    "note": "A/C重复，以C为准（2025）",
-    "douban_id": "37563668",
-    "douban_url": "https://book.douban.com/subject/37563668/",
-    "cover": "covers/37563668.jpg",
-    "color": "#61b8ae"
-  },
-  {
-    "title": "安岳（石窟史诗系列第一册）",
-    "author": "王南、袁进钊",
-    "publisher": "读库·四川美术出版社",
-    "category": "艺术与电影",
-    "tags": [
-      "石窟",
-      "考古"
-    ],
-    "confidence": "high",
-    "note": "2024-12出版，已核实",
-    "douban_id": "37184166",
-    "douban_url": "https://book.douban.com/subject/37184166/",
-    "cover": "covers/37184166.jpg",
-    "color": "#5a5d5d"
-  },
-  {
-    "title": "红楼食经",
-    "author": "丁章华、李维冰",
-    "publisher": "江苏人民出版社",
-    "category": "生活方式与美食",
-    "tags": [
-      "饮食文化",
-      "红楼梦"
-    ],
-    "confidence": "high",
-    "note": "线装式裸脊，已核实",
-    "douban_id": "30539340",
-    "douban_url": "https://book.douban.com/subject/30539340/",
-    "cover": "covers/30539340.jpg",
-    "color": "#bf665a"
-  },
-  {
-    "title": "吃的江湖",
-    "author": "林卫辉",
-    "publisher": "广东人民出版社",
-    "category": "生活方式与美食",
-    "tags": [
-      "饮食随笔"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "35425337",
-    "douban_url": "https://book.douban.com/subject/35425337/",
-    "cover": "covers/35425337.jpg",
-    "color": "#968384"
-  },
-  {
-    "title": "一碟腌菜",
-    "author": "张家荣",
-    "publisher": "新星出版社·读库",
-    "category": "生活方式与美食",
-    "tags": [
-      "饮食文化"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "27157160",
-    "douban_url": "https://book.douban.com/subject/27157160/",
-    "cover": "covers/27157160.jpg",
-    "color": "#ac8f6c"
-  },
-  {
-    "title": "北方厨房：一个家庭的烹饪史",
-    "author": "蒋韵",
-    "publisher": "上海文艺出版社",
-    "category": "生活方式与美食",
-    "tags": [
-      "饮食",
-      "家族记忆"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "35501309",
-    "douban_url": "https://book.douban.com/subject/35501309/",
-    "cover": "covers/35501309.jpg",
-    "color": "#985842"
-  },
-  {
-    "title": "人间食话",
-    "author": "梁实秋",
-    "publisher": "天津人民出版社（文通天下出品）",
-    "category": "生活方式与美食",
-    "tags": [
-      "饮食散文"
-    ],
-    "confidence": "high",
-    "note": "已核实（2019）",
-    "douban_id": "33455875",
-    "douban_url": "https://book.douban.com/subject/33455875/",
-    "cover": "covers/33455875.jpg",
-    "color": "#a3a475"
-  },
-  {
-    "title": "料理全书：初江奶奶带你从零开始学习日本料理",
-    "author": "[日] 高木初江",
-    "publisher": "未读·生活家",
-    "category": "生活方式与美食",
-    "tags": [
-      "日本料理",
-      "食谱"
-    ],
-    "confidence": "mid",
-    "note": "副题/作者小字部分模糊",
-    "douban_id": "26665581",
-    "douban_url": "https://book.douban.com/subject/26665581/",
-    "cover": "covers/26665581.jpg",
-    "color": "#c07c59"
-  },
-  {
-    "title": "料理图鉴",
-    "author": "[日] 越智登代子 著、平野惠理子 绘",
-    "publisher": "后浪",
-    "category": "生活方式与美食",
-    "tags": [
-      "料理",
-      "图鉴"
-    ],
-    "confidence": "high",
-    "note": "作者据检索补全",
-    "douban_id": "30300327",
-    "douban_url": "https://book.douban.com/subject/30300327/",
-    "cover": "covers/30300327.jpg",
-    "color": "#c07159"
-  },
-  {
-    "title": "回家做面包",
-    "author": "爱和自由",
-    "publisher": "版本不详",
-    "category": "生活方式与美食",
-    "tags": [
-      "烘焙"
-    ],
-    "confidence": "mid",
-    "note": "书脊见“爱自由”logo",
-    "douban_id": "33390400",
-    "douban_url": "https://book.douban.com/subject/33390400/",
-    "cover": "covers/33390400.jpg",
-    "color": "#9d897b"
-  },
-  {
-    "title": "厨房科学超图解：700个料理冷知识，解密烹饪的真相",
-    "author": "作者不详",
-    "publisher": "有书至美",
-    "category": "生活方式与美食",
-    "tags": [
-      "烹饪科学"
-    ],
-    "confidence": "mid",
-    "note": "",
-    "douban_id": "35672000",
-    "douban_url": "https://book.douban.com/subject/35672000/",
-    "cover": "covers/35672000.jpg",
-    "color": "#b16d58"
-  },
-  {
-    "title": "好物让人上瘾：和喜欢的一切在一起",
-    "author": "[日] 香菜子",
-    "publisher": "北京时代华文书局",
-    "category": "生活方式与美食",
-    "tags": [
-      "生活方式",
-      "好物"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "34809211",
-    "douban_url": "https://book.douban.com/subject/34809211/",
-    "cover": "covers/34809211.jpg",
-    "color": "#b39565"
-  },
-  {
-    "title": "短而常的瑜伽（Yoga: A Manual for Life）",
-    "author": "[英] 娜奥米·安南德 著、缪妙 译",
-    "publisher": "乐府文化",
-    "category": "生活方式与美食",
-    "tags": [
-      "瑜伽",
-      "健康"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "36278950",
-    "douban_url": "https://book.douban.com/subject/36278950/",
-    "cover": "covers/36278950.jpg",
-    "color": "#c08259"
-  },
-  {
-    "title": "给你的猫一个家",
-    "author": "[日] 株式会社无限知识 著、廖雯雯 译",
-    "publisher": "磨铁",
-    "category": "宠物与自然",
-    "tags": [
-      "宠物",
-      "猫"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "34450826",
-    "douban_url": "https://book.douban.com/subject/34450826/",
-    "cover": "covers/34450826.jpg",
-    "color": "#9e907a"
-  },
-  {
-    "title": "猫猫饭食",
-    "author": "[韩] 金泰希 著、刑青青 译",
-    "publisher": "中国画报出版社",
-    "category": "宠物与自然",
-    "tags": [
-      "宠物",
-      "猫"
-    ],
-    "confidence": "high",
-    "note": "已检索核实（2013）",
-    "douban_id": "25693197",
-    "douban_url": "https://book.douban.com/subject/25693197/",
-    "cover": "covers/25693197.jpg",
-    "color": "#b26769"
-  },
-  {
-    "title": "中国猫咪",
-    "author": "刘朝飞 编著",
-    "publisher": "巴蜀书社·远涉文化",
-    "category": "宠物与自然",
-    "tags": [
-      "猫",
-      "传统文化"
-    ],
-    "confidence": "high",
-    "note": "A/C重复，以C为准（古代猫文化古籍新编）",
-    "douban_id": "37158038",
-    "douban_url": "https://book.douban.com/subject/37158038/",
-    "cover": "covers/37158038.jpg",
-    "color": "#bd845c"
-  },
-  {
-    "title": "不可思议的果实种子图鉴",
-    "author": "作者不详",
-    "publisher": "版本不详",
-    "category": "宠物与自然",
-    "tags": [
-      "自然",
-      "图鉴"
-    ],
-    "confidence": "mid",
-    "note": "",
-    "douban_id": "36147070",
-    "douban_url": "https://book.douban.com/subject/36147070/",
-    "cover": "covers/36147070.jpg",
-    "color": "#a48b75"
-  },
-  {
-    "title": "常见花草轻图鉴",
-    "author": "付彦荣 主编、含章新实用编辑部 编著",
-    "publisher": "江苏凤凰科学技术出版社",
-    "category": "宠物与自然",
-    "tags": [
-      "植物",
-      "图鉴"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "36284922",
-    "douban_url": "https://book.douban.com/subject/36284922/",
-    "cover": "covers/36284922.jpg",
-    "color": "#a49074"
-  },
-  {
-    "title": "美国儿科学会育儿百科（第7版）",
-    "author": "[美] 塔尼娅·奥尔特曼 主编、唐亚 等译",
-    "publisher": "北京科学技术出版社",
-    "category": "育儿与绘本",
-    "tags": [
-      "育儿",
-      "健康"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "35218443",
-    "douban_url": "https://book.douban.com/subject/35218443/",
-    "cover": "covers/35218443.jpg",
-    "color": "#827c9c"
-  },
-  {
-    "title": "新手妈妈的头两年",
-    "author": "[日] 高木直子 著绘",
-    "publisher": "新星出版社",
-    "category": "育儿与绘本",
-    "tags": [
-      "绘本",
-      "育儿"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "35273151",
-    "douban_url": "https://book.douban.com/subject/35273151/",
-    "cover": "covers/35273151.jpg",
-    "color": "#b08868"
-  },
-  {
-    "title": "好绘本如何好",
-    "author": "郝广才",
-    "publisher": "二十一世纪出版社",
-    "category": "育儿与绘本",
-    "tags": [
-      "图画书",
-      "阅读教育"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "26797923",
-    "douban_url": "https://book.douban.com/subject/26797923/",
-    "cover": "covers/26797923.jpg",
-    "color": "#c05f59"
-  },
-  {
-    "title": "欢迎走进图画书王国",
-    "author": "孙莉莉",
-    "publisher": "广西师范大学出版社·魔法象（“阅读学园”）",
-    "category": "育儿与绘本",
-    "tags": [
-      "图画书",
-      "阅读教育"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "30387666",
-    "douban_url": "https://book.douban.com/subject/30387666/",
-    "cover": "covers/30387666.jpg",
-    "color": "#ac876c"
-  },
-  {
-    "title": "父与子（大师经典）",
-    "author": "[德] 埃·奥·卜劳恩",
-    "publisher": "未读·大师经典",
-    "category": "育儿与绘本",
-    "tags": [
-      "漫画",
-      "经典"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "35933906",
-    "douban_url": "https://book.douban.com/subject/35933906/",
-    "cover": "covers/35933906.jpg",
-    "color": "#8c8c8c"
-  },
-  {
-    "title": "Pinocchio（木偶奇遇记，英文插图版）",
-    "author": "Carlo Collodi",
-    "publisher": "英文原版（版本未详）",
-    "category": "育儿与绘本",
-    "tags": [
-      "儿童文学",
-      "英文原版"
-    ],
-    "confidence": "mid",
-    "note": ""
-  },
-  {
-    "title": "野生动物在长春·第贰辑",
-    "author": "史航 著、吕欣 绘",
-    "publisher": "读库·新星出版社",
-    "category": "育儿与绘本",
-    "tags": [
-      "绘本",
-      "漫画"
-    ],
-    "confidence": "high",
-    "note": "已检索核实全名",
-    "douban_id": "36205660",
-    "douban_url": "https://book.douban.com/subject/36205660/",
-    "cover": "covers/36205660.jpg",
-    "color": "#938e85"
-  },
-  {
-    "title": "读库 2005",
-    "author": "张立宪 主编",
-    "publisher": "读库·新星出版社",
-    "category": "杂志书Mook",
-    "tags": [
-      "读库",
-      "Mook"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "35228033",
-    "douban_url": "https://book.douban.com/subject/35228033/",
-    "cover": "covers/35228033.jpg",
-    "color": "#849590"
-  },
-  {
-    "title": "读库 2400",
-    "author": "张立宪 主编",
-    "publisher": "读库·新星出版社",
-    "category": "杂志书Mook",
-    "tags": [
-      "读库",
-      "Mook"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "36680227",
-    "douban_url": "https://book.douban.com/subject/36680227/",
-    "cover": "covers/36680227.jpg",
-    "color": "#b37066"
-  },
-  {
-    "title": "读库 2500（期号推测）",
-    "author": "张立宪 主编",
-    "publisher": "读库·新星出版社",
-    "category": "杂志书Mook",
-    "tags": [
-      "读库",
-      "Mook"
-    ],
-    "confidence": "low",
-    "note": "橙色书脊“DUKU 250…”被遮挡，期号为推测",
-    "douban_id": "37191862",
-    "douban_url": "https://book.douban.com/subject/37191862/",
-    "cover": "covers/37191862.jpg",
-    "color": "#a77671"
-  },
-  {
-    "title": "读库 2600",
-    "author": "张立宪 主编",
-    "publisher": "读库·新星出版社",
-    "category": "杂志书Mook",
-    "tags": [
-      "读库",
-      "Mook"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "38494172",
-    "douban_url": "https://book.douban.com/subject/38494172/",
-    "cover": "covers/38494172.jpg",
-    "color": "#c06859"
-  },
-  {
-    "title": "读库 2601",
-    "author": "张立宪 主编",
-    "publisher": "读库·新星出版社",
-    "category": "杂志书Mook",
-    "tags": [
-      "读库",
-      "Mook"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "38361098",
-    "douban_url": "https://book.douban.com/subject/38361098/",
-    "cover": "covers/38361098.jpg",
-    "color": "#c06859"
-  },
-  {
-    "title": "读库 2603",
-    "author": "张立宪 主编",
-    "publisher": "新星出版社",
-    "category": "杂志书Mook",
-    "tags": [
-      "读库",
-      "Mook"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "38531179",
-    "douban_url": "https://book.douban.com/subject/38531179/",
-    "cover": "covers/38531179.jpg",
-    "color": "#c06859"
-  },
-  {
-    "title": "单读30：去公园和野外",
-    "author": "吴琦 主编",
-    "publisher": "单读/上海文艺出版社",
-    "category": "杂志书Mook",
-    "tags": [
-      "单读",
-      "Mook"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "35802205",
-    "douban_url": "https://book.douban.com/subject/35802205/",
-    "cover": "covers/35802205.jpg",
-    "color": "#698961"
-  },
-  {
-    "title": "单读09：多谈谈问题",
-    "author": "吴琦 主编",
-    "publisher": "单读·上海文艺出版社",
-    "category": "杂志书Mook",
-    "tags": [
-      "单读",
-      "社会思想"
-    ],
-    "confidence": "high",
-    "note": "",
-    "douban_id": "36321036",
-    "douban_url": "https://book.douban.com/subject/36321036/",
-    "cover": "covers/36321036.jpg",
-    "color": "#5b9cbe"
-  },
-  {
-    "title": "单读·爱尔兰文学特辑",
-    "author": "吴琦 主编",
-    "publisher": "单读/上海文艺出版社",
-    "category": "杂志书Mook",
-    "tags": [
-      "单读",
-      "爱尔兰文学"
-    ],
-    "confidence": "low",
-    "note": "期号不确定，顶部小字可辨"
-  },
-  {
-    "title": "人民文学 2026年第1期",
-    "author": "人民文学杂志社",
-    "publisher": "人民文学出版社",
-    "category": "杂志书Mook",
-    "tags": [
-      "文学期刊"
-    ],
-    "confidence": "high",
-    "note": "A图1下层平放两本同期，算1条"
-  },
-  {
-    "title": "人民文学 2026年第2期",
-    "author": "人民文学杂志社",
-    "publisher": "人民文学出版社",
-    "category": "杂志书Mook",
-    "tags": [
-      "文学期刊"
-    ],
-    "confidence": "high",
-    "note": "C图1平放；与第1期为两期，分计",
-    "douban_id": "38421261",
-    "douban_url": "https://book.douban.com/subject/38421261/",
-    "cover": "covers/38421261.jpg",
-    "color": "#c06359"
-  },
-  {
-    "title": "深度强化学习",
-    "author": "王树森、黎彧君、张志华",
-    "publisher": "人民邮电出版社",
-    "category": "计算机与人工智能",
-    "tags": [
-      "强化学习",
-      "AI"
-    ],
-    "confidence": "high",
-    "note": "2026-08 桌面小书架新增",
-    "douban_id": "36161659",
-    "douban_url": "https://book.douban.com/subject/36161659/",
-    "cover": "covers/36161659.jpg",
-    "color": "#537aad"
-  },
-  {
-    "title": "强化学习的数学原理",
-    "author": "赵世钰",
-    "publisher": "清华大学出版社",
-    "category": "计算机与人工智能",
-    "tags": [
-      "强化学习",
-      "数学"
-    ],
-    "confidence": "high",
-    "note": "2026-08 桌面小书架新增",
-    "douban_id": "37309451",
-    "douban_url": "https://book.douban.com/subject/37309451/",
-    "cover": "covers/37309451.jpg",
-    "color": "#5b86be"
-  },
-  {
-    "title": "动手学深度学习",
-    "author": "阿斯顿·张、李沐 等",
-    "publisher": "人民邮电出版社",
-    "category": "计算机与人工智能",
-    "tags": [
-      "深度学习",
-      "AI"
-    ],
-    "confidence": "high",
-    "note": "2026-08 桌面小书架新增",
-    "douban_id": "33450010",
-    "douban_url": "https://book.douban.com/subject/33450010/",
-    "cover": "covers/33450010.jpg",
-    "color": "#7a8580"
-  },
-  {
-    "title": "大模型算法：强化学习、微调与对齐",
-    "author": "余昌叶",
-    "publisher": "电子工业出版社",
-    "category": "计算机与人工智能",
-    "tags": [
-      "大模型",
-      "强化学习",
-      "对齐"
-    ],
-    "confidence": "high",
-    "note": "2026-08 桌面小书架新增",
-    "douban_id": "37331056",
-    "douban_url": "https://book.douban.com/subject/37331056/",
-    "cover": "covers/37331056.jpg",
-    "color": "#4162a8"
-  },
-  {
-    "title": "深度学习入门 4：强化学习",
-    "author": "[日] 斋藤康毅",
-    "publisher": "人民邮电出版社",
-    "category": "计算机与人工智能",
-    "tags": [
-      "深度学习",
-      "强化学习",
-      "入门"
-    ],
-    "confidence": "high",
-    "note": "2026-08 桌面小书架新增",
-    "douban_id": "36991430",
-    "douban_url": "https://book.douban.com/subject/36991430/",
-    "cover": "covers/36991430.jpg",
-    "color": "#bd5064"
-  },
-  {
-    "title": "Redis 应用实例",
-    "author": "黄健宏",
-    "publisher": "人民邮电出版社",
-    "category": "计算机与人工智能",
-    "tags": [
-      "Redis",
-      "数据库"
-    ],
-    "confidence": "high",
-    "note": "2026-08 桌面小书架新增",
-    "douban_id": "37044995",
-    "douban_url": "https://book.douban.com/subject/37044995/",
-    "cover": "covers/37044995.jpg",
-    "color": "#71a7a7"
-  },
-  {
-    "title": "原则",
-    "author": "[美] 瑞·达利欧",
-    "publisher": "中信出版社",
-    "category": "商业科技与互联网",
-    "tags": [
-      "管理",
-      "人生原则"
-    ],
-    "confidence": "high",
-    "note": "2026-08 桌面小书架新增",
-    "douban_id": "27608239",
-    "douban_url": "https://book.douban.com/subject/27608239/",
-    "cover": "covers/27608239.jpg",
-    "color": "#66292c"
-  },
-  {
-    "title": "Zen and the Art of Motorcycle Maintenance（禅与摩托车维修艺术 英文原版）",
-    "author": "Robert M. Pirsig",
-    "publisher": "英文原版",
-    "category": "哲学与思想",
-    "tags": [
-      "哲学",
-      "英文原版"
-    ],
-    "confidence": "high",
-    "note": "2026-08 桌面小书架新增",
-    "douban_id": "1478120",
-    "douban_url": "https://book.douban.com/subject/1478120/",
-    "cover": "covers/1478120.jpg",
-    "color": "#89908d"
-  },
-  {
-    "title": "土木",
-    "author": "张明扬",
-    "publisher": "新星出版社（读库）",
-    "category": "中国历史与近代史",
-    "tags": [
-      "明代",
-      "土木堡之变",
-      "读库"
-    ],
-    "confidence": "high",
-    "note": "2025年10月新书；2026-08 桌面小书架新增",
-    "douban_id": "37534754",
-    "douban_url": "https://book.douban.com/subject/37534754/",
-    "cover": "covers/37534754.jpg",
-    "color": "#4f4d47"
-  },
-  {
-    "title": "安史之乱：历史、宣传与神话",
-    "author": "张诗坪、胡可奇",
-    "publisher": "世纪文景/上海人民出版社",
-    "category": "中国历史与近代史",
-    "tags": [
-      "唐代",
-      "安史之乱",
-      "文景"
-    ],
-    "confidence": "high",
-    "note": "2026-08 桌面小书架新增",
-    "douban_id": "37118766",
-    "douban_url": "https://book.douban.com/subject/37118766/",
-    "cover": "covers/37118766.jpg",
-    "color": "#7a8271"
-  },
-  {
-    "title": "秩序之诗：花朵、建筑、埃舍尔",
-    "author": "张羿",
-    "publisher": "新星出版社（读库）",
-    "category": "艺术与电影",
-    "tags": [
-      "数学",
-      "艺术",
-      "埃舍尔",
-      "读库"
-    ],
-    "confidence": "high",
-    "note": "2026-08 桌面小书架新增",
-    "douban_id": "36640422",
-    "douban_url": "https://book.douban.com/subject/36640422/",
-    "cover": "covers/36640422.jpg",
-    "color": "#c06959"
-  },
-  {
-    "title": "家庭健康管理全书",
-    "author": "冯雪",
-    "publisher": "天津科学技术出版社（得到图书）",
-    "category": "健康养生",
-    "tags": [
-      "健康",
-      "家庭医学"
-    ],
-    "confidence": "high",
-    "note": "2026-08 桌面小书架新增",
-    "douban_id": "37498421",
-    "douban_url": "https://book.douban.com/subject/37498421/",
-    "cover": "covers/37498421.jpg",
-    "color": "#385193"
-  },
-  {
-    "title": "塞尔达传说：旷野之息 大师之书",
-    "author": "日本任天堂 著，林延平 译",
-    "publisher": "新星出版社",
-    "category": "游戏与流行文化",
-    "tags": [
-      "塞尔达传说",
-      "设定集",
-      "任天堂"
-    ],
-    "confidence": "high",
-    "note": "2026-08 新增（照片识别）",
-    "douban_id": "34432985",
-    "douban_url": "https://book.douban.com/subject/34432985/",
-    "cover": "covers/34432985.jpg",
-    "color": "#9b907e"
-  },
-  {
-    "title": "死亡搁浅艺术设定集",
-    "author": "小岛工作室 著，林延平 译",
-    "publisher": "新星出版社",
-    "category": "游戏与流行文化",
-    "tags": [
-      "死亡搁浅",
-      "小岛秀夫",
-      "设定集"
-    ],
-    "confidence": "high",
-    "note": "2026-08 新增（照片识别）",
-    "douban_id": "34942577",
-    "douban_url": "https://book.douban.com/subject/34942577/",
-    "cover": "covers/34942577.jpg",
-    "color": "#898b8f"
-  },
-  {
-    "title": "这里是中国",
-    "author": "星球研究所、中国青藏高原研究会 著",
-    "publisher": "中信出版集团",
-    "category": "科普博物",
-    "tags": [
-      "地理",
-      "国民地理书"
-    ],
-    "confidence": "high",
-    "note": "2026-08 新增（照片识别）",
-    "douban_id": "34835320",
-    "douban_url": "https://book.douban.com/subject/34835320/",
-    "cover": "covers/34835320.jpg",
-    "color": "#889485"
-  },
-  {
-    "title": "新京报书评周刊合订本（2025年1月~2025年12月）",
-    "author": "新京报社 主编",
-    "publisher": "中国纺织出版社",
-    "category": "杂志书Mook",
-    "tags": [
-      "书评周刊",
-      "合订本",
-      "新京报"
-    ],
-    "confidence": "high",
-    "note": "2026-08 新增（照片识别）；2026年4月出版，精装改版",
-    "douban_id": "38436256",
-    "douban_url": "https://book.douban.com/subject/38436256/",
-    "cover": "covers/38436256.jpg",
-    "color": "#918c87"
-  }
+ {
+  "title": "共产党宣言",
+  "author": "马克思、恩格斯",
+  "publisher": "版本不详",
+  "category": "政治理论",
+  "tags": [
+   "马克思主义",
+   "经典"
+  ],
+  "confidence": "high",
+  "note": "书脊清晰",
+  "douban_id": "36586444",
+  "douban_url": "https://book.douban.com/subject/36586444/",
+  "cover": "covers/36586444.jpg",
+  "color": "#c0bb59"
+ },
+ {
+  "title": "毛泽东选集 第一卷",
+  "author": "毛泽东",
+  "publisher": "人民出版社",
+  "category": "政治理论",
+  "tags": [
+   "毛泽东著作"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "2008436",
+  "douban_url": "https://book.douban.com/subject/2008436/",
+  "cover": "covers/2008436.jpg",
+  "color": "#c08759"
+ },
+ {
+  "title": "毛泽东选集 第二卷",
+  "author": "毛泽东",
+  "publisher": "人民出版社",
+  "category": "政治理论",
+  "tags": [
+   "毛泽东著作"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "1252183",
+  "douban_url": "https://book.douban.com/subject/1252183/",
+  "cover": "covers/1252183.jpg",
+  "color": "#c09759"
+ },
+ {
+  "title": "毛泽东选集 第三卷",
+  "author": "毛泽东",
+  "publisher": "人民出版社",
+  "category": "政治理论",
+  "tags": [
+   "毛泽东著作"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "1077621",
+  "douban_url": "https://book.douban.com/subject/1077621/",
+  "cover": "covers/1077621.jpg",
+  "color": "#c09459"
+ },
+ {
+  "title": "毛泽东选集 第四卷",
+  "author": "毛泽东",
+  "publisher": "人民出版社",
+  "category": "政治理论",
+  "tags": [
+   "毛泽东著作"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "1139359",
+  "douban_url": "https://book.douban.com/subject/1139359/",
+  "cover": "covers/1139359.jpg",
+  "color": "#c09b59"
+ },
+ {
+  "title": "中共党史十二讲",
+  "author": "作者不详",
+  "publisher": "版本不详",
+  "category": "政治理论",
+  "tags": [
+   "党史"
+  ],
+  "confidence": "mid",
+  "note": "书名清晰，作者看不清",
+  "douban_id": "35451036",
+  "douban_url": "https://book.douban.com/subject/35451036/",
+  "cover": "covers/35451036.jpg",
+  "color": "#c08059"
+ },
+ {
+  "title": "他改变了中国：江泽民传",
+  "author": "[美] 罗伯特·劳伦斯·库恩",
+  "publisher": "世纪文景/上海译文出版社（推测）",
+  "category": "传记",
+  "tags": [
+   "政治人物",
+   "传记"
+  ],
+  "confidence": "mid",
+  "note": "书脊仅见“他改变了”+人物头像，据此推断",
+  "douban_id": "1023322",
+  "douban_url": "https://book.douban.com/subject/1023322/",
+  "cover": "covers/1023322.jpg",
+  "color": "#b04c43"
+ },
+ {
+  "title": "埃隆·马斯克传",
+  "author": "[美] 沃尔特·艾萨克森",
+  "publisher": "中信出版集团",
+  "category": "传记",
+  "tags": [
+   "商业",
+   "科技人物"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "36518892",
+  "douban_url": "https://book.douban.com/subject/36518892/",
+  "cover": "covers/36518892.jpg",
+  "color": "#7e726d"
+ },
+ {
+  "title": "Steve Jobs（史蒂夫·乔布斯传 英文原版）",
+  "author": "Walter Isaacson",
+  "publisher": "Simon & Schuster",
+  "category": "传记",
+  "tags": [
+   "商业",
+   "科技人物",
+   "英文原版"
+  ],
+  "confidence": "high",
+  "note": "与中文版为不同版本，单独计条",
+  "douban_id": "6512188",
+  "douban_url": "https://book.douban.com/subject/6512188/",
+  "cover": "covers/6512188.jpg",
+  "color": "#858186"
+ },
+ {
+  "title": "史蒂夫·乔布斯传",
+  "author": "[美] 沃尔特·艾萨克森",
+  "publisher": "中信出版社",
+  "category": "传记",
+  "tags": [
+   "商业",
+   "科技人物"
+  ],
+  "confidence": "high",
+  "note": "中文版，与英文原版分计",
+  "douban_id": "6798611",
+  "douban_url": "https://book.douban.com/subject/6798611/",
+  "cover": "covers/6798611.jpg",
+  "color": "#7c7b79"
+ },
+ {
+  "title": "列奥纳多·达·芬奇传：从凡人到天才的创造力密码",
+  "author": "[美] 沃尔特·艾萨克森",
+  "publisher": "中信出版集团",
+  "category": "传记",
+  "tags": [
+   "艺术",
+   "天才传记"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "30236304",
+  "douban_url": "https://book.douban.com/subject/30236304/",
+  "cover": "covers/30236304.jpg",
+  "color": "#958d83"
+ },
+ {
+  "title": "拉法耶特",
+  "author": "冯翔",
+  "publisher": "读库·新星出版社",
+  "category": "传记",
+  "tags": [
+   "历史人物",
+   "读库"
+  ],
+  "confidence": "high",
+  "note": "2025年读库新书，已核实",
+  "douban_id": "37432300",
+  "douban_url": "https://book.douban.com/subject/37432300/",
+  "cover": "covers/37432300.jpg",
+  "color": "#494648"
+ },
+ {
+  "title": "洞中人：王羲之传",
+  "author": "周文翰",
+  "publisher": "新星出版社（“文人视觉传记”系列）",
+  "category": "传记",
+  "tags": [
+   "艺术家传记",
+   "书法"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "37015110",
+  "douban_url": "https://book.douban.com/subject/37015110/",
+  "cover": "covers/37015110.jpg",
+  "color": "#7a797b"
+ },
+ {
+  "title": "孤星之旅：苏东坡传",
+  "author": "周文翰",
+  "publisher": "新星出版社",
+  "category": "传记",
+  "tags": [
+   "文学家传记",
+   "宋代"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "36247474",
+  "douban_url": "https://book.douban.com/subject/36247474/",
+  "cover": "covers/36247474.jpg",
+  "color": "#345d88"
+ },
+ {
+  "title": "腾讯传：中国互联网公司进化论 1998-2016",
+  "author": "吴晓波",
+  "publisher": "浙江大学出版社/蓝狮子图书",
+  "category": "商业科技与互联网",
+  "tags": [
+   "互联网",
+   "企业史"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "26929955",
+  "douban_url": "https://book.douban.com/subject/26929955/",
+  "cover": "covers/26929955.jpg",
+  "color": "#979181"
+ },
+ {
+  "title": "浪潮之巅（第四版·上册）",
+  "author": "吴军",
+  "publisher": "人民邮电出版社",
+  "category": "商业科技与互联网",
+  "tags": [
+   "科技史",
+   "互联网"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "33474750",
+  "douban_url": "https://book.douban.com/subject/33474750/",
+  "cover": "covers/33474750.jpg",
+  "color": "#31465e"
+ },
+ {
+  "title": "浪潮之巅（第四版·下册）",
+  "author": "吴军",
+  "publisher": "人民邮电出版社",
+  "category": "商业科技与互联网",
+  "tags": [
+   "科技史",
+   "互联网"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "33474750",
+  "douban_url": "https://book.douban.com/subject/33474750/",
+  "cover": "covers/33474750.jpg",
+  "color": "#31465e"
+ },
+ {
+  "title": "梦想机器",
+  "author": "[美] M.米切尔·沃尔德罗普 著、刘崇岭 译",
+  "publisher": "读库·新星出版社",
+  "category": "商业科技与互联网",
+  "tags": [
+   "计算机史",
+   "传记",
+   "读库"
+  ],
+  "confidence": "high",
+  "note": "利克莱德传记，2026-1出版，已核实",
+  "douban_id": "38373965",
+  "douban_url": "https://book.douban.com/subject/38373965/",
+  "cover": "covers/38373965.jpg",
+  "color": "#474748"
+ },
+ {
+  "title": "深度思考：不断逼近问题的本质（Beyond the Label）",
+  "author": "[美] 莫琳·希凯 著、孔锐才 译",
+  "publisher": "版本不详",
+  "category": "商业科技与互联网",
+  "tags": [
+   "管理",
+   "商业"
+  ],
+  "confidence": "mid",
+  "note": "出版社未见",
+  "douban_id": "30312510",
+  "douban_url": "https://book.douban.com/subject/30312510/",
+  "cover": "covers/30312510.jpg",
+  "color": "#978d81"
+ },
+ {
+  "title": "详谈：芦苇",
+  "author": "李翔",
+  "publisher": "得到图书·新星出版社",
+  "category": "商业科技与互联网",
+  "tags": [
+   "商业访谈"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "36216309",
+  "douban_url": "https://book.douban.com/subject/36216309/",
+  "cover": "covers/36216309.jpg",
+  "color": "#b49264"
+ },
+ {
+  "title": "详谈：左晖",
+  "author": "李翔",
+  "publisher": "得到图书·新星出版社",
+  "category": "商业科技与互联网",
+  "tags": [
+   "商业访谈"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "35254632",
+  "douban_url": "https://book.douban.com/subject/35254632/",
+  "cover": "covers/35254632.jpg",
+  "color": "#8c8c8d"
+ },
+ {
+  "title": "详谈：沈鹏",
+  "author": "李翔",
+  "publisher": "得到图书·新星出版社",
+  "category": "商业科技与互联网",
+  "tags": [
+   "商业访谈"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "35407207",
+  "douban_url": "https://book.douban.com/subject/35407207/",
+  "cover": "covers/35407207.jpg",
+  "color": "#7b9d97"
+ },
+ {
+  "title": "详谈：赵鹏",
+  "author": "李翔",
+  "publisher": "得到图书·新星出版社",
+  "category": "商业科技与互联网",
+  "tags": [
+   "商业访谈"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "35523118",
+  "douban_url": "https://book.douban.com/subject/35523118/",
+  "cover": "covers/35523118.jpg",
+  "color": "#829782"
+ },
+ {
+  "title": "修改代码的艺术",
+  "author": "[美] Michael C. Feathers",
+  "publisher": "人民邮电出版社·图灵",
+  "category": "商业科技与互联网",
+  "tags": [
+   "软件工程",
+   "编程"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "2248759",
+  "douban_url": "https://book.douban.com/subject/2248759/",
+  "cover": "covers/2248759.jpg",
+  "color": "#967e9b"
+ },
+ {
+  "title": "经济学原理（疑为宏观经济学分册）",
+  "author": "[美] 曼昆（推断）",
+  "publisher": "北京大学出版社（推断）",
+  "category": "经济理财",
+  "tags": [
+   "经济学",
+   "教材"
+  ],
+  "confidence": "low",
+  "note": "大部分被遮挡，据相邻微观分册推断",
+  "douban_id": "30297210",
+  "douban_url": "https://book.douban.com/subject/30297210/",
+  "cover": "covers/30297210.jpg",
+  "color": "#7599a4"
+ },
+ {
+  "title": "经济学原理：微观经济学分册",
+  "author": "[美] 曼昆",
+  "publisher": "北京大学出版社",
+  "category": "经济理财",
+  "tags": [
+   "经济学",
+   "教材"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "3719533",
+  "douban_url": "https://book.douban.com/subject/3719533/",
+  "cover": "covers/3719533.jpg",
+  "color": "#838c75"
+ },
+ {
+  "title": "薛兆丰经济学讲义",
+  "author": "薛兆丰",
+  "publisher": "中信出版集团",
+  "category": "经济理财",
+  "tags": [
+   "经济学"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "30280804",
+  "douban_url": "https://book.douban.com/subject/30280804/",
+  "cover": "covers/30280804.jpg",
+  "color": "#b98e47"
+ },
+ {
+  "title": "财富自由之路",
+  "author": "李笑来",
+  "publisher": "版本不详",
+  "category": "经济理财",
+  "tags": [
+   "理财",
+   "自我提升"
+  ],
+  "confidence": "mid",
+  "note": "书脊仅见 FINANCIAL FREEDOM，作者据检索补全",
+  "douban_id": "27094706",
+  "douban_url": "https://book.douban.com/subject/27094706/",
+  "cover": "covers/27094706.jpg",
+  "color": "#a64c3f"
+ },
+ {
+  "title": "投资第1课",
+  "author": "孟岩",
+  "publisher": "新星出版社",
+  "category": "经济理财",
+  "tags": [
+   "投资",
+   "理财"
+  ],
+  "confidence": "high",
+  "note": "已检索核实",
+  "douban_id": "36295222",
+  "douban_url": "https://book.douban.com/subject/36295222/",
+  "cover": "covers/36295222.jpg",
+  "color": "#c05a59"
+ },
+ {
+  "title": "决策困境：医疗现场的行为经济学",
+  "author": "[日] 大竹文雄 等 编著",
+  "publisher": "新星出版社·读库",
+  "category": "经济理财",
+  "tags": [
+   "行为经济学",
+   "医疗"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "36546340",
+  "douban_url": "https://book.douban.com/subject/36546340/",
+  "cover": "covers/36546340.jpg",
+  "color": "#547b62"
+ },
+ {
+  "title": "主机战争（CONSOLE WARS）",
+  "author": "[美] 布莱克·J. 哈里斯",
+  "publisher": "读库",
+  "category": "游戏与流行文化",
+  "tags": [
+   "游戏史",
+   "商业"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "37036877",
+  "douban_url": "https://book.douban.com/subject/37036877/",
+  "cover": "covers/37036877.jpg",
+  "color": "#5873a4"
+ },
+ {
+  "title": "游戏结束：任天堂全球征服史（GAME OVER）",
+  "author": "[美] 戴维·谢弗 著、吕敏 译",
+  "publisher": "新星出版社·御宅学/读库",
+  "category": "游戏与流行文化",
+  "tags": [
+   "游戏史",
+   "任天堂"
+  ],
+  "confidence": "high",
+  "note": "A图2平放/C图3平放，同一条合并，以C为准",
+  "douban_id": "34983702",
+  "douban_url": "https://book.douban.com/subject/34983702/",
+  "cover": "covers/34983702.jpg",
+  "color": "#505265"
+ },
+ {
+  "title": "像素工厂：游戏开发背后的成功与混乱",
+  "author": "[美] 贾森·施赖埃尔 著、吕敏 译",
+  "publisher": "四川美术出版社·御宅学/读库",
+  "category": "游戏与流行文化",
+  "tags": [
+   "游戏产业",
+   "非虚构"
+  ],
+  "confidence": "high",
+  "note": "A/C重复，以C出版社信息为准",
+  "douban_id": "36102420",
+  "douban_url": "https://book.douban.com/subject/36102420/",
+  "cover": "covers/36102420.jpg",
+  "color": "#55575b"
+ },
+ {
+  "title": "创作的基因：我所爱着的MEME们",
+  "author": "[日] 小岛秀夫",
+  "publisher": "天闻角川·新星出版社",
+  "category": "游戏与流行文化",
+  "tags": [
+   "游戏",
+   "创作随笔"
+  ],
+  "confidence": "high",
+  "note": "A/C重复，以C出版社信息为准",
+  "douban_id": "35873664",
+  "douban_url": "https://book.douban.com/subject/35873664/",
+  "cover": "covers/35873664.jpg",
+  "color": "#c0bc59"
+ },
+ {
+  "title": "死亡搁浅（上）",
+  "author": "[日] 野岛一人 著（小岛秀夫原作/监修）",
+  "publisher": "新星出版社",
+  "category": "游戏与流行文化",
+  "tags": [
+   "科幻",
+   "游戏衍生小说"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "35406144",
+  "douban_url": "https://book.douban.com/subject/35406144/",
+  "cover": "covers/35406144.jpg",
+  "color": "#444775"
+ },
+ {
+  "title": "死亡搁浅（下）",
+  "author": "[日] 野岛一人 著（小岛秀夫原作/监修）",
+  "publisher": "新星出版社",
+  "category": "游戏与流行文化",
+  "tags": [
+   "科幻",
+   "游戏衍生小说"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "35406145",
+  "douban_url": "https://book.douban.com/subject/35406145/",
+  "cover": "covers/35406145.jpg",
+  "color": "#543f6a"
+ },
+ {
+  "title": "刺客信条：王朝 卷一",
+  "author": "许先哲 作、张肖 绘",
+  "publisher": "中信出版集团",
+  "category": "游戏与流行文化",
+  "tags": [
+   "漫画",
+   "游戏衍生"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "35447182",
+  "douban_url": "https://book.douban.com/subject/35447182/",
+  "cover": "covers/35447182.jpg",
+  "color": "#876055"
+ },
+ {
+  "title": "刺客信条：王朝 卷二",
+  "author": "许先哲 作、张肖 绘",
+  "publisher": "中信出版集团",
+  "category": "游戏与流行文化",
+  "tags": [
+   "漫画",
+   "游戏衍生"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "35510551",
+  "douban_url": "https://book.douban.com/subject/35510551/",
+  "cover": "covers/35510551.jpg",
+  "color": "#5c3237"
+ },
+ {
+  "title": "笔记的方法",
+  "author": "刘少楠、刘白光",
+  "publisher": "得到图书",
+  "category": "写作与自我提升",
+  "tags": [
+   "学习方法",
+   "笔记"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "36615020",
+  "douban_url": "https://book.douban.com/subject/36615020/",
+  "cover": "covers/36615020.jpg",
+  "color": "#3a9868"
+ },
+ {
+  "title": "暗时间：思维改变生活（第2版）",
+  "author": "刘未鹏",
+  "publisher": "电子工业出版社",
+  "category": "写作与自我提升",
+  "tags": [
+   "思维",
+   "时间管理"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "6709809",
+  "douban_url": "https://book.douban.com/subject/6709809/",
+  "cover": "covers/6709809.jpg",
+  "color": "#835244"
+ },
+ {
+  "title": "数字时代的效率手册",
+  "author": "少数派",
+  "publisher": "电子工业出版社",
+  "category": "写作与自我提升",
+  "tags": [
+   "效率",
+   "工具"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "35573401",
+  "douban_url": "https://book.douban.com/subject/35573401/",
+  "cover": "covers/35573401.jpg",
+  "color": "#8d8c8c"
+ },
+ {
+  "title": "非暴力沟通",
+  "author": "金圣荣",
+  "publisher": "江苏人民出版社",
+  "category": "写作与自我提升",
+  "tags": [
+   "沟通",
+   "心理"
+  ],
+  "confidence": "high",
+  "note": "注：金圣荣同名著作，非卢森堡博士译本",
+  "douban_id": "3533221",
+  "douban_url": "https://book.douban.com/subject/3533221/",
+  "cover": "covers/3533221.jpg",
+  "color": "#a25b5f"
+ },
+ {
+  "title": "职场晋升101",
+  "author": "崔璀",
+  "publisher": "读客（出版社未见）",
+  "category": "写作与自我提升",
+  "tags": [
+   "职场"
+  ],
+  "confidence": "mid",
+  "note": "",
+  "douban_id": "35799634",
+  "douban_url": "https://book.douban.com/subject/35799634/",
+  "cover": "covers/35799634.jpg",
+  "color": "#c0a659"
+ },
+ {
+  "title": "不上班咖啡馆：打工人的觉醒",
+  "author": "古典",
+  "publisher": "果麦·四川文艺出版社",
+  "category": "写作与自我提升",
+  "tags": [
+   "职业规划"
+  ],
+  "confidence": "high",
+  "note": "已检索核实（2024）",
+  "douban_id": "36946567",
+  "douban_url": "https://book.douban.com/subject/36946567/",
+  "cover": "covers/36946567.jpg",
+  "color": "#556e76"
+ },
+ {
+  "title": "人的全景：弹簧人、思维体操与进步",
+  "author": "池宇峰",
+  "publisher": "中译出版社",
+  "category": "写作与自我提升",
+  "tags": [
+   "思维"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "36458024",
+  "douban_url": "https://book.douban.com/subject/36458024/",
+  "cover": "covers/36458024.jpg",
+  "color": "#9d9b7c"
+ },
+ {
+  "title": "学习之道",
+  "author": "[美] 芭芭拉·奥克利",
+  "publisher": "机械工业出版社",
+  "category": "写作与自我提升",
+  "tags": [
+   "学习方法"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "26895988",
+  "douban_url": "https://book.douban.com/subject/26895988/",
+  "cover": "covers/26895988.jpg",
+  "color": "#bfbe59"
+ },
+ {
+  "title": "南方周末写作课",
+  "author": "南方周末 编著",
+  "publisher": "中信出版集团",
+  "category": "写作与自我提升",
+  "tags": [
+   "写作",
+   "新闻"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "35436205",
+  "douban_url": "https://book.douban.com/subject/35436205/",
+  "cover": "covers/35436205.jpg",
+  "color": "#ba5f69"
+ },
+ {
+  "title": "非虚构写作指南",
+  "author": "李梓新 主编",
+  "publisher": "中信出版集团",
+  "category": "写作与自我提升",
+  "tags": [
+   "写作",
+   "非虚构"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "34445366",
+  "douban_url": "https://book.douban.com/subject/34445366/",
+  "cover": "covers/34445366.jpg",
+  "color": "#b6af45"
+ },
+ {
+  "title": "卡片笔记写作法：如何实现从阅读到写作",
+  "author": "[德] 申克·阿伦斯 著、陈琳 译",
+  "publisher": "人民邮电出版社",
+  "category": "写作与自我提升",
+  "tags": [
+   "写作",
+   "知识管理"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "35503571",
+  "douban_url": "https://book.douban.com/subject/35503571/",
+  "cover": "covers/35503571.jpg",
+  "color": "#949e7a"
+ },
+ {
+  "title": "英语科技写作",
+  "author": "[英] Hilary Glasman-Deal",
+  "publisher": "机械工业出版社（华章）",
+  "category": "写作与自我提升",
+  "tags": [
+   "学术写作",
+   "英语"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "36437925",
+  "douban_url": "https://book.douban.com/subject/36437925/",
+  "cover": "covers/36437925.jpg",
+  "color": "#989081"
+ },
+ {
+  "title": "猫和狗的生活哲学",
+  "author": "简单心理",
+  "publisher": "浦睿文化（版式推测）",
+  "category": "写作与自我提升",
+  "tags": [
+   "心理",
+   "漫画"
+  ],
+  "confidence": "mid",
+  "note": "出版社小字未辨",
+  "douban_id": "35639086",
+  "douban_url": "https://book.douban.com/subject/35639086/",
+  "cover": "covers/35639086.jpg",
+  "color": "#829795"
+ },
+ {
+  "title": "枪炮、病菌与钢铁：人类社会的命运",
+  "author": "[美] 贾雷德·戴蒙德",
+  "publisher": "中信出版集团",
+  "category": "社会科学",
+  "tags": [
+   "人类史",
+   "社会学"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "1813841",
+  "douban_url": "https://book.douban.com/subject/1813841/",
+  "cover": "covers/1813841.jpg",
+  "color": "#958053"
+ },
+ {
+  "title": "人类简史：从动物到上帝",
+  "author": "[以色列] 尤瓦尔·赫拉利 著、林俊宏 译",
+  "publisher": "中信出版集团",
+  "category": "社会科学",
+  "tags": [
+   "人类史"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "25985021",
+  "douban_url": "https://book.douban.com/subject/25985021/",
+  "cover": "covers/25985021.jpg",
+  "color": "#938f85"
+ },
+ {
+  "title": "小镇喧嚣：一个乡镇政治运作的演绎与阐释",
+  "author": "吴毅",
+  "publisher": "生活·读书·新知三联书店（“中国社会学经典文库”）",
+  "category": "社会科学",
+  "tags": [
+   "社会学",
+   "田野调查"
+  ],
+  "confidence": "high",
+  "note": "A/C重复，以C为准",
+  "douban_id": "30122152",
+  "douban_url": "https://book.douban.com/subject/30122152/",
+  "cover": "covers/30122152.jpg",
+  "color": "#928986"
+ },
+ {
+  "title": "以利为利：财政关系与地方政府行为",
+  "author": "周飞舟",
+  "publisher": "上海三联书店",
+  "category": "社会科学",
+  "tags": [
+   "社会学",
+   "财政"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "10587755",
+  "douban_url": "https://book.douban.com/subject/10587755/",
+  "cover": "covers/10587755.jpg",
+  "color": "#805d57"
+ },
+ {
+  "title": "工作、消费主义和新穷人",
+  "author": "[英] 齐格蒙特·鲍曼 著、郭楠 译",
+  "publisher": "上海社会科学院出版社·燧石",
+  "category": "社会科学",
+  "tags": [
+   "社会学",
+   "消费主义"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "35593780",
+  "douban_url": "https://book.douban.com/subject/35593780/",
+  "cover": "covers/35593780.jpg",
+  "color": "#908989"
+ },
+ {
+  "title": "事实（FACTFULNESS）",
+  "author": "[瑞典] 汉斯·罗斯林 等",
+  "publisher": "读客·文汇出版社",
+  "category": "社会科学",
+  "tags": [
+   "认知",
+   "数据思维"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "33385402",
+  "douban_url": "https://book.douban.com/subject/33385402/",
+  "cover": "covers/33385402.jpg",
+  "color": "#ba7c49"
+ },
+ {
+  "title": "超级城市是如何运转的",
+  "author": "[美] 凯特·阿歇尔",
+  "publisher": "后浪（推测）",
+  "category": "社会科学",
+  "tags": [
+   "城市",
+   "科普"
+  ],
+  "confidence": "mid",
+  "note": "出版社待确认",
+  "douban_id": "27622170",
+  "douban_url": "https://book.douban.com/subject/27622170/",
+  "cover": "covers/27622170.jpg",
+  "color": "#46556a"
+ },
+ {
+  "title": "何谓大学",
+  "author": "[日] 吉见俊哉 著、王敏 译",
+  "publisher": "版本不详",
+  "category": "社会科学",
+  "tags": [
+   "教育"
+  ],
+  "confidence": "mid",
+  "note": "出版社未见",
+  "douban_id": "37050074",
+  "douban_url": "https://book.douban.com/subject/37050074/",
+  "cover": "covers/37050074.jpg",
+  "color": "#a88570"
+ },
+ {
+  "title": "被设想的未来",
+  "author": "[印] 普立梵、[英] 安德鲁·瓦特 著、王焙尧 译",
+  "publisher": "上海三联书店",
+  "category": "社会科学",
+  "tags": [
+   "未来学"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "36177045",
+  "douban_url": "https://book.douban.com/subject/36177045/",
+  "cover": "covers/36177045.jpg",
+  "color": "#9d956c"
+ },
+ {
+  "title": "跟不内耗的森林居民一起生活",
+  "author": "[日] 奥野克巳 著、张威 译",
+  "publisher": "新星出版社·读库",
+  "category": "社会科学",
+  "tags": [
+   "人类学",
+   "民族志"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "37522069",
+  "douban_url": "https://book.douban.com/subject/37522069/",
+  "cover": "covers/37522069.jpg",
+  "color": "#71ac6c"
+ },
+ {
+  "title": "博弈论入门的入门",
+  "author": "[日] 镰田雄一郎 著、朱悦玮 译",
+  "publisher": "新星出版社·读库",
+  "category": "社会科学",
+  "tags": [
+   "博弈论",
+   "科普"
+  ],
+  "confidence": "high",
+  "note": "A“博弈论入门…”对应此书，以C为准",
+  "douban_id": "36610325",
+  "douban_url": "https://book.douban.com/subject/36610325/",
+  "cover": "covers/36610325.jpg",
+  "color": "#a29e77"
+ },
+ {
+  "title": "重燃文学之火：在阅读课上思考自我与社会",
+  "author": "[美] 大卫·丹比 著、汪畅 译",
+  "publisher": "读库·新星出版社",
+  "category": "社会科学",
+  "tags": [
+   "教育",
+   "阅读"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "36910974",
+  "douban_url": "https://book.douban.com/subject/36910974/",
+  "cover": "covers/36910974.jpg",
+  "color": "#9b3b48"
+ },
+ {
+  "title": "中学语文60年老课本精选",
+  "author": "上海教育出版社 编",
+  "publisher": "上海教育出版社",
+  "category": "社会科学",
+  "tags": [
+   "教育",
+   "教材文献"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "4293370",
+  "douban_url": "https://book.douban.com/subject/4293370/",
+  "cover": "covers/4293370.jpg",
+  "color": "#b89a61"
+ },
+ {
+  "title": "东言西语：在语言中重新发现中国",
+  "author": "郑子宁",
+  "publisher": "后浪·敦煌文艺出版社",
+  "category": "社会科学",
+  "tags": [
+   "语言学",
+   "文化"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "34945889",
+  "douban_url": "https://book.douban.com/subject/34945889/",
+  "cover": "covers/34945889.jpg",
+  "color": "#8e8b8b"
+ },
+ {
+  "title": "历史的运用与滥用（The Uses and Abuses of History）",
+  "author": "[加] 玛格丽特·麦克米伦",
+  "publisher": "一頁folio·广西师范大学出版社",
+  "category": "社会科学",
+  "tags": [
+   "历史学",
+   "公共历史"
+  ],
+  "confidence": "high",
+  "note": "A/C重复，以C为准",
+  "douban_id": "35324419",
+  "douban_url": "https://book.douban.com/subject/35324419/",
+  "cover": "covers/35324419.jpg",
+  "color": "#b4494a"
+ },
+ {
+  "title": "从一到无穷大：科学中的事实和臆测",
+  "author": "[美] 乔治·伽莫夫",
+  "publisher": "中读天下",
+  "category": "科普博物",
+  "tags": [
+   "科学经典"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "1102715",
+  "douban_url": "https://book.douban.com/subject/1102715/",
+  "cover": "covers/1102715.jpg",
+  "color": "#9b7d81"
+ },
+ {
+  "title": "简单统计学",
+  "author": "[美] 加里·史密斯",
+  "publisher": "后浪·江西人民出版社",
+  "category": "科普博物",
+  "tags": [
+   "统计学"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "37528384",
+  "douban_url": "https://book.douban.com/subject/37528384/",
+  "cover": "covers/37528384.jpg",
+  "color": "#a79772"
+ },
+ {
+  "title": "贪婪的多巴胺",
+  "author": "[美] 丹尼尔·利伯曼、迈克尔·E.朗 著、郑李垚 译",
+  "publisher": "中信出版集团",
+  "category": "科普博物",
+  "tags": [
+   "神经科学"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "35545272",
+  "douban_url": "https://book.douban.com/subject/35545272/",
+  "cover": "covers/35545272.jpg",
+  "color": "#888891"
+ },
+ {
+  "title": "海错图笔记",
+  "author": "张辰亮",
+  "publisher": "中信出版社",
+  "category": "科普博物",
+  "tags": [
+   "博物",
+   "海洋生物"
+  ],
+  "confidence": "high",
+  "note": "卷次书脊未标",
+  "douban_id": "26905274",
+  "douban_url": "https://book.douban.com/subject/26905274/",
+  "cover": "covers/26905274.jpg",
+  "color": "#888a7c"
+ },
+ {
+  "title": "舍象与秋水变焦",
+  "author": "刘华杰",
+  "publisher": "北京时代华文书局（“AI时代趣味博物学”系列）",
+  "category": "科普博物",
+  "tags": [
+   "博物学",
+   "科学文化"
+  ],
+  "confidence": "high",
+  "note": "已检索核实",
+  "douban_id": "37523035",
+  "douban_url": "https://book.douban.com/subject/37523035/",
+  "cover": "covers/37523035.jpg",
+  "color": "#899286"
+ },
+ {
+  "title": "它们没有脚，但足迹遍天下",
+  "author": "[意] 斯特凡诺·曼库索",
+  "publisher": "读库·新星出版社",
+  "category": "科普博物",
+  "tags": [
+   "植物",
+   "科普"
+  ],
+  "confidence": "high",
+  "note": "已核实",
+  "douban_id": "36659509",
+  "douban_url": "https://book.douban.com/subject/36659509/",
+  "cover": "covers/36659509.jpg",
+  "color": "#6e86aa"
+ },
+ {
+  "title": "不可思议的人体",
+  "author": "[日] 茨木保 著、周岩蕾 译",
+  "publisher": "后浪·北京联合出版公司",
+  "category": "科普博物",
+  "tags": [
+   "医学",
+   "漫画科普"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "35649768",
+  "douban_url": "https://book.douban.com/subject/35649768/",
+  "cover": "covers/35649768.jpg",
+  "color": "#9d967c"
+ },
+ {
+  "title": "小猎犬号航海记（插图全译本）",
+  "author": "[英] 查尔斯·达尔文 著、陈红 译",
+  "publisher": "译林出版社",
+  "category": "科普博物",
+  "tags": [
+   "博物",
+   "科学旅行"
+  ],
+  "confidence": "mid",
+  "note": "译者按书脊辨认",
+  "douban_id": "34933366",
+  "douban_url": "https://book.douban.com/subject/34933366/",
+  "cover": "covers/34933366.jpg",
+  "color": "#b29966"
+ },
+ {
+  "title": "冷与冰（Ice & Cold）",
+  "author": "李恪",
+  "publisher": "读库·新星出版社",
+  "category": "科普博物",
+  "tags": [
+   "技术史",
+   "制冷"
+  ],
+  "confidence": "high",
+  "note": "人类取冰与制冷史，已核实",
+  "douban_id": "37469982",
+  "douban_url": "https://book.douban.com/subject/37469982/",
+  "cover": "covers/37469982.jpg",
+  "color": "#658cb3"
+ },
+ {
+  "title": "海洋诱惑",
+  "author": "袁越",
+  "publisher": "三联生活书店（推测）",
+  "category": "科普博物",
+  "tags": [
+   "海洋",
+   "科学"
+  ],
+  "confidence": "mid",
+  "note": "出版社待确认",
+  "douban_id": "36895318",
+  "douban_url": "https://book.douban.com/subject/36895318/",
+  "cover": "covers/36895318.jpg",
+  "color": "#2b596d"
+ },
+ {
+  "title": "哥德尔、艾舍尔、巴赫：集异璧之大成（GEB）",
+  "author": "[美] 侯世达",
+  "publisher": "商务印书馆",
+  "category": "哲学与思想",
+  "tags": [
+   "认知科学",
+   "哲学",
+   "经典"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "1291204",
+  "douban_url": "https://book.douban.com/subject/1291204/",
+  "cover": "covers/1291204.jpg",
+  "color": "#7b7c7f"
+ },
+ {
+  "title": "逃出瓶子的精灵：一部关于“我”的哲学史",
+  "author": "[荷] 戈尔·格罗特",
+  "publisher": "读库·新星出版社",
+  "category": "哲学与思想",
+  "tags": [
+   "哲学史",
+   "自我"
+  ],
+  "confidence": "high",
+  "note": "已核实",
+  "douban_id": "36492396",
+  "douban_url": "https://book.douban.com/subject/36492396/",
+  "cover": "covers/36492396.jpg",
+  "color": "#8f8c8a"
+ },
+ {
+  "title": "电车难题有答案",
+  "author": "作者不详",
+  "publisher": "读库出品",
+  "category": "哲学与思想",
+  "tags": [
+   "伦理学",
+   "思想实验"
+  ],
+  "confidence": "mid",
+  "note": "书脊被遮挡一半；经搜索确为读库L套餐书目",
+  "douban_id": "37892476",
+  "douban_url": "https://book.douban.com/subject/37892476/",
+  "cover": "covers/37892476.jpg",
+  "color": "#474747"
+ },
+ {
+  "title": "谈美",
+  "author": "朱光潜",
+  "publisher": "版本不详",
+  "category": "哲学与思想",
+  "tags": [
+   "美学",
+   "文艺理论"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "26838438",
+  "douban_url": "https://book.douban.com/subject/26838438/",
+  "cover": "covers/26838438.jpg",
+  "color": "#8c8c8c"
+ },
+ {
+  "title": "活法（珍藏版）",
+  "author": "[日] 稻盛和夫 著、曹岫云 译",
+  "publisher": "东方出版社",
+  "category": "哲学与思想",
+  "tags": [
+   "人生哲学",
+   "经营"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "25817726",
+  "douban_url": "https://book.douban.com/subject/25817726/",
+  "cover": "covers/25817726.jpg",
+  "color": "#c0595c"
+ },
+ {
+  "title": "万历十五年（增订本）",
+  "author": "[美] 黄仁宇",
+  "publisher": "中华书局",
+  "category": "中国历史与近代史",
+  "tags": [
+   "明史",
+   "经典"
+  ],
+  "confidence": "high",
+  "note": "A/C重复，以C版本信息为准",
+  "douban_id": "1981042",
+  "douban_url": "https://book.douban.com/subject/1981042/",
+  "cover": "covers/1981042.jpg",
+  "color": "#bf9559"
+ },
+ {
+  "title": "中国大历史",
+  "author": "[美] 黄仁宇",
+  "publisher": "生活·读书·新知三联书店",
+  "category": "中国历史与近代史",
+  "tags": [
+   "通史"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "1015699",
+  "douban_url": "https://book.douban.com/subject/1015699/",
+  "cover": "covers/1015699.jpg",
+  "color": "#c09259"
+ },
+ {
+  "title": "中国通史",
+  "author": "吕思勉",
+  "publisher": "斯坦威图书（具体出版社不明）",
+  "category": "中国历史与近代史",
+  "tags": [
+   "通史"
+  ],
+  "confidence": "mid",
+  "note": "书脊标“斯坦威 K047”",
+  "douban_id": "3707886",
+  "douban_url": "https://book.douban.com/subject/3707886/",
+  "cover": "covers/3707886.jpg",
+  "color": "#a39176"
+ },
+ {
+  "title": "中国历代政治得失",
+  "author": "钱穆",
+  "publisher": "生活·读书·新知三联书店（钱穆作品精选）",
+  "category": "中国历史与近代史",
+  "tags": [
+   "制度史"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "1003479",
+  "douban_url": "https://book.douban.com/subject/1003479/",
+  "cover": "covers/1003479.jpg",
+  "color": "#c09d59"
+ },
+ {
+  "title": "清末民初的思想与人物",
+  "author": "杨琥",
+  "publisher": "壹卷YeBook·四川人民出版社",
+  "category": "中国历史与近代史",
+  "tags": [
+   "近代史",
+   "思想史"
+  ],
+  "confidence": "high",
+  "note": "A“清末民…”对应此书，以C为准",
+  "douban_id": "35582656",
+  "douban_url": "https://book.douban.com/subject/35582656/",
+  "cover": "covers/35582656.jpg",
+  "color": "#869093"
+ },
+ {
+  "title": "枢纽：3000年的中国",
+  "author": "施展",
+  "publisher": "广西师范大学出版社",
+  "category": "中国历史与近代史",
+  "tags": [
+   "通史",
+   "文明史"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "27602003",
+  "douban_url": "https://book.douban.com/subject/27602003/",
+  "cover": "covers/27602003.jpg",
+  "color": "#7b413d"
+ },
+ {
+  "title": "叫魂：1768年中国妖术大恐慌",
+  "author": "[美] 孔飞力 著、陈兼、刘昶 译",
+  "publisher": "上海三联书店",
+  "category": "中国历史与近代史",
+  "tags": [
+   "清史",
+   "社会史"
+  ],
+  "confidence": "high",
+  "note": "A/C重复",
+  "douban_id": "25912076",
+  "douban_url": "https://book.douban.com/subject/25912076/",
+  "cover": "covers/25912076.jpg",
+  "color": "#505f70"
+ },
+ {
+  "title": "漫长的余生：一个北魏宫女和她的时代",
+  "author": "罗新",
+  "publisher": "理想国·北京日报出版社",
+  "category": "中国历史与近代史",
+  "tags": [
+   "北魏",
+   "微观史"
+  ],
+  "confidence": "high",
+  "note": "A/C重复",
+  "douban_id": "35909188",
+  "douban_url": "https://book.douban.com/subject/35909188/",
+  "cover": "covers/35909188.jpg",
+  "color": "#ac8d6d"
+ },
+ {
+  "title": "大明最后的使臣",
+  "author": "苗子兮",
+  "publisher": "新星出版社·读库",
+  "category": "中国历史与近代史",
+  "tags": [
+   "明史",
+   "外交"
+  ],
+  "confidence": "high",
+  "note": "A/C重复，以C为准（2025）",
+  "douban_id": "37109442",
+  "douban_url": "https://book.douban.com/subject/37109442/",
+  "cover": "covers/37109442.jpg",
+  "color": "#9c8c7c"
+ },
+ {
+  "title": "大宋病人",
+  "author": "韩福东",
+  "publisher": "新星出版社·读库",
+  "category": "中国历史与近代史",
+  "tags": [
+   "宋史"
+  ],
+  "confidence": "high",
+  "note": "A/C重复，以C为准（写宋英宗赵曙）",
+  "douban_id": "36640421",
+  "douban_url": "https://book.douban.com/subject/36640421/",
+  "cover": "covers/36640421.jpg",
+  "color": "#9c9f77"
+ },
+ {
+  "title": "司马迁的记忆之野",
+  "author": "刘勃",
+  "publisher": "读库·新星出版社",
+  "category": "中国历史与近代史",
+  "tags": [
+   "汉史",
+   "史记"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "35230273",
+  "douban_url": "https://book.douban.com/subject/35230273/",
+  "cover": "covers/35230273.jpg",
+  "color": "#5a7bbe"
+ },
+ {
+  "title": "清代旅蒙商述略",
+  "author": "秋原",
+  "publisher": "读库·新星出版社",
+  "category": "中国历史与近代史",
+  "tags": [
+   "清史",
+   "商业史"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "26419408",
+  "douban_url": "https://book.douban.com/subject/26419408/",
+  "cover": "covers/26419408.jpg",
+  "color": "#8c9980"
+ },
+ {
+  "title": "碌碌有为：微观历史视野下的中国社会与民众（上卷·人、日常和文化）",
+  "author": "王笛",
+  "publisher": "中信出版集团",
+  "category": "中国历史与近代史",
+  "tags": [
+   "社会史",
+   "微观史"
+  ],
+  "confidence": "high",
+  "note": "A/C重复，以C为准",
+  "douban_id": "36110430",
+  "douban_url": "https://book.douban.com/subject/36110430/",
+  "cover": "covers/36110430.jpg",
+  "color": "#a79371"
+ },
+ {
+  "title": "碌碌有为：微观历史视野下的中国社会与民众（下卷·家、群体和法律）",
+  "author": "王笛",
+  "publisher": "中信出版集团",
+  "category": "中国历史与近代史",
+  "tags": [
+   "社会史",
+   "微观史"
+  ],
+  "confidence": "high",
+  "note": "A/C重复，以C为准",
+  "douban_id": "36110430",
+  "douban_url": "https://book.douban.com/subject/36110430/",
+  "cover": "covers/36110430.jpg",
+  "color": "#a79371"
+ },
+ {
+  "title": "马伯庸笑翻中国简史",
+  "author": "马伯庸",
+  "publisher": "版本未详",
+  "category": "中国历史与近代史",
+  "tags": [
+   "通俗历史"
+  ],
+  "confidence": "mid",
+  "note": "",
+  "douban_id": "25978734",
+  "douban_url": "https://book.douban.com/subject/25978734/",
+  "cover": "covers/25978734.jpg",
+  "color": "#c0a759"
+ },
+ {
+  "title": "历史中的大与小",
+  "author": "马伯庸",
+  "publisher": "湖南文艺出版社·博集天卷",
+  "category": "中国历史与近代史",
+  "tags": [
+   "历史随笔"
+  ],
+  "confidence": "high",
+  "note": "A/C重复（2025），已核实",
+  "douban_id": "37869944",
+  "douban_url": "https://book.douban.com/subject/37869944/",
+  "cover": "covers/37869944.jpg",
+  "color": "#c06759"
+ },
+ {
+  "title": "说三分：三国故事的三重叙事",
+  "author": "刘勃",
+  "publisher": "新星出版社·读库",
+  "category": "中国历史与近代史",
+  "tags": [
+   "三国",
+   "叙事学"
+  ],
+  "confidence": "high",
+  "note": "A“三国…黄色书脊”对应此书，以C为准",
+  "douban_id": "36964205",
+  "douban_url": "https://book.douban.com/subject/36964205/",
+  "cover": "covers/36964205.jpg",
+  "color": "#c0b859"
+ },
+ {
+  "title": "重走：在公路、河流和驿道上寻找西南联大",
+  "author": "杨潇",
+  "publisher": "单读·铸刻文化/上海文艺出版社",
+  "category": "中国历史与近代史",
+  "tags": [
+   "西南联大",
+   "旅行非虚构"
+  ],
+  "confidence": "high",
+  "note": "A/C重复，以C为准",
+  "douban_id": "35436901",
+  "douban_url": "https://book.douban.com/subject/35436901/",
+  "cover": "covers/35436901.jpg",
+  "color": "#978581"
+ },
+ {
+  "title": "红星照耀中国（Red Star over China）",
+  "author": "[美] 埃德加·斯诺 著、董乐山 译",
+  "publisher": "人民文学出版社",
+  "category": "中国历史与近代史",
+  "tags": [
+   "纪实",
+   "革命史"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "26820347",
+  "douban_url": "https://book.douban.com/subject/26820347/",
+  "cover": "covers/26820347.jpg",
+  "color": "#c0595d"
+ },
+ {
+  "title": "暗斗：一个书生的文化抗战",
+  "author": "吴真",
+  "publisher": "生活·读书·新知三联书店",
+  "category": "中国历史与近代史",
+  "tags": [
+   "抗战",
+   "书籍史"
+  ],
+  "confidence": "high",
+  "note": "2025年出版",
+  "douban_id": "37383501",
+  "douban_url": "https://book.douban.com/subject/37383501/",
+  "cover": "covers/37383501.jpg",
+  "color": "#c07559"
+ },
+ {
+  "title": "清明上河图：北宋繁华记忆",
+  "author": "薛凤旋",
+  "publisher": "中华书局",
+  "category": "中国历史与近代史",
+  "tags": [
+   "宋史",
+   "艺术史"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "27075116",
+  "douban_url": "https://book.douban.com/subject/27075116/",
+  "cover": "covers/27075116.jpg",
+  "color": "#afa66a"
+ },
+ {
+  "title": "街角的老北京",
+  "author": "卢文龙（阿龙）",
+  "publisher": "正阳书局/北京联合出版公司（“正阳文库”）",
+  "category": "中国历史与近代史",
+  "tags": [
+   "北京",
+   "城市文化"
+  ],
+  "confidence": "high",
+  "note": "A/C重复，以C为准",
+  "douban_id": "26579735",
+  "douban_url": "https://book.douban.com/subject/26579735/",
+  "cover": "covers/26579735.jpg",
+  "color": "#779aa2"
+ },
+ {
+  "title": "北京老画报",
+  "author": "周利成",
+  "publisher": "天津古籍出版社（“中国老画报丛书”，推测）",
+  "category": "中国历史与近代史",
+  "tags": [
+   "北京",
+   "图像文化"
+  ],
+  "confidence": "mid",
+  "note": "出版社按同类丛书推测",
+  "douban_id": "36312727",
+  "douban_url": "https://book.douban.com/subject/36312727/",
+  "cover": "covers/36312727.jpg",
+  "color": "#b7a362"
+ },
+ {
+  "title": "奔袭",
+  "author": "冯翔",
+  "publisher": "读库·新星出版社",
+  "category": "中国历史与近代史",
+  "tags": [
+   "纪实",
+   "历史"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "36580720",
+  "douban_url": "https://book.douban.com/subject/36580720/",
+  "cover": "covers/36580720.jpg",
+  "color": "#b19e67"
+ },
+ {
+  "title": "东京梦华录",
+  "author": "[宋] 孟元老 撰",
+  "publisher": "中华书局（“都城风物”系列）",
+  "category": "古典文学与传统文化",
+  "tags": [
+   "宋代笔记",
+   "都城"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "35436867",
+  "douban_url": "https://book.douban.com/subject/35436867/",
+  "cover": "covers/35436867.jpg",
+  "color": "#c0595f"
+ },
+ {
+  "title": "武林旧事",
+  "author": "[宋] 周密 撰",
+  "publisher": "中华书局（“都城风物”系列）",
+  "category": "古典文学与传统文化",
+  "tags": [
+   "宋代笔记",
+   "都城"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "2280983",
+  "douban_url": "https://book.douban.com/subject/2280983/",
+  "cover": "covers/2280983.jpg",
+  "color": "#b8b461"
+ },
+ {
+  "title": "类编长安志",
+  "author": "[元] 骆天骧 撰",
+  "publisher": "中华书局（“都城风物”系列）",
+  "category": "古典文学与传统文化",
+  "tags": [
+   "地方志",
+   "长安"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "1823700",
+  "douban_url": "https://book.douban.com/subject/1823700/",
+  "cover": "covers/1823700.jpg",
+  "color": "#a18d78"
+ },
+ {
+  "title": "洛阳伽蓝记",
+  "author": "[北魏] 杨衒之 撰",
+  "publisher": "中华书局（“都城风物”系列）",
+  "category": "古典文学与传统文化",
+  "tags": [
+   "北朝笔记"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "10488582",
+  "douban_url": "https://book.douban.com/subject/10488582/",
+  "cover": "covers/10488582.jpg",
+  "color": "#c07959"
+ },
+ {
+  "title": "清嘉录：中国人的节日之书",
+  "author": "[清] 顾禄 著、王密林/韩育生 译、王弘力 插图",
+  "publisher": "汉语经典文库",
+  "category": "古典文学与传统文化",
+  "tags": [
+   "民俗",
+   "节日"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "34482000",
+  "douban_url": "https://book.douban.com/subject/34482000/",
+  "cover": "covers/34482000.jpg",
+  "color": "#a09279"
+ },
+ {
+  "title": "神仙传",
+  "author": "[晋] 葛洪 撰",
+  "publisher": "中华书局（中华经典名著全本全注全译丛书）",
+  "category": "古典文学与传统文化",
+  "tags": [
+   "道教",
+   "志怪"
+  ],
+  "confidence": "high",
+  "note": "A/C重复",
+  "douban_id": "27589913",
+  "douban_url": "https://book.douban.com/subject/27589913/",
+  "cover": "covers/27589913.jpg",
+  "color": "#b46044"
+ },
+ {
+  "title": "《古文观止》化读",
+  "author": "王鼎钧",
+  "publisher": "生活·读书·新知三联书店",
+  "category": "古典文学与传统文化",
+  "tags": [
+   "古文",
+   "散文"
+  ],
+  "confidence": "high",
+  "note": "A“古文…”对应此书，以C为准",
+  "douban_id": "33455190",
+  "douban_url": "https://book.douban.com/subject/33455190/",
+  "cover": "covers/33455190.jpg",
+  "color": "#a36755"
+ },
+ {
+  "title": "浮生六记（阅读无障碍本）",
+  "author": "[清] 沈复",
+  "publisher": "岳麓书社（“古典名著·阅读无障碍本”系列，版式推断）",
+  "category": "古典文学与传统文化",
+  "tags": [
+   "古典散文"
+  ],
+  "confidence": "mid",
+  "note": "版本之一：阅读无障碍本",
+  "douban_id": "1088581",
+  "douban_url": "https://book.douban.com/subject/1088581/",
+  "cover": "covers/1088581.jpg",
+  "color": "#b29767"
+ },
+ {
+  "title": "浮生六记（苗怀明评注本）",
+  "author": "[清] 沈复 著、苗怀明 评注",
+  "publisher": "中华书局",
+  "category": "古典文学与传统文化",
+  "tags": [
+   "古典散文",
+   "评注"
+  ],
+  "confidence": "high",
+  "note": "版本之二：中华书局白色精装烫金本",
+  "douban_id": "1088581",
+  "douban_url": "https://book.douban.com/subject/1088581/",
+  "cover": "covers/1088581.jpg",
+  "color": "#b29767"
+ },
+ {
+  "title": "脂砚斋评石头记（红色多卷本，约3-4册）",
+  "author": "曹雪芹 著、脂砚斋 评",
+  "publisher": "版本不详",
+  "category": "古典文学与传统文化",
+  "tags": [
+   "红楼梦",
+   "评点"
+  ],
+  "confidence": "mid",
+  "note": "可见“叁”“肆”卷次标识，按套计1条",
+  "douban_id": "6712512",
+  "douban_url": "https://book.douban.com/subject/6712512/",
+  "cover": "covers/6712512.jpg",
+  "color": "#bc6051"
+ },
+ {
+  "title": "三国演义（红色多卷本，3册）",
+  "author": "罗贯中",
+  "publisher": "版本不详",
+  "category": "古典文学与传统文化",
+  "tags": [
+   "古典小说"
+  ],
+  "confidence": "mid",
+  "note": "与脂评本同系列装帧，按套计1条",
+  "douban_id": "1483894",
+  "douban_url": "https://book.douban.com/subject/1483894/",
+  "cover": "covers/1483894.jpg",
+  "color": "#c0ba59"
+ },
+ {
+  "title": "中国小说史略",
+  "author": "鲁迅",
+  "publisher": "中国和平出版社（“民国大师文库”006）",
+  "category": "古典文学与传统文化",
+  "tags": [
+   "文学史",
+   "学术"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "1974044",
+  "douban_url": "https://book.douban.com/subject/1974044/",
+  "cover": "covers/1974044.jpg",
+  "color": "#c0a559"
+ },
+ {
+  "title": "见鬼：中国古代志怪小说阅读笔记",
+  "author": "有鬼君",
+  "publisher": "东方出版社",
+  "category": "古典文学与传统文化",
+  "tags": [
+   "志怪",
+   "阅读笔记"
+  ],
+  "confidence": "high",
+  "note": "A/C重复，以C出版社信息为准",
+  "douban_id": "34879052",
+  "douban_url": "https://book.douban.com/subject/34879052/",
+  "cover": "covers/34879052.jpg",
+  "color": "#c06b59"
+ },
+ {
+  "title": "红楼夜话",
+  "author": "郝永勃",
+  "publisher": "生活书店出版有限公司",
+  "category": "古典文学与传统文化",
+  "tags": [
+   "红学",
+   "随笔"
+  ],
+  "confidence": "high",
+  "note": "A/C重复，以C为准",
+  "douban_id": "30223416",
+  "douban_url": "https://book.douban.com/subject/30223416/",
+  "cover": "covers/30223416.jpg",
+  "color": "#aab068"
+ },
+ {
+  "title": "汉字树5：汉字中的建筑与器皿",
+  "author": "廖文豪",
+  "publisher": "北京联合出版公司·紫图",
+  "category": "古典文学与传统文化",
+  "tags": [
+   "汉字",
+   "文化"
+  ],
+  "confidence": "high",
+  "note": "A/C重复，以C为准（A误记为汉字树6）",
+  "douban_id": "33437743",
+  "douban_url": "https://book.douban.com/subject/33437743/",
+  "cover": "covers/33437743.jpg",
+  "color": "#8c8c8c"
+ },
+ {
+  "title": "思无邪：诗经名物图解（植物卷）",
+  "author": "[日] 细井徇 绘",
+  "publisher": "版本未详（常见为浙江人民美术出版社）",
+  "category": "古典文学与传统文化",
+  "tags": [
+   "诗经",
+   "博物"
+  ],
+  "confidence": "mid",
+  "note": "出版社按推测标注",
+  "douban_id": "27071894",
+  "douban_url": "https://book.douban.com/subject/27071894/",
+  "cover": "covers/27071894.jpg",
+  "color": "#a0aa61"
+ },
+ {
+  "title": "长安诗选",
+  "author": "追光动画、韩潇",
+  "publisher": "中信出版集团",
+  "category": "古典文学与传统文化",
+  "tags": [
+   "诗歌",
+   "动画衍生"
+  ],
+  "confidence": "high",
+  "note": "电影《长安三万里》配套诗集",
+  "douban_id": "36463197",
+  "douban_url": "https://book.douban.com/subject/36463197/",
+  "cover": "covers/36463197.jpg",
+  "color": "#c08f59"
+ },
+ {
+  "title": "古籍原来这么好看",
+  "author": "熊建",
+  "publisher": "人民日报出版社",
+  "category": "古典文学与传统文化",
+  "tags": [
+   "古籍普及",
+   "文化"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "36392406",
+  "douban_url": "https://book.douban.com/subject/36392406/",
+  "cover": "covers/36392406.jpg",
+  "color": "#b69762"
+ },
+ {
+  "title": "呐喊",
+  "author": "鲁迅",
+  "publisher": "果麦",
+  "category": "现当代文学",
+  "tags": [
+   "鲁迅",
+   "小说"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "1449351",
+  "douban_url": "https://book.douban.com/subject/1449351/",
+  "cover": "covers/1449351.jpg",
+  "color": "#b49a65"
+ },
+ {
+  "title": "野草",
+  "author": "鲁迅",
+  "publisher": "果麦",
+  "category": "现当代文学",
+  "tags": [
+   "鲁迅",
+   "散文诗"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "1915958",
+  "douban_url": "https://book.douban.com/subject/1915958/",
+  "cover": "covers/1915958.jpg",
+  "color": "#b49b65"
+ },
+ {
+  "title": "故事新编",
+  "author": "鲁迅",
+  "publisher": "果麦",
+  "category": "现当代文学",
+  "tags": [
+   "鲁迅",
+   "小说"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "2046909",
+  "douban_url": "https://book.douban.com/subject/2046909/",
+  "cover": "covers/2046909.jpg",
+  "color": "#b39b65"
+ },
+ {
+  "title": "鲁迅杂文集",
+  "author": "鲁迅",
+  "publisher": "果麦",
+  "category": "现当代文学",
+  "tags": [
+   "鲁迅",
+   "杂文"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "26697791",
+  "douban_url": "https://book.douban.com/subject/26697791/",
+  "cover": "covers/26697791.jpg",
+  "color": "#c07459"
+ },
+ {
+  "title": "鲁迅作品礼盒套装（约5册）",
+  "author": "鲁迅",
+  "publisher": "版本不详（与果麦鲁迅系列装帧一致）",
+  "category": "现当代文学",
+  "tags": [
+   "鲁迅",
+   "作品集"
+  ],
+  "confidence": "mid",
+  "note": "盒内含《呐喊》《彷徨》《朝花夕拾》《野草》等，按套装计1条"
+ },
+ {
+  "title": "人间草木",
+  "author": "汪曾祺",
+  "publisher": "时代华语国际",
+  "category": "现当代文学",
+  "tags": [
+   "散文"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "1253310",
+  "douban_url": "https://book.douban.com/subject/1253310/",
+  "cover": "covers/1253310.jpg",
+  "color": "#c09559"
+ },
+ {
+  "title": "把日子过得有趣",
+  "author": "老舍",
+  "publisher": "版本不详",
+  "category": "现当代文学",
+  "tags": [
+   "散文"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "30262387",
+  "douban_url": "https://book.douban.com/subject/30262387/",
+  "cover": "covers/30262387.jpg",
+  "color": "#8d8b8b"
+ },
+ {
+  "title": "北平旧事",
+  "author": "梁实秋 等",
+  "publisher": "江苏凤凰文艺出版社（“大师经典·珍藏版”）",
+  "category": "现当代文学",
+  "tags": [
+   "散文",
+   "北京"
+  ],
+  "confidence": "high",
+  "note": "A/C重复，以C为准",
+  "douban_id": "35109258",
+  "douban_url": "https://book.douban.com/subject/35109258/",
+  "cover": "covers/35109258.jpg",
+  "color": "#918887"
+ },
+ {
+  "title": "夜晚的潜水艇",
+  "author": "陈春成",
+  "publisher": "理想国·上海三联书店",
+  "category": "现当代文学",
+  "tags": [
+   "短篇小说"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "35005045",
+  "douban_url": "https://book.douban.com/subject/35005045/",
+  "cover": "covers/35005045.jpg",
+  "color": "#2c5473"
+ },
+ {
+  "title": "咸的玩笑（SALTY JOKES）",
+  "author": "刘震云",
+  "publisher": "人民文学出版社",
+  "category": "现当代文学",
+  "tags": [
+   "长篇小说"
+  ],
+  "confidence": "high",
+  "note": "2025年12月新书，已核实",
+  "douban_id": "37833272",
+  "douban_url": "https://book.douban.com/subject/37833272/",
+  "cover": "covers/37833272.jpg",
+  "color": "#275268"
+ },
+ {
+  "title": "莫言的奇奇怪怪故事集",
+  "author": "莫言",
+  "publisher": "读客·江苏凤凰文艺出版社",
+  "category": "现当代文学",
+  "tags": [
+   "故事集"
+  ],
+  "confidence": "high",
+  "note": "A/C重复",
+  "douban_id": "35792990",
+  "douban_url": "https://book.douban.com/subject/35792990/",
+  "cover": "covers/35792990.jpg",
+  "color": "#809f60"
+ },
+ {
+  "title": "桃花源没事儿",
+  "author": "马伯庸",
+  "publisher": "湖南文艺出版社·博集天卷",
+  "category": "现当代文学",
+  "tags": [
+   "小说"
+  ],
+  "confidence": "high",
+  "note": "2025年出版",
+  "douban_id": "37339619",
+  "douban_url": "https://book.douban.com/subject/37339619/",
+  "cover": "covers/37339619.jpg",
+  "color": "#aa886f"
+ },
+ {
+  "title": "许渊冲英译毛泽东诗词",
+  "author": "毛泽东 著、许渊冲 英译",
+  "publisher": "版本不详",
+  "category": "现当代文学",
+  "tags": [
+   "诗词",
+   "翻译"
+  ],
+  "confidence": "mid",
+  "note": "出版社未见",
+  "douban_id": "26654587",
+  "douban_url": "https://book.douban.com/subject/26654587/",
+  "cover": "covers/26654587.jpg",
+  "color": "#a9a06f"
+ },
+ {
+  "title": "夜雨藏笺",
+  "author": "吴夜雨（辑）",
+  "publisher": "不详（疑自印/线装本）",
+  "category": "现当代文学",
+  "tags": [
+   "诗文"
+  ],
+  "confidence": "low",
+  "note": "疑为个人辑印本",
+  "douban_id": "36347479",
+  "douban_url": "https://book.douban.com/subject/36347479/",
+  "cover": "covers/36347479.jpg",
+  "color": "#66adb3"
+ },
+ {
+  "title": "夜读十记（上）",
+  "author": "疑为计文君",
+  "publisher": "版本不详",
+  "category": "现当代文学",
+  "tags": [
+   "随笔"
+  ],
+  "confidence": "low",
+  "note": "书名/作者均不确定，检索无结果"
+ },
+ {
+  "title": "读书与藏书：27位文化名家的私人阅读史",
+  "author": "绿茶 著绘",
+  "publisher": "未读·文艺家/北京联合出版公司",
+  "category": "现当代文学",
+  "tags": [
+   "书话",
+   "阅读文化"
+  ],
+  "confidence": "high",
+  "note": "A/C重复，以C为准",
+  "douban_id": "36352643",
+  "douban_url": "https://book.douban.com/subject/36352643/",
+  "cover": "covers/36352643.jpg",
+  "color": "#6e6969"
+ },
+ {
+  "title": "书事：近现代版本杂谈",
+  "author": "薛冰",
+  "publisher": "天津人民出版社",
+  "category": "现当代文学",
+  "tags": [
+   "版本学",
+   "书话"
+  ],
+  "confidence": "high",
+  "note": "A/C重复，以C为准",
+  "douban_id": "35099251",
+  "douban_url": "https://book.douban.com/subject/35099251/",
+  "cover": "covers/35099251.jpg",
+  "color": "#989180"
+ },
+ {
+  "title": "错误、边缘、野马（读库文存·他说）",
+  "author": "读库 编选",
+  "publisher": "新星出版社·读库",
+  "category": "现当代文学",
+  "tags": [
+   "访谈",
+   "随笔"
+  ],
+  "confidence": "high",
+  "note": "书脊文字经检索确认",
+  "douban_id": "36820858",
+  "douban_url": "https://book.douban.com/subject/36820858/",
+  "cover": "covers/36820858.jpg",
+  "color": "#9a837e"
+ },
+ {
+  "title": "白鲸（MOBY DICK）",
+  "author": "[美] 赫尔曼·麦尔维尔",
+  "publisher": "后浪文学",
+  "category": "外国文学",
+  "tags": [
+   "美国文学",
+   "经典"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "37333462",
+  "douban_url": "https://book.douban.com/subject/37333462/",
+  "cover": "covers/37333462.jpg",
+  "color": "#4e5c61"
+ },
+ {
+  "title": "我是猫（吾輩は猫である）",
+  "author": "[日] 夏目漱石 著、尤炳圻、胡雪 译",
+  "publisher": "人民文学出版社（名著名译插图本）",
+  "category": "外国文学",
+  "tags": [
+   "日本文学",
+   "经典"
+  ],
+  "confidence": "high",
+  "note": "A/C重复，以C为准",
+  "douban_id": "34852934",
+  "douban_url": "https://book.douban.com/subject/34852934/",
+  "cover": "covers/34852934.jpg",
+  "color": "#9f7748"
+ },
+ {
+  "title": "地下室手记",
+  "author": "[俄] 陀思妥耶夫斯基 著、臧仲伦 译",
+  "publisher": "读库经典/新星出版社（推测）",
+  "category": "外国文学",
+  "tags": [
+   "俄国文学",
+   "经典"
+  ],
+  "confidence": "mid",
+  "note": "出版社按推测标注",
+  "douban_id": "34990839",
+  "douban_url": "https://book.douban.com/subject/34990839/",
+  "cover": "covers/34990839.jpg",
+  "color": "#8f847a"
+ },
+ {
+  "title": "金阁寺",
+  "author": "[日] 三岛由纪夫 著、陈德文 译",
+  "publisher": "中信出版集团（文库本）",
+  "category": "外国文学",
+  "tags": [
+   "日本文学"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "3391248",
+  "douban_url": "https://book.douban.com/subject/3391248/",
+  "cover": "covers/3391248.jpg",
+  "color": "#898e8f"
+ },
+ {
+  "title": "巨人的陨落 I（世纪三部曲第一部）",
+  "author": "[英] 肯·福莱特 著、于大卫 译",
+  "publisher": "读客·江苏凤凰文艺出版社",
+  "category": "外国文学",
+  "tags": [
+   "历史小说",
+   "三部曲"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "26698660",
+  "douban_url": "https://book.douban.com/subject/26698660/",
+  "cover": "covers/26698660.jpg",
+  "color": "#913f37"
+ },
+ {
+  "title": "巨人的陨落 II",
+  "author": "[英] 肯·福莱特 著、于大卫 译",
+  "publisher": "读客·江苏凤凰文艺出版社",
+  "category": "外国文学",
+  "tags": [
+   "历史小说",
+   "三部曲"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "26698660",
+  "douban_url": "https://book.douban.com/subject/26698660/",
+  "cover": "covers/26698660.jpg",
+  "color": "#913f37"
+ },
+ {
+  "title": "巨人的陨落 III",
+  "author": "[英] 肯·福莱特 著、于大卫 译",
+  "publisher": "读客·江苏凤凰文艺出版社",
+  "category": "外国文学",
+  "tags": [
+   "历史小说",
+   "三部曲"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "26698660",
+  "douban_url": "https://book.douban.com/subject/26698660/",
+  "cover": "covers/26698660.jpg",
+  "color": "#913f37"
+ },
+ {
+  "title": "生如夏花：泰戈尔经典诗选（泰戈尔诞辰150周年纪念版）",
+  "author": "[印] 泰戈尔 著、郑振铎 译",
+  "publisher": "江苏凤凰文艺出版社·时代华语",
+  "category": "外国文学",
+  "tags": [
+   "诗歌"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "6558446",
+  "douban_url": "https://book.douban.com/subject/6558446/",
+  "cover": "covers/6558446.jpg",
+  "color": "#a79572"
+ },
+ {
+  "title": "S.（忒修斯之船）",
+  "author": "[美] J.J.艾布拉姆斯、道格·道斯特",
+  "publisher": "中信出版社",
+  "category": "外国文学",
+  "tags": [
+   "实验小说",
+   "悬疑"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "26356515",
+  "douban_url": "https://book.douban.com/subject/26356515/",
+  "cover": "covers/26356515.jpg",
+  "color": "#4d4742"
+ },
+ {
+  "title": "头号书迷（上？）",
+  "author": "疑为 [美] 斯蒂芬·金",
+  "publisher": "人民文学出版社·99读书人（推测）",
+  "category": "外国文学",
+  "tags": [
+   "惊悚小说"
+  ],
+  "confidence": "low",
+  "note": "书脊残字，作者/出版社均为推测",
+  "douban_id": "25728473",
+  "douban_url": "https://book.douban.com/subject/25728473/",
+  "cover": "covers/25728473.jpg",
+  "color": "#66292c"
+ },
+ {
+  "title": "胡斯战争 卷一：愚人之塔（Narrenturm）",
+  "author": "[波] 安杰伊·萨普科夫斯基",
+  "publisher": "重庆出版社",
+  "category": "外国文学",
+  "tags": [
+   "奇幻",
+   "历史小说"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "36532325",
+  "douban_url": "https://book.douban.com/subject/36532325/",
+  "cover": "covers/36532325.jpg",
+  "color": "#6a6a60"
+ },
+ {
+  "title": "TOLKIEN（托尔金英文书，具体分册不明）",
+  "author": "J.R.R. Tolkien",
+  "publisher": "英文原版",
+  "category": "外国文学",
+  "tags": [
+   "奇幻",
+   "英文原版"
+  ],
+  "confidence": "mid",
+  "note": "仅见书脊“TOLKIEN”"
+ },
+ {
+  "title": "两京十五日",
+  "author": "马伯庸",
+  "publisher": "湖南文艺出版社·博集天卷",
+  "category": "历史小说与悬疑",
+  "tags": [
+   "明史",
+   "历史小说"
+  ],
+  "confidence": "high",
+  "note": "A/C重复",
+  "douban_id": "35080870",
+  "douban_url": "https://book.douban.com/subject/35080870/",
+  "cover": "covers/35080870.jpg",
+  "color": "#9c443b"
+ },
+ {
+  "title": "北洋夜行记",
+  "author": "金醉·魔宙",
+  "publisher": "中国友谊出版公司·魔宙",
+  "category": "历史小说与悬疑",
+  "tags": [
+   "悬疑",
+   "都市传说"
+  ],
+  "confidence": "high",
+  "note": "A/C重复，以C出版社信息为准",
+  "douban_id": "27166426",
+  "douban_url": "https://book.douban.com/subject/27166426/",
+  "cover": "covers/27166426.jpg",
+  "color": "#8f6242"
+ },
+ {
+  "title": "西游八十一案：大唐泥犁狱",
+  "author": "陈渐",
+  "publisher": "重庆出版社·紫焰传媒",
+  "category": "历史小说与悬疑",
+  "tags": [
+   "悬疑",
+   "西游"
+  ],
+  "confidence": "high",
+  "note": "A/C重复",
+  "douban_id": "27609563",
+  "douban_url": "https://book.douban.com/subject/27609563/",
+  "cover": "covers/27609563.jpg",
+  "color": "#63523e"
+ },
+ {
+  "title": "认识电影（全彩插图第12版）",
+  "author": "[美] 路易斯·贾内梯",
+  "publisher": "后浪电影学院/Pearson",
+  "category": "艺术与电影",
+  "tags": [
+   "电影",
+   "教材"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "26848740",
+  "douban_url": "https://book.douban.com/subject/26848740/",
+  "cover": "covers/26848740.jpg",
+  "color": "#6b6667"
+ },
+ {
+  "title": "鸟瞰古文明：130幅城市复原图重现古地中海文明",
+  "author": "[法] 让-克劳德·戈尔万",
+  "publisher": "后浪",
+  "category": "艺术与电影",
+  "tags": [
+   "古文明",
+   "复原图"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "34617780",
+  "douban_url": "https://book.douban.com/subject/34617780/",
+  "cover": "covers/34617780.jpg",
+  "color": "#b09769"
+ },
+ {
+  "title": "盐香风色：扬州八怪传",
+  "author": "周文翰",
+  "publisher": "新星出版社·读库（“文人视觉传记”系列）",
+  "category": "艺术与电影",
+  "tags": [
+   "艺术史",
+   "扬州八怪"
+  ],
+  "confidence": "high",
+  "note": "A/C重复，以C为准（2025）",
+  "douban_id": "37563668",
+  "douban_url": "https://book.douban.com/subject/37563668/",
+  "cover": "covers/37563668.jpg",
+  "color": "#61b8ae"
+ },
+ {
+  "title": "安岳（石窟史诗系列第一册）",
+  "author": "王南、袁进钊",
+  "publisher": "读库·四川美术出版社",
+  "category": "艺术与电影",
+  "tags": [
+   "石窟",
+   "考古"
+  ],
+  "confidence": "high",
+  "note": "2024-12出版，已核实",
+  "douban_id": "37184166",
+  "douban_url": "https://book.douban.com/subject/37184166/",
+  "cover": "covers/37184166.jpg",
+  "color": "#5a5d5d"
+ },
+ {
+  "title": "红楼食经",
+  "author": "丁章华、李维冰",
+  "publisher": "江苏人民出版社",
+  "category": "生活方式与美食",
+  "tags": [
+   "饮食文化",
+   "红楼梦"
+  ],
+  "confidence": "high",
+  "note": "线装式裸脊，已核实",
+  "douban_id": "30539340",
+  "douban_url": "https://book.douban.com/subject/30539340/",
+  "cover": "covers/30539340.jpg",
+  "color": "#bf665a"
+ },
+ {
+  "title": "吃的江湖",
+  "author": "林卫辉",
+  "publisher": "广东人民出版社",
+  "category": "生活方式与美食",
+  "tags": [
+   "饮食随笔"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "35425337",
+  "douban_url": "https://book.douban.com/subject/35425337/",
+  "cover": "covers/35425337.jpg",
+  "color": "#968384"
+ },
+ {
+  "title": "一碟腌菜",
+  "author": "张家荣",
+  "publisher": "新星出版社·读库",
+  "category": "生活方式与美食",
+  "tags": [
+   "饮食文化"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "27157160",
+  "douban_url": "https://book.douban.com/subject/27157160/",
+  "cover": "covers/27157160.jpg",
+  "color": "#ac8f6c"
+ },
+ {
+  "title": "北方厨房：一个家庭的烹饪史",
+  "author": "蒋韵",
+  "publisher": "上海文艺出版社",
+  "category": "生活方式与美食",
+  "tags": [
+   "饮食",
+   "家族记忆"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "35501309",
+  "douban_url": "https://book.douban.com/subject/35501309/",
+  "cover": "covers/35501309.jpg",
+  "color": "#985842"
+ },
+ {
+  "title": "人间食话",
+  "author": "梁实秋",
+  "publisher": "天津人民出版社（文通天下出品）",
+  "category": "生活方式与美食",
+  "tags": [
+   "饮食散文"
+  ],
+  "confidence": "high",
+  "note": "已核实（2019）",
+  "douban_id": "33455875",
+  "douban_url": "https://book.douban.com/subject/33455875/",
+  "cover": "covers/33455875.jpg",
+  "color": "#a3a475"
+ },
+ {
+  "title": "料理全书：初江奶奶带你从零开始学习日本料理",
+  "author": "[日] 高木初江",
+  "publisher": "未读·生活家",
+  "category": "生活方式与美食",
+  "tags": [
+   "日本料理",
+   "食谱"
+  ],
+  "confidence": "mid",
+  "note": "副题/作者小字部分模糊",
+  "douban_id": "26665581",
+  "douban_url": "https://book.douban.com/subject/26665581/",
+  "cover": "covers/26665581.jpg",
+  "color": "#c07c59"
+ },
+ {
+  "title": "料理图鉴",
+  "author": "[日] 越智登代子 著、平野惠理子 绘",
+  "publisher": "后浪",
+  "category": "生活方式与美食",
+  "tags": [
+   "料理",
+   "图鉴"
+  ],
+  "confidence": "high",
+  "note": "作者据检索补全",
+  "douban_id": "30300327",
+  "douban_url": "https://book.douban.com/subject/30300327/",
+  "cover": "covers/30300327.jpg",
+  "color": "#c07159"
+ },
+ {
+  "title": "回家做面包",
+  "author": "爱和自由",
+  "publisher": "版本不详",
+  "category": "生活方式与美食",
+  "tags": [
+   "烘焙"
+  ],
+  "confidence": "mid",
+  "note": "书脊见“爱自由”logo",
+  "douban_id": "33390400",
+  "douban_url": "https://book.douban.com/subject/33390400/",
+  "cover": "covers/33390400.jpg",
+  "color": "#9d897b"
+ },
+ {
+  "title": "厨房科学超图解：700个料理冷知识，解密烹饪的真相",
+  "author": "作者不详",
+  "publisher": "有书至美",
+  "category": "生活方式与美食",
+  "tags": [
+   "烹饪科学"
+  ],
+  "confidence": "mid",
+  "note": "",
+  "douban_id": "35672000",
+  "douban_url": "https://book.douban.com/subject/35672000/",
+  "cover": "covers/35672000.jpg",
+  "color": "#b16d58"
+ },
+ {
+  "title": "好物让人上瘾：和喜欢的一切在一起",
+  "author": "[日] 香菜子",
+  "publisher": "北京时代华文书局",
+  "category": "生活方式与美食",
+  "tags": [
+   "生活方式",
+   "好物"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "34809211",
+  "douban_url": "https://book.douban.com/subject/34809211/",
+  "cover": "covers/34809211.jpg",
+  "color": "#b39565"
+ },
+ {
+  "title": "短而常的瑜伽（Yoga: A Manual for Life）",
+  "author": "[英] 娜奥米·安南德 著、缪妙 译",
+  "publisher": "乐府文化",
+  "category": "生活方式与美食",
+  "tags": [
+   "瑜伽",
+   "健康"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "36278950",
+  "douban_url": "https://book.douban.com/subject/36278950/",
+  "cover": "covers/36278950.jpg",
+  "color": "#c08259"
+ },
+ {
+  "title": "给你的猫一个家",
+  "author": "[日] 株式会社无限知识 著、廖雯雯 译",
+  "publisher": "磨铁",
+  "category": "宠物与自然",
+  "tags": [
+   "宠物",
+   "猫"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "34450826",
+  "douban_url": "https://book.douban.com/subject/34450826/",
+  "cover": "covers/34450826.jpg",
+  "color": "#9e907a"
+ },
+ {
+  "title": "猫猫饭食",
+  "author": "[韩] 金泰希 著、刑青青 译",
+  "publisher": "中国画报出版社",
+  "category": "宠物与自然",
+  "tags": [
+   "宠物",
+   "猫"
+  ],
+  "confidence": "high",
+  "note": "已检索核实（2013）",
+  "douban_id": "25693197",
+  "douban_url": "https://book.douban.com/subject/25693197/",
+  "cover": "covers/25693197.jpg",
+  "color": "#b26769"
+ },
+ {
+  "title": "中国猫咪",
+  "author": "刘朝飞 编著",
+  "publisher": "巴蜀书社·远涉文化",
+  "category": "宠物与自然",
+  "tags": [
+   "猫",
+   "传统文化"
+  ],
+  "confidence": "high",
+  "note": "A/C重复，以C为准（古代猫文化古籍新编）",
+  "douban_id": "37158038",
+  "douban_url": "https://book.douban.com/subject/37158038/",
+  "cover": "covers/37158038.jpg",
+  "color": "#bd845c"
+ },
+ {
+  "title": "不可思议的果实种子图鉴",
+  "author": "作者不详",
+  "publisher": "版本不详",
+  "category": "宠物与自然",
+  "tags": [
+   "自然",
+   "图鉴"
+  ],
+  "confidence": "mid",
+  "note": "",
+  "douban_id": "36147070",
+  "douban_url": "https://book.douban.com/subject/36147070/",
+  "cover": "covers/36147070.jpg",
+  "color": "#a48b75"
+ },
+ {
+  "title": "常见花草轻图鉴",
+  "author": "付彦荣 主编、含章新实用编辑部 编著",
+  "publisher": "江苏凤凰科学技术出版社",
+  "category": "宠物与自然",
+  "tags": [
+   "植物",
+   "图鉴"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "36284922",
+  "douban_url": "https://book.douban.com/subject/36284922/",
+  "cover": "covers/36284922.jpg",
+  "color": "#a49074"
+ },
+ {
+  "title": "美国儿科学会育儿百科（第7版）",
+  "author": "[美] 塔尼娅·奥尔特曼 主编、唐亚 等译",
+  "publisher": "北京科学技术出版社",
+  "category": "育儿与绘本",
+  "tags": [
+   "育儿",
+   "健康"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "35218443",
+  "douban_url": "https://book.douban.com/subject/35218443/",
+  "cover": "covers/35218443.jpg",
+  "color": "#827c9c"
+ },
+ {
+  "title": "新手妈妈的头两年",
+  "author": "[日] 高木直子 著绘",
+  "publisher": "新星出版社",
+  "category": "育儿与绘本",
+  "tags": [
+   "绘本",
+   "育儿"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "35273151",
+  "douban_url": "https://book.douban.com/subject/35273151/",
+  "cover": "covers/35273151.jpg",
+  "color": "#b08868"
+ },
+ {
+  "title": "好绘本如何好",
+  "author": "郝广才",
+  "publisher": "二十一世纪出版社",
+  "category": "育儿与绘本",
+  "tags": [
+   "图画书",
+   "阅读教育"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "26797923",
+  "douban_url": "https://book.douban.com/subject/26797923/",
+  "cover": "covers/26797923.jpg",
+  "color": "#c05f59"
+ },
+ {
+  "title": "欢迎走进图画书王国",
+  "author": "孙莉莉",
+  "publisher": "广西师范大学出版社·魔法象（“阅读学园”）",
+  "category": "育儿与绘本",
+  "tags": [
+   "图画书",
+   "阅读教育"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "30387666",
+  "douban_url": "https://book.douban.com/subject/30387666/",
+  "cover": "covers/30387666.jpg",
+  "color": "#ac876c"
+ },
+ {
+  "title": "父与子（大师经典）",
+  "author": "[德] 埃·奥·卜劳恩",
+  "publisher": "未读·大师经典",
+  "category": "育儿与绘本",
+  "tags": [
+   "漫画",
+   "经典"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "35933906",
+  "douban_url": "https://book.douban.com/subject/35933906/",
+  "cover": "covers/35933906.jpg",
+  "color": "#8c8c8c"
+ },
+ {
+  "title": "Pinocchio（木偶奇遇记，英文插图版）",
+  "author": "Carlo Collodi",
+  "publisher": "英文原版（版本未详）",
+  "category": "育儿与绘本",
+  "tags": [
+   "儿童文学",
+   "英文原版"
+  ],
+  "confidence": "mid",
+  "note": ""
+ },
+ {
+  "title": "野生动物在长春·第贰辑",
+  "author": "史航 著、吕欣 绘",
+  "publisher": "读库·新星出版社",
+  "category": "育儿与绘本",
+  "tags": [
+   "绘本",
+   "漫画"
+  ],
+  "confidence": "high",
+  "note": "已检索核实全名",
+  "douban_id": "36205660",
+  "douban_url": "https://book.douban.com/subject/36205660/",
+  "cover": "covers/36205660.jpg",
+  "color": "#938e85"
+ },
+ {
+  "title": "读库 2005",
+  "author": "张立宪 主编",
+  "publisher": "读库·新星出版社",
+  "category": "杂志书Mook",
+  "tags": [
+   "读库",
+   "Mook"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "35228033",
+  "douban_url": "https://book.douban.com/subject/35228033/",
+  "cover": "covers/35228033.jpg",
+  "color": "#849590"
+ },
+ {
+  "title": "读库 2400",
+  "author": "张立宪 主编",
+  "publisher": "读库·新星出版社",
+  "category": "杂志书Mook",
+  "tags": [
+   "读库",
+   "Mook"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "36680227",
+  "douban_url": "https://book.douban.com/subject/36680227/",
+  "cover": "covers/36680227.jpg",
+  "color": "#b37066"
+ },
+ {
+  "title": "读库 2500（期号推测）",
+  "author": "张立宪 主编",
+  "publisher": "读库·新星出版社",
+  "category": "杂志书Mook",
+  "tags": [
+   "读库",
+   "Mook"
+  ],
+  "confidence": "low",
+  "note": "橙色书脊“DUKU 250…”被遮挡，期号为推测",
+  "douban_id": "37191862",
+  "douban_url": "https://book.douban.com/subject/37191862/",
+  "cover": "covers/37191862.jpg",
+  "color": "#a77671"
+ },
+ {
+  "title": "读库 2600",
+  "author": "张立宪 主编",
+  "publisher": "读库·新星出版社",
+  "category": "杂志书Mook",
+  "tags": [
+   "读库",
+   "Mook"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "38494172",
+  "douban_url": "https://book.douban.com/subject/38494172/",
+  "cover": "covers/38494172.jpg",
+  "color": "#c06859"
+ },
+ {
+  "title": "读库 2601",
+  "author": "张立宪 主编",
+  "publisher": "读库·新星出版社",
+  "category": "杂志书Mook",
+  "tags": [
+   "读库",
+   "Mook"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "38361098",
+  "douban_url": "https://book.douban.com/subject/38361098/",
+  "cover": "covers/38361098.jpg",
+  "color": "#c06859"
+ },
+ {
+  "title": "读库 2603",
+  "author": "张立宪 主编",
+  "publisher": "新星出版社",
+  "category": "杂志书Mook",
+  "tags": [
+   "读库",
+   "Mook"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "38531179",
+  "douban_url": "https://book.douban.com/subject/38531179/",
+  "cover": "covers/38531179.jpg",
+  "color": "#c06859"
+ },
+ {
+  "title": "单读30：去公园和野外",
+  "author": "吴琦 主编",
+  "publisher": "单读/上海文艺出版社",
+  "category": "杂志书Mook",
+  "tags": [
+   "单读",
+   "Mook"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "35802205",
+  "douban_url": "https://book.douban.com/subject/35802205/",
+  "cover": "covers/35802205.jpg",
+  "color": "#698961"
+ },
+ {
+  "title": "单读09：多谈谈问题",
+  "author": "吴琦 主编",
+  "publisher": "单读·上海文艺出版社",
+  "category": "杂志书Mook",
+  "tags": [
+   "单读",
+   "社会思想"
+  ],
+  "confidence": "high",
+  "note": "",
+  "douban_id": "36321036",
+  "douban_url": "https://book.douban.com/subject/36321036/",
+  "cover": "covers/36321036.jpg",
+  "color": "#5b9cbe"
+ },
+ {
+  "title": "单读·爱尔兰文学特辑",
+  "author": "吴琦 主编",
+  "publisher": "单读/上海文艺出版社",
+  "category": "杂志书Mook",
+  "tags": [
+   "单读",
+   "爱尔兰文学"
+  ],
+  "confidence": "low",
+  "note": "期号不确定，顶部小字可辨"
+ },
+ {
+  "title": "人民文学 2026年第1期",
+  "author": "人民文学杂志社",
+  "publisher": "人民文学出版社",
+  "category": "杂志书Mook",
+  "tags": [
+   "文学期刊"
+  ],
+  "confidence": "high",
+  "note": "A图1下层平放两本同期，算1条"
+ },
+ {
+  "title": "人民文学 2026年第2期",
+  "author": "人民文学杂志社",
+  "publisher": "人民文学出版社",
+  "category": "杂志书Mook",
+  "tags": [
+   "文学期刊"
+  ],
+  "confidence": "high",
+  "note": "C图1平放；与第1期为两期，分计",
+  "douban_id": "38421261",
+  "douban_url": "https://book.douban.com/subject/38421261/",
+  "cover": "covers/38421261.jpg",
+  "color": "#c06359"
+ },
+ {
+  "title": "深度强化学习",
+  "author": "王树森、黎彧君、张志华",
+  "publisher": "人民邮电出版社",
+  "category": "计算机与人工智能",
+  "tags": [
+   "强化学习",
+   "AI"
+  ],
+  "confidence": "high",
+  "note": "2026-08 桌面小书架新增",
+  "douban_id": "36161659",
+  "douban_url": "https://book.douban.com/subject/36161659/",
+  "cover": "covers/36161659.jpg",
+  "color": "#537aad"
+ },
+ {
+  "title": "强化学习的数学原理",
+  "author": "赵世钰",
+  "publisher": "清华大学出版社",
+  "category": "计算机与人工智能",
+  "tags": [
+   "强化学习",
+   "数学"
+  ],
+  "confidence": "high",
+  "note": "2026-08 桌面小书架新增",
+  "douban_id": "37309451",
+  "douban_url": "https://book.douban.com/subject/37309451/",
+  "cover": "covers/37309451.jpg",
+  "color": "#5b86be"
+ },
+ {
+  "title": "动手学深度学习",
+  "author": "阿斯顿·张、李沐 等",
+  "publisher": "人民邮电出版社",
+  "category": "计算机与人工智能",
+  "tags": [
+   "深度学习",
+   "AI"
+  ],
+  "confidence": "high",
+  "note": "2026-08 桌面小书架新增",
+  "douban_id": "33450010",
+  "douban_url": "https://book.douban.com/subject/33450010/",
+  "cover": "covers/33450010.jpg",
+  "color": "#7a8580"
+ },
+ {
+  "title": "大模型算法：强化学习、微调与对齐",
+  "author": "余昌叶",
+  "publisher": "电子工业出版社",
+  "category": "计算机与人工智能",
+  "tags": [
+   "大模型",
+   "强化学习",
+   "对齐"
+  ],
+  "confidence": "high",
+  "note": "2026-08 桌面小书架新增",
+  "douban_id": "37331056",
+  "douban_url": "https://book.douban.com/subject/37331056/",
+  "cover": "covers/37331056.jpg",
+  "color": "#4162a8"
+ },
+ {
+  "title": "深度学习入门 4：强化学习",
+  "author": "[日] 斋藤康毅",
+  "publisher": "人民邮电出版社",
+  "category": "计算机与人工智能",
+  "tags": [
+   "深度学习",
+   "强化学习",
+   "入门"
+  ],
+  "confidence": "high",
+  "note": "2026-08 桌面小书架新增",
+  "douban_id": "36991430",
+  "douban_url": "https://book.douban.com/subject/36991430/",
+  "cover": "covers/36991430.jpg",
+  "color": "#bd5064"
+ },
+ {
+  "title": "Redis 应用实例",
+  "author": "黄健宏",
+  "publisher": "人民邮电出版社",
+  "category": "计算机与人工智能",
+  "tags": [
+   "Redis",
+   "数据库"
+  ],
+  "confidence": "high",
+  "note": "2026-08 桌面小书架新增",
+  "douban_id": "37044995",
+  "douban_url": "https://book.douban.com/subject/37044995/",
+  "cover": "covers/37044995.jpg",
+  "color": "#71a7a7"
+ },
+ {
+  "title": "原则",
+  "author": "[美] 瑞·达利欧",
+  "publisher": "中信出版社",
+  "category": "商业科技与互联网",
+  "tags": [
+   "管理",
+   "人生原则"
+  ],
+  "confidence": "high",
+  "note": "2026-08 桌面小书架新增",
+  "douban_id": "27608239",
+  "douban_url": "https://book.douban.com/subject/27608239/",
+  "cover": "covers/27608239.jpg",
+  "color": "#66292c"
+ },
+ {
+  "title": "Zen and the Art of Motorcycle Maintenance（禅与摩托车维修艺术 英文原版）",
+  "author": "Robert M. Pirsig",
+  "publisher": "英文原版",
+  "category": "哲学与思想",
+  "tags": [
+   "哲学",
+   "英文原版"
+  ],
+  "confidence": "high",
+  "note": "2026-08 桌面小书架新增",
+  "douban_id": "1478120",
+  "douban_url": "https://book.douban.com/subject/1478120/",
+  "cover": "covers/1478120.jpg",
+  "color": "#89908d"
+ },
+ {
+  "title": "土木",
+  "author": "张明扬",
+  "publisher": "新星出版社（读库）",
+  "category": "中国历史与近代史",
+  "tags": [
+   "明代",
+   "土木堡之变",
+   "读库"
+  ],
+  "confidence": "high",
+  "note": "2025年10月新书；2026-08 桌面小书架新增",
+  "douban_id": "37534754",
+  "douban_url": "https://book.douban.com/subject/37534754/",
+  "cover": "covers/37534754.jpg",
+  "color": "#4f4d47"
+ },
+ {
+  "title": "安史之乱：历史、宣传与神话",
+  "author": "张诗坪、胡可奇",
+  "publisher": "世纪文景/上海人民出版社",
+  "category": "中国历史与近代史",
+  "tags": [
+   "唐代",
+   "安史之乱",
+   "文景"
+  ],
+  "confidence": "high",
+  "note": "2026-08 桌面小书架新增",
+  "douban_id": "37118766",
+  "douban_url": "https://book.douban.com/subject/37118766/",
+  "cover": "covers/37118766.jpg",
+  "color": "#7a8271"
+ },
+ {
+  "title": "秩序之诗：花朵、建筑、埃舍尔",
+  "author": "张羿",
+  "publisher": "新星出版社（读库）",
+  "category": "艺术与电影",
+  "tags": [
+   "数学",
+   "艺术",
+   "埃舍尔",
+   "读库"
+  ],
+  "confidence": "high",
+  "note": "2026-08 桌面小书架新增",
+  "douban_id": "36640422",
+  "douban_url": "https://book.douban.com/subject/36640422/",
+  "cover": "covers/36640422.jpg",
+  "color": "#c06959"
+ },
+ {
+  "title": "家庭健康管理全书",
+  "author": "冯雪",
+  "publisher": "天津科学技术出版社（得到图书）",
+  "category": "健康养生",
+  "tags": [
+   "健康",
+   "家庭医学"
+  ],
+  "confidence": "high",
+  "note": "2026-08 桌面小书架新增",
+  "douban_id": "37498421",
+  "douban_url": "https://book.douban.com/subject/37498421/",
+  "cover": "covers/37498421.jpg",
+  "color": "#385193"
+ },
+ {
+  "title": "塞尔达传说：旷野之息 大师之书",
+  "author": "日本任天堂 著，林延平 译",
+  "publisher": "新星出版社",
+  "category": "游戏与流行文化",
+  "tags": [
+   "塞尔达传说",
+   "设定集",
+   "任天堂"
+  ],
+  "confidence": "high",
+  "note": "2026-08 新增（照片识别）",
+  "douban_id": "34432985",
+  "douban_url": "https://book.douban.com/subject/34432985/",
+  "cover": "covers/34432985.jpg",
+  "color": "#9b907e",
+  "added": "2026-08-02",
+  "source_photo": "photos/newbook_20260802.jpg",
+  "source_photo_thumb": "photos/newbook_20260802_thumb.jpg"
+ },
+ {
+  "title": "死亡搁浅艺术设定集",
+  "author": "小岛工作室 著，林延平 译",
+  "publisher": "新星出版社",
+  "category": "游戏与流行文化",
+  "tags": [
+   "死亡搁浅",
+   "小岛秀夫",
+   "设定集"
+  ],
+  "confidence": "high",
+  "note": "2026-08 新增（照片识别）",
+  "douban_id": "34942577",
+  "douban_url": "https://book.douban.com/subject/34942577/",
+  "cover": "covers/34942577.jpg",
+  "color": "#898b8f",
+  "added": "2026-08-02",
+  "source_photo": "photos/newbook_20260802.jpg",
+  "source_photo_thumb": "photos/newbook_20260802_thumb.jpg"
+ },
+ {
+  "title": "这里是中国",
+  "author": "星球研究所、中国青藏高原研究会 著",
+  "publisher": "中信出版集团",
+  "category": "科普博物",
+  "tags": [
+   "地理",
+   "国民地理书"
+  ],
+  "confidence": "high",
+  "note": "2026-08 新增（照片识别）",
+  "douban_id": "34835320",
+  "douban_url": "https://book.douban.com/subject/34835320/",
+  "cover": "covers/34835320.jpg",
+  "color": "#889485",
+  "added": "2026-08-02",
+  "source_photo": "photos/newbook_20260802.jpg",
+  "source_photo_thumb": "photos/newbook_20260802_thumb.jpg"
+ },
+ {
+  "title": "新京报书评周刊合订本（2025年1月~2025年12月）",
+  "author": "新京报社 主编",
+  "publisher": "中国纺织出版社",
+  "category": "杂志书Mook",
+  "tags": [
+   "书评周刊",
+   "合订本",
+   "新京报"
+  ],
+  "confidence": "high",
+  "note": "2026-08 新增（照片识别）；2026年4月出版，精装改版",
+  "douban_id": "38436256",
+  "douban_url": "https://book.douban.com/subject/38436256/",
+  "cover": "covers/38436256.jpg",
+  "color": "#918c87",
+  "added": "2026-08-02",
+  "source_photo": "photos/newbook_20260802.jpg",
+  "source_photo_thumb": "photos/newbook_20260802_thumb.jpg"
+ }
 ]
