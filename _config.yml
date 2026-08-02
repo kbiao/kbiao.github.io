@@ -27,7 +27,7 @@ archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
-skip_render:
+skip_render: bookshelf/**
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -79,7 +79,6 @@ deploy:
   - type: git
     repo: git@github.com:kbiao/kbiao.github.io.git
     branch: master
-  - type: leancloud_counter_security_sync
 
 #baidu_analytics: 40650f57a96f0df2cfe5cee491a33cae
 
