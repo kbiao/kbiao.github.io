@@ -3232,5 +3232,72 @@
     "douban_url": "https://book.douban.com/subject/37498421/",
     "cover": "covers/37498421.jpg",
     "color": "#385193"
+  },
+  {
+    "title": "塞尔达传说：旷野之息 大师之书",
+    "author": "日本任天堂 著，林延平 译",
+    "publisher": "新星出版社",
+    "category": "游戏与流行文化",
+    "tags": [
+      "塞尔达传说",
+      "设定集",
+      "任天堂"
+    ],
+    "confidence": "high",
+    "note": "2026-08 新增（照片识别）",
+    "douban_id": "34432985",
+    "douban_url": "https://book.douban.com/subject/34432985/",
+    "cover": "covers/34432985.jpg",
+    "color": "#9b907e"
+  },
+  {
+    "title": "死亡搁浅艺术设定集",
+    "author": "小岛工作室 著，林延平 译",
+    "publisher": "新星出版社",
+    "category": "游戏与流行文化",
+    "tags": [
+      "死亡搁浅",
+      "小岛秀夫",
+      "设定集"
+    ],
+    "confidence": "high",
+    "note": "2026-08 新增（照片识别）",
+    "douban_id": "34942577",
+    "douban_url": "https://book.douban.com/subject/34942577/",
+    "cover": "covers/34942577.jpg",
+    "color": "#898b8f"
+  },
+  {
+    "title": "这里是中国",
+    "author": "星球研究所、中国青藏高原研究会 著",
+    "publisher": "中信出版集团",
+    "category": "科普博物",
+    "tags": [
+      "地理",
+      "国民地理书"
+    ],
+    "confidence": "high",
+    "note": "2026-08 新增（照片识别）",
+    "douban_id": "34835320",
+    "douban_url": "https://book.douban.com/subject/34835320/",
+    "cover": "covers/34835320.jpg",
+    "color": "#889485"
+  },
+  {
+    "title": "新京报书评周刊合订本（2025年1月~2025年12月）",
+    "author": "新京报社 主编",
+    "publisher": "中国纺织出版社",
+    "category": "杂志书Mook",
+    "tags": [
+      "书评周刊",
+      "合订本",
+      "新京报"
+    ],
+    "confidence": "high",
+    "note": "2026-08 新增（照片识别）；2026年4月出版，精装改版",
+    "douban_id": "38436256",
+    "douban_url": "https://book.douban.com/subject/38436256/",
+    "cover": "covers/38436256.jpg",
+    "color": "#918c87"
   }
 ]
