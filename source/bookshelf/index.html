@@ -864,6 +864,20 @@ function initApp(){
   document.title = "我的书架 · " + BOOKS.length + " 本书构成的精神世界";
   var sub = document.querySelector("header.app-header p.sub");
   if (sub) sub.textContent = BOOKS.length + " 本书构成的精神世界";
+
+  /* hash 深链：#profile / #about 直达对应页签，#list 直达列表视图 */
+  var hash = location.hash;
+  if (hash === "#list"){
+    viewMode = "list";
+    viewToggle.querySelectorAll("button").forEach(function(b){
+      b.classList.toggle("on", b.getAttribute("data-view") === "list");
+    });
+    sortSelect.style.display = "";
+    buildShelf();
+  } else if (hash === "#profile" || hash === "#about"){
+    var tabBtn = document.querySelector('nav.tabbar button[data-page="' + hash.slice(1) + '"]');
+    if (tabBtn) tabBtn.click();
+  }
 }
 
 /* 从同目录 books.json / profile.json 载入数据；维护书单与画像只需编辑这两个文件 */
