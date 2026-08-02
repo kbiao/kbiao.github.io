@@ -49,6 +49,16 @@ header.app-header{
   position:sticky;top:0;z-index:40;
   background:#f5efe4;
 }
+.back-home{
+  position:absolute;top:14px;right:16px;
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:.76rem;color:var(--ink-soft);text-decoration:none;
+  border:1px solid var(--line);border-radius:999px;padding:5px 12px;
+  background:var(--card);box-shadow:var(--shadow);
+  transition:color .15s ease,border-color .15s ease;
+}
+.back-home:hover{color:var(--wood-dark);border-color:var(--wood-light)}
+.back-home:active{transform:scale(.96)}
 header.app-header h1{
   font-family:var(--serif);
   font-size:1.5rem;
@@ -419,6 +429,8 @@ nav.tabbar button.active .ico{transform:translateY(-1px)}
 <body>
 <div class="wrap">
   <header class="app-header">
+    <!-- 相对路径 ../ ：书架始终部署在博客根路径下的 bookshelf/ 目录，../ 即博客首页，不写死域名以兼容任何部署位置 -->
+    <a class="back-home" href="../" title="返回博客首页">&#8592; 博客首页</a>
     <h1>我的书架</h1>
     <p class="sub">书单加载中…</p>
   </header>
