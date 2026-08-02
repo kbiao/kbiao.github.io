@@ -1,1 +1,512 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta name="theme-color" content="#222" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico"><link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico"><link rel="mask-icon" href="/images/logo.svg" color="#222"><link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous"><script class="next-config" data-name="main" type="application/json">{"hostname":"blog.kbiao.me","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script><meta name="description" content="六月，即将开始新的半年规划。自然要把业务数据拿出来看看，上个季度重启迭代的 AI 能力，UV 有小几百。和平台整体的 UV 大几千，且仍然保持 20%以上的增速相比，确实不算什么成绩。AI 工作台上线半年，渗透需要时间，这很正常。所有合理的话术我都背得出来——新能力爬坡期，用户习惯需要培养，先做深再做广。每一句都对。 但我心里清楚问题不在这里。问题是：我看着这两个数字的时候，脑子里冒出来的不是”怎"><meta property="og:type" content="blog"><meta property="og:title" content="登味系统——一个内部系统和它的中年"><meta property="og:url" content="https://blog.kbiao.me/Dengwei-System-An-Internal-System-And-Its-Midlife/index.html"><meta property="og:site_name" content="听雨小筑"><meta property="og:description" content="六月，即将开始新的半年规划。自然要把业务数据拿出来看看，上个季度重启迭代的 AI 能力，UV 有小几百。和平台整体的 UV 大几千，且仍然保持 20%以上的增速相比，确实不算什么成绩。AI 工作台上线半年，渗透需要时间，这很正常。所有合理的话术我都背得出来——新能力爬坡期，用户习惯需要培养，先做深再做广。每一句都对。 但我心里清楚问题不在这里。问题是：我看着这两个数字的时候，脑子里冒出来的不是”怎"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://image.kbiao.me/blog/img202606211657758.png?imageView2/2/w/1200/format/webp/quality/80"><meta property="article:published_time" content="2026-06-21T06:30:00.000Z"><meta property="article:modified_time" content="2026-06-21T09:14:28.217Z"><meta property="article:author" content="K、Biao"><meta property="article:tag" content="AI转型"><meta property="article:tag" content="中年"><meta property="article:tag" content="工程"><meta property="article:tag" content="平台老化"><meta property="article:tag" content="认知反思"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://image.kbiao.me/blog/img202606211657758.png?imageView2/2/w/1200/format/webp/quality/80"><link rel="canonical" href="https://blog.kbiao.me/Dengwei-System-An-Internal-System-And-Its-Midlife/"><script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.kbiao.me/Dengwei-System-An-Internal-System-And-Its-Midlife/","path":"/Dengwei-System-An-Internal-System-And-Its-Midlife/","title":"登味系统——一个内部系统和它的中年"}</script><script class="next-config" data-name="calendar" type="application/json">""</script><title>登味系统——一个内部系统和它的中年 | 听雨小筑</title><script src="/js/third-party/analytics/baidu-analytics.js" defer></script><script async src="https://hm.baidu.com/hm.js?40650f57a96f0df2cfe5cee491a33cae"></script><script size="160" alpha="0.6" zindex="-1" src="https://cdn.jsdelivr.net/npm/ribbon.js@1.0.2/dist/ribbon.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script><script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script><script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script><script src="https://cdn.jsdelivr.net/npm/pangu@7.2.0/dist/browser/pangu.umd.js" integrity="sha256-JnmRRnJK7DC6RQJbAJb6AXOM9OmWzS6z8eYultk/48Y=" crossorigin="anonymous" defer></script><script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/pjax.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.5.0/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script><script src="/js/third-party/search/local-search.js" defer></script><script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@11.10.1/dist/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script><script src="/js/third-party/tags/mermaid.js" defer></script><script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"7OTu25XcWOiqFHBrfOA46xsT-gzGzoHsz","app_key":"bigXFjf3hf5a9TEukm9xO7uT","server_url":"https://blog-api.kbiao.me","security":false}</script><script src="/js/third-party/statistics/lean-analytics.js" defer></script><script src="https://cdn.jsdelivr.net/npm/quicklink@3.0.1/dist/quicklink.umd.js" integrity="sha256-44BednzIpUeQJcY8qtLyarFu0UCCTbgmWOvaoehiFQQ=" crossorigin="anonymous" defer></script><script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://blog.kbiao.me/Dengwei-System-An-Internal-System-And-Its-Midlife/"}</script><script src="/js/third-party/quicklink.js" defer></script><noscript><link rel="stylesheet" href="/css/noscript.css"></noscript><link rel="alternate" href="/atom.xml" title="听雨小筑" type="application/atom+xml"></head><body itemscope itemtype="http://schema.org/WebPage" class="use-motion"><div class="headband"></div><main class="main"><div class="column"><header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container"><div class="site-nav-toggle"><div class="toggle" aria-label="切换导航栏" role="button"><span class="toggle-line"></span> <span class="toggle-line"></span> <span class="toggle-line"></span></div></div><div class="site-meta"><a href="/" class="brand" rel="start"><i class="logo-line"></i><p class="site-title">听雨小筑</p><i class="logo-line"></i></a><p class="site-subtitle" itemprop="description">爱学习，有梦想，实力派</p></div><div class="site-nav-right"><div class="toggle popup-trigger" aria-label="搜索" role="button"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class="site-nav"><ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">75</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">13</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">46</span></a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li><li class="menu-item menu-item-search"><a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索</a></li></ul></nav><div class="search-pop-overlay"><div class="popup search-popup"><div class="search-header"><span class="search-icon"><i class="fa fa-search"></i></span><div class="search-input-container"><input autocomplete="off" autocapitalize="off" maxlength="80" placeholder="搜索..." spellcheck="false" type="search" class="search-input"></div><span class="popup-btn-close" role="button"><i class="fa fa-times-circle"></i></span></div><div class="search-result-container"><div class="search-result-icon"><i class="fa fa-spinner fa-pulse fa-5x"></i></div></div></div></div></header><aside class="sidebar"><div class="sidebar-inner sidebar-nav-active sidebar-toc-active"><ul class="sidebar-nav"><li class="sidebar-nav-toc">文章目录</li><li class="sidebar-nav-overview">站点概览</li></ul><div class="sidebar-panel-container"><div class="post-toc-wrap sidebar-panel"><div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%99%BB%E5%91%B3%EF%BC%8C%E6%98%AF%E7%B3%BB%E7%BB%9F%E5%B1%82%E9%9D%A2%E7%9A%84%E4%B8%AD%E5%B9%B4"><span class="nav-text">一、登味，是系统层面的中年</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E7%99%BB%E5%91%B3%E4%B8%8D%E6%98%AF%E4%B8%80%E5%A4%A9%E5%85%BB%E6%88%90%E7%9A%84"><span class="nav-text">二、登味不是一天养成的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AE%83%E4%B8%8D%E5%86%8D%E5%93%8D%E5%BA%94"><span class="nav-text">三、为什么它不再响应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%86%99%E5%88%B0%E8%BF%99%E9%87%8C%EF%BC%8C%E6%88%91%E7%9C%8B%E6%B8%85%E4%BA%86%E4%B8%89%E4%BB%B6%E4%BA%8B"><span class="nav-text">四、写到这里，我看清了三件事</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%85%B6%E5%AE%9E%E5%86%99%E7%9A%84%E4%B8%8D%E5%8F%AA%E6%98%AF%E4%B8%9A%E5%8A%A1%E7%B3%BB%E7%BB%9F"><span class="nav-text">五、其实写的不只是业务系统</span></a></li></ol></div></div><div class="site-overview-wrap sidebar-panel"><div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="site-author-image" itemprop="image" alt="K、Biao" src="https://image.kbiao.me/kbiao.jpg"><p class="site-author-name" itemprop="name">K、Biao</p><div class="site-description" itemprop="description">彪彪的技术博客</div></div><div class="site-state-wrap animated"><nav class="site-state"><div class="site-state-item site-state-posts"><a href="/archives/"><span class="site-state-item-count">46</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"><a href="/categories/"><span class="site-state-item-count">13</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"><a href="/tags/"><span class="site-state-item-count">75</span> <span class="site-state-item-name">标签</span></a></div></nav></div><div class="links-of-author animated"><span class="links-of-author-item"><a href="https://github.com/kbiao" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kbiao" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a> </span><span class="links-of-author-item"><a href="http://www.zhihu.com/people/kbiao" title="知乎 → http:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;kbiao" rel="noopener me" target="_blank"></a> </span><span class="links-of-author-item"><a href="mailto:kbiao@qq.com" title="E-Mail → mailto:kbiao@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a> </span><span class="links-of-author-item"><a href="https://stackoverflow.com/kbiao" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;kbiao" rel="noopener me" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i></a></span></div></div></div></div><div class="pjax"></div></aside></div><div class="main-inner post posts-expand"><div class="post-block"><article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN"><link itemprop="mainEntityOfPage" href="https://blog.kbiao.me/Dengwei-System-An-Internal-System-And-Its-Midlife/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="image" content="https://image.kbiao.me/kbiao.jpg"><meta itemprop="name" content="K、Biao"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="听雨小筑"><meta itemprop="description" content="彪彪的技术博客"></span><span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork"><meta itemprop="name" content="登味系统——一个内部系统和它的中年 | 听雨小筑"><meta itemprop="description" content=""></span><header class="post-header"><h1 class="post-title" itemprop="name headline">登味系统——一个内部系统和它的中年</h1><div class="post-meta-container"><div class="post-meta"><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-calendar"></i> </span><span class="post-meta-item-text">发表于</span> <time title="创建时间：2026-06-21 14:30:00" itemprop="dateCreated datePublished" datetime="2026-06-21T14:30:00+08:00">2026-06-21</time> </span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-calendar-check"></i> </span><span class="post-meta-item-text">更新于</span> <time title="修改时间：2026-06-21 17:14:28" itemprop="dateModified" datetime="2026-06-21T17:14:28+08:00">2026-06-21</time> </span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-folder"></i> </span><span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%8A%80%E6%9C%AF%E4%BA%BA%E7%94%9F/" itemprop="url" rel="index"><span itemprop="name">技术人生</span></a> </span></span><span id="/Dengwei-System-An-Internal-System-And-Its-Midlife/" class="post-meta-item leancloud_visitors" data-flag-title="登味系统——一个内部系统和它的中年" title="阅读次数"><span class="post-meta-item-icon"><i class="far fa-eye"></i> </span><span class="post-meta-item-text">阅读次数：</span> <span class="leancloud-visitors-count"></span></span></div></div></header><div class="post-body" itemprop="articleBody"><p>六月，即将开始新的半年规划。自然要把业务数据拿出来看看，上个季度重启迭代的 AI 能力，UV 有小几百。和平台整体的 UV 大几千，且仍然保持 20%以上的增速相比，确实不算什么成绩。AI 工作台上线半年，渗透需要时间，这很正常。所有合理的话术我都背得出来——新能力爬坡期，用户习惯需要培养，先做深再做广。每一句都对。</p><p>但我心里清楚问题不在这里。问题是：我看着这两个数字的时候，脑子里冒出来的不是”怎么让几百变成几千”，而是另一个更不舒服的问题——做 AI，到底是想做什么？</p><p>是给现有流程装一个 AI 引擎？还是让 AI 重新定义现在的业务系统是谁？</p><p>如果是前者，我们一直在做。四阶段的规划写得很完整：阶段一增强，阶段二会话化，阶段三 MultiAgent，阶段四自治控制面。每个阶段都有 OKR，每个 OKR 都有指标。如果是后者，我停了一下，因为我不知道怎么回答。</p><p>于是我给这种感觉取了个名字。我把它叫做<strong>登味系统</strong>。</p><p>不是烂到该弃，也不是好到能自然进化。卡在中间。在字节业务中，这样的系统其实不多，更常见的故事是开启新的版本和迁移用户。</p><p><img data-src="https://image.kbiao.me/blog/img202606211657758.png?imageView2/2/w/1200/format/webp/quality/80"></p><span id="more"></span><h2 id="一、登味，是系统层面的中年"><a href="#一、登味，是系统层面的中年" class="headerlink" title="一、登味，是系统层面的中年"></a>一、登味，是系统层面的中年</h2><p>“登味”这个词不是从哪本书里抄来的，是当时在脑子里冒出来的。团队群里吐槽用户反馈不合理，我就讲了”想当年”，平台坏了业务都带着笔记本来我工位；或者我上卫生间路上就有人招呼过去看问题啥的；那时候做个啥功能上去，立马就有人来聊，来反馈。都是建设性的。</p><p>说完就觉得自己老登味儿十足，大概是因为它能同时形容”还有点东西，但已经不新了”的状态。</p><p>一个系统进入登味状态的样子大概是这样：</p><p>它曾经做对过一些事，所以才有今天这个体量；用户在用，业务在依赖，oncall 不断；但你想往前推一步，每一步都很泥泞。那些奇怪的设计都有”存在即合理”的解释，单独看每一个都没错，串起来看却没人能讲清楚未来的样子。最难的地方在于，经历过 0-1 的人还在，创新预期也在，但系统本身已经不再响应新的用力。</p><p>写到这里我想到了一个更准确的类比：<strong>人到中年。</strong></p><p>中年人可以谈起年少有为，也可以叹息如今层层牵绊、力有不逮。年轻时做对了选择冲到了前面，如今每一次转向都要拖着一身历史包袱。不是不想动，是每一层牵绊都真实存在——当年的成功经验变成了今天的默认配置，每一个”当时合理”的设计现在都在以<strong>利息的方式往回要账</strong>。</p><p>和人的中年一样，最累的不是外部压力，而是内部那种”我知道我还能，但身体不答应了”的撕裂感。</p><p>我负责的业务系统现在就是这个状态。</p><h2 id="二、登味不是一天养成的"><a href="#二、登味不是一天养成的" class="headerlink" title="二、登味不是一天养成的"></a>二、登味不是一天养成的</h2><p>回头看维护系统这四五年，有三次关键的选择。每一次在当时看都是对的。</p><p><strong>第一次是从一个好用的工具到把它做成一个平台。</strong></p><p>一开始我只是做了一个工具——把研发在本地环境不好的体验做成了在线工具。跑起来了，有人在用，然后关注到新的痛点，持续创新，周 UV 从几慢慢爬到两千。用户说好用。</p><p>然后问题来了：好用之后怎么办？</p><p>有两个选项摆在桌上。一个是保持工具形态，做深、做精、做到一小群人离不开它。另一个是平台化——接入更多流程，覆盖更多场景，成为研发的主流程入口。</p><p>团队选了后者。理由很充分：一个工具只能解决一个环节的问题，一个平台可以串联整条链路。这个决定是对的。没有它，就没有后来的成功。但也是这个决定，让这个系统第一次背上了”兼容所有环节”的责任。</p><p><strong>第二次是把每一件对的事都做进去，叫标准化。</strong></p><p>那两年进入加速叠加期。合并了一些平台，叠加了治理目标，成为了更多系统的上游，成为了业务个性化的首选。</p><p>每一个项目都是单独立项、单独评审、单独上线的。每一个都解决了当时一个真实的痛点。每一个都在 OKR 上写了一个漂亮的结果。</p><p>这些都是”对的事”。单独看每一件都对。但如果退一步看这四五个季度的叠加——它们在系统里累积出了一个沉重的执行层。不是某一个功能多余，是所有功能加起来，形成了一个”你需要穿过所有这些才能做一件事”的系统。</p><p>O1 标准化。O2 自动化。O3 智能化。O4 插件化。每一季度的 OKR 都写得很工整。</p><p>但工整本身就是登味的信号。<strong>当一个系统的规划变得过于工整，它可能已经在用计划替代直觉了。</strong></p><p><strong>第三次是 AI 浪潮拍过来，我们做了一个选项之外的第三个选择。</strong></p><p>桌上其实有两个选项。一个是停下来，问：这个系统在 AI 时代需要被重新定义吗？另一个是不停，直接做：给现有流程加 AI 能力。</p><p>我们都没选。或者说我们选了 C，做了一个几阶段规划，试图同时回答”重新定义”和”先做进去”。</p><p>规划本身是完整的、有远见的：推演一个理想态，然后试图规划一条演进路线。但执行的时候，每一个阶段都面临同一个问题——<strong>如何和已经存在的系统兼容？</strong></p><p>工具系统，特别是存在很久的平台工具，其用户体验往往是求用户需求的最大公约数，否则就没有办法平台化、标准化。这也是传统软件标准的取舍。当用户适应了以后，不再是这个交互合理好看的问题，是顺手能推进流程的问题。每个改版，按钮不在原处一定是”罪大恶极”的自嗨。</p><p>一个产品的存在一定是因为解决了用户的问题，这是个常识。但是 AI 定义的系统是在解决系统自己的问题不是业务，不是用户，当然就不会那么多人买账。AI 是新引擎，但发动机的接口是按旧机器定义的。几百对几千的 UV 和渗透。数字不撒谎，它们说的是同一句话——<strong>这个系统不再响应新的用力了。</strong></p><h2 id="三、为什么它不再响应"><a href="#三、为什么它不再响应" class="headerlink" title="三、为什么它不再响应"></a>三、为什么它不再响应</h2><p>我想过很久这个问题。不是代码的问题，不是架构的问题，甚至不是人的问题。是三条线缠在一起拧死了。</p><p><strong>第一条线是组织默认软件是建完就便宜的。</strong></p><p>平台化、合并——组织天然认为软件系统的边际成本是递减的。这个判断本身没错，制造业是这样，建筑业也是这样。但在一个每天还有几千人在用、需求还在变、上游还在动的研发平台上，它不成立。</p><p>只要还有用户、还有 oncall、还有上游变更——稳定就不是一个完成态，它是一个持续状态。但在预算表上，它被归为”本职”。本职的意思是：你做了应该做的，做多了也不会被看见。</p><p>所以 oncall 没有额外预算，稳定性优化没有专门的人力，用户增长带来的维护成本——账本上它不存在，但在工作日历上它占满了每一格。</p><p>这就是登味系统的第一个沉默机制：<strong>没有人禁止你做什么，但也没有人为你做额外的事买单。</strong></p><p>就像中年人”上有老下有小”那种状态。上要兜住业务方和稳定性承诺，下要接住存量用户和历史兼容性。没有人要求你创新，但也没有人告诉你：维持现状本身就是在消耗你未来创新的可能性。</p><p>更隐蔽的问题是”本职”的边界在悄悄扩张。最开始，稳定只是修 bug；后来，稳定变成了兼容每一次上游变更；再后来，稳定变成了在组织调整中证明这个平台还活着。每一次扩张都没有人决策，没有人拍板，它就这么发生了。</p><p><strong>第二条线是 OKR 把创新翻译成了叠加。</strong></p><p>我们的 O1 到 O4，每一条单独看都对。但仔细看会发现一个共同的前提——它们都默认这个系统<strong>的进化方式是叠加，不是重构</strong>。</p><p>标准化是在已有的系统上加一层规范。自动化是在已有的流程上加节点流转。智能化是在已有的能力上加 AI。插件化是在已有的架构上加扩展机制。</p><p>没有一条 OKR 写的是：”我们停下来，拆掉一些东西，重新想一下它在 AI 时代应该长什么样。”</p><p>不是不想。是在 OKR 的框架里，停下来这件事根本没有对应的度量方式。你可以写”AI 渗透率达到 xx%”，但你没办法写”我们花一个季度想清楚到底应该是什么”，然后让老板签字。</p><p>这是登味系统的第二个沉默机制：<strong>凡是无法被指标化的判断，在组织的决策流程里天然不可见。</strong></p><p>而把创新目标翻译成存量指标，是登味系统最隐蔽的陷阱。不是”AI 改变了什么”，而是”AI 渗透率达到了百分之多少”。前者是问题，后者是 KPI。问题需要回答，KPI 只需要被达成。</p><p><strong>第三条线是做过 0-1 的人还在，但他们的判断已经用不出去了。</strong></p><p>最早做出来系统的那几个人，对这个平台有真实的判断力。他们知道哪个角落是当年赶工期留下的，哪个功能是因为某个业务方强烈要求临时加的，哪个流程的设计背后有一段讲不完的故事。</p><p>这些知识是平台最宝贵的资产，但在一个层层叠加之后的系统里，这些判断每一次往外推都要撞上三层墙：技术兼容性（改了 A，B 会不会挂？）、用户习惯（肌肉记忆已经形成）、组织惯性（跨团队吗？需要几个人？谁批？）。</p><p>不是判断不对。是判断的成本变高了。</p><p>高到每一次正确的改动，都需要先用三倍的时间解释”为什么要改”，再用三倍的精力处理修改带来的涟漪。慢慢地，那些最有判断力的人开始选择沉默——不是他们没想法了，是想法落地这件事的摩擦力，已经压住了他们出手的意愿。</p><p>这三条线合在一起，登味系统的完整成因就清楚了：组织用持续缩编的预算把你固定在”本职”的位置上，用 OKR 的叠加逻辑替代了重新定义的选项，最后用层层积累的摩擦力磨掉了那些还有判断力的人的执行意愿。</p><p>这不是一个人的困境。这是一个系统被组织安排进了一个它出不来的位置。</p><h2 id="四、写到这里，我看清了三件事"><a href="#四、写到这里，我看清了三件事" class="headerlink" title="四、写到这里，我看清了三件事"></a>四、写到这里，我看清了三件事</h2><p>写完上面那一段，我本来想接着列三条出路。但停了一下——回看自己这几个月的笔记，发现我其实已经用自己的方式在回应这个困境了，只是还没把它们写成方法。</p><p>串起来，是三件事。</p><p><strong>第一件：上下文比决策重要。</strong></p><p>有一次 oncall 排查，追到根因的时候，我发现问题不是 AI 太强或太弱——是 AI 没有身份。权限、边界、授权，全部模糊。所以我、用户和下游平台方没有共识。</p><p>那次之后我一直在想一个问题：我到底拥有什么别人没有的东西？</p><p>不是自动流转。不是质量门禁。这些功能别的平台也可以做。拥有的，是研发全链路的上下文——需求文档怎么流进来的，MR 经历了多少次 review，IDL 什么时候变更的，部署状态卡在哪一步。这些信息散落在各处，但在这里，它们天然被串联在一起。</p><p>如果说这个登味系统还有什么值得守住的资产，大概就是这个。不是功能，不是架构，是这些年来积累下来的那条完整的上下文链。</p><p>AI 在这里最好的角色，不是替代谁做决策，而是在正确的时机把这条链上的某个环节展现在正确的人面前。这不是路线图，是一个观察：在登味系统里，最难被替代的不是能力，是知道事情的前因后果。</p><p><strong>第二件：登味不是故障，是指示灯。</strong></p><p>我去年 8 月写过一条笔记：「少收集答案，多收集问题。」5 月写完《代码可以生成之后，程序员失去了什么》——最后没有给出答案，只是用《白鲸记》把问题重新描述了一遍，就收了。</p><p>两次都是同一件事：<strong>先把问题看清楚，比急着回答重要。</strong></p><p>登味状态不是故障。能进入登味状态的系统，都曾经做成过一件事——做成过，才有用户，才有历史，才有惯性，才有”当年做对了的事变成了今天绕不开的墙”。失败的系统根本走不到这一步。</p><p>业务 UV 指标的差距，不是一个需要修复的 bug。它是一个指示灯。它在说：这个系统到了需要重新定义自己的阶段，但重新定义这件事，从来没有进入过正式的议程。</p><p>承认系统处于登味状态，本身就是一个判断。这个判断不一定立即带来行动，但它至少会让你停止问”为什么又推不动了”。</p><p><strong>第三件：只有你能做的事，不需要和别人竞争。</strong></p><p>去年下半年，我从执行角色转向方向负责。那时候最难适应的不是工作内容的变化，而是一件更隐蔽的事——做判断这件工作，没有指标。</p><p>以前我可以用代码行数、需求完成量来确认自己一天有没有干活。换成”今天做了一个重要判断”——连我自己都不确定这是不是真的在工作。</p><p>但登味系统最需要的，恰好就是这个。</p><p>登味的护城河不是通用 AI 能力。开源模型谁都可以调，Agent 框架谁都可以搭。它独一无二的是：它在某个业务的主流程里待了四五年，它串联了需求到发布的整条链路，它积累了真实的研发行为数据。</p><p>把这些东西变成 AI 时代的差异化——用这些年的上下文去做别人做不了的事，而不是用通用能力去和所有人竞争——这是只有做过 0-1 的人才能做的判断。</p><p>这三件事串起来，得到了一个比”三条出路”诚实的结论：<strong>登味系统不是靠新功能走出来的。是靠那些只有经历过 0-1 的人才能做出的判断，一次一次选择不做什么，慢慢把自己从叠加状态里挪出来的。</strong></p><h2 id="五、其实写的不只是业务系统"><a href="#五、其实写的不只是业务系统" class="headerlink" title="五、其实写的不只是业务系统"></a>五、其实写的不只是业务系统</h2><p>写到这里我才发现，整篇文章的主语不只是一个系统。</p><p>我对登味系统的思考，来自我负责的系统和我自己——都是这个阶段。</p><p>三十而立，社会和家庭对我有了新的期待。但过去靠精力和闯劲做成的微小成功，已经不再能支撑这个阶段的发展。</p><p>这不是巧合。这是同一件事在两个尺度上的展开。</p><p>曾靠几个人冲出来，靠叠加功能获得用户，靠”把每件对的事做进去”走到今天——然后发现这套打法的边际收益在归零。我自己也是。靠冲劲和聪明做成过一些事，但到了需要判断力、取舍和长期视野的阶段——以前的肌肉用不上了。</p><p>登味不是一个系统的病。是一个阶段的代名词。</p><p>能进入登味状态，说明你曾经做对过一些事。失败的系统、失败的人，根本走不到这一步。<strong>这件事做成功了，才有历史包袱，才有惯性，才有”当年的成功变成今天的默认配置”这件事。</strong></p><p>登味系统的宿命，不是被遗弃，而是被重新定义。能不能重新定义，取决于一件事：<strong>愿不愿意承认，那些曾经带你走到这里的东西，可能不是带你走到下一步的东西。</strong></p><p>这不是放弃历史。这是把历史变成资产，而不是变成利息。</p><p>人到中年也一样。</p></div><footer class="post-footer"><div class="reward-container"><div>请我一杯咖啡吧！</div><button>赞赏</button><div class="post-reward"><div><img src="/uploads/rewards_wx.jpg" alt="K、Biao 微信"> <span>微信</span></div></div></div><div class="post-copyright"><ul><li class="post-copyright-author"><strong>本文作者： </strong>K、Biao</li><li class="post-copyright-link"><strong>本文链接：</strong> <a href="https://blog.kbiao.me/Dengwei-System-An-Internal-System-And-Its-Midlife/" title="登味系统——一个内部系统和它的中年">https://blog.kbiao.me/Dengwei-System-An-Internal-System-And-Its-Midlife/</a></li><li class="post-copyright-license"><strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li></ul></div><div class="followme"><span>欢迎关注我的其它发布渠道</span><div class="social-list"><div class="social-item"><span class="social-link"><span class="icon"><i class="fab fa-weixin"></i> </span><span class="label">WeChat</span> </span><img class="social-item-img" src="/uploads/qrcode_wx.jpg"></div><div class="social-item"><a target="_blank" class="social-link" href="/atom.xml"><span class="icon"><i class="fa fa-rss"></i> </span><span class="label">RSS</span></a></div></div></div><div class="post-tags"><a href="/tags/%E5%B7%A5%E7%A8%8B/" rel="tag"><i class="fa fa-tag"></i> 工程</a> <a href="/tags/%E5%B9%B3%E5%8F%B0%E8%80%81%E5%8C%96/" rel="tag"><i class="fa fa-tag"></i> 平台老化</a> <a href="/tags/AI%E8%BD%AC%E5%9E%8B/" rel="tag"><i class="fa fa-tag"></i> AI转型</a> <a href="/tags/%E4%B8%AD%E5%B9%B4/" rel="tag"><i class="fa fa-tag"></i> 中年</a> <a href="/tags/%E8%AE%A4%E7%9F%A5%E5%8F%8D%E6%80%9D/" rel="tag"><i class="fa fa-tag"></i> 认知反思</a></div><div class="post-nav"><div class="post-nav-item"><a href="/%E4%BB%A3%E7%A0%81%E5%8F%AF%E4%BB%A5%E7%94%9F%E6%88%90%E4%B9%8B%E5%90%8E%EF%BC%8C%E7%A8%8B%E5%BA%8F%E5%91%98%E5%A4%B1%E5%8E%BB%E4%BA%86%E4%BB%80%E4%B9%88-6a0c3abdff3a/" rel="prev" title="代码可以生成之后，程序员失去了什么"><i class="fa fa-angle-left"></i> 代码可以生成之后，程序员失去了什么</a></div><div class="post-nav-item"><a href="/AI%E5%8E%9F%E7%94%9F%E7%A0%94%E5%8F%91%E6%B5%81%E7%A8%8B%E4%B8%8E%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B%E9%97%AE%E9%A2%98%E6%8B%86%E8%A7%A3%E6%A1%86%E6%9E%B6-be56286337f0/" rel="next" title="AI原生研发流程与平台工程问题拆解框架">AI原生研发流程与平台工程问题拆解框架 <i class="fa fa-angle-right"></i></a></div></div></footer></article></div></div></main><footer class="footer"><div class="footer-inner"><div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">赣ICP备15005339号</a></div><div class="copyright">&copy; <span itemprop="copyrightYear">2026</span> <span class="with-love"><i class="fa fa-heart"></i> </span><span class="author" itemprop="copyrightHolder">K、Biao</span></div><div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动</div></div></footer><div class="toggle sidebar-toggle" role="button"><span class="toggle-line"></span> <span class="toggle-line"></span> <span class="toggle-line"></span></div><div class="sidebar-dimmer"></div><div class="back-to-top" role="button" aria-label="返回顶部"><i class="fa fa-arrow-up fa-lg"></i> <span>0%</span></div><div class="reading-progress-bar"></div><noscript><div class="noscript-warning">Theme NexT works best with JavaScript enabled</div></noscript></body></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+  <link rel="mask-icon" href="/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.kbiao.me","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="六月，即将开始新的半年规划。自然要把业务数据拿出来看看，上个季度重启迭代的 AI 能力，UV 有小几百。和平台整体的 UV 大几千，且仍然保持 20%以上的增速相比，确实不算什么成绩。AI 工作台上线半年，渗透需要时间，这很正常。所有合理的话术我都背得出来——新能力爬坡期，用户习惯需要培养，先做深再做广。每一句都对。 但我心里清楚问题不在这里。问题是：我看着这两个数字的时候，脑子里冒出来的不是”怎">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="登味系统——一个内部系统和它的中年">
+<meta property="og:url" content="https://blog.kbiao.me/Dengwei-System-An-Internal-System-And-Its-Midlife/index.html">
+<meta property="og:site_name" content="听雨小筑">
+<meta property="og:description" content="六月，即将开始新的半年规划。自然要把业务数据拿出来看看，上个季度重启迭代的 AI 能力，UV 有小几百。和平台整体的 UV 大几千，且仍然保持 20%以上的增速相比，确实不算什么成绩。AI 工作台上线半年，渗透需要时间，这很正常。所有合理的话术我都背得出来——新能力爬坡期，用户习惯需要培养，先做深再做广。每一句都对。 但我心里清楚问题不在这里。问题是：我看着这两个数字的时候，脑子里冒出来的不是”怎">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://image.kbiao.me/blog/img202606211657758.png?imageView2/2/w/1200/format/webp/quality/80">
+<meta property="article:published_time" content="2026-06-21T06:30:00.000Z">
+<meta property="article:modified_time" content="2026-06-21T09:14:28.217Z">
+<meta property="article:author" content="K、Biao">
+<meta property="article:tag" content="AI转型">
+<meta property="article:tag" content="中年">
+<meta property="article:tag" content="工程">
+<meta property="article:tag" content="平台老化">
+<meta property="article:tag" content="认知反思">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://image.kbiao.me/blog/img202606211657758.png?imageView2/2/w/1200/format/webp/quality/80">
+
+
+<link rel="canonical" href="https://blog.kbiao.me/Dengwei-System-An-Internal-System-And-Its-Midlife/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.kbiao.me/Dengwei-System-An-Internal-System-And-Its-Midlife/","path":"/Dengwei-System-An-Internal-System-And-Its-Midlife/","title":"登味系统——一个内部系统和它的中年"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>登味系统——一个内部系统和它的中年 | 听雨小筑</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?40650f57a96f0df2cfe5cee491a33cae"></script>
+
+
+
+
+
+
+
+  
+  <script size="160" alpha="0.6" zIndex="-1" src="https://unpkg.com/ribbon.js@1.0.2/dist/ribbon.min.js" defer></script>
+  <script src="https://unpkg.com/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://unpkg.com/@next-theme/pjax@0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="https://unpkg.com/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
+  <script src="https://unpkg.com/pangu@7.2.0/dist/browser/pangu.umd.js" integrity="sha256-JnmRRnJK7DC6RQJbAJb6AXOM9OmWzS6z8eYultk/48Y=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://unpkg.com/mermaid@11.10.1/dist/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+
+
+
+  
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"7OTu25XcWOiqFHBrfOA46xsT-gzGzoHsz","app_key":"bigXFjf3hf5a9TEukm9xO7uT","server_url":"https://blog-api.kbiao.me","security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js" defer></script>
+
+
+  <script src="https://unpkg.com/quicklink@3.0.1/dist/quicklink.umd.js" integrity="sha256-44BednzIpUeQJcY8qtLyarFu0UCCTbgmWOvaoehiFQQ=" crossorigin="anonymous" defer></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://blog.kbiao.me/Dengwei-System-An-Internal-System-And-Its-Midlife/"}</script>
+  <script src="/js/third-party/quicklink.js" defer></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="听雨小筑" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">听雨小筑</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">爱学习，有梦想，实力派</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-bookshelf"><a href="/bookshelf/" rel="section"><i class="fa fa-book fa-fw"></i>bookshelf</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">42</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">10</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">30</span></a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%99%BB%E5%91%B3%EF%BC%8C%E6%98%AF%E7%B3%BB%E7%BB%9F%E5%B1%82%E9%9D%A2%E7%9A%84%E4%B8%AD%E5%B9%B4"><span class="nav-text">一、登味，是系统层面的中年</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E7%99%BB%E5%91%B3%E4%B8%8D%E6%98%AF%E4%B8%80%E5%A4%A9%E5%85%BB%E6%88%90%E7%9A%84"><span class="nav-text">二、登味不是一天养成的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AE%83%E4%B8%8D%E5%86%8D%E5%93%8D%E5%BA%94"><span class="nav-text">三、为什么它不再响应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%86%99%E5%88%B0%E8%BF%99%E9%87%8C%EF%BC%8C%E6%88%91%E7%9C%8B%E6%B8%85%E4%BA%86%E4%B8%89%E4%BB%B6%E4%BA%8B"><span class="nav-text">四、写到这里，我看清了三件事</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%85%B6%E5%AE%9E%E5%86%99%E7%9A%84%E4%B8%8D%E5%8F%AA%E6%98%AF%E4%B8%9A%E5%8A%A1%E7%B3%BB%E7%BB%9F"><span class="nav-text">五、其实写的不只是业务系统</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="K、Biao"
+      src="https://image.kbiao.me/kbiao.jpg">
+  <p class="site-author-name" itemprop="name">K、Biao</p>
+  <div class="site-description" itemprop="description">彪彪的技术博客</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kbiao" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kbiao" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://www.zhihu.com/people/kbiao" title="知乎 → http:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;kbiao" rel="noopener me" target="_blank"></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kbiao@qq.com" title="E-Mail → mailto:kbiao@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/kbiao" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;kbiao" rel="noopener me" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.kbiao.me/Dengwei-System-An-Internal-System-And-Its-Midlife/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://image.kbiao.me/kbiao.jpg">
+      <meta itemprop="name" content="K、Biao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="听雨小筑">
+      <meta itemprop="description" content="彪彪的技术博客">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="登味系统——一个内部系统和它的中年 | 听雨小筑">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          登味系统——一个内部系统和它的中年
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-06-21 14:30:00" itemprop="dateCreated datePublished" datetime="2026-06-21T14:30:00+08:00">2026-06-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-06-21 17:14:28" itemprop="dateModified" datetime="2026-06-21T17:14:28+08:00">2026-06-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E4%BA%BA%E7%94%9F/" itemprop="url" rel="index"><span itemprop="name">技术人生</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/Dengwei-System-An-Internal-System-And-Its-Midlife/" class="post-meta-item leancloud_visitors" data-flag-title="登味系统——一个内部系统和它的中年" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>六月，即将开始新的半年规划。自然要把业务数据拿出来看看，上个季度重启迭代的 AI 能力，UV 有小几百。和平台整体的 UV 大几千，且仍然保持 20%以上的增速相比，确实不算什么成绩。AI 工作台上线半年，渗透需要时间，这很正常。所有合理的话术我都背得出来——新能力爬坡期，用户习惯需要培养，先做深再做广。每一句都对。</p>
+<p>但我心里清楚问题不在这里。问题是：我看着这两个数字的时候，脑子里冒出来的不是”怎么让几百变成几千”，而是另一个更不舒服的问题——做 AI，到底是想做什么？</p>
+<p>是给现有流程装一个 AI 引擎？还是让 AI 重新定义现在的业务系统是谁？</p>
+<p>如果是前者，我们一直在做。四阶段的规划写得很完整：阶段一增强，阶段二会话化，阶段三 MultiAgent，阶段四自治控制面。每个阶段都有 OKR，每个 OKR 都有指标。如果是后者，我停了一下，因为我不知道怎么回答。</p>
+<p>于是我给这种感觉取了个名字。我把它叫做<strong>登味系统</strong>。</p>
+<p>不是烂到该弃，也不是好到能自然进化。卡在中间。在字节业务中，这样的系统其实不多，更常见的故事是开启新的版本和迁移用户。</p>
+<p><img data-src="https://image.kbiao.me/blog/img202606211657758.png?imageView2/2/w/1200/format/webp/quality/80"></p>
+<span id="more"></span>
+
+<h2 id="一、登味，是系统层面的中年"><a href="#一、登味，是系统层面的中年" class="headerlink" title="一、登味，是系统层面的中年"></a>一、登味，是系统层面的中年</h2><p>“登味”这个词不是从哪本书里抄来的，是当时在脑子里冒出来的。团队群里吐槽用户反馈不合理，我就讲了”想当年”，平台坏了业务都带着笔记本来我工位；或者我上卫生间路上就有人招呼过去看问题啥的；那时候做个啥功能上去，立马就有人来聊，来反馈。都是建设性的。</p>
+<p>说完就觉得自己老登味儿十足，大概是因为它能同时形容”还有点东西，但已经不新了”的状态。</p>
+<p>一个系统进入登味状态的样子大概是这样：</p>
+<p>它曾经做对过一些事，所以才有今天这个体量；用户在用，业务在依赖，oncall 不断；但你想往前推一步，每一步都很泥泞。那些奇怪的设计都有”存在即合理”的解释，单独看每一个都没错，串起来看却没人能讲清楚未来的样子。最难的地方在于，经历过 0-1 的人还在，创新预期也在，但系统本身已经不再响应新的用力。</p>
+<p>写到这里我想到了一个更准确的类比：<strong>人到中年。</strong></p>
+<p>中年人可以谈起年少有为，也可以叹息如今层层牵绊、力有不逮。年轻时做对了选择冲到了前面，如今每一次转向都要拖着一身历史包袱。不是不想动，是每一层牵绊都真实存在——当年的成功经验变成了今天的默认配置，每一个”当时合理”的设计现在都在以<strong>利息的方式往回要账</strong>。</p>
+<p>和人的中年一样，最累的不是外部压力，而是内部那种”我知道我还能，但身体不答应了”的撕裂感。</p>
+<p>我负责的业务系统现在就是这个状态。</p>
+<h2 id="二、登味不是一天养成的"><a href="#二、登味不是一天养成的" class="headerlink" title="二、登味不是一天养成的"></a>二、登味不是一天养成的</h2><p>回头看维护系统这四五年，有三次关键的选择。每一次在当时看都是对的。</p>
+<p><strong>第一次是从一个好用的工具到把它做成一个平台。</strong></p>
+<p>一开始我只是做了一个工具——把研发在本地环境不好的体验做成了在线工具。跑起来了，有人在用，然后关注到新的痛点，持续创新，周 UV 从几慢慢爬到两千。用户说好用。</p>
+<p>然后问题来了：好用之后怎么办？</p>
+<p>有两个选项摆在桌上。一个是保持工具形态，做深、做精、做到一小群人离不开它。另一个是平台化——接入更多流程，覆盖更多场景，成为研发的主流程入口。</p>
+<p>团队选了后者。理由很充分：一个工具只能解决一个环节的问题，一个平台可以串联整条链路。这个决定是对的。没有它，就没有后来的成功。但也是这个决定，让这个系统第一次背上了”兼容所有环节”的责任。</p>
+<p><strong>第二次是把每一件对的事都做进去，叫标准化。</strong></p>
+<p>那两年进入加速叠加期。合并了一些平台，叠加了治理目标，成为了更多系统的上游，成为了业务个性化的首选。</p>
+<p>每一个项目都是单独立项、单独评审、单独上线的。每一个都解决了当时一个真实的痛点。每一个都在 OKR 上写了一个漂亮的结果。</p>
+<p>这些都是”对的事”。单独看每一件都对。但如果退一步看这四五个季度的叠加——它们在系统里累积出了一个沉重的执行层。不是某一个功能多余，是所有功能加起来，形成了一个”你需要穿过所有这些才能做一件事”的系统。</p>
+<p>O1 标准化。O2 自动化。O3 智能化。O4 插件化。每一季度的 OKR 都写得很工整。</p>
+<p>但工整本身就是登味的信号。<strong>当一个系统的规划变得过于工整，它可能已经在用计划替代直觉了。</strong></p>
+<p><strong>第三次是 AI 浪潮拍过来，我们做了一个选项之外的第三个选择。</strong></p>
+<p>桌上其实有两个选项。一个是停下来，问：这个系统在 AI 时代需要被重新定义吗？另一个是不停，直接做：给现有流程加 AI 能力。</p>
+<p>我们都没选。或者说我们选了 C，做了一个几阶段规划，试图同时回答”重新定义”和”先做进去”。</p>
+<p>规划本身是完整的、有远见的：推演一个理想态，然后试图规划一条演进路线。但执行的时候，每一个阶段都面临同一个问题——<strong>如何和已经存在的系统兼容？</strong></p>
+<p>工具系统，特别是存在很久的平台工具，其用户体验往往是求用户需求的最大公约数，否则就没有办法平台化、标准化。这也是传统软件标准的取舍。当用户适应了以后，不再是这个交互合理好看的问题，是顺手能推进流程的问题。每个改版，按钮不在原处一定是”罪大恶极”的自嗨。</p>
+<p>一个产品的存在一定是因为解决了用户的问题，这是个常识。但是 AI 定义的系统是在解决系统自己的问题不是业务，不是用户，当然就不会那么多人买账。AI 是新引擎，但发动机的接口是按旧机器定义的。几百对几千的 UV 和渗透。数字不撒谎，它们说的是同一句话——<strong>这个系统不再响应新的用力了。</strong></p>
+<h2 id="三、为什么它不再响应"><a href="#三、为什么它不再响应" class="headerlink" title="三、为什么它不再响应"></a>三、为什么它不再响应</h2><p>我想过很久这个问题。不是代码的问题，不是架构的问题，甚至不是人的问题。是三条线缠在一起拧死了。</p>
+<p><strong>第一条线是组织默认软件是建完就便宜的。</strong></p>
+<p>平台化、合并——组织天然认为软件系统的边际成本是递减的。这个判断本身没错，制造业是这样，建筑业也是这样。但在一个每天还有几千人在用、需求还在变、上游还在动的研发平台上，它不成立。</p>
+<p>只要还有用户、还有 oncall、还有上游变更——稳定就不是一个完成态，它是一个持续状态。但在预算表上，它被归为”本职”。本职的意思是：你做了应该做的，做多了也不会被看见。</p>
+<p>所以 oncall 没有额外预算，稳定性优化没有专门的人力，用户增长带来的维护成本——账本上它不存在，但在工作日历上它占满了每一格。</p>
+<p>这就是登味系统的第一个沉默机制：<strong>没有人禁止你做什么，但也没有人为你做额外的事买单。</strong></p>
+<p>就像中年人”上有老下有小”那种状态。上要兜住业务方和稳定性承诺，下要接住存量用户和历史兼容性。没有人要求你创新，但也没有人告诉你：维持现状本身就是在消耗你未来创新的可能性。</p>
+<p>更隐蔽的问题是”本职”的边界在悄悄扩张。最开始，稳定只是修 bug；后来，稳定变成了兼容每一次上游变更；再后来，稳定变成了在组织调整中证明这个平台还活着。每一次扩张都没有人决策，没有人拍板，它就这么发生了。</p>
+<p><strong>第二条线是 OKR 把创新翻译成了叠加。</strong></p>
+<p>我们的 O1 到 O4，每一条单独看都对。但仔细看会发现一个共同的前提——它们都默认这个系统<strong>的进化方式是叠加，不是重构</strong>。</p>
+<p>标准化是在已有的系统上加一层规范。自动化是在已有的流程上加节点流转。智能化是在已有的能力上加 AI。插件化是在已有的架构上加扩展机制。</p>
+<p>没有一条 OKR 写的是：”我们停下来，拆掉一些东西，重新想一下它在 AI 时代应该长什么样。”</p>
+<p>不是不想。是在 OKR 的框架里，停下来这件事根本没有对应的度量方式。你可以写”AI 渗透率达到 xx%”，但你没办法写”我们花一个季度想清楚到底应该是什么”，然后让老板签字。</p>
+<p>这是登味系统的第二个沉默机制：<strong>凡是无法被指标化的判断，在组织的决策流程里天然不可见。</strong></p>
+<p>而把创新目标翻译成存量指标，是登味系统最隐蔽的陷阱。不是”AI 改变了什么”，而是”AI 渗透率达到了百分之多少”。前者是问题，后者是 KPI。问题需要回答，KPI 只需要被达成。</p>
+<p><strong>第三条线是做过 0-1 的人还在，但他们的判断已经用不出去了。</strong></p>
+<p>最早做出来系统的那几个人，对这个平台有真实的判断力。他们知道哪个角落是当年赶工期留下的，哪个功能是因为某个业务方强烈要求临时加的，哪个流程的设计背后有一段讲不完的故事。</p>
+<p>这些知识是平台最宝贵的资产，但在一个层层叠加之后的系统里，这些判断每一次往外推都要撞上三层墙：技术兼容性（改了 A，B 会不会挂？）、用户习惯（肌肉记忆已经形成）、组织惯性（跨团队吗？需要几个人？谁批？）。</p>
+<p>不是判断不对。是判断的成本变高了。</p>
+<p>高到每一次正确的改动，都需要先用三倍的时间解释”为什么要改”，再用三倍的精力处理修改带来的涟漪。慢慢地，那些最有判断力的人开始选择沉默——不是他们没想法了，是想法落地这件事的摩擦力，已经压住了他们出手的意愿。</p>
+<p>这三条线合在一起，登味系统的完整成因就清楚了：组织用持续缩编的预算把你固定在”本职”的位置上，用 OKR 的叠加逻辑替代了重新定义的选项，最后用层层积累的摩擦力磨掉了那些还有判断力的人的执行意愿。</p>
+<p>这不是一个人的困境。这是一个系统被组织安排进了一个它出不来的位置。</p>
+<h2 id="四、写到这里，我看清了三件事"><a href="#四、写到这里，我看清了三件事" class="headerlink" title="四、写到这里，我看清了三件事"></a>四、写到这里，我看清了三件事</h2><p>写完上面那一段，我本来想接着列三条出路。但停了一下——回看自己这几个月的笔记，发现我其实已经用自己的方式在回应这个困境了，只是还没把它们写成方法。</p>
+<p>串起来，是三件事。</p>
+<p><strong>第一件：上下文比决策重要。</strong></p>
+<p>有一次 oncall 排查，追到根因的时候，我发现问题不是 AI 太强或太弱——是 AI 没有身份。权限、边界、授权，全部模糊。所以我、用户和下游平台方没有共识。</p>
+<p>那次之后我一直在想一个问题：我到底拥有什么别人没有的东西？</p>
+<p>不是自动流转。不是质量门禁。这些功能别的平台也可以做。拥有的，是研发全链路的上下文——需求文档怎么流进来的，MR 经历了多少次 review，IDL 什么时候变更的，部署状态卡在哪一步。这些信息散落在各处，但在这里，它们天然被串联在一起。</p>
+<p>如果说这个登味系统还有什么值得守住的资产，大概就是这个。不是功能，不是架构，是这些年来积累下来的那条完整的上下文链。</p>
+<p>AI 在这里最好的角色，不是替代谁做决策，而是在正确的时机把这条链上的某个环节展现在正确的人面前。这不是路线图，是一个观察：在登味系统里，最难被替代的不是能力，是知道事情的前因后果。</p>
+<p><strong>第二件：登味不是故障，是指示灯。</strong></p>
+<p>我去年 8 月写过一条笔记：「少收集答案，多收集问题。」5 月写完《代码可以生成之后，程序员失去了什么》——最后没有给出答案，只是用《白鲸记》把问题重新描述了一遍，就收了。</p>
+<p>两次都是同一件事：<strong>先把问题看清楚，比急着回答重要。</strong></p>
+<p>登味状态不是故障。能进入登味状态的系统，都曾经做成过一件事——做成过，才有用户，才有历史，才有惯性，才有”当年做对了的事变成了今天绕不开的墙”。失败的系统根本走不到这一步。</p>
+<p>业务 UV 指标的差距，不是一个需要修复的 bug。它是一个指示灯。它在说：这个系统到了需要重新定义自己的阶段，但重新定义这件事，从来没有进入过正式的议程。</p>
+<p>承认系统处于登味状态，本身就是一个判断。这个判断不一定立即带来行动，但它至少会让你停止问”为什么又推不动了”。</p>
+<p><strong>第三件：只有你能做的事，不需要和别人竞争。</strong></p>
+<p>去年下半年，我从执行角色转向方向负责。那时候最难适应的不是工作内容的变化，而是一件更隐蔽的事——做判断这件工作，没有指标。</p>
+<p>以前我可以用代码行数、需求完成量来确认自己一天有没有干活。换成”今天做了一个重要判断”——连我自己都不确定这是不是真的在工作。</p>
+<p>但登味系统最需要的，恰好就是这个。</p>
+<p>登味的护城河不是通用 AI 能力。开源模型谁都可以调，Agent 框架谁都可以搭。它独一无二的是：它在某个业务的主流程里待了四五年，它串联了需求到发布的整条链路，它积累了真实的研发行为数据。</p>
+<p>把这些东西变成 AI 时代的差异化——用这些年的上下文去做别人做不了的事，而不是用通用能力去和所有人竞争——这是只有做过 0-1 的人才能做的判断。</p>
+<p>这三件事串起来，得到了一个比”三条出路”诚实的结论：<strong>登味系统不是靠新功能走出来的。是靠那些只有经历过 0-1 的人才能做出的判断，一次一次选择不做什么，慢慢把自己从叠加状态里挪出来的。</strong></p>
+<h2 id="五、其实写的不只是业务系统"><a href="#五、其实写的不只是业务系统" class="headerlink" title="五、其实写的不只是业务系统"></a>五、其实写的不只是业务系统</h2><p>写到这里我才发现，整篇文章的主语不只是一个系统。</p>
+<p>我对登味系统的思考，来自我负责的系统和我自己——都是这个阶段。</p>
+<p>三十而立，社会和家庭对我有了新的期待。但过去靠精力和闯劲做成的微小成功，已经不再能支撑这个阶段的发展。</p>
+<p>这不是巧合。这是同一件事在两个尺度上的展开。</p>
+<p>曾靠几个人冲出来，靠叠加功能获得用户，靠”把每件对的事做进去”走到今天——然后发现这套打法的边际收益在归零。我自己也是。靠冲劲和聪明做成过一些事，但到了需要判断力、取舍和长期视野的阶段——以前的肌肉用不上了。</p>
+<p>登味不是一个系统的病。是一个阶段的代名词。</p>
+<p>能进入登味状态，说明你曾经做对过一些事。失败的系统、失败的人，根本走不到这一步。<strong>这件事做成功了，才有历史包袱，才有惯性，才有”当年的成功变成今天的默认配置”这件事。</strong></p>
+<p>登味系统的宿命，不是被遗弃，而是被重新定义。能不能重新定义，取决于一件事：<strong>愿不愿意承认，那些曾经带你走到这里的东西，可能不是带你走到下一步的东西。</strong></p>
+<p>这不是放弃历史。这是把历史变成资产，而不是变成利息。</p>
+<p>人到中年也一样。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/uploads/rewards_wx.jpg" alt="K、Biao 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>K、Biao
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://blog.kbiao.me/Dengwei-System-An-Internal-System-And-Its-Midlife/" title="登味系统——一个内部系统和它的中年">https://blog.kbiao.me/Dengwei-System-An-Internal-System-And-Its-Midlife/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/uploads/qrcode_wx.jpg">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E5%B7%A5%E7%A8%8B/" rel="tag"><i class="fa fa-tag"></i> 工程</a>
+              <a href="/tags/%E5%B9%B3%E5%8F%B0%E8%80%81%E5%8C%96/" rel="tag"><i class="fa fa-tag"></i> 平台老化</a>
+              <a href="/tags/AI%E8%BD%AC%E5%9E%8B/" rel="tag"><i class="fa fa-tag"></i> AI转型</a>
+              <a href="/tags/%E4%B8%AD%E5%B9%B4/" rel="tag"><i class="fa fa-tag"></i> 中年</a>
+              <a href="/tags/%E8%AE%A4%E7%9F%A5%E5%8F%8D%E6%80%9D/" rel="tag"><i class="fa fa-tag"></i> 认知反思</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/%E4%BB%A3%E7%A0%81%E5%8F%AF%E4%BB%A5%E7%94%9F%E6%88%90%E4%B9%8B%E5%90%8E%EF%BC%8C%E7%A8%8B%E5%BA%8F%E5%91%98%E5%A4%B1%E5%8E%BB%E4%BA%86%E4%BB%80%E4%B9%88-6a0c3abdff3a/" rel="prev" title="代码可以生成之后，程序员失去了什么">
+                  <i class="fa fa-angle-left"></i> 代码可以生成之后，程序员失去了什么
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/AI%E5%8E%9F%E7%94%9F%E7%A0%94%E5%8F%91%E6%B5%81%E7%A8%8B%E4%B8%8E%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B%E9%97%AE%E9%A2%98%E6%8B%86%E8%A7%A3%E6%A1%86%E6%9E%B6-be56286337f0/" rel="next" title="AI原生研发流程与平台工程问题拆解框架">
+                  AI原生研发流程与平台工程问题拆解框架 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">赣ICP备15005339号 </a>
+  </div>
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">K、Biao</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html amp>
 
 <head>
     <meta charset="UTF-8">
+    <meta name="generator" content="Mobirise v4.9.7, mobirise.com">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-    <meta name="generator" content="Hexo + Next Theme">
-    <meta name="theme-color" content="#0593d3">
-    <meta name="msapplication-TileColor" content="#0593d3">
     <link rel="shortcut icon" href="assets/images/avator.jpg" type="image/x-icon">
     <meta name="description" content="">
 
@@ -15,15 +13,460 @@
     <meta property="og:description" content="2020 毕业，字节跳动-抖音-全干打杂，博客：blog.kbiao.me">
     <meta property="og:image" content="https://blog.kbiao.me/favicon.ico?v=6.7.0">
     <meta property="og:url" content="https://blog.kebiao.me/about">
-    <link rel="stylesheet" href="style.css">
-    <script defer src="script.js"></script>
     <title>康彪彪的简历</title>
 
+    <style amp-custom>
+        * {
+            margin: 0;
+            padding: 0;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        div,
+        span,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        blockquote,
+        a,
+        ol,
+        ul,
+        li,
+        figcaption {
+            font: inherit;
+        }
+
+        a {
+            font-style: normal;
+            font-weight: 400;
+            cursor: pointer;
+        }
+
+        a,
+        a:hover {
+            text-decoration: none;
+        }
+
+
+        body {
+            position: relative;
+            font-style: normal;
+            line-height: 1.5;
+        }
+
+        section {
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .container {
+            width: 1080px;
+            margin: 0 auto;
+        }
+
+
+        .header .headerbar {
+            display: flex;
+            
+            padding: .8rem 1rem;
+            min-height: 70px;
+            -webkit-align-items: center;
+            align-items: center;
+            background: #ffffff;
+            border-bottom: 4px solid #4790ef;
+        }
+
+        .header-layout {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .home img {
+            width: 32px;
+        }
+
+        .home {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.6rem;
+        }
 
 
 
+        .header .brand {
+            display: flex;
+            -webkit-align-items: center;
+            align-items: center;
+            -webkit-align-self: flex-start;
+            align-self: flex-start;
+            padding-right: 30px;
+        }
+
+        .header .brand-name {
+            color: #333;
+            font-size: 1.2rem;
+        }
+
+        .brand-text {
+            font-size: 0.8rem;
+            font-weight: 300;
+        }
+
+        .header .brand p {
+            margin: 0;
+            padding: 0;
+        }
+
+        .header amp-img {
+            margin-right: 1rem;
+            display: flex;
+            -webkit-align-items: center;
+            align-items: center;
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+        }
+
+        .header .headerbar {
+            position: fixed;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        .person-info {
+            padding-top: 130px;
+            background: #4790ef;
+            color: #fff;
+            text-align: center;
+        }
+
+        .avator img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-bottom: 24px;
+        }
+
+        .person-detail p {
+            font-size: 18px;
+            line-height: 40px;
+        }
+
+        .tag-list {
+            margin-top: 36px;
+            padding-bottom: 36px;
+        }
+
+        .tag-list span {
+            padding: 4px 6px;
+            border: 1px solid #fff;
+            font-size: 12px;
+            border-radius: 2px;
+            margin-right: 16px;
+            line-height: 36px;
+        }
+
+        /* 教育经历 */
+
+        .education {
+            padding-bottom: 60px;
+            text-align: center;
+        }
+
+        .title {
+            padding-top: 60px;
+            padding-bottom: 40px;
+            font-weight: 300;
+            margin: 0 auto;
+            text-align: center;
+            font-family: 'Rubik', sans-serif;
+            font-size: 2rem;
+            font-display: swap;
+        }
+
+        .school {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 36px;
+        }
+
+        .school-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-right: 24px;
+        }
+
+        .school-img img {
+            width: 100%;
+        }
+
+        .school-detail {}
+
+        .school-name {
+            font-weight: 300px;
+            font-size: 1.2rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .school-info {
+            margin-bottom: 0.4rem;
+            font-size: 1rem;
+        }
+
+        .school-time {
+            font-size: 1rem;
+            font-weight: 300;
+        }
+
+        .education-layout {
+            display: flex;
+            margin-top: 48px;
+        }
+
+        .education-item {
+            flex: 1;
+        }
+
+        .event {
+            min-height: 80px;
+            font-size: 0.8rem;
+            font-weight: 300;
+        }
+
+        /* 实习经历 */
+
+        .work {
+            background-color: #efefef;
+            padding-bottom: 60px;
+        }
+
+        .work-layout {
+            display: flex;
+        }
+
+        .work-item {
+            flex: 1;
+            background-color: #fff;
+            padding: 3rem;
+            word-wrap: break-word;
+            margin: 0 24px;
+            border-radius: 0.25rem;
+        }
+
+        .company-logo {
+            width: 150px;
+            display: inline-block;
+            margin-bottom: 24px;
+        }
+
+        .company-logo img {
+            width: 100%;
+        }
+
+        .work-time {
+            font-weight: 300;
+            font-size: 1rem;
+            float: right;
+            line-height: 60px;
+            color: rgba(0, 0, 0, 0.7)
+        }
+
+        .work-detail {
+            margin-top: 24px;
+            font-size: 0.8rem;
+            color: #767676;
+            font-weight: 300;
+        }
+
+        .work-main {
+            font-size: 1rem;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .work-more {
+            border-radius: 1rem;
+            margin-left: 24px;
+            background-color: #00b8e3;
+            color: #fff;
+            font-size: 0.6rem;
+            font-weight: 300;
+            padding: 0.2rem 0.5rem;
+        }
 
 
+        .project-item {
+            margin-bottom: 36px;
+            background-color: #fff;
+            box-shadow: 0 6px 18px 0 rgba(82, 94, 102, .15);
+            border-radius: 4px;
+            font-weight: 300;
+            display: flex;
+            height: 240px;
+        }
+
+        .project-info {
+            padding: 24px 24px 24px 48px;
+            font-size: 0.8rem;
+        }
+
+        .project-img {
+            width: 240px !important;
+            height: 240px;
+            flex-shrink: 0;
+        }
+
+
+        .project1-img {
+            width: 240;
+            height: 100%;
+            background: url("assets/images/coding.jpg") center center no-repeat;
+            background-size: 100% 100%;
+        }
+
+        .project2-img {
+            width: 100%;
+            height: 100%;
+            background: url("assets/images/maotu.jpeg") center center no-repeat;
+            background-size: 100% 100%;
+        }
+
+        .project3-img {
+            width: 100%;
+            height: 100%;
+            background: url("assets/images/zhonghan.jpeg") center center no-repeat;
+            background-size: 100% 100%;
+        }
+
+        .project-info ul {
+            margin-top: 16px;
+            color: rgba(0, 0, 0, 0.7);
+        }
+
+        .project-info ul li {
+            margin-left: 24px;
+        }
+
+        .project-name {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+            color: #555;
+            display: inline-block;
+        }
+
+        .project-time {
+            display: inline-block;
+            margin-left: 48px;
+            color: rgba(0, 0, 0, 0.7);
+            font-weight: 300;
+            font-size: 1rem;
+        }
+
+        .project-article {
+            margin-top: 16px;
+        }
+
+        .project-article a {
+            border-radius: 1rem;
+            margin-right: 24px;
+            background-color: #519e5d;
+            color: #fff;
+            font-size: 0.6rem;
+            font-weight: 300;
+            padding: 0.2rem 0.5rem;
+        }
+
+
+        @media (max-width: 767px) {
+            .header amp-img {
+                max-height: 40px;
+                max-width: 40px;
+            }
+
+            .container {
+                width: 100%;
+                margin: 0 auto;
+            }
+
+            .education-layout {
+                display: flex;
+                flex-direction: column;
+                margin-top: 16px;
+            }
+
+            .education-item:nth-child(2) {
+                margin-top: 16px;
+            }
+
+            .company-logo {
+                margin-bottom: 0;
+            }
+
+            .work-layout {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .work-item:nth-child(2) {
+                margin-top: 24px;
+            }
+
+            .work-time {
+                display: block;
+                float: unset;
+            }
+
+            .work-more {
+                display:inline-block;
+                margin-left: 0;
+                margin-top: 8px;
+            }
+
+            .project-item {
+                display: block;
+                height: auto;
+            }
+
+            .project-img {
+                margin: 0 auto;
+            }
+
+            .project-time {
+                margin-left: 0;
+            }
+
+            .project-article a {
+                display: inline-block;
+                margin-top: 8px;
+            }
+        }
+    </style>
+
+
+
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
+    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js">
+    </script>
+    <script async custom-element="amp-image-lightbox" src="https://cdn.ampproject.org/v0/amp-image-lightbox-0.1.js">
+    </script>
+    <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+    <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
+    <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
+    <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
 </head>
 
 <body>
@@ -34,8 +477,9 @@
             <div class="header-layout container">
                     <div class="brand">
                             <span class="brand-logo">
-                                <img data-src="assets/images/avator.jpg" class="logo" width="50" height="50"
-                                    alt="康彪彪" style="border-radius: 50%;">
+                                <amp-img src="assets/images/avator.jpg" class="logo" layout="responsive" width="200" height="45"
+                                    alt="康彪彪" class="mobirise-loader">
+                                </amp-img>
                             </span>
                             <div>
                                 <p class="brand-name mbr-fonts-style mbr-semibold display-5">康彪彪</p>
@@ -177,7 +621,7 @@
                 <div class="project-info">
                     <div class="project-name">北航在线编程平台微服务改造 <a class="work-more" target="_blank" href="https://accoding.cn">在线访问 ></a>
                     </div>
-                    <div class="project-time">2018年10月 - 2019年 9 月</div>
+                    <div class="project-time">2018年10月 - 至今</div>
                     <p>实验室维护的遗留系统，本用于学院课程教学用后推广到全校所有信息类课程使用</p>
                     <p>从单机系统支持200多人上机，逐步改进支持到近2000 以上学生同时上机考试的微服务系统，且对校外开放，积累上万名用户</p>
                     <ul>

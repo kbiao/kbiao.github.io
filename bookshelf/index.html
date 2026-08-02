@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>我的书架</title>
+<style>
+:root{
+  --bg:#faf6f0;
+  --card:#fffdf9;
+  --wood:#8b6f56;
+  --wood-dark:#6f5843;
+  --wood-light:#a68a6d;
+  --ink:#3a342e;
+  --ink-soft:#6b6157;
+  --ink-faint:#9a8f82;
+  --line:#e8dfd2;
+  --radius:14px;
+  --shadow:0 2px 10px rgba(90,70,50,.08);
+  --serif:"Noto Serif SC","Songti SC","STSong",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{font-size:16px}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--sans);
+  line-height:1.7;
+  min-height:100vh;
+}
+.wrap{
+  max-width:480px;
+  margin:0 auto;
+  min-height:100vh;
+  background:var(--bg);
+  padding-bottom:calc(64px + env(safe-area-inset-bottom));
+  position:relative;
+}
+@media (min-width:520px){
+  body{background:#f1eadf}
+  .wrap{box-shadow:0 0 40px rgba(90,70,50,.10)}
+}
+
+/* ===== Header ===== */
+header.app-header{
+  padding:28px 20px 16px;
+  border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:40;
+  background:#f5efe4;
+}
+header.app-header h1{
+  font-family:var(--serif);
+  font-size:1.5rem;
+  letter-spacing:.08em;
+  color:var(--ink);
+}
+header.app-header p.sub{
+  font-size:.8rem;
+  color:var(--ink-soft);
+  letter-spacing:.12em;
+  margin-top:2px;
+}
+
+/* ===== Search ===== */
+.search-bar{padding:12px 16px 4px;display:flex;gap:8px;align-items:center}
+.search-bar .box{
+  flex:1;display:flex;align-items:center;gap:8px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:8px 14px;
+  box-shadow:var(--shadow);
+}
+.search-bar svg{flex:none;opacity:.55}
+.search-bar input{
+  border:none;outline:none;background:transparent;
+  font-size:.92rem;color:var(--ink);width:100%;font-family:var(--sans);
+}
+.search-bar input::placeholder{color:var(--ink-faint)}
+.search-count{font-size:.78rem;color:var(--ink-faint);padding:2px 20px 0;min-height:1.2em}
+
+/* ===== Pages / Tabs ===== */
+.page{display:none;padding:8px 0 24px}
+.page.active{display:block;animation:fadeIn .28s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+nav.tabbar{
+  position:fixed;left:50%;transform:translateX(-50%);
+  bottom:0;width:100%;max-width:480px;z-index:50;
+  display:flex;
+  background:rgba(255,253,249,.96);
+  border-top:1px solid var(--line);
+  padding-bottom:env(safe-area-inset-bottom);
+}
+nav.tabbar button{
+  flex:1;border:none;background:none;cursor:pointer;
+  padding:9px 0 8px;
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  font-family:var(--sans);
+  font-size:.7rem;color:var(--ink-faint);
+  transition:color .2s;
+}
+nav.tabbar button .ico{font-size:1.15rem;line-height:1.2}
+nav.tabbar button.active{color:var(--wood-dark);font-weight:600}
+nav.tabbar button.active .ico{transform:translateY(-1px)}
+
+/* ===== Shelf ===== */
+.shelf-section{margin:18px 12px 6px}
+.shelf-head{
+  display:flex;align-items:baseline;gap:8px;
+  padding:0 8px 6px;cursor:pointer;user-select:none;
+}
+.shelf-head h2{
+  font-family:var(--serif);
+  font-size:1.02rem;font-weight:600;color:var(--ink);
+}
+.shelf-head .cnt{font-size:.75rem;color:var(--ink-faint)}
+.shelf-head .toggle{
+  margin-left:auto;font-size:.72rem;color:var(--wood);
+  border:1px solid var(--line);border-radius:999px;
+  padding:1px 10px;background:var(--card);
+}
+.shelf-body{
+  background:#f6f0e5;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:14px 8px 0;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.shelf-body.collapsed{display:none}
+.shelf-row{
+  display:flex;align-items:flex-end;gap:3px;
+  padding:0 2px;
+}
+.plank{
+  height:12px;
+  border-radius:3px;
+  background:linear-gradient(180deg,var(--wood-light) 0%,var(--wood) 45%,var(--wood-dark) 100%);
+  box-shadow:0 3px 6px rgba(90,70,50,.28), inset 0 1px 0 rgba(255,255,255,.25);
+  margin-bottom:14px;
+  position:relative;
+}
+.plank::after{
+  content:"";position:absolute;left:0;right:0;top:3px;height:1px;
+  background:rgba(255,255,255,.14);
+}
+.spine{
+  flex:none;
+  border-radius:3px 3px 1px 1px;
+  box-shadow:inset -2px 0 3px rgba(0,0,0,.18), inset 2px 0 2px rgba(255,255,255,.12), 0 1px 2px rgba(90,70,50,.2);
+  cursor:pointer;
+  display:flex;justify-content:center;
+  padding:8px 0 10px;
+  transition:transform .15s ease;
+  position:relative;
+  overflow:hidden;
+}
+.spine:hover{transform:translateY(-4px)}
+.spine:active{transform:scale(.94)}
+.spine .t{
+  writing-mode:vertical-rl;
+  font-family:var(--serif);
+  color:#fbf7ef;
+  text-shadow:0 1px 1px rgba(0,0,0,.25);
+  letter-spacing:.06em;
+  white-space:nowrap;
+  overflow:hidden;
+  max-height:100%;
+}
+.spine .band{
+  position:absolute;left:0;right:0;height:5px;top:6px;
+  background:rgba(255,255,255,.14);
+}
+.spine .band.b2{top:auto;bottom:8px;height:4px}
+
+/* 多层书架生活感 */
+.bookcase{margin:10px 16px 0}
+.shelf-gap{flex:none;height:10px}
+.spine.lean{transform:rotate(4deg) translateY(2px);transform-origin:bottom left}
+.spine.lean:hover{transform:rotate(4deg) translateY(-2px)}
+
+/* 视图切换 & 排序 */
+.view-bar{display:flex;justify-content:space-between;align-items:center;padding:8px 16px 0}
+.view-toggle{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--card);box-shadow:var(--shadow)}
+.view-toggle button{
+  border:none;background:transparent;padding:5px 14px;
+  font-size:.78rem;color:var(--ink-soft);cursor:pointer;font-family:var(--sans);
+}
+.view-toggle button.on{background:var(--wood);color:#fbf7ef;font-weight:600}
+#sort-select{
+  border:1px solid var(--line);border-radius:999px;background:var(--card);
+  padding:5px 10px;font-size:.78rem;color:var(--ink-soft);
+  font-family:var(--sans);box-shadow:var(--shadow);
+}
+
+/* 列表视图 */
+.bk-list{padding:6px 16px}
+.bk-cat{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--serif);font-size:.95rem;color:var(--wood-dark);
+  margin:14px 0 6px;padding-bottom:4px;border-bottom:1px solid var(--line);
+}
+.bk-cat span{font-size:.72rem;color:var(--ink-faint);font-family:var(--sans)}
+.bk-row{
+  display:flex;gap:10px;align-items:center;
+  background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:8px 12px;margin-bottom:6px;cursor:pointer;box-shadow:var(--shadow);
+  transition:transform .15s;
+}
+.bk-row:active{transform:scale(.98)}
+.bk-row .dot{flex:none;width:8px;height:30px;border-radius:2px}
+.bk-main{min-width:0}
+.bk-row .t{font-family:var(--serif);font-size:.9rem;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bk-row .m{font-size:.74rem;color:var(--ink-faint);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* ===== Search results ===== */
+.result-list{padding:6px 16px}
+.result-item{
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:10px 14px;margin-bottom:8px;cursor:pointer;
+  box-shadow:var(--shadow);
+  display:flex;gap:12px;align-items:center;
+  transition:transform .15s;
+}
+.result-item:active{transform:scale(.98)}
+.result-item .dot{flex:none;width:10px;height:34px;border-radius:3px}
+.result-item .info{min-width:0}
+.result-item .bt{font-family:var(--serif);font-size:.95rem;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.result-item .ba{font-size:.76rem;color:var(--ink-faint);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.empty-tip{text-align:center;color:var(--ink-faint);font-size:.85rem;padding:40px 0}
+
+/* ===== Category page ===== */
+.cat-list{padding:10px 16px}
+.cat-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  margin-bottom:10px;box-shadow:var(--shadow);overflow:hidden;
+}
+.cat-card .cc-head{
+  display:flex;align-items:center;gap:10px;
+  padding:13px 16px;cursor:pointer;user-select:none;
+}
+.cat-card .swatch{width:14px;height:26px;border-radius:3px;flex:none;box-shadow:inset -1px 0 2px rgba(0,0,0,.15)}
+.cat-card .cc-name{font-family:var(--serif);font-size:.98rem;font-weight:600}
+.cat-card .cc-count{margin-left:auto;font-size:.78rem;color:var(--ink-faint)}
+.cat-card .cc-arrow{color:var(--ink-faint);font-size:.8rem;transition:transform .2s}
+.cat-card.open .cc-arrow{transform:rotate(90deg)}
+.cat-books{display:none;border-top:1px dashed var(--line);padding:6px 16px 12px}
+.cat-card.open .cat-books{display:block;animation:fadeIn .25s ease}
+.cat-book{
+  padding:9px 4px;border-bottom:1px solid #f2ebdf;cursor:pointer;
+}
+.cat-book:last-child{border-bottom:none}
+.cat-book .t{font-family:var(--serif);font-size:.92rem}
+.cat-book .m{font-size:.74rem;color:var(--ink-faint)}
+
+/* ===== Profile page ===== */
+.profile-body{padding:18px 22px 30px}
+.profile-body h1{
+  font-family:var(--serif);font-size:1.35rem;line-height:1.5;
+  margin:6px 0 4px;letter-spacing:.04em;
+}
+.profile-body h2{
+  font-family:var(--serif);font-size:1.12rem;
+  margin:30px 0 10px;color:var(--wood-dark);
+  padding-left:12px;border-left:4px solid var(--wood);
+  line-height:1.5;
+}
+.profile-body h3{
+  font-family:var(--serif);font-size:1rem;
+  margin:20px 0 6px;color:var(--ink);
+}
+.profile-body p{margin:10px 0;font-size:.92rem;color:#4a443d;text-align:justify}
+.profile-body strong{color:var(--wood-dark)}
+.profile-body ol,.profile-body ul{margin:10px 0 10px 1.4em}
+.profile-body li{margin:8px 0;font-size:.92rem;color:#4a443d}
+.profile-body blockquote{
+  margin:14px 0;padding:10px 16px;
+  background:#f4eee2;border-left:4px solid var(--wood-light);
+  border-radius:0 10px 10px 0;
+  font-size:.9rem;color:var(--ink-soft);
+}
+/* 画像页：快照徽章 + 演进时间线 */
+.pf-snapshot{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 6px}
+.pf-chip{
+  background:#f3ecdf;border:1px solid var(--line);border-radius:999px;
+  padding:4px 12px;font-size:.78rem;color:var(--ink-soft);
+}
+.pf-chip b{color:var(--wood-dark);font-weight:600}
+.timeline{margin:14px 0 4px;border-left:2px solid var(--line);padding-left:18px}
+.tl-item{position:relative;margin-bottom:18px}
+.tl-item::before{
+  content:"";position:absolute;left:-23px;top:6px;width:8px;height:8px;
+  border-radius:50%;background:var(--wood);border:2px solid #f5efe4;
+}
+.tl-date{font-size:.76rem;color:var(--ink-faint);letter-spacing:.08em}
+.tl-title{font-size:.95rem;color:var(--ink);font-weight:600;margin:2px 0}
+.tl-detail{font-size:.86rem;color:#4a443d;line-height:1.7}
+
+/* ===== About page ===== */
+.about-body{padding:18px 16px}
+.stat-grid{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.stat-card{
+  flex:1 1 calc(50% - 10px);
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-family:var(--serif);font-size:1.7rem;color:var(--wood-dark);font-weight:700}
+.stat-card .lbl{font-size:.76rem;color:var(--ink-faint);margin-top:2px}
+.about-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px 18px;margin-bottom:14px;box-shadow:var(--shadow);
+}
+.about-card h3{font-family:var(--serif);font-size:.98rem;margin-bottom:10px;color:var(--wood-dark)}
+.pub-row{display:flex;align-items:center;gap:10px;padding:5px 0;font-size:.85rem}
+.pub-row .rk{flex:none;width:20px;height:20px;border-radius:6px;background:#f0e8da;color:var(--wood-dark);font-size:.72rem;display:flex;align-items:center;justify-content:center}
+.pub-row .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pub-row .bar{flex:none;width:70px;height:6px;border-radius:3px;background:#f0e8da;overflow:hidden}
+.pub-row .bar i{display:block;height:100%;background:var(--wood-light);border-radius:3px}
+.pub-row .ct{flex:none;font-size:.75rem;color:var(--ink-faint);width:2em;text-align:right}
+.about-note{font-size:.82rem;color:var(--ink-soft);line-height:1.9}
+.about-note p{margin:8px 0}
+.conf-bar{height:10px;border-radius:5px;background:#f0e8da;overflow:hidden;margin:8px 0 4px}
+.conf-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--wood-light),var(--wood));border-radius:5px}
+
+/* ===== Modal ===== */
+.modal-mask{
+  position:fixed;inset:0;z-index:100;
+  background:rgba(58,52,46,.45);
+  display:none;align-items:flex-end;justify-content:center;
+}
+.modal-mask.show{display:flex;animation:fadeIn .2s ease}
+@media (min-width:520px){.modal-mask{align-items:center}}
+.modal-card{
+  background:var(--card);
+  width:100%;max-width:480px;
+  border-radius:20px 20px 0 0;
+  padding:22px 24px calc(24px + env(safe-area-inset-bottom));
+  max-height:82vh;overflow-y:auto;
+  animation:slideUp .28s ease;
+}
+@media (min-width:520px){.modal-card{border-radius:20px;margin:0 16px}}
+@keyframes slideUp{from{transform:translateY(40px);opacity:.6}to{transform:none;opacity:1}}
+.modal-card .grab{width:40px;height:4px;border-radius:2px;background:var(--line);margin:0 auto 16px}
+.modal-card h2{font-family:var(--serif);font-size:1.2rem;line-height:1.5;margin-bottom:4px}
+.modal-card .author{font-size:.88rem;color:var(--ink-soft);margin-bottom:14px}
+.meta-row{display:flex;gap:8px;font-size:.82rem;padding:7px 0;border-bottom:1px dashed var(--line)}
+.meta-row .k{flex:none;width:4.5em;color:var(--ink-faint)}
+.meta-row .v{flex:1;color:var(--ink)}
+.tag-chips{display:flex;flex-wrap:wrap;gap:6px}
+.tag-chips span{
+  font-size:.74rem;color:var(--wood-dark);
+  background:#f3ecdf;border:1px solid var(--line);
+  border-radius:999px;padding:2px 10px;
+}
+.conf-badge{display:inline-block;font-size:.74rem;border-radius:999px;padding:2px 10px}
+.conf-high{background:#eef0e6;color:#5d6b4a;border:1px solid #dde2cd}
+.conf-mid{background:#f6efe0;color:#8a7440;border:1px solid #eadfc4}
+.conf-low{background:#f5e8e4;color:#96604e;border:1px solid #ecd9d2}
+/* 分类快捷筛选 chip 条 */
+.chip-bar{
+  display:flex;gap:8px;overflow-x:auto;padding:10px 16px 4px;
+  scrollbar-width:none;-webkit-overflow-scrolling:touch;
+}
+.chip-bar::-webkit-scrollbar{display:none}
+.chip{
+  flex:none;display:inline-flex;align-items:center;gap:6px;
+  border:1px solid var(--line);background:var(--card);border-radius:999px;
+  padding:6px 13px;font-size:.8rem;color:var(--ink-soft);cursor:pointer;
+  font-family:var(--sans);white-space:nowrap;box-shadow:var(--shadow);
+  transition:all .15s ease;
+}
+.chip i{display:inline-block;width:8px;height:8px;border-radius:50%}
+.chip.on{background:var(--wood);border-color:var(--wood);color:#fbf7ef;font-weight:600}
+.chip.on i{background:#fbf7ef !important}
+.chip:active{transform:scale(.96)}
+
+.modal-close{
+  margin-top:18px;width:100%;border:none;cursor:pointer;
+  background:var(--wood);color:#fbf7ef;font-family:var(--sans);
+  border-radius:12px;padding:12px;font-size:.92rem;letter-spacing:.2em;
+}
+.modal-close:active{transform:scale(.98)}
+/* 弹窗封面与豆瓣链接 */
+.m-top{display:flex;gap:14px;align-items:flex-start;margin-bottom:4px}
+.m-cover{
+  width:74px;min-width:74px;border-radius:6px;
+  box-shadow:0 3px 12px rgba(90,70,50,.22);background:#eee6d8;
+}
+.m-head h2{margin-top:2px}
+.douban-link{
+  display:block;margin-top:14px;text-align:center;text-decoration:none;
+  border:1px solid var(--wood-light);color:var(--wood-dark);
+  border-radius:12px;padding:10px;font-size:.88rem;letter-spacing:.06em;
+  transition:background .15s ease;
+}
+.douban-link:active{background:#f3ecdf}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="app-header">
+    <h1>我的书架</h1>
+    <p class="sub">书单加载中…</p>
+  </header>
+
+  <section class="page active" id="page-shelf">
+    <div class="search-bar">
+      <div class="box">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6b6157" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+        <input id="search-input" type="search" placeholder="搜索书名 / 作者 / 出版社…" autocomplete="off">
+      </div>
+    </div>
+    <div class="search-count" id="search-count"></div>
+    <div class="chip-bar" id="chip-bar"></div>
+    <div class="view-bar">
+      <div class="view-toggle" id="view-toggle">
+        <button data-view="shelf" class="on">书脊</button>
+        <button data-view="list">列表</button>
+      </div>
+      <select id="sort-select" style="display:none" aria-label="排序方式">
+        <option value="default">按分类</option>
+        <option value="title">按书名</option>
+        <option value="author">按作者</option>
+        <option value="publisher">按出版社</option>
+      </select>
+    </div>
+    <div id="shelf-container"></div>
+    <div class="result-list" id="result-list" style="display:none"></div>
+  </section>
+
+  <section class="page" id="page-profile">
+    <article class="profile-body" id="profile-body"></article>
+  </section>
+
+  <section class="page" id="page-about">
+    <div class="about-body" id="about-body"></div>
+  </section>
+
+  <nav class="tabbar">
+    <button data-page="shelf" class="active"><span class="ico">&#128218;</span>书架</button>
+    <button data-page="profile"><span class="ico">&#129694;</span>画像</button>
+    <button data-page="about"><span class="ico">&#8505;&#65039;</span>关于</button>
+  </nav>
+</div>
+
+<div class="modal-mask" id="modal-mask">
+  <div class="modal-card" id="modal-card"></div>
+</div>
+<script>
+"use strict";
+/* ===== 数据 ===== */
+var BOOKS = []; /* 数据来自同目录 books.json，由底部 fetch 载入 */
+
+/* 分类低饱和暖调色板（新分类直接在此追加即可） */
+var CAT_COLORS = {
+  "政治理论": "#9a5b4f",
+  "传记": "#a8763e",
+  "中国历史与近代史": "#8b6f56",
+  "古典文学与传统文化": "#7d6b4f",
+  "现当代文学": "#b08968",
+  "外国文学": "#96705a",
+  "社会科学": "#8a7968",
+  "写作与自我提升": "#a98f6d",
+  "生活方式与美食": "#b98a5e",
+  "杂志书Mook": "#9c8465",
+  "商业科技与互联网": "#7a7a5e",
+  "科普博物": "#7e8b6f",
+  "游戏与流行文化": "#a66a52",
+  "育儿与绘本": "#c09a6b",
+  "经济理财": "#8f7a4e",
+  "哲学与思想": "#6e6255",
+  "宠物与自然": "#91906b",
+  "艺术与电影": "#a5836a",
+  "历史小说与悬疑": "#7d5a50",
+  "计算机与人工智能": "#6f7d75",
+  "健康养生": "#8e9a6b"
+};
+var FALLBACK_COLORS = ["#8b6f56","#a98f6d","#96705a","#7d6b4f","#b08968"];
+
+/* ===== 工具 ===== */
+function esc(s){
+  return String(s == null ? "" : s)
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+}
+/* 稳定的字符串散列，用于确定性"随机" */
+function hashStr(s){
+  var h = 0;
+  for (var i = 0; i < s.length; i++){ h = (h * 31 + s.charCodeAt(i)) >>> 0; }
+  return h;
+}
+/* hex 颜色明暗微调，amt: -1..1 */
+function shade(hex, amt){
+  var n = parseInt(hex.slice(1), 16);
+  var r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+  function adj(c){
+    return Math.max(0, Math.min(255, Math.round(amt >= 0 ? c + (255 - c) * amt : c * (1 + amt))));
+  }
+  return "rgb(" + adj(r) + "," + adj(g) + "," + adj(b) + ")";
+}
+function catColor(cat){
+  return CAT_COLORS[cat] || FALLBACK_COLORS[hashStr(cat) % FALLBACK_COLORS.length];
+}
+/* 书脊宽度：按书名长度 + 确定性抖动 */
+function spineWidth(book){
+  var h = hashStr(book.title);
+  var base = 24 + Math.min(book.title.length, 14);
+  return base + (h % 9) - 4; // 约 21 ~ 42px
+}
+function spineHeight(book){
+  var h = hashStr(book.title + book.author);
+  return 148 + (h % 34); // 148 ~ 181px
+}
+function spineColor(book){
+  var h = hashStr(book.title);
+  var amt = ((h % 7) - 3) * 0.06; // -0.18 ~ +0.18
+  /* 优先用封面提取色（低饱和化过），无封面再退化为分类色 */
+  if (book.color) return shade(book.color, amt * 0.5);
+  return shade(catColor(book.category).length === 7 ? catColor(book.category) : "#8b6f56", amt);
+}
+
+/* ===== 分组（数据加载后调用 rebuildGroups 重建） ===== */
+var CAT_ORDER = [];
+var GROUPS = [];
+function rebuildGroups(){
+  var map = {};
+  CAT_ORDER = [];
+  BOOKS.forEach(function(b, idx){
+    b._idx = idx;
+    if (!map[b.category]){ map[b.category] = []; CAT_ORDER.push(b.category); }
+    map[b.category].push(b);
+  });
+  CAT_ORDER.sort(function(a, b2){ return map[b2].length - map[a].length || a.localeCompare(b2, "zh"); });
+  GROUPS = CAT_ORDER.map(function(c){ return { name: c, books: map[c] }; });
+}
+
+/* ===== 书架渲染 ===== */
+var shelfContainer = document.getElementById("shelf-container");
+var viewMode = "shelf";   // shelf=书脊书架 | list=列表
+var sortBy = "default";   // default=按分类 | title | author | publisher
+
+function spineHtml(b, extraCls){
+  var w = spineWidth(b), hh = spineHeight(b);
+  var fs = Math.max(10, Math.min(14, w - 12));
+  return '<div class="spine' + (extraCls || "") + '" data-idx="' + b._idx + '" style="width:' + w + 'px;height:' + hh + 'px;background:' + spineColor(b) + '" title="' + esc(b.title) + '">' +
+    '<div class="band"></div>' +
+    '<span class="t" style="font-size:' + fs + 'px">' + esc(b.title) + '</span>' +
+    '<div class="band b2"></div></div>';
+}
+
+/* 顺序填充分行：像真实书架一样排满一层再换层 */
+function packRows(books, rowWidth){
+  var rows = [], cur = [], curW = 0;
+  books.forEach(function(b){
+    var w = spineWidth(b) + 3;
+    if (cur.length && curW + w > rowWidth){ rows.push(cur); cur = []; curW = 0; }
+    cur.push(b); curW += w;
+  });
+  if (cur.length) rows.push(cur);
+  return rows;
+}
+
+/* 渲染若干层书架，带确定性"生活感"：偶发缝隙、偶发斜倚的书 */
+function rowsHtml(rows){
+  var html = "";
+  rows.forEach(function(row, ri){
+    html += '<div class="shelf-row">';
+    var seed = hashStr(row[0].title + "#" + ri);
+    var gapAt = (seed % 4 === 0) ? (seed >> 3) % (row.length + 1) : -1; // 约 1/4 的层有缝隙
+    var lean = (seed % 5 === 0);                                        // 约 1/5 的层末本书斜倚
+    row.forEach(function(b, bi){
+      if (bi === gapAt) html += '<div class="shelf-gap" style="width:' + (10 + (seed >> 5) % 16) + 'px"></div>';
+      html += spineHtml(b, lean && bi === row.length - 1 ? " lean" : "");
+    });
+    html += '</div><div class="plank"></div>';
+  });
+  return html;
+}
+
+function buildShelf(){
+  if (viewMode === "list"){ buildList(); return; }
+  var containerWidth = shelfContainer.clientWidth || 360;
+  var rowWidth = Math.max(240, containerWidth - 24 - 16 - 4);
+  var html = "";
+  if (activeCat){
+    var g = GROUPS.filter(function(x){ return x.name === activeCat; })[0];
+    if (g){
+      html += '<div class="shelf-section"><div class="shelf-head"><h2>' + esc(g.name) + '</h2>' +
+        '<span class="cnt">' + g.books.length + ' 本</span></div>' +
+        '<div class="shelf-body">' + rowsHtml(packRows(g.books, rowWidth)) + '</div></div>';
+    }
+  } else {
+    /* 全部：连续多层书架，按分类顺序自然混排，像家里真正的书架 */
+    var all = [];
+    GROUPS.forEach(function(g){ all = all.concat(g.books); });
+    html += '<div class="shelf-body bookcase">' + rowsHtml(packRows(all, rowWidth)) + '</div>';
+  }
+  shelfContainer.innerHTML = html;
+}
+
+/* ===== 列表视图 ===== */
+function bookRowHtml(b){
+  return '<div class="bk-row" data-idx="' + b._idx + '">' +
+    '<i class="dot" style="background:' + spineColor(b) + '"></i>' +
+    '<div class="bk-main"><div class="t">' + esc(b.title) + '</div>' +
+    '<div class="m">' + esc(b.author) + ' · ' + esc(b.publisher) + '</div></div></div>';
+}
+function buildList(){
+  var html = "";
+  var groups = activeCat ? GROUPS.filter(function(g){ return g.name === activeCat; }) : GROUPS;
+  if (sortBy === "default"){
+    groups.forEach(function(g){
+      html += '<div class="bk-cat">' + esc(g.name) + '<span>' + g.books.length + ' 本</span></div>';
+      g.books.forEach(function(b){ html += bookRowHtml(b); });
+    });
+  } else {
+    var all = [];
+    groups.forEach(function(g){ all = all.concat(g.books); });
+    all.sort(function(a, b){
+      return String(a[sortBy] || "").localeCompare(String(b[sortBy] || ""), "zh");
+    });
+    all.forEach(function(b){ html += bookRowHtml(b); });
+  }
+  shelfContainer.innerHTML = '<div class="bk-list">' + html + '</div>';
+}
+
+shelfContainer.addEventListener("click", function(e){
+  var row = e.target.closest(".bk-row");
+  if (row){ openModal(+row.getAttribute("data-idx")); return; }
+  var spine = e.target.closest(".spine");
+  if (spine){ openModal(+spine.getAttribute("data-idx")); }
+});
+
+/* 视图切换 & 排序 */
+var viewToggle = document.getElementById("view-toggle");
+var sortSelect = document.getElementById("sort-select");
+viewToggle.addEventListener("click", function(e){
+  var btn = e.target.closest("button");
+  if (!btn) return;
+  viewMode = btn.getAttribute("data-view");
+  viewToggle.querySelectorAll("button").forEach(function(b){ b.classList.toggle("on", b === btn); });
+  sortSelect.style.display = viewMode === "list" ? "" : "none";
+  buildShelf();
+});
+sortSelect.addEventListener("change", function(){
+  sortBy = sortSelect.value;
+  buildList();
+});
+
+/* ===== 搜索 ===== */
+var searchInput = document.getElementById("search-input");
+var searchCount = document.getElementById("search-count");
+var resultList = document.getElementById("result-list");
+
+function doSearch(){
+  var q = searchInput.value.trim().toLowerCase();
+  if (!q){
+    resultList.style.display = "none";
+    shelfContainer.style.display = "";
+    searchCount.textContent = "";
+    return;
+  }
+  var hits = BOOKS.filter(function(b){
+    return b.title.toLowerCase().indexOf(q) >= 0 ||
+           b.author.toLowerCase().indexOf(q) >= 0 ||
+           b.publisher.toLowerCase().indexOf(q) >= 0;
+  });
+  shelfContainer.style.display = "none";
+  resultList.style.display = "";
+  searchCount.textContent = "找到 " + hits.length + " 本";
+  if (!hits.length){
+    resultList.innerHTML = '<div class="empty-tip">没有找到「' + esc(q) + '」相关的书</div>';
+    return;
+  }
+  var html = "";
+  hits.forEach(function(b){
+    html += '<div class="result-item" data-idx="' + b._idx + '">' +
+      '<div class="dot" style="background:' + catColor(b.category) + '"></div>' +
+      '<div class="info"><div class="bt">' + esc(b.title) + '</div>' +
+      '<div class="ba">' + esc(b.author) + " · " + esc(b.publisher) + '</div></div></div>';
+  });
+  resultList.innerHTML = html;
+}
+searchInput.addEventListener("input", doSearch);
+resultList.addEventListener("click", function(e){
+  var item = e.target.closest(".result-item");
+  if (item) openModal(+item.getAttribute("data-idx"));
+});
+
+/* ===== 分类快捷筛选（书架页顶部 chip 条） ===== */
+var activeCat = null;
+var chipBar = document.getElementById("chip-bar");
+function buildChips(){
+  var html = '<button class="chip' + (activeCat ? "" : " on") + '" data-cat="">全部 ' + BOOKS.length + '</button>';
+  GROUPS.forEach(function(g){
+    html += '<button class="chip' + (activeCat === g.name ? " on" : "") + '" data-cat="' + esc(g.name) + '">' +
+      '<i style="background:' + catColor(g.name) + '"></i>' + esc(g.name) + ' ' + g.books.length + '</button>';
+  });
+  chipBar.innerHTML = html;
+}
+chipBar.addEventListener("click", function(e){
+  var chip = e.target.closest(".chip");
+  if (!chip) return;
+  activeCat = chip.getAttribute("data-cat") || null;
+  buildChips();
+  buildShelf();
+});
+
+/* ===== 关于页 ===== */
+function buildAbout(){
+  var total = BOOKS.length;
+  var catCount = CAT_ORDER.length;
+  var high = BOOKS.filter(function(b){ return b.confidence === "high"; }).length;
+  var pct = Math.round(high / total * 1000) / 10;
+  var pubMap = {};
+  BOOKS.forEach(function(b){
+    var p = b.publisher || "未知";
+    pubMap[p] = (pubMap[p] || 0) + 1;
+  });
+  var pubs = Object.keys(pubMap).map(function(k){ return [k, pubMap[k]]; });
+  pubs.sort(function(a, b){ return b[1] - a[1] || a[0].localeCompare(b[0], "zh"); });
+  var top = pubs.slice(0, 10);
+  var max = top.length ? top[0][1] : 1;
+
+  var html = '<div class="stat-grid">' +
+    '<div class="stat-card"><div class="num">' + total + '</div><div class="lbl">总藏书（种）</div></div>' +
+    '<div class="stat-card"><div class="num">' + catCount + '</div><div class="lbl">分类数</div></div>' +
+    '<div class="stat-card"><div class="num">' + pubs.length + '</div><div class="lbl">出版社 / 品牌</div></div>' +
+    '<div class="stat-card"><div class="num">' + pct + '%</div><div class="lbl">高置信识别占比</div></div>' +
+    '</div>';
+
+  html += '<div class="about-card"><h3>出版社 / 系列 Top 10</h3>';
+  top.forEach(function(p, i){
+    html += '<div class="pub-row"><span class="rk">' + (i + 1) + '</span>' +
+      '<span class="nm">' + esc(p[0]) + '</span>' +
+      '<span class="bar"><i style="width:' + Math.round(p[1] / max * 100) + '%"></i></span>' +
+      '<span class="ct">' + p[1] + '</span></div>';
+  });
+  html += '</div>';
+
+  html += '<div class="about-card"><h3>识别置信度</h3>' +
+    '<div class="conf-bar"><i style="width:' + pct + '%"></i></div>' +
+    '<div class="about-note"><p>高置信 ' + high + ' 本（' + pct + '%），其余为中等或较低置信，多因书脊文字模糊或推测版本所致。</p></div></div>';
+
+  html += '<div class="about-card"><h3>关于本站</h3><div class="about-note">' +
+    '<p>本书架根据书架照片 AI 识别整理，当前共收录 ' + total + ' 种（含 2026-08 桌面小书架新增的 12 种）。</p>' +
+    '<p>书籍信息（作者、出版社、分类、标签）由识别结果结合出版常识推断，个别条目可能存在误差；「画像」页为站长第一人称自述，随书架更新持续演进。</p>' +
+    '<p>单文件静态页面，无外部依赖，可离线浏览。</p>' +
+    '</div></div>';
+
+  document.getElementById("about-body").innerHTML = html;
+}
+
+/* ===== 详情弹窗 ===== */
+var modalMask = document.getElementById("modal-mask");
+var modalCard = document.getElementById("modal-card");
+var CONF_LABEL = { high: "高置信", mid: "中置信", low: "低置信" };
+
+function openModal(idx){
+  var b = BOOKS[idx];
+  if (!b) return;
+  var tags = (b.tags || []).map(function(t){ return "<span>" + esc(t) + "</span>"; }).join("");
+  var doubanUrl = b.douban_url ||
+    ("https://search.douban.com/book/subject_search?search_text=" + encodeURIComponent(b.title));
+  modalCard.innerHTML =
+    '<div class="grab"></div>' +
+    (b.cover ?
+      '<div class="m-top"><img class="m-cover" src="' + esc(b.cover) + '" referrerpolicy="no-referrer" loading="lazy" alt="封面">' +
+      '<div class="m-head"><h2>' + esc(b.title) + '</h2><div class="author">' + esc(b.author) + '</div></div></div>'
+      :
+      "<h2>" + esc(b.title) + "</h2>" + '<div class="author">' + esc(b.author) + '</div>') +
+    '<div class="meta-row"><span class="k">出版社</span><span class="v">' + esc(b.publisher) + '</span></div>' +
+    '<div class="meta-row"><span class="k">分类</span><span class="v">' +
+      '<i style="display:inline-block;width:10px;height:10px;border-radius:3px;background:' + catColor(b.category) + ';margin-right:6px"></i>' +
+      esc(b.category) + '</span></div>' +
+    (tags ? '<div class="meta-row"><span class="k">标签</span><span class="v tag-chips">' + tags + '</span></div>' : "") +
+    '<div class="meta-row"><span class="k">置信度</span><span class="v"><span class="conf-badge conf-' + esc(b.confidence) + '">' +
+      (CONF_LABEL[b.confidence] || esc(b.confidence)) + '</span></span></div>' +
+    (b.note ? '<div class="meta-row"><span class="k">备注</span><span class="v">' + esc(b.note) + '</span></div>' : "") +
+    '<a class="douban-link" href="' + esc(doubanUrl) + '" target="_blank" rel="noopener noreferrer">' +
+      (b.douban_url ? "在豆瓣查看这本书" : "到豆瓣搜索这本书") + ' &#8599;</a>' +
+    '<button class="modal-close" id="modal-close">收 起</button>';
+  modalMask.classList.add("show");
+  document.body.style.overflow = "hidden";
+  document.getElementById("modal-close").addEventListener("click", closeModal);
+}
+function closeModal(){
+  modalMask.classList.remove("show");
+  document.body.style.overflow = "";
+}
+modalMask.addEventListener("click", function(e){
+  if (e.target === modalMask) closeModal();
+});
+document.addEventListener("keydown", function(e){
+  if (e.key === "Escape") closeModal();
+});
+
+/* ===== Tab 切换 ===== */
+var tabBtns = document.querySelectorAll("nav.tabbar button");
+var pages = {
+  shelf: document.getElementById("page-shelf"),
+  profile: document.getElementById("page-profile"),
+  about: document.getElementById("page-about")
+};
+tabBtns.forEach(function(btn){
+  btn.addEventListener("click", function(){
+    var key = btn.getAttribute("data-page");
+    tabBtns.forEach(function(b){ b.classList.toggle("active", b === btn); });
+    Object.keys(pages).forEach(function(k){
+      pages[k].classList.toggle("active", k === key);
+    });
+    window.scrollTo(0, 0);
+  });
+});
+
+/* ===== 初始化 & 自适应重排 ===== */
+var resizeTimer = null;
+window.addEventListener("resize", function(){
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(function(){
+    if (!searchInput.value.trim()) buildShelf();
+  }, 200);
+});
+
+/* ===== 画像页（数据来自 profile.json，快照数据实时计算） ===== */
+var PROFILE = null;
+function buildProfile(){
+  var el = document.getElementById("profile-body");
+  if (!PROFILE){
+    el.innerHTML = '<p style="color:var(--ink-faint)">画像内容加载失败，请确认 profile.json 存在。</p>';
+    return;
+  }
+  var html = '<h1>' + esc(PROFILE.title) + '</h1>';
+  html += '<div class="pf-snapshot">' +
+    '<span class="pf-chip">画像 <b>v' + esc(PROFILE.version) + '</b></span>' +
+    '<span class="pf-chip">更新于 ' + esc(PROFILE.updated) + '</span>' +
+    '<span class="pf-chip">基于 <b>' + BOOKS.length + '</b> 本书 · <b>' + CAT_ORDER.length + '</b> 个分类</span>' +
+    '</div>';
+  html += '<p>' + esc(PROFILE.intro) + '</p>';
+  (PROFILE.sections || []).forEach(function(s){
+    html += '<h2>' + esc(s.h) + '</h2>' + s.html;
+  });
+  html += '<h2>画像演进</h2>' +
+    '<p>书架在长，画像也在长。每次有值得一提的更新，我会在这里记一笔。</p>' +
+    '<div class="timeline">';
+  (PROFILE.timeline || []).slice().reverse().forEach(function(t){
+    html += '<div class="tl-item">' +
+      '<div class="tl-date">' + esc(t.date) + '</div>' +
+      '<div class="tl-title">' + esc(t.title) + '</div>' +
+      '<div class="tl-detail">' + esc(t.detail) + '</div></div>';
+  });
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+function initApp(){
+  rebuildGroups();
+  buildShelf();
+  buildChips();
+  buildAbout();
+  buildProfile();
+  document.title = "我的书架 · " + BOOKS.length + " 本书构成的精神世界";
+  var sub = document.querySelector("header.app-header p.sub");
+  if (sub) sub.textContent = BOOKS.length + " 本书构成的精神世界";
+}
+
+/* 从同目录 books.json / profile.json 载入数据；维护书单与画像只需编辑这两个文件 */
+Promise.all([
+  fetch("books.json", { cache: "no-cache" }).then(function(r){
+    if (!r.ok) throw new Error("books.json HTTP " + r.status);
+    return r.json();
+  }),
+  fetch("profile.json", { cache: "no-cache" }).then(function(r){
+    return r.ok ? r.json() : null;
+  }).catch(function(){ return null; })
+])
+  .then(function(rs){
+    BOOKS = rs[0];
+    PROFILE = rs[1];
+    initApp();
+  })
+  .catch(function(err){
+    shelfContainer.innerHTML =
+      '<div style="padding:32px 20px;color:var(--ink-soft);font-size:.9rem;line-height:1.9">' +
+      '书单数据加载失败（' + esc(err.message) + '）。<br>' +
+      '请确认 books.json 与 index.html 在同一目录，并通过本地服务器访问（如 <code>npm run dev</code>），' +
+      '不要直接用 file:// 打开。</div>';
+  });
+</script>
+</body>
+</html>
