@@ -297,6 +297,14 @@ nav.tabbar button.active .ico{transform:translateY(-1px)}
 .tl-date{font-size:.76rem;color:var(--ink-faint);letter-spacing:.08em}
 .tl-title{font-size:.95rem;color:var(--ink);font-weight:600;margin:2px 0}
 .tl-detail{font-size:.86rem;color:#4a443d;line-height:1.7}
+.tl-photo{margin-top:8px}
+.tl-photo img{
+  width:180px;border-radius:8px;border:1px solid var(--line);
+  box-shadow:var(--shadow);display:block;cursor:zoom-in;
+  transition:transform .15s ease;
+}
+.tl-photo img:active{transform:scale(.97)}
+.tl-photo figcaption{font-size:.74rem;color:var(--ink-faint);margin-top:5px;line-height:1.5}
 
 /* ===== About page ===== */
 .about-body{padding:18px 16px}
@@ -396,6 +404,16 @@ nav.tabbar button.active .ico{transform:translateY(-1px)}
   transition:background .15s ease;
 }
 .douban-link:active{background:#f3ecdf}
+/* 弹窗内的上架来源照片 */
+.m-src{
+  margin-top:14px;padding:12px;border:1px dashed var(--line);border-radius:12px;
+  background:#faf6ee;
+}
+.m-src .m-src-label{font-size:.76rem;color:var(--ink-faint);letter-spacing:.06em;margin-bottom:8px}
+.m-src img{
+  width:100%;border-radius:8px;border:1px solid var(--line);
+  display:block;cursor:zoom-in;
+}
 </style>
 </head>
 <body>
@@ -779,6 +797,11 @@ function openModal(idx){
     '<div class="meta-row"><span class="k">置信度</span><span class="v"><span class="conf-badge conf-' + esc(b.confidence) + '">' +
       (CONF_LABEL[b.confidence] || esc(b.confidence)) + '</span></span></div>' +
     (b.note ? '<div class="meta-row"><span class="k">备注</span><span class="v">' + esc(b.note) + '</span></div>' : "") +
+    (b.source_photo ?
+      '<div class="m-src"><div class="m-src-label">上架记录 · ' + esc(b.added || "") + ' 拍照识别上架</div>' +
+      '<a href="' + esc(b.source_photo) + '" target="_blank" rel="noopener noreferrer">' +
+      '<img src="' + esc(b.source_photo_thumb || b.source_photo) + '" loading="lazy" alt="上架来源照片"></a></div>'
+      : "") +
     '<a class="douban-link" href="' + esc(doubanUrl) + '" target="_blank" rel="noopener noreferrer">' +
       (b.douban_url ? "在豆瓣查看这本书" : "到豆瓣搜索这本书") + ' &#8599;</a>' +
     '<button class="modal-close" id="modal-close">收 起</button>';
@@ -849,7 +872,15 @@ function buildProfile(){
     html += '<div class="tl-item">' +
       '<div class="tl-date">' + esc(t.date) + '</div>' +
       '<div class="tl-title">' + esc(t.title) + '</div>' +
-      '<div class="tl-detail">' + esc(t.detail) + '</div></div>';
+      '<div class="tl-detail">' + esc(t.detail) + '</div>' +
+      (t.photo ?
+        '<figure class="tl-photo">' +
+        '<a href="' + esc(t.photo) + '" target="_blank" rel="noopener noreferrer">' +
+        '<img src="' + esc(t.photo_thumb || t.photo) + '" loading="lazy" alt="更新来源照片"></a>' +
+        (t.photo_caption ? '<figcaption>' + esc(t.photo_caption) + '</figcaption>' : '') +
+        '</figure>'
+        : "") +
+      '</div>';
   });
   html += '</div>';
   el.innerHTML = html;
