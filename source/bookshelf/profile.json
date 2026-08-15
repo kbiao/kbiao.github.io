@@ -1,6 +1,6 @@
 {
- "version": 3,
- "updated": "2026-08-02",
+ "version": 4,
+ "updated": "2026-08-09",
  "title": "以书为镜：我和我的书架",
  "intro": "这是我的书架，也是我的精神户型图——每一层都对应着我生活或好奇心的一块区域。与其请人介绍我，不如让你直接逛一圈。这个画像我会不定期更新，书架在长，它也跟着长。",
  "sections": [
@@ -47,6 +47,14 @@
    "photo": "photos/newbook_20260802.jpg",
    "photo_thumb": "photos/newbook_20260802_thumb.jpg",
    "photo_caption": "这次更新的来源：一张桌面照片，4 本新书由此上架"
+  },
+  {
+   "date": "2026-08-09",
+   "title": "民国侦探补遗 · 211 本",
+   "detail": "新增 1 本：陆澹安《李飞探案集》（华斯比整理，北京联合出版公司）——民国侦探小说的当代拾遗，「历史小说与悬疑」一格添了位民国前辈。",
+   "photo": "photos/newbook_20260809.jpg",
+   "photo_thumb": "photos/newbook_20260809_thumb.jpg",
+   "photo_caption": "这次更新的来源：一张封面照，《李飞探案集》由此上架"
   }
  ]
 }
