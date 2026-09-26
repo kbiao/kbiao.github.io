@@ -3331,5 +3331,164 @@
     "douban_url": "https://book.douban.com/subject/35338191/",
     "cover": "covers/35338191.jpg",
     "color": "#ab776d"
+  },
+  {
+    "title": "把自己作为方法：与项飙谈话（增订版）",
+    "author": "项飙、吴琦",
+    "publisher": "中信出版集团",
+    "category": "社会科学",
+    "tags": [
+      "人类学",
+      "访谈",
+      "项飙"
+    ],
+    "douban_id": "38545165",
+    "cover": "covers/38545165.jpg",
+    "douban_url": "https://book.douban.com/subject/38545165/",
+    "confidence": "high",
+    "note": "2026-09 地坛书市购入",
+    "added": "2026-09-26",
+    "source_photo": "photos/ditan_20260926_a.jpg",
+    "source_photo_thumb": "photos/ditan_20260926_a_thumb.jpg",
+    "color": "#6b8eae"
+  },
+  {
+    "title": "高能量家庭",
+    "author": "有解妈妈",
+    "publisher": "人民邮电出版社",
+    "category": "育儿与绘本",
+    "tags": [
+      "亲子关系",
+      "家庭教育"
+    ],
+    "douban_id": "37323320",
+    "cover": "covers/37323320.jpg",
+    "douban_url": "https://book.douban.com/subject/37323320/",
+    "confidence": "high",
+    "note": "2026-09 地坛书市购入",
+    "added": "2026-09-26",
+    "source_photo": "photos/ditan_20260926_a.jpg",
+    "source_photo_thumb": "photos/ditan_20260926_a_thumb.jpg",
+    "color": "#b47064"
+  },
+  {
+    "title": "彼得·潘",
+    "author": "[英] 詹姆斯·巴里",
+    "publisher": "江苏凤凰文艺出版社",
+    "category": "育儿与绘本",
+    "tags": [
+      "童话",
+      "读客",
+      "注音版"
+    ],
+    "douban_id": "37561421",
+    "cover": "covers/37561421.jpg",
+    "douban_url": "https://book.douban.com/subject/37561421/",
+    "confidence": "high",
+    "note": "2026-09 地坛书市购入",
+    "added": "2026-09-26",
+    "source_photo": "photos/ditan_20260926_b.jpg",
+    "source_photo_thumb": "photos/ditan_20260926_b_thumb.jpg",
+    "color": "#8d9880"
+  },
+  {
+    "title": "小岛无大事，日日是好日",
+    "author": "一罐小岛 编绘",
+    "publisher": "人民邮电出版社",
+    "category": "生活方式与美食",
+    "tags": [
+      "绘本",
+      "海岛生活",
+      "水彩"
+    ],
+    "douban_id": "38175103",
+    "cover": "covers/38175103.jpg",
+    "douban_url": "https://book.douban.com/subject/38175103/",
+    "confidence": "high",
+    "note": "2026-09 地坛书市购入",
+    "added": "2026-09-26",
+    "source_photo": "photos/ditan_20260926_b.jpg",
+    "source_photo_thumb": "photos/ditan_20260926_b_thumb.jpg",
+    "color": "#76a3a0"
+  },
+  {
+    "title": "中国颜色",
+    "author": "红糖美学",
+    "publisher": "人民邮电出版社",
+    "category": "艺术与电影",
+    "tags": [
+      "传统色",
+      "东方美学",
+      "设计工具书"
+    ],
+    "douban_id": "36818234",
+    "cover": "covers/36818234.jpg",
+    "douban_url": "https://book.douban.com/subject/36818234/",
+    "confidence": "high",
+    "note": "2026-09 地坛书市购入",
+    "added": "2026-09-26",
+    "source_photo": "photos/ditan_20260926_b.jpg",
+    "source_photo_thumb": "photos/ditan_20260926_b_thumb.jpg",
+    "color": "#c05f59"
+  },
+  {
+    "title": "教父（三部曲典藏版）",
+    "author": "[美] 马里奥·普佐",
+    "publisher": "江苏凤凰文艺出版社",
+    "category": "外国文学",
+    "tags": [
+      "黑帮小说",
+      "经典",
+      "读客"
+    ],
+    "douban_id": "30254385",
+    "cover": "covers/30254385.jpg",
+    "douban_url": "https://book.douban.com/subject/30254385/",
+    "confidence": "high",
+    "note": "2026-09 地坛书市购入",
+    "added": "2026-09-26",
+    "source_photo": "photos/ditan_20260926_b.jpg",
+    "source_photo_thumb": "photos/ditan_20260926_b_thumb.jpg",
+    "color": "#534e4d"
+  },
+  {
+    "title": "星汉灿烂：中国天文五千年",
+    "author": "李亮",
+    "publisher": "人民邮电出版社",
+    "category": "科普博物",
+    "tags": [
+      "天文学史",
+      "文津图书奖",
+      "科普"
+    ],
+    "douban_id": "36722888",
+    "cover": "covers/36722888.jpg",
+    "douban_url": "https://book.douban.com/subject/36722888/",
+    "confidence": "high",
+    "note": "2026-09 地坛书市购入",
+    "added": "2026-09-26",
+    "source_photo": "photos/ditan_20260926_b.jpg",
+    "source_photo_thumb": "photos/ditan_20260926_b_thumb.jpg",
+    "color": "#917974"
+  },
+  {
+    "title": "中国菜市场",
+    "author": "钟淑如",
+    "publisher": "光启书局·上海人民出版社",
+    "category": "社会科学",
+    "tags": [
+      "人类学",
+      "田野调查",
+      "食物"
+    ],
+    "douban_id": "38425442",
+    "cover": "covers/38425442.jpg",
+    "douban_url": "https://book.douban.com/subject/38425442/",
+    "confidence": "high",
+    "note": "2026-09 地坛书市购入",
+    "added": "2026-09-26",
+    "source_photo": "photos/ditan_20260926_b.jpg",
+    "source_photo_thumb": "photos/ditan_20260926_b_thumb.jpg",
+    "color": "#80776b"
   }
 ]
